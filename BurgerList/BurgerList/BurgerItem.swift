@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+struct Burger {
+    let id: UUID
+    let name: String
+    let description: String?
+    let image: URL?
+}

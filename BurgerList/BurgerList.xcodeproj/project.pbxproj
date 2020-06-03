@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		DCEBAA5B2487DFBD0024BFA9 /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
 		DCEBAA602487DFBD0024BFA9 /* BurgerListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEBAA5F2487DFBD0024BFA9 /* BurgerListTests.swift */; };
-		DCEBAA622487DFBD0024BFA9 /* BurgerList.h in Headers */ = {isa = PBXBuildFile; fileRef = DCEBAA542487DFBD0024BFA9 /* BurgerList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCEBAA6C2487DFDB0024BFA9 /* BurgerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEBAA6B2487DFDB0024BFA9 /* BurgerItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,11 +24,11 @@
 
 /* Begin PBXFileReference section */
 		DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BurgerList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCEBAA542487DFBD0024BFA9 /* BurgerList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BurgerList.h; sourceTree = "<group>"; };
 		DCEBAA552487DFBD0024BFA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCEBAA5A2487DFBD0024BFA9 /* BurgerListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCEBAA5F2487DFBD0024BFA9 /* BurgerListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListTests.swift; sourceTree = "<group>"; };
 		DCEBAA612487DFBD0024BFA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCEBAA6B2487DFDB0024BFA9 /* BurgerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +71,8 @@
 		DCEBAA532487DFBD0024BFA9 /* BurgerList */ = {
 			isa = PBXGroup;
 			children = (
-				DCEBAA542487DFBD0024BFA9 /* BurgerList.h */,
 				DCEBAA552487DFBD0024BFA9 /* Info.plist */,
+				DCEBAA6B2487DFDB0024BFA9 /* BurgerItem.swift */,
 			);
 			path = BurgerList;
 			sourceTree = "<group>";
@@ -93,7 +93,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCEBAA622487DFBD0024BFA9 /* BurgerList.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +147,7 @@
 				TargetAttributes = {
 					DCEBAA502487DFBD0024BFA9 = {
 						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1120;
 					};
 					DCEBAA592487DFBD0024BFA9 = {
 						CreatedOnToolsVersion = 11.2.1;
@@ -195,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCEBAA6C2487DFDB0024BFA9 /* BurgerItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +340,7 @@
 		DCEBAA662487DFBD0024BFA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -356,6 +358,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gustavo.londono.BurgerList;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -363,6 +366,7 @@
 		DCEBAA672487DFBD0024BFA9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -387,6 +391,7 @@
 		DCEBAA692487DFBD0024BFA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = EN79VQJFV3;
@@ -405,6 +410,7 @@
 		DCEBAA6A2487DFBD0024BFA9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = EN79VQJFV3;
