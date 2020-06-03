@@ -10,6 +10,7 @@
 		DCEBAA5B2487DFBD0024BFA9 /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
 		DCEBAA602487DFBD0024BFA9 /* BurgerListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEBAA5F2487DFBD0024BFA9 /* BurgerListTests.swift */; };
 		DCEBAA6C2487DFDB0024BFA9 /* BurgerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEBAA6B2487DFDB0024BFA9 /* BurgerItem.swift */; };
+		DCEBAA6E2487E4D00024BFA9 /* BurgerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEBAA6D2487E4D00024BFA9 /* BurgerLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		DCEBAA5F2487DFBD0024BFA9 /* BurgerListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListTests.swift; sourceTree = "<group>"; };
 		DCEBAA612487DFBD0024BFA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCEBAA6B2487DFDB0024BFA9 /* BurgerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerItem.swift; sourceTree = "<group>"; };
+		DCEBAA6D2487E4D00024BFA9 /* BurgerLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				DCEBAA552487DFBD0024BFA9 /* Info.plist */,
 				DCEBAA6B2487DFDB0024BFA9 /* BurgerItem.swift */,
+				DCEBAA6D2487E4D00024BFA9 /* BurgerLoader.swift */,
 			);
 			path = BurgerList;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCEBAA6C2487DFDB0024BFA9 /* BurgerItem.swift in Sources */,
+				DCEBAA6E2487E4D00024BFA9 /* BurgerLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
