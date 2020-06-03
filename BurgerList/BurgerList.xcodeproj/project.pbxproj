@@ -73,9 +73,8 @@
 		DCEBAA532487DFBD0024BFA9 /* BurgerList */ = {
 			isa = PBXGroup;
 			children = (
+				DCEBAA702487E7660024BFA9 /* BurgerFeature */,
 				DCEBAA552487DFBD0024BFA9 /* Info.plist */,
-				DCEBAA6B2487DFDB0024BFA9 /* BurgerItem.swift */,
-				DCEBAA6D2487E4D00024BFA9 /* BurgerLoader.swift */,
 			);
 			path = BurgerList;
 			sourceTree = "<group>";
@@ -87,6 +86,15 @@
 				DCEBAA612487DFBD0024BFA9 /* Info.plist */,
 			);
 			path = BurgerListTests;
+			sourceTree = "<group>";
+		};
+		DCEBAA702487E7660024BFA9 /* BurgerFeature */ = {
+			isa = PBXGroup;
+			children = (
+				DCEBAA6B2487DFDB0024BFA9 /* BurgerItem.swift */,
+				DCEBAA6D2487E4D00024BFA9 /* BurgerLoader.swift */,
+			);
+			name = BurgerFeature;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
