@@ -1,7 +1,8 @@
 # Burger-Online-Delivery-study-case
+
 This project is to holistically apply aswift app develeopment knowledge
 
-# BDD Scenarios
+## BDD Scenarios
 
 ### Narrative #1
 
@@ -47,7 +48,7 @@ Given the customer doesn't have connectivity
    Then the app should display an error message 
 ```
 
-# Use Cases
+## Use Cases
 
 ### Load Menu From Remote Use Case
 
@@ -109,4 +110,4 @@ Given the customer doesn't have connectivity
 #### Expired cache course (sad path):
    1. System delivers no menu.
    
-# Flowchart
+## Flowchart
