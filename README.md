@@ -111,3 +111,5 @@ Given the customer doesn't have connectivity
    1. System delivers no menu.
    
 ## Flowchart
+
+## Architecture
