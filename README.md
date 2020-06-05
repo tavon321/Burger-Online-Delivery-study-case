@@ -49,7 +49,7 @@ Given the customer doesn't have connectivity
 
 # Use Cases
 
-### Load Feed From Remote Use Case
+### Load Menu From Remote Use Case
 
 #### Data
    * URL
@@ -66,6 +66,8 @@ Given the customer doesn't have connectivity
 
 #### No connectivity – error course (sad path):
    1. System delivers connectivity error.
+
+---
 
 ### Load Burger Image Data From Remote Use Case
 
@@ -84,4 +86,25 @@ Given the customer doesn't have connectivity
 
 #### No connectivity – error course (sad path):
    1. System delivers connectivity error.
-  
+   
+---
+
+### Load Menu From Remote Use Case
+
+#### Data
+   * URL
+   
+#### Primary course (happy path):
+   1. Execute "Load Burger Menu" command with above data.
+   1. System retrieves menu data from the cache.
+   1. System validates cache is less than two weeks old.
+   1. System delivers cached feed data.
+
+#### Retrieval error course (sad path):
+   1. System delivers invalid data error.
+
+#### Empty cache (sad path):
+   1. System delivers connectivity error.
+   
+#### Expired cache course (sad path):
+   1. System delivers no menu.
