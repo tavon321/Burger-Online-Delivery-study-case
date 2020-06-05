@@ -89,7 +89,7 @@ Given the customer doesn't have connectivity
    
 ---
 
-### Load Menu From Remote Use Case
+### Load Menu From Cache Use Case
 
 #### Data
    * URL
