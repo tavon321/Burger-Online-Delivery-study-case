@@ -55,11 +55,11 @@ Given the customer doesn't have connectivity
    * URL
    
 ### Primary course (happy path):
-   1. Execute "Load Image Feed" command with above data.
+   1. Execute "Load Burger Menu" command with above data.
    1. System downloads data from the URL.
    1. System validates downloaded data.
-   1. System creates image feed from valid data.
-   1. System delivers image feed.
+   1. System creates menu from valid data.
+   1. System delivers menu.
 
 ### Invalid data – error course (sad path):
    1. System delivers invalid data error.
