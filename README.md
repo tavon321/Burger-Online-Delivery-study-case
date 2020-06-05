@@ -3,7 +3,7 @@ This project is to holistically apply aswift app develeopment knowledge
 
 # BDD Scenarios
 
-### Narrative #1
+## Narrative #1
 
 ```
 As a online customer
@@ -19,7 +19,7 @@ Given the customer has connectivity
         And replace the cache with the new menu    
 ```
 
-### Narrative #2
+## Narrative #2
 
 ```
 As a offline customer
@@ -46,3 +46,24 @@ Given the customer doesn't have connectivity
  When the customer requests to see the menu
    Then the app should display an error message 
 ```
+
+# Use Cases
+
+## Load Feed From Remote Use Case
+
+### Data
+   * URL
+   
+### Primary course (happy path):
+   1.Execute "Load Image Feed" command with above data.
+   1.System downloads data from the URL.
+   1.System validates downloaded data.
+   1.System creates image feed from valid data.
+   1.System delivers image feed.
+
+### Invalid data – error course (sad path):
+   1.System delivers invalid data error.
+
+### No connectivity – error course (sad path):
+   1.System delivers connectivity error.
+  
