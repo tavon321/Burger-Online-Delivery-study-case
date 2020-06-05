@@ -108,3 +108,5 @@ Given the customer doesn't have connectivity
    
 #### Expired cache course (sad path):
    1. System delivers no menu.
+   
+# Flowchart
