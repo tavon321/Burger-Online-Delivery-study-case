@@ -127,3 +127,35 @@ Given the customer doesn't have connectivity
 | description  | String? |
 | image  | URL?  |
 
+### Payload contract
+```
+GET *url* (TBD)
+
+200 RESPONSE
+
+{
+	"items": [
+		{
+			"id": "a UUID",
+			"name": "a burger name",
+			"description": "a description",
+			"image": "https://a-image.url",
+		},
+		{
+			"id": "another UUID",
+			"name": "a burger name"
+		},
+		{
+			"id": "another UUID",
+			"name": "a burger name",
+			"description": "another description"
+		},
+		{
+			"id": "another UUID",
+			"name": "a burger name",
+			"image": "https://a-image.url"
+		}
+		...
+	]
+}
+```
