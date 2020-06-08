@@ -115,3 +115,15 @@ Given the customer doesn't have connectivity
 
 ## Architecture
 ![Screen Shot 2020-06-05 at 8 59 55 AM](https://user-images.githubusercontent.com/19692076/83884727-f202c200-a70a-11ea-8ca6-c682cb32c9ab.png)
+
+## Model Specs
+
+### Burger Item
+
+| Property  | Type |
+| ------------- | ------------- |
+| id  | UUID  |
+| name  | String  |
+| description  | String? |
+| image  | URL?  |
+
