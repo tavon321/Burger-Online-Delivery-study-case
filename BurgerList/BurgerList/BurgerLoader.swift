@@ -9,5 +9,5 @@
 import Foundation
 
 protocol BurgerLoader {
-    func load(completion: @escaping (Result<Burger, Error>) -> Void)
+    func load(completion: @escaping (Result<[Burger], Error>) -> Void)
 }
