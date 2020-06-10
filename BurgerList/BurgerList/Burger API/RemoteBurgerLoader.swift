@@ -1,5 +1,5 @@
 //
-//  RemoteFeedLoader.swift
+//  RemoteBurgerLoader.swift
 //  BurgerList
 //
 //  Created by Gustavo Londono on 6/10/20.
@@ -8,16 +8,20 @@
 
 import Foundation
 
-class RemoteBurgerLLoader {
-    let client: HTTPClient
-    let url: URL
+public protocol HTTPClient {
+    func get(form url: URL)
+}
+
+public final class RemoteBurgerLoader {
+    private let client: HTTPClient
+    private let url: URL
     
-    init(httpClient: HTTPClient, url: URL) {
+    public init(httpClient: HTTPClient, url: URL) {
         self.client = httpClient
         self.url = url
     }
     
-    func load() {
+    public func load() {
         client.get(form: url)
     }
 }

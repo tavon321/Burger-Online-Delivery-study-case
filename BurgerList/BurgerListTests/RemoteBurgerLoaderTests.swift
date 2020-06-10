@@ -7,24 +7,7 @@
 //
 
 import XCTest
-
-class RemoteFeedLoader {
-    let client: HTTPClient
-    let url: URL
-    
-    init(httpClient: HTTPClient, url: URL) {
-        self.client = httpClient
-        self.url = url
-    }
-    
-    func load() {
-        client.get(form: url)
-    }
-}
-
-protocol HTTPClient {
-    func get(form url: URL)
-}
+import BurgerList
 
 class RemoteBurgerLoaderTests: XCTestCase {
     
@@ -42,9 +25,9 @@ class RemoteBurgerLoaderTests: XCTestCase {
     }
     
     // MARK: Helpers
-    private func makeSUT(url: URL = URL(string: "https://a-given-url.com")!) -> (sut: RemoteFeedLoader, client: HTTPClientSpy) {
+    private func makeSUT(url: URL = URL(string: "https://a-given-url.com")!) -> (sut: RemoteBurgerLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
-        let sut = RemoteFeedLoader(httpClient: client, url: url)
+        let sut = RemoteBurgerLoader(httpClient: client, url: url)
         
         return (sut, client)
     }
