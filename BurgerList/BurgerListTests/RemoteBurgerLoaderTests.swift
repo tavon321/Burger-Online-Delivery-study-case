@@ -50,14 +50,18 @@ class RemoteBurgerLoaderTests: XCTestCase {
     
     func test_load_deliversNon200HTTPResponse() {
         let (sut, client) = makeSUT()
+        let samples = [199, 201, 300, 400, 500].enumerated()
         
-        var capturedErrors: [RemoteBurgerLoader.Error] = []
-        sut.load { error in
-            capturedErrors.append(error)
+        samples.forEach { index, code in
+            var capturedErrors: [RemoteBurgerLoader.Error] = []
+            
+            sut.load { error in
+                capturedErrors.append(error)
+            }
+            
+            client.complete(withStatusCode: code, at: index)
+            XCTAssertEqual(capturedErrors, [.invalidData])
         }
-        
-        client.complete(withStatusCode: 300)
-        XCTAssertEqual(capturedErrors, [.invalidData])
     }
     
     // TODO add invalid data to the error
@@ -71,26 +75,26 @@ class RemoteBurgerLoaderTests: XCTestCase {
     }
     
     private class HTTPClientSpy: HTTPClient {
-        private var messages: [(url: URL, completion: HTTPClient.Response)] = []
+        private var messages: [(url: URL, completion: HTTPClient.HTTPClientResult)] = []
         var requestedURLs: [URL] {
             return messages.map( { $0.url })
         }
         
-        func get(form url: URL, completion: @escaping HTTPClient.Response) {
+        func get(form url: URL, completion: @escaping HTTPClient.HTTPClientResult) {
             messages.append((url, completion))
         }
         
         func complete(with error: Error, at index: Int = 0) {
-            messages[index].completion(error, nil)
+            messages[index].completion(.failure(error))
         }
         
         func complete(withStatusCode code: Int, at index: Int = 0) {
             let response = HTTPURLResponse(url: requestedURLs[index],
                                            statusCode: code,
                                            httpVersion: nil,
-                                           headerFields: nil)
+                                           headerFields: nil)!
             
-            messages[index].completion(nil, response)
+            messages[index].completion(.success(response))
         }
     }
 }
