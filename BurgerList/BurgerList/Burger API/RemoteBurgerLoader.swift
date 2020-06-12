@@ -9,7 +9,9 @@
 import Foundation
 
 public protocol HTTPClient {
-    func get(form url: URL, completion: @escaping (Error) -> Void)
+    typealias Response = (Error?, URLResponse?) -> ()
+    
+    func get(form url: URL, completion: @escaping Response)
 }
 
 public final class RemoteBurgerLoader {
@@ -18,6 +20,7 @@ public final class RemoteBurgerLoader {
     
     public enum Error: Swift.Error {
         case connectivity
+        case invalidData
     }
     
     public init(httpClient: HTTPClient, url: URL) {
@@ -26,8 +29,12 @@ public final class RemoteBurgerLoader {
     }
     
     public func load(completion: @escaping (RemoteBurgerLoader.Error) -> Void) {
-        client.get(form: url) { error in
-            completion(.connectivity)
+        client.get(form: url) { error, response  in
+            if response != nil {
+                completion(.invalidData)
+            } else {
+                completion(.connectivity)
+            }
         }
     }
 }

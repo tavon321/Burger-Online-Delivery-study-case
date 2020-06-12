@@ -48,6 +48,18 @@ class RemoteBurgerLoaderTests: XCTestCase {
         XCTAssertEqual(capturedErrors, [.connectivity])
     }
     
+    func test_load_deliversNon200HTTPResponse() {
+        let (sut, client) = makeSUT()
+        
+        var capturedErrors: [RemoteBurgerLoader.Error] = []
+        sut.load { error in
+            capturedErrors.append(error)
+        }
+        
+        client.complete(withStatusCode: 300)
+        XCTAssertEqual(capturedErrors, [.invalidData])
+    }
+    
     // TODO add invalid data to the error
     
     // MARK: Helpers
@@ -59,17 +71,26 @@ class RemoteBurgerLoaderTests: XCTestCase {
     }
     
     private class HTTPClientSpy: HTTPClient {
-        private var messages: [(url: URL, completion: (Error) -> ())] = []
+        private var messages: [(url: URL, completion: HTTPClient.Response)] = []
         var requestedURLs: [URL] {
             return messages.map( { $0.url })
         }
         
-        func get(form url: URL, completion: @escaping (Error) -> Void) {
+        func get(form url: URL, completion: @escaping HTTPClient.Response) {
             messages.append((url, completion))
         }
         
         func complete(with error: Error, at index: Int = 0) {
-            messages[index].completion(error)
+            messages[index].completion(error, nil)
+        }
+        
+        func complete(withStatusCode code: Int, at index: Int = 0) {
+            let response = HTTPURLResponse(url: requestedURLs[index],
+                                           statusCode: code,
+                                           httpVersion: nil,
+                                           headerFields: nil)
+            
+            messages[index].completion(nil, response)
         }
     }
 }
