@@ -25,7 +25,7 @@ public final class RemoteBurgerLoader {
         self.url = url
     }
     
-    public func load(completion: @escaping (RemoteBurgerLoader.Error) -> Void = { _ in }) {
+    public func load(completion: @escaping (RemoteBurgerLoader.Error) -> Void) {
         client.get(form: url) { error in
             completion(.connectivity)
         }
