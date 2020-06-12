@@ -37,14 +37,19 @@ class RemoteBurgerLoaderTests: XCTestCase {
     func test_load_deliversErrorOnClienError() {
         let (sut, client) = makeSUT()
         
-        client.error = NSError(domain: "test", code: 0)
-               
-        var capturedError: RemoteBurgerLoader.Error?
+        let clientError = NSError(domain: "test", code: 0)
+        
+        var capturedErrors: [RemoteBurgerLoader.Error] = []
         sut.load { error in
-            capturedError = error
+            capturedErrors.append(error)
         }
-        XCTAssertEqual(capturedError, .connectivity)
+        
+        client.completions[0](clientError)
+        
+        XCTAssertEqual(capturedErrors, [.connectivity])
     }
+    
+    // TODO add invalid data to the error
     
     // MARK: Helpers
     private func makeSUT(url: URL = URL(string: "https://a-given-url.com")!) -> (sut: RemoteBurgerLoader, client: HTTPClientSpy) {
@@ -55,14 +60,11 @@ class RemoteBurgerLoaderTests: XCTestCase {
     }
     
     private class HTTPClientSpy: HTTPClient {
-
         var requestedURLs: [URL] = []
-        var error: Error?
+        var completions: [(Error) -> ()] = []
         
         func get(form url: URL, completion: @escaping (Error) -> Void) {
-            if let error = error {
-                completion(error)
-            }
+            completions.append(completion)
             requestedURLs.append(url)
         }
     }
