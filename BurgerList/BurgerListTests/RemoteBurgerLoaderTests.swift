@@ -36,10 +36,10 @@ class RemoteBurgerLoaderTests: XCTestCase {
     
     func test_load_deliversErrorOnClienError() {
         let (sut, client) = makeSUT()
-        let clientError = NSError(domain: "test", code: 0)
         
         expect(sut, toCompleteWithError: .connectivity) {
-             client.complete(with: clientError)
+            let clientError = NSError(domain: "test", code: 0)
+            client.complete(with: clientError)
         }
     }
     
@@ -48,17 +48,19 @@ class RemoteBurgerLoaderTests: XCTestCase {
         let samples = [199, 201, 300, 400, 500].enumerated()
         
         samples.forEach { index, code in
+            
             expect(sut, toCompleteWithError: .invalidData) {
-                 client.complete(withStatusCode: code, at: index)
+                client.complete(withStatusCode: code, at: index)
             }
         }
     }
     
     func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (sut, client) = makeSUT()
-        let invalidJSON = Data("Invalid JSON".utf8)
         
         expect(sut, toCompleteWithError: .invalidData) {
+            
+            let invalidJSON = Data("Invalid JSON".utf8)
             client.complete(withStatusCode: 200, data: invalidJSON)
         }
     }
@@ -72,15 +74,17 @@ class RemoteBurgerLoaderTests: XCTestCase {
     }
     
     private func expect(_ sut: RemoteBurgerLoader,
-                   toCompleteWithError error: RemoteBurgerLoader.Error,
-                   when action: () -> Void) {
+                        toCompleteWithError error: RemoteBurgerLoader.Error,
+                        file: StaticString = #file,
+                        line: UInt = #line,
+                        when action: () -> Void) {
         var capturedErrors: [RemoteBurgerLoader.Error] = []
         sut.load { error in
             capturedErrors.append(error)
         }
         
         action()
-        XCTAssertEqual(capturedErrors, [error])
+        XCTAssertEqual(capturedErrors, [error], file: file, line: line)
     }
     
     private class HTTPClientSpy: HTTPClient {
