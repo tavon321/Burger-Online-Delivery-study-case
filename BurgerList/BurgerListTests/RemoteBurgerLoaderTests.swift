@@ -65,6 +65,15 @@ class RemoteBurgerLoaderTests: XCTestCase {
         }
     }
     
+//    func test_load_deliversNoItemsOn200HTTPResponseWithJSONEmptyList() {
+//        let (sut, client) = makeSUT()
+//
+//        expect(sut, toCompleteWithError: .invalidData) {
+//            let invalidJSON = Data("Invalid JSON".utf8)
+//            client.complete(withStatusCode: 200, data: invalidJSON)
+//        }
+//    }
+    
     // MARK: Helpers
     private func makeSUT(url: URL = URL(string: "https://a-given-url.com")!) -> (sut: RemoteBurgerLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
@@ -78,22 +87,23 @@ class RemoteBurgerLoaderTests: XCTestCase {
                         file: StaticString = #file,
                         line: UInt = #line,
                         when action: () -> Void) {
-        var capturedErrors: [RemoteBurgerLoader.Error] = []
-        sut.load { error in
-            capturedErrors.append(error)
+        var capturedResults: [RemoteBurgerLoader.Result] = []
+        sut.load { result in
+            capturedResults.append(result)
         }
         
         action()
-        XCTAssertEqual(capturedErrors, [error], file: file, line: line)
+        XCTAssertEqual(capturedResults, [.failure(error)], file: file, line: line)
     }
     
     private class HTTPClientSpy: HTTPClient {
-        private var messages: [(url: URL, completion: HTTPClient.HTTPClientResult)] = []
+        
+        private var messages: [(url: URL, completion: (HTTPClientResult) -> Void)] = []
         var requestedURLs: [URL] {
             return messages.map( { $0.url })
         }
         
-        func get(form url: URL, completion: @escaping HTTPClient.HTTPClientResult) {
+        func get(form url: URL, completion: @escaping (HTTPClientResult) -> Void) {
             messages.append((url, completion))
         }
         

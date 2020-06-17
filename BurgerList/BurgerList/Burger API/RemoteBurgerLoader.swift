@@ -9,12 +9,14 @@
 import Foundation
 
 public protocol HTTPClient {
-    typealias HTTPClientResult = (Result<(URLResponse, Data), Error>) -> ()
+    typealias HTTPClientResult = Result<(URLResponse, Data), Error>
     
-    func get(form url: URL, completion: @escaping HTTPClientResult)
+    func get(form url: URL, completion: @escaping (HTTPClientResult) -> Void)
 }
 
 public final class RemoteBurgerLoader {
+    public typealias Result = Swift.Result<[Burger], Error>
+    
     private let client: HTTPClient
     private let url: URL
     
@@ -28,13 +30,13 @@ public final class RemoteBurgerLoader {
         self.url = url
     }
     
-    public func load(completion: @escaping (RemoteBurgerLoader.Error) -> Void) {
+    public func load(completion: @escaping (Result) -> Void) {
         client.get(form: url) { result in
             switch result {
             case .success:
-                completion(.invalidData)
+                completion(.failure(.invalidData))
             case .failure:
-                completion(.connectivity)
+                completion(.failure(.connectivity))
             }
         }
     }
