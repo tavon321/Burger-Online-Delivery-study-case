@@ -33,8 +33,13 @@ public final class RemoteBurgerLoader {
     public func load(completion: @escaping (Result) -> Void) {
         client.get(form: url) { result in
             switch result {
-            case .success:
-                completion(.failure(.invalidData))
+            case .success(let successTuple):
+                let (_, data) = successTuple
+                if let json = try? JSONSerialization.jsonObject(with: data) {
+                    completion(.success([]))
+                } else {
+                    completion(.failure(.invalidData))
+                }
             case .failure:
                 completion(.failure(.connectivity))
             }

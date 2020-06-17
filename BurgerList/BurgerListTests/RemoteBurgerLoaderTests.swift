@@ -37,7 +37,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
     func test_load_deliversErrorOnClienError() {
         let (sut, client) = makeSUT()
         
-        expect(sut, toCompleteWithError: .connectivity) {
+        expect(sut, toCompleteWithResult: .failure(.connectivity)) {
             let clientError = NSError(domain: "test", code: 0)
             client.complete(with: clientError)
         }
@@ -49,7 +49,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
         
         samples.forEach { index, code in
             
-            expect(sut, toCompleteWithError: .invalidData) {
+            expect(sut, toCompleteWithResult: .failure(.invalidData)) {
                 client.complete(withStatusCode: code, at: index)
             }
         }
@@ -58,21 +58,21 @@ class RemoteBurgerLoaderTests: XCTestCase {
     func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (sut, client) = makeSUT()
         
-        expect(sut, toCompleteWithError: .invalidData) {
+        expect(sut, toCompleteWithResult: .failure(.invalidData)) {
             
             let invalidJSON = Data("Invalid JSON".utf8)
             client.complete(withStatusCode: 200, data: invalidJSON)
         }
     }
     
-//    func test_load_deliversNoItemsOn200HTTPResponseWithJSONEmptyList() {
-//        let (sut, client) = makeSUT()
-//
-//        expect(sut, toCompleteWithError: .invalidData) {
-//            let invalidJSON = Data("Invalid JSON".utf8)
-//            client.complete(withStatusCode: 200, data: invalidJSON)
-//        }
-//    }
+    func test_load_deliversNoItemsOn200HTTPResponseWithJSONEmptyList() {
+        let (sut, client) = makeSUT()
+        
+        expect(sut, toCompleteWithResult: .success([])) {
+            let emptyListJSON = Data("{\"items\": []}".utf8)
+            client.complete(withStatusCode: 200, data: emptyListJSON)
+        }
+    }
     
     // MARK: Helpers
     private func makeSUT(url: URL = URL(string: "https://a-given-url.com")!) -> (sut: RemoteBurgerLoader, client: HTTPClientSpy) {
@@ -83,7 +83,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
     }
     
     private func expect(_ sut: RemoteBurgerLoader,
-                        toCompleteWithError error: RemoteBurgerLoader.Error,
+                        toCompleteWithResult result: RemoteBurgerLoader.Result,
                         file: StaticString = #file,
                         line: UInt = #line,
                         when action: () -> Void) {
@@ -93,7 +93,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
         }
         
         action()
-        XCTAssertEqual(capturedResults, [.failure(error)], file: file, line: line)
+        XCTAssertEqual(capturedResults, [result], file: file, line: line)
     }
     
     private class HTTPClientSpy: HTTPClient {
