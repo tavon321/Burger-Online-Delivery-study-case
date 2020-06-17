@@ -35,8 +35,8 @@ public final class RemoteBurgerLoader {
             switch result {
             case .success(let successTuple):
                 let (_, data) = successTuple
-                if let json = try? JSONSerialization.jsonObject(with: data) {
-                    completion(.success([]))
+                if let root = try? JSONDecoder().decode(BurgerRoot.self, from: data) {
+                    completion(.success(root.items))
                 } else {
                     completion(.failure(.invalidData))
                 }
@@ -45,4 +45,9 @@ public final class RemoteBurgerLoader {
             }
         }
     }
+}
+
+
+private struct BurgerRoot: Decodable {
+    let items: [Burger]
 }

@@ -74,6 +74,38 @@ class RemoteBurgerLoaderTests: XCTestCase {
         }
     }
     
+    func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
+        let (sut, client) = makeSUT()
+        let item1 = Burger(id: UUID(),
+                          name: "",
+                          description: nil,
+                          imageURL: URL(string: "https://a-url.com")!)
+        
+        let item1JSON = [
+            "id": item1.id.uuidString,
+            "name": item1.name,
+            "image": item1.imageURL?.absoluteString
+        ]
+        
+        let item2 = Burger(id: UUID(),
+                           name: "",
+                           description: "a description",
+                           imageURL: nil)
+        
+        let item2JSON = [
+            "id": item2.id.uuidString,
+            "name": item1.name,
+            "description": item2.description
+        ]
+        
+        let itemsJSON = ["items": [item1JSON, item2JSON]]
+        
+        expect(sut, toCompleteWithResult: .success([item1, item2])) {
+            let data = try! JSONSerialization.data(withJSONObject: itemsJSON)
+            client.complete(withStatusCode: 200, data: data)
+        }
+    }
+    
     // MARK: Helpers
     private func makeSUT(url: URL = URL(string: "https://a-given-url.com")!) -> (sut: RemoteBurgerLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
