@@ -1,5 +1,5 @@
 //
-//  BurgerItem.swift
+//  Burger.swift
 //  BurgerList
 //
 //  Created by Gustavo Londono on 6/3/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Burger {
+public struct Burger: Equatable {
     let id: UUID
     let name: String
     let description: String?
