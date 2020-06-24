@@ -35,10 +35,10 @@ public final class RemoteBurgerLoader {
             switch result {
             case .success(let successTuple):
                 let (response, data) = successTuple
-                if response.statusCode == 200,
-                    let root = try? JSONDecoder().decode(BurgerRoot.self, from: data) {
-                    completion(.success(root.items.map({ $0.burger })))
-                } else {
+                do {
+                    let items = try BurgerItemsMapper.map(data, response: response)
+                    completion(.success(items))
+                } catch {
                     completion(.failure(.invalidData))
                 }
             case .failure:
@@ -48,21 +48,32 @@ public final class RemoteBurgerLoader {
     }
 }
 
-
-private struct BurgerRoot: Decodable {
-    let items: [RemoteBurger]
-}
-
-private struct RemoteBurger: Decodable {
-    let id: UUID
-    let name: String
-    let description: String?
-    let image: URL?
+private class BurgerItemsMapper {
     
-    var burger: Burger {
-        return Burger(id: id,
-                      name: name,
-                      description: description,
-                      imageURL: image)
+    private struct BurgerRoot: Decodable {
+        let items: [RemoteBurger]
+    }
+
+    private struct RemoteBurger: Decodable {
+        let id: UUID
+        let name: String
+        let description: String?
+        let image: URL?
+        
+        var burger: Burger {
+            return Burger(id: id,
+                          name: name,
+                          description: description,
+                          imageURL: image)
+        }
+    }
+    
+    static func map(_ data: Data, response: HTTPURLResponse) throws -> [Burger] {
+        guard response.statusCode == 200 else {
+            throw RemoteBurgerLoader.Error.invalidData
+        }
+        
+        let root = try JSONDecoder().decode(BurgerRoot.self, from: data)
+        return root.items.map({ $0.burger })
     }
 }
