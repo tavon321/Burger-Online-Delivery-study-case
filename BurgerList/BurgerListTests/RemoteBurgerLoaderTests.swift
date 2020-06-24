@@ -76,31 +76,13 @@ class RemoteBurgerLoaderTests: XCTestCase {
     
     func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
         let (sut, client) = makeSUT()
-        let item1 = Burger(id: UUID(),
-                          name: "",
-                          description: nil,
-                          imageURL: URL(string: "https://a-url.com")!)
         
-        let item1JSON = [
-            "id": item1.id.uuidString,
-            "name": item1.name,
-            "image": item1.imageURL?.absoluteString
-        ]
+        let item1 = makeItem(name: "", image: URL(string: "https://a-url.com")!)
+        let item2 = makeItem(name: "", description: "a description")
         
-        let item2 = Burger(id: UUID(),
-                           name: "",
-                           description: "a description",
-                           imageURL: nil)
+        let itemsJSON = ["items": [item1.json, item2.json]]
         
-        let item2JSON = [
-            "id": item2.id.uuidString,
-            "name": item1.name,
-            "description": item2.description
-        ]
-        
-        let itemsJSON = ["items": [item1JSON, item2JSON]]
-        
-        expect(sut, toCompleteWithResult: .success([item1, item2])) {
+        expect(sut, toCompleteWithResult: .success([item1.model, item2.model])) {
             let data = try! JSONSerialization.data(withJSONObject: itemsJSON)
             client.complete(withStatusCode: 200, data: data)
         }
@@ -112,6 +94,21 @@ class RemoteBurgerLoaderTests: XCTestCase {
         let sut = RemoteBurgerLoader(httpClient: client, url: url)
         
         return (sut, client)
+    }
+    
+    private func makeItem(id: UUID = UUID(),
+                          name: String,
+                          description: String? = nil,
+                          image: URL? = nil) -> (model: Burger, json: [String: Any]) {
+        let model = Burger(id: id, name: name, description: description, imageURL: image)
+        let json = [
+            "id": id.uuidString,
+            "name": name,
+            "description": description,
+            "image": image?.absoluteString
+            ].compactMapValues( { return $0 })
+        
+        return (model, json)
     }
     
     private func expect(_ sut: RemoteBurgerLoader,
