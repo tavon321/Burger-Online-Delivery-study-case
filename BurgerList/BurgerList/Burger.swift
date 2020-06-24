@@ -21,13 +21,3 @@ public struct Burger: Equatable {
         self.imageURL = imageURL
     }
 }
-
-
-extension Burger: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case description
-        case imageURL = "image"
-    }
-}

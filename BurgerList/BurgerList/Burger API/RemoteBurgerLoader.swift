@@ -37,7 +37,7 @@ public final class RemoteBurgerLoader {
                 let (response, data) = successTuple
                 if response.statusCode == 200,
                     let root = try? JSONDecoder().decode(BurgerRoot.self, from: data) {
-                    completion(.success(root.items))
+                    completion(.success(root.items.map({ $0.burger })))
                 } else {
                     completion(.failure(.invalidData))
                 }
@@ -50,5 +50,19 @@ public final class RemoteBurgerLoader {
 
 
 private struct BurgerRoot: Decodable {
-    let items: [Burger]
+    let items: [RemoteBurger]
+}
+
+private struct RemoteBurger: Decodable {
+    let id: UUID
+    let name: String
+    let description: String?
+    let image: URL?
+    
+    var burger: Burger {
+        return Burger(id: id,
+                      name: name,
+                      description: description,
+                      imageURL: image)
+    }
 }
