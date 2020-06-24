@@ -79,8 +79,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
         
         let item1 = makeItem(name: "", image: URL(string: "https://a-url.com")!)
         let item2 = makeItem(name: "", description: "a description")
-        
-       
+
         
         expect(sut, toCompleteWithResult: .success([item1.model, item2.model])) {
             let data = makeItemsJson([item1.json, item2.json])

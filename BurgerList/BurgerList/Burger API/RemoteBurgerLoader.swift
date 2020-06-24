@@ -50,6 +50,8 @@ public final class RemoteBurgerLoader {
 
 private class BurgerItemsMapper {
     
+    static var ok200 = 200
+    
     private struct BurgerRoot: Decodable {
         let items: [RemoteBurger]
     }
@@ -69,7 +71,7 @@ private class BurgerItemsMapper {
     }
     
     static func map(_ data: Data, response: HTTPURLResponse) throws -> [Burger] {
-        guard response.statusCode == 200 else {
+        guard response.statusCode == ok200 else {
             throw RemoteBurgerLoader.Error.invalidData
         }
         
