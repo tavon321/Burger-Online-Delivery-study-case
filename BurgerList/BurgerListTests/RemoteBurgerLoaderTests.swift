@@ -69,7 +69,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
         let (sut, client) = makeSUT()
         
         expect(sut, toCompleteWithResult: .success([])) {
-            let emptyListJSON = Data("{\"items\": []}".utf8)
+            let emptyListJSON = makeItemsJson([])
             client.complete(withStatusCode: 200, data: emptyListJSON)
         }
     }
