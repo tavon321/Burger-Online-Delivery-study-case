@@ -48,9 +48,9 @@ class RemoteBurgerLoaderTests: XCTestCase {
         let samples = [199, 201, 300, 400, 500].enumerated()
         
         samples.forEach { index, code in
-            
             expect(sut, toCompleteWithResult: .failure(.invalidData)) {
-                client.complete(withStatusCode: code, at: index)
+                let data = makeItemsJson([])
+                client.complete(withStatusCode: code, data: data, at: index)
             }
         }
     }
@@ -146,7 +146,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
         }
         
         func complete(withStatusCode code: Int,
-                      data: Data = Data(),
+                      data: Data,
                       at index: Int = 0) {
             let response = HTTPURLResponse(url: requestedURLs[index],
                                            statusCode: code,

@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol HTTPClient {
-    typealias HTTPClientResult = Result<(URLResponse, Data), Error>
+    typealias HTTPClientResult = Result<(HTTPURLResponse, Data), Error>
     
     func get(form url: URL, completion: @escaping (HTTPClientResult) -> Void)
 }
@@ -34,8 +34,9 @@ public final class RemoteBurgerLoader {
         client.get(form: url) { result in
             switch result {
             case .success(let successTuple):
-                let (_, data) = successTuple
-                if let root = try? JSONDecoder().decode(BurgerRoot.self, from: data) {
+                let (response, data) = successTuple
+                if response.statusCode == 200,
+                    let root = try? JSONDecoder().decode(BurgerRoot.self, from: data) {
                     completion(.success(root.items))
                 } else {
                     completion(.failure(.invalidData))
