@@ -80,10 +80,10 @@ class RemoteBurgerLoaderTests: XCTestCase {
         let item1 = makeItem(name: "", image: URL(string: "https://a-url.com")!)
         let item2 = makeItem(name: "", description: "a description")
         
-        let itemsJSON = ["items": [item1.json, item2.json]]
+       
         
         expect(sut, toCompleteWithResult: .success([item1.model, item2.model])) {
-            let data = try! JSONSerialization.data(withJSONObject: itemsJSON)
+            let data = makeItemsJson([item1.json, item2.json])
             client.complete(withStatusCode: 200, data: data)
         }
     }
@@ -109,6 +109,11 @@ class RemoteBurgerLoaderTests: XCTestCase {
             ].compactMapValues( { return $0 })
         
         return (model, json)
+    }
+    
+    private func makeItemsJson(_ items: [[String: Any]]) -> Data {
+        let items = ["items": items]
+        return try! JSONSerialization.data(withJSONObject: items)
     }
     
     private func expect(_ sut: RemoteBurgerLoader,
