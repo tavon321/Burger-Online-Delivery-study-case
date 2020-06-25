@@ -80,7 +80,6 @@ class RemoteBurgerLoaderTests: XCTestCase {
         let item1 = makeItem(name: "", image: URL(string: "https://a-url.com")!)
         let item2 = makeItem(name: "", description: "a description")
 
-        
         expect(sut, toCompleteWithResult: .success([item1.model, item2.model])) {
             let data = makeItemsJson([item1.json, item2.json])
             client.complete(withStatusCode: 200, data: data)
@@ -88,11 +87,20 @@ class RemoteBurgerLoaderTests: XCTestCase {
     }
     
     // MARK: Helpers
-    private func makeSUT(url: URL = URL(string: "https://a-given-url.com")!) -> (sut: RemoteBurgerLoader, client: HTTPClientSpy) {
+    private func makeSUT(url: URL = URL(string: "https://a-given-url.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: RemoteBurgerLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
         let sut = RemoteBurgerLoader(httpClient: client, url: url)
         
+        trakForMemoryLeaks(sut, file: file, line: line)
+        trakForMemoryLeaks(client, file: file, line: line)
+        
         return (sut, client)
+    }
+    
+    private func trakForMemoryLeaks(_ object: AnyObject, file: StaticString = #file, line: UInt = #line) {
+        addTeardownBlock { [weak object] in
+            XCTAssertNil(object, "Instance should have being deallocated. Potential memory leak", file: file, line: line)
+        }
     }
     
     private func makeItem(id: UUID = UUID(),

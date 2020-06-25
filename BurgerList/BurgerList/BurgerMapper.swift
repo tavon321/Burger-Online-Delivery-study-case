@@ -1,5 +1,5 @@
 //
-//  FeedItemsMapper.swift
+//  BurgerMapper.swift
 //  BurgerList
 //
 //  Created by Gustavo Londono on 6/25/20.
@@ -8,12 +8,16 @@
 
 import Foundation
 
-internal final class BurgerItemsMapper {
+internal final class BurgerMapper {
     
     private static var ok200 = 200
     
     private struct BurgerRoot: Decodable {
         let items: [RemoteBurger]
+        
+        var burgers: [Burger] {
+            return items.map({ $0.burger })
+        }
     }
     
     private struct RemoteBurger: Decodable {
@@ -30,12 +34,10 @@ internal final class BurgerItemsMapper {
         }
     }
     
-    internal static func map(_ data: Data, response: HTTPURLResponse) throws -> [Burger] {
-        guard response.statusCode == ok200 else {
-            throw RemoteBurgerLoader.Error.invalidData
+    internal static func map(_ data: Data, response: HTTPURLResponse) -> RemoteBurgerLoader.Result {
+        guard response.statusCode == ok200, let root = try? JSONDecoder().decode(BurgerRoot.self, from: data) else {
+            return .failure(.invalidData)
         }
-        
-        let root = try JSONDecoder().decode(BurgerRoot.self, from: data)
-        return root.items.map({ $0.burger })
+        return .success(root.burgers)
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol HTTPClient {
-    typealias HTTPClientResult = Result<(HTTPURLResponse, Data), Error>
+    typealias HTTPClientResult = Result<(response: HTTPURLResponse, data: Data), Error>
     
     func get(form url: URL, completion: @escaping (HTTPClientResult) -> Void)
 }

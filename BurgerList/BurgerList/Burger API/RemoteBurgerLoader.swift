@@ -28,16 +28,12 @@ public final class RemoteBurgerLoader {
         client.get(form: url) { result in
             switch result {
             case .success(let successTuple):
-                let (response, data) = successTuple
-                do {
-                    let items = try BurgerItemsMapper.map(data, response: response)
-                    completion(.success(items))
-                } catch {
-                    completion(.failure(.invalidData))
-                }
+                completion(BurgerMapper.map(successTuple.data, response: successTuple.response))
             case .failure:
                 completion(.failure(.connectivity))
             }
         }
     }
+    
+ 
 }
