@@ -8,12 +8,6 @@
 
 import Foundation
 
-public protocol HTTPClient {
-    typealias HTTPClientResult = Result<(HTTPURLResponse, Data), Error>
-    
-    func get(form url: URL, completion: @escaping (HTTPClientResult) -> Void)
-}
-
 public final class RemoteBurgerLoader {
     public typealias Result = Swift.Result<[Burger], Error>
     
@@ -45,37 +39,5 @@ public final class RemoteBurgerLoader {
                 completion(.failure(.connectivity))
             }
         }
-    }
-}
-
-private class BurgerItemsMapper {
-    
-    static var ok200 = 200
-    
-    private struct BurgerRoot: Decodable {
-        let items: [RemoteBurger]
-    }
-
-    private struct RemoteBurger: Decodable {
-        let id: UUID
-        let name: String
-        let description: String?
-        let image: URL?
-        
-        var burger: Burger {
-            return Burger(id: id,
-                          name: name,
-                          description: description,
-                          imageURL: image)
-        }
-    }
-    
-    static func map(_ data: Data, response: HTTPURLResponse) throws -> [Burger] {
-        guard response.statusCode == ok200 else {
-            throw RemoteBurgerLoader.Error.invalidData
-        }
-        
-        let root = try JSONDecoder().decode(BurgerRoot.self, from: data)
-        return root.items.map({ $0.burger })
     }
 }
