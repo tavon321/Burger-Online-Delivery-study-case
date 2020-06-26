@@ -71,7 +71,6 @@ Given the customer doesn't have connectivity
 ---
 
 ### Load Burger Image Data From Remote Use Case
-<img width="530" alt="Screen Shot 2020-06-26 at 8 57 14 AM" src="https://user-images.githubusercontent.com/19692076/85865241-3540d580-b78b-11ea-965e-303f38fa8b17.png">
 
 ### Data
    * URL
@@ -115,6 +114,7 @@ Given the customer doesn't have connectivity
 ![image](https://drive.google.com/file/d/1p6TjTjornO5K6Gn0RrEx8vW40s5VAdWh/view?usp=sharing)
 
 ## Architecture
+<img width="530" alt="Screen Shot 2020-06-26 at 8 57 14 AM" src="https://user-images.githubusercontent.com/19692076/85865241-3540d580-b78b-11ea-965e-303f38fa8b17.png">
 
 ## Model Specs
 
