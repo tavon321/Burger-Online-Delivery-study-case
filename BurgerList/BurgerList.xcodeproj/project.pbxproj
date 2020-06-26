@@ -67,6 +67,14 @@
 			path = "Burger API";
 			sourceTree = "<group>";
 		};
+		DCE1E05724A6359A000325B1 /* FeedAPI */ = {
+			isa = PBXGroup;
+			children = (
+				DC208125248FC1630043BC6E /* RemoteBurgerLoaderTests.swift */,
+			);
+			path = FeedAPI;
+			sourceTree = "<group>";
+		};
 		DCEBAA472487DFBD0024BFA9 = {
 			isa = PBXGroup;
 			children = (
@@ -99,7 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				DCEBAA612487DFBD0024BFA9 /* Info.plist */,
-				DC208125248FC1630043BC6E /* RemoteBurgerLoaderTests.swift */,
+				DCE1E05724A6359A000325B1 /* FeedAPI */,
 			);
 			path = BurgerListTests;
 			sourceTree = "<group>";
