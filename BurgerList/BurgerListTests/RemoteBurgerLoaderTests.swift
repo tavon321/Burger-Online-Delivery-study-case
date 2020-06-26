@@ -86,6 +86,22 @@ class RemoteBurgerLoaderTests: XCTestCase {
         }
     }
     
+    func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
+        let url = URL(string: "https://a-given-url.com")!
+        let client = HTTPClientSpy()
+        var sut: RemoteBurgerLoader? = RemoteBurgerLoader(httpClient: client, url: url)
+        
+        var capturedResults: [RemoteBurgerLoader.Result] = []
+        sut?.load { result in
+            capturedResults.append(result)
+        }
+        
+        sut = nil
+        client.complete(withStatusCode: 200, data: Data())
+        
+        XCTAssertTrue(capturedResults.isEmpty)
+    }
+    
     // MARK: Helpers
     private func makeSUT(url: URL = URL(string: "https://a-given-url.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: RemoteBurgerLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()

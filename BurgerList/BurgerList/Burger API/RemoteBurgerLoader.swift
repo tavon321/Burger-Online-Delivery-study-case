@@ -25,7 +25,8 @@ public final class RemoteBurgerLoader {
     }
     
     public func load(completion: @escaping (Result) -> Void) {
-        client.get(form: url) { result in
+        client.get(form: url) { [weak self] result in
+            guard self != nil else { return }
             switch result {
             case .success(let successTuple):
                 completion(BurgerMapper.map(successTuple.data, response: successTuple.response))
