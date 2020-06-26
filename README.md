@@ -111,7 +111,7 @@ Given the customer doesn't have connectivity
    1. System delivers no menu.
    
 ## Flowchart
-![image](https://drive.google.com/uc?export=view&id=<1p6TjTjornO5K6Gn0RrEx8vW40s5VAdWh)
+![image](https://drive.google.com/uc?export=view&id=1p6TjTjornO5K6Gn0RrEx8vW40s5VAdWh)
 
 ## Architecture
 <img width="530" alt="Screen Shot 2020-06-26 at 8 57 14 AM" src="https://user-images.githubusercontent.com/19692076/85865241-3540d580-b78b-11ea-965e-303f38fa8b17.png">
