@@ -8,8 +8,8 @@
 
 import Foundation
 
-public final class RemoteBurgerLoader {
-    public typealias Result = Swift.Result<[Burger], Error>
+public final class RemoteBurgerLoader: BurgerLoader {
+    public typealias Result = BurgerLoader.BurgerListResult
     
     private let client: HTTPClient
     private let url: URL
@@ -31,10 +31,9 @@ public final class RemoteBurgerLoader {
             case .success(let successTuple):
                 completion(BurgerMapper.map(successTuple.data, response: successTuple.response))
             case .failure:
-                completion(.failure(.connectivity))
+                completion(.failure(Error.connectivity))
             }
         }
     }
-    
  
 }

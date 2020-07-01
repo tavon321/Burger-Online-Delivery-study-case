@@ -61,6 +61,7 @@
 		DC8671BB24911EC0007DA501 /* Burger API */ = {
 			isa = PBXGroup;
 			children = (
+				DCD8F68724A4DC7700064ED9 /* BurgerMapper.swift */,
 				DC8671BC24911ED6007DA501 /* RemoteBurgerLoader.swift */,
 				DCD8F68524A4DC1C00064ED9 /* HTTPClient.swift */,
 			);
@@ -117,7 +118,6 @@
 			children = (
 				DCEBAA6B2487DFDB0024BFA9 /* Burger.swift */,
 				DCEBAA6D2487E4D00024BFA9 /* BurgerLoader.swift */,
-				DCD8F68724A4DC7700064ED9 /* BurgerMapper.swift */,
 			);
 			name = BurgerFeature;
 			sourceTree = "<group>";

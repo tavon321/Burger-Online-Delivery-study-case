@@ -37,7 +37,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
     func test_load_deliversErrorOnClienError() {
         let (sut, client) = makeSUT()
         
-        expect(sut, toCompleteWithResult: .failure(.connectivity)) {
+        expect(sut, toCompleteWithResult: .failure(RemoteBurgerLoader.Error.connectivity)) {
             let clientError = NSError(domain: "test", code: 0)
             client.complete(with: clientError)
         }
@@ -48,7 +48,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
         let samples = [199, 201, 300, 400, 500].enumerated()
         
         samples.forEach { index, code in
-            expect(sut, toCompleteWithResult: .failure(.invalidData)) {
+            expect(sut, toCompleteWithResult: .failure(RemoteBurgerLoader.Error.invalidData)) {
                 let data = makeItemsJson([])
                 client.complete(withStatusCode: code, data: data, at: index)
             }
@@ -58,7 +58,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
     func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (sut, client) = makeSUT()
         
-        expect(sut, toCompleteWithResult: .failure(.invalidData)) {
+        expect(sut, toCompleteWithResult: .failure(RemoteBurgerLoader.Error.invalidData)) {
             
             let invalidJSON = Data("Invalid JSON".utf8)
             client.complete(withStatusCode: 200, data: invalidJSON)
@@ -140,17 +140,27 @@ class RemoteBurgerLoaderTests: XCTestCase {
     }
     
     private func expect(_ sut: RemoteBurgerLoader,
-                        toCompleteWithResult result: RemoteBurgerLoader.Result,
+                        toCompleteWithResult expectedResult: RemoteBurgerLoader.Result,
                         file: StaticString = #file,
                         line: UInt = #line,
                         when action: () -> Void) {
-        var capturedResults: [RemoteBurgerLoader.Result] = []
-        sut.load { result in
-            capturedResults.append(result)
+        let exp = expectation(description: "Wait for load completion")
+        sut.load { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case let (.success(receivedItems), .success(expectedItems)):
+                XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
+            case let (.failure(receivedError), .failure(expectedResult)):
+                XCTAssertEqual(receivedError as! RemoteBurgerLoader.Error, expectedResult as! RemoteBurgerLoader.Error, file: file, line: line)
+            default:
+                XCTFail("Expected result \(expectedResult) got \(receivedResult) insted", file: file, line: line)
+            }
+            
+            exp.fulfill()
         }
         
         action()
-        XCTAssertEqual(capturedResults, [result], file: file, line: line)
+        
+        wait(for: [exp], timeout: 1.0)
     }
     
     private class HTTPClientSpy: HTTPClient {

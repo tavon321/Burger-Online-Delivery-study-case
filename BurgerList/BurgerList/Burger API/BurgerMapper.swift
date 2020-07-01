@@ -36,7 +36,7 @@ internal final class BurgerMapper {
     
     internal static func map(_ data: Data, response: HTTPURLResponse) -> RemoteBurgerLoader.Result {
         guard response.statusCode == ok200, let root = try? JSONDecoder().decode(BurgerRoot.self, from: data) else {
-            return .failure(.invalidData)
+            return .failure(RemoteBurgerLoader.Error.invalidData)
         }
         return .success(root.burgers)
     }

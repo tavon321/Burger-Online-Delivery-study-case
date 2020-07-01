@@ -8,6 +8,8 @@
 
 import Foundation
 
-protocol BurgerLoader {
-    func load(completion: @escaping (Result<[Burger], Error>) -> Void)
+public protocol BurgerLoader {
+    typealias BurgerListResult = Result<[Burger], Error>
+    
+    func load(completion: @escaping (BurgerListResult) -> Void)
 }
