@@ -37,7 +37,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
     func test_load_deliversErrorOnClienError() {
         let (sut, client) = makeSUT()
         
-        expect(sut, toCompleteWithResult: .failure(RemoteBurgerLoader.Error.connectivity)) {
+        expect(sut, toCompleteWithResult: failure(.connectivity)) {
             let clientError = NSError(domain: "test", code: 0)
             client.complete(with: clientError)
         }
@@ -48,7 +48,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
         let samples = [199, 201, 300, 400, 500].enumerated()
         
         samples.forEach { index, code in
-            expect(sut, toCompleteWithResult: .failure(RemoteBurgerLoader.Error.invalidData)) {
+            expect(sut, toCompleteWithResult: failure(.invalidData)) {
                 let data = makeItemsJson([])
                 client.complete(withStatusCode: code, data: data, at: index)
             }
@@ -58,7 +58,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
     func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (sut, client) = makeSUT()
         
-        expect(sut, toCompleteWithResult: .failure(RemoteBurgerLoader.Error.invalidData)) {
+        expect(sut, toCompleteWithResult: failure(.invalidData)) {
             
             let invalidJSON = Data("Invalid JSON".utf8)
             client.complete(withStatusCode: 200, data: invalidJSON)
@@ -137,6 +137,10 @@ class RemoteBurgerLoaderTests: XCTestCase {
     private func makeItemsJson(_ items: [[String: Any]]) -> Data {
         let items = ["items": items]
         return try! JSONSerialization.data(withJSONObject: items)
+    }
+    
+    private func failure(_ error: RemoteBurgerLoader.Error) -> RemoteBurgerLoader.Result {
+        return .failure(error)
     }
     
     private func expect(_ sut: RemoteBurgerLoader,
