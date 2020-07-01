@@ -149,8 +149,8 @@ class RemoteBurgerLoaderTests: XCTestCase {
             switch (receivedResult, expectedResult) {
             case let (.success(receivedItems), .success(expectedItems)):
                 XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
-            case let (.failure(receivedError), .failure(expectedResult)):
-                XCTAssertEqual(receivedError as! RemoteBurgerLoader.Error, expectedResult as! RemoteBurgerLoader.Error, file: file, line: line)
+            case let (.failure(receivedError as RemoteBurgerLoader.Error), .failure(expectedResult as RemoteBurgerLoader.Error)):
+                XCTAssertEqual(receivedError, expectedResult, file: file, line: line)
             default:
                 XCTFail("Expected result \(expectedResult) got \(receivedResult) insted", file: file, line: line)
             }
