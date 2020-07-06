@@ -11,6 +11,7 @@
 		DC8671BD24911ED6007DA501 /* RemoteBurgerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8671BC24911ED6007DA501 /* RemoteBurgerLoader.swift */; };
 		DCD8F68624A4DC1C00064ED9 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD8F68524A4DC1C00064ED9 /* HTTPClient.swift */; };
 		DCD8F68824A4DC7700064ED9 /* BurgerMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD8F68724A4DC7700064ED9 /* BurgerMapper.swift */; };
+		DCE9FBB724B36613004D526E /* URLSessionHttpClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE9FBB624B36613004D526E /* URLSessionHttpClientTest.swift */; };
 		DCEBAA5B2487DFBD0024BFA9 /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
 		DCEBAA6C2487DFDB0024BFA9 /* Burger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEBAA6B2487DFDB0024BFA9 /* Burger.swift */; };
 		DCEBAA6E2487E4D00024BFA9 /* BurgerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEBAA6D2487E4D00024BFA9 /* BurgerLoader.swift */; };
@@ -31,6 +32,7 @@
 		DC8671BC24911ED6007DA501 /* RemoteBurgerLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBurgerLoader.swift; sourceTree = "<group>"; };
 		DCD8F68524A4DC1C00064ED9 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		DCD8F68724A4DC7700064ED9 /* BurgerMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapper.swift; sourceTree = "<group>"; };
+		DCE9FBB624B36613004D526E /* URLSessionHttpClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHttpClientTest.swift; sourceTree = "<group>"; };
 		DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BurgerList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCEBAA552487DFBD0024BFA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCEBAA5A2487DFBD0024BFA9 /* BurgerListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				DC208125248FC1630043BC6E /* RemoteBurgerLoaderTests.swift */,
+				DCE9FBB624B36613004D526E /* URLSessionHttpClientTest.swift */,
 			);
 			path = FeedAPI;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC208126248FC1630043BC6E /* RemoteBurgerLoaderTests.swift in Sources */,
+				DCE9FBB724B36613004D526E /* URLSessionHttpClientTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
