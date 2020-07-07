@@ -170,6 +170,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
     private class HTTPClientSpy: HTTPClient {
         
         private var messages: [(url: URL, completion: (HTTPClientResult) -> Void)] = []
+        
         var requestedURLs: [URL] {
             return messages.map( { $0.url })
         }
