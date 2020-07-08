@@ -15,8 +15,11 @@ class URLSessionHttpClient {
         self.session = session
     }
     
-    func get(from url: URL) {
-        session.dataTask(with: url) { (_, _, _) in }.resume()
+    func get(from url: URL, completion: @escaping (Error?) -> Void) {
+        session.dataTask(with: url) { (_, _, error) in
+            guard let error = error else { return }
+            completion(error)
+        }.resume()
     }
 }
 
@@ -32,16 +35,35 @@ class URLSessionHttpClientTest: XCTestCase {
         
         let sut = URLSessionHttpClient(session: session)
         
-        sut.get(from: url)
+        sut.get(from: url) { _ in }
         
         XCTAssertEqual(task.resumeCallCount, 1)
+    }
+    
+    func test_getFromUrl_failsOnRequestError() {
+        let url = URL(string: "http://any-url.com")!
+        let session = URLSessionSpy()
+        let error = NSError(domain: "an Error", code: 1)
+        
+        let sut = URLSessionHttpClient(session: session)
+        
+        var capturedErrors = [NSError]()
+        sut.get(from: url) { receivedError in
+            capturedErrors.append(error as NSError)
+        }
+        
+        session.dataTaskCompletions.first?(nil, nil, error)
+        
+        XCTAssertEqual([error], capturedErrors)
     }
     
     // MARK: Helpers
     private class URLSessionSpy: URLSession {
         private var stubs = [URL: URLSessionDataTask]()
+        var dataTaskCompletions = [(Data?, URLResponse?, Error?) -> Void] ()
         
         override func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+            dataTaskCompletions.append(completionHandler)
             return stubs[url] ?? FakeURLSessionDataTask()
         }
         
