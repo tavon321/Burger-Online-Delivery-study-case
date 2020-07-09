@@ -30,7 +30,6 @@ class URLSessionHttpClientTest: XCTestCase {
     func test_getFromURL_performGETRequestWithURL() {
         URLProtocolStub.startInterceptingRequest()
         let url = URL(string: "http://any-url.com")!
-        let sut = URLSessionHttpClient()
         
         let exp = expectation(description: "Wait for request")
         
@@ -40,9 +39,9 @@ class URLSessionHttpClientTest: XCTestCase {
             exp.fulfill()
         }
         
-        wait(for: [exp], timeout: 1.0)
+        makeSUT().get(from: url) { _ in }
         
-        sut.get(from: url) { _ in }
+        wait(for: [exp], timeout: 1.0)
         
         URLProtocolStub.stopInterceptionRequest()
     }
@@ -54,10 +53,9 @@ class URLSessionHttpClientTest: XCTestCase {
         let error = NSError(domain: "an Error", code: 1)
         URLProtocolStub.stub(data: nil, response: nil, error: error)
         
-        let sut = URLSessionHttpClient()
         let exp = expectation(description: "Wait for completion")
         
-        sut.get(from: url) { result in
+        makeSUT().get(from: url) { result in
             switch result {
             case .success:
                 XCTFail("Expected failure with error \(error), got \(result) instead")
@@ -73,6 +71,10 @@ class URLSessionHttpClientTest: XCTestCase {
     }
     
     // MARK: Helpers
+    private func makeSUT() -> URLSessionHttpClient {
+        return URLSessionHttpClient()
+    }
+    
     private class URLProtocolStub: URLProtocol {
         private static var stub: Stub?
         private static var requestObserver: ((URLRequest) -> Void)?
@@ -84,6 +86,7 @@ class URLSessionHttpClientTest: XCTestCase {
         static func stopInterceptionRequest() {
             URLProtocol.unregisterClass(URLProtocolStub.self)
             stub = nil
+            requestObserver = nil
         }
         
         private struct Stub {
