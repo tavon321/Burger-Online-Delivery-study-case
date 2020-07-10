@@ -9,7 +9,6 @@
 import XCTest
 import BurgerList
 
-
 class URLSessionHttpClient {
     private let session: URLSession
     
@@ -27,10 +26,16 @@ class URLSessionHttpClient {
 
 class URLSessionHttpClientTest: XCTestCase {
     
-    func test_getFromURL_performGETRequestWithURL() {
+    override func setUpWithError() throws {
         URLProtocolStub.startInterceptingRequest()
+    }
+    
+    override func tearDownWithError() throws {
+        URLProtocolStub.stopInterceptionRequest()
+    }
+    
+    func test_getFromURL_performGETRequestWithURL() {
         let url = URL(string: "http://any-url.com")!
-        
         let exp = expectation(description: "Wait for request")
         
         URLProtocolStub.observerRequest { request in
@@ -42,13 +47,9 @@ class URLSessionHttpClientTest: XCTestCase {
         makeSUT().get(from: url) { _ in }
         
         wait(for: [exp], timeout: 1.0)
-        
-        URLProtocolStub.stopInterceptionRequest()
     }
 
     func test_getFromUrl_failsOnRequestError() {
-        URLProtocolStub.startInterceptingRequest()
-        
         let url = URL(string: "http://any-url.com")!
         let error = NSError(domain: "an Error", code: 1)
         URLProtocolStub.stub(data: nil, response: nil, error: error)
@@ -66,8 +67,6 @@ class URLSessionHttpClientTest: XCTestCase {
         }
         
         wait(for: [exp], timeout: 1)
-        
-        URLProtocolStub.stopInterceptionRequest()
     }
     
     // MARK: Helpers
