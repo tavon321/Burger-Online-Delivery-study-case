@@ -60,12 +60,40 @@ class URLSessionHttpClientTest: XCTestCase {
         XCTAssertEqual(requestedError, receivedError as NSError?)
     }
 
-    func test_getFromUrl_failsOnAllNilValues() {
-        let receivedError = resultErrorFor(data: nil, response: nil, error: nil)
-        XCTAssertNotNil(receivedError)
+    func test_getFromUrl_failsOnAllInvalidCasesValues() {
+        XCTAssertNotNil(resultErrorFor(data: nil, response: nil, error: nil))
+        XCTAssertNotNil(resultErrorFor(data: nil, response: nonHTTTPURLResponse, error: nil))
+        XCTAssertNotNil(resultErrorFor(data: nil, response: anyHTTTPURLResponse, error: nil))
+        XCTAssertNotNil(resultErrorFor(data: nil, response: anyHTTTPURLResponse, error: anyError))
+        XCTAssertNotNil(resultErrorFor(data: anyData, response: nil, error: nil))
+        XCTAssertNotNil(resultErrorFor(data: anyData, response: nil, error: anyError))
+        XCTAssertNotNil(resultErrorFor(data: nil, response: nonHTTTPURLResponse, error: anyError))
+        XCTAssertNotNil(resultErrorFor(data: nil, response: anyHTTTPURLResponse, error: anyError))
+        XCTAssertNotNil(resultErrorFor(data: anyData, response: nonHTTTPURLResponse, error: anyError))
+        XCTAssertNotNil(resultErrorFor(data: anyData, response: anyHTTTPURLResponse, error: anyError))
+        XCTAssertNotNil(resultErrorFor(data: anyData, response: nonHTTTPURLResponse, error: nil))
     }
     
     // MARK: Helpers
+    var anyError: Error {
+        return NSError(domain: "any error", code: 0)
+    }
+    var anyURL: URL {
+        return URL(string: "http://any-url.com")!
+    }
+    
+    var anyData: Data {
+        return Data("any data".utf8)
+    }
+    
+    var nonHTTTPURLResponse: URLResponse {
+        return URLResponse(url: anyURL, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
+    }
+    
+    var anyHTTTPURLResponse: HTTPURLResponse {
+        return HTTPURLResponse(url: anyURL, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
+    }
+    
     private func resultErrorFor(data: Data?, response: URLResponse?, error: Error?, file: StaticString = #file, line: UInt = #line) -> Error? {
         URLProtocolStub.stub(data: data, response: response, error: error)
         let exp = expectation(description: "Wait for completion")
@@ -88,10 +116,6 @@ class URLSessionHttpClientTest: XCTestCase {
     
     private func makeSUT() -> URLSessionHttpClient {
         return URLSessionHttpClient()
-    }
-    
-    var anyURL: URL {
-        return URL(string: "http://any-url.com")!
     }
     
     private class URLProtocolStub: URLProtocol {
