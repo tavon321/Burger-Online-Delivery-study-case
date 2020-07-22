@@ -79,48 +79,24 @@ class URLSessionHttpClientTest: XCTestCase {
     func test_getFromURL_succeedOnHTTPResponseURLWithData() {
         let expectedData = anyData
         let expectedHTTPResponse = anyHTTTPURLResponse
-        URLProtocolStub.stub(data: expectedData, response: expectedHTTPResponse, error: nil)
+        let result = resultSucceedFor(data: expectedData, response: expectedHTTPResponse)
         
-        let exp = expectation(description: "wait for result")
-        makeSUT().get(from: anyURL) { result in
-            switch result {
-            case .success((let receivedResponse, let receivedData)):
-                XCTAssertEqual(receivedResponse.url, expectedHTTPResponse.url)
-                XCTAssertEqual(receivedResponse.statusCode, expectedHTTPResponse.statusCode)
-                
-                XCTAssertEqual(expectedData, receivedData)
-            default:
-                XCTFail("Expected success, got \(result) instead")
-            }
-            
-            exp.fulfill()
-        }
+        XCTAssertEqual(result?.response.url, expectedHTTPResponse.url)
+        XCTAssertEqual(result?.response.statusCode, expectedHTTPResponse.statusCode)
         
-        wait(for: [exp], timeout: 1)
+        XCTAssertEqual(result?.data, expectedData)
     }
     
     func test_getFromURL_succeedWithEmptyDataOnHTTPResponseURLWithNilData() {
-           let expectedData = Data()
-           let expectedHTTPResponse = anyHTTTPURLResponse
-           URLProtocolStub.stub(data: nil, response: expectedHTTPResponse, error: nil)
-           
-           let exp = expectation(description: "wait for result")
-           makeSUT().get(from: anyURL) { result in
-               switch result {
-               case .success((let receivedResponse, let receivedData)):
-                   XCTAssertEqual(receivedResponse.url, expectedHTTPResponse.url)
-                   XCTAssertEqual(receivedResponse.statusCode, expectedHTTPResponse.statusCode)
-                   
-                   XCTAssertEqual(expectedData, receivedData)
-               default:
-                   XCTFail("Expected success, got \(result) instead")
-               }
-               
-               exp.fulfill()
-           }
-           
-           wait(for: [exp], timeout: 1)
-       }
+        let expectedData = Data()
+        let expectedHTTPResponse = anyHTTTPURLResponse
+        
+        let result = resultSucceedFor(data: expectedData, response: expectedHTTPResponse)
+        
+        XCTAssertEqual(result?.response.url, expectedHTTPResponse.url)
+        XCTAssertEqual(result?.response.statusCode, expectedHTTPResponse.statusCode)
+        XCTAssertEqual(result?.data, expectedData)
+    }
     
     // MARK: Helpers
     var anyError: NSError {
@@ -140,6 +116,30 @@ class URLSessionHttpClientTest: XCTestCase {
     
     var anyHTTTPURLResponse: HTTPURLResponse {
         return HTTPURLResponse(url: anyURL, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
+    }
+    
+    private func resultSucceedFor(data: Data?,
+                                  response: URLResponse?,
+                                  file: StaticString = #file,
+                                  line: UInt = #line) -> (data: Data, response: HTTPURLResponse)? {
+        URLProtocolStub.stub(data: data, response: response, error: nil)
+        
+        let exp = expectation(description: "Wait for completion")
+        
+        var capturedResponse: (data: Data, response: HTTPURLResponse)?
+        makeSUT().get(from: anyURL) { result in
+            switch result {
+            case let .success((response, data)):
+                capturedResponse = (data, response)
+            default:
+                XCTFail("Expected success, got \(result) instead", file: file, line: line)
+            }
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1)
+        
+        return capturedResponse
     }
     
     private func resultErrorFor(data: Data?, response: URLResponse?, error: Error?, file: StaticString = #file, line: UInt = #line) -> Error? {
