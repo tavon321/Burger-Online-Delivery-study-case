@@ -22,7 +22,7 @@ class URLSessionHttpClient {
         session.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 completion(.failure(error))
-            } else if let data = data, data.count > 0, let response = response as? HTTPURLResponse {
+            } else if let data = data, let response = response as? HTTPURLResponse {
                 completion(.success((response, data)))
             } else {
                 completion(.failure(UnexpectedValue()))
@@ -66,7 +66,6 @@ class URLSessionHttpClientTest: XCTestCase {
     func test_getFromUrl_failsOnAllInvalidCasesValues() {
         XCTAssertNotNil(resultErrorFor(data: nil, response: nil, error: nil))
         XCTAssertNotNil(resultErrorFor(data: nil, response: nonHTTTPURLResponse, error: nil))
-        XCTAssertNotNil(resultErrorFor(data: nil, response: anyHTTTPURLResponse, error: nil))
         XCTAssertNotNil(resultErrorFor(data: nil, response: anyHTTTPURLResponse, error: anyError))
         XCTAssertNotNil(resultErrorFor(data: anyData, response: nil, error: nil))
         XCTAssertNotNil(resultErrorFor(data: anyData, response: nil, error: anyError))
@@ -99,6 +98,29 @@ class URLSessionHttpClientTest: XCTestCase {
         
         wait(for: [exp], timeout: 1)
     }
+    
+    func test_getFromURL_succeedWithEmptyDataOnHTTPResponseURLWithNilData() {
+           let expectedData = Data()
+           let expectedHTTPResponse = anyHTTTPURLResponse
+           URLProtocolStub.stub(data: nil, response: expectedHTTPResponse, error: nil)
+           
+           let exp = expectation(description: "wait for result")
+           makeSUT().get(from: anyURL) { result in
+               switch result {
+               case .success((let receivedResponse, let receivedData)):
+                   XCTAssertEqual(receivedResponse.url, expectedHTTPResponse.url)
+                   XCTAssertEqual(receivedResponse.statusCode, expectedHTTPResponse.statusCode)
+                   
+                   XCTAssertEqual(expectedData, receivedData)
+               default:
+                   XCTFail("Expected success, got \(result) instead")
+               }
+               
+               exp.fulfill()
+           }
+           
+           wait(for: [exp], timeout: 1)
+       }
     
     // MARK: Helpers
     var anyError: NSError {
