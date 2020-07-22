@@ -25,7 +25,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
         XCTAssertEqual(client.requestedURLs, [url])
     }
     
-    func test_loadTwict_requestDataFromURLTwice() {
+    func test_loadTwice_requestDataFromURLTwice() {
         let url = URL(string: "https://a-given-url.com")!
         let (sut, client) = makeSUT(url: url)
         
