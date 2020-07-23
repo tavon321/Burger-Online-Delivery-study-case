@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		DC208126248FC1630043BC6E /* RemoteBurgerLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC208125248FC1630043BC6E /* RemoteBurgerLoaderTests.swift */; };
+		DC765CD524C9CA82007D7999 /* BurgerListAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC765CD424C9CA82007D7999 /* BurgerListAPIEndToEndTests.swift */; };
+		DC765CD724C9CA82007D7999 /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
+		DC765CDE24C9CB2C007D7999 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC765CDD24C9CB2C007D7999 /* URLSessionHTTPClient.swift */; };
 		DC8671BD24911ED6007DA501 /* RemoteBurgerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8671BC24911ED6007DA501 /* RemoteBurgerLoader.swift */; };
 		DCD8F68624A4DC1C00064ED9 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD8F68524A4DC1C00064ED9 /* HTTPClient.swift */; };
 		DCD8F68824A4DC7700064ED9 /* BurgerMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD8F68724A4DC7700064ED9 /* BurgerMapper.swift */; };
@@ -18,6 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		DC765CD824C9CA82007D7999 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCEBAA482487DFBD0024BFA9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCEBAA502487DFBD0024BFA9;
+			remoteInfo = BurgerList;
+		};
 		DCEBAA5C2487DFBD0024BFA9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DCEBAA482487DFBD0024BFA9 /* Project object */;
@@ -29,6 +39,10 @@
 
 /* Begin PBXFileReference section */
 		DC208125248FC1630043BC6E /* RemoteBurgerLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBurgerLoaderTests.swift; sourceTree = "<group>"; };
+		DC765CD224C9CA82007D7999 /* BurgerListAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC765CD424C9CA82007D7999 /* BurgerListAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListAPIEndToEndTests.swift; sourceTree = "<group>"; };
+		DC765CD624C9CA82007D7999 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC765CDD24C9CB2C007D7999 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		DC8671BC24911ED6007DA501 /* RemoteBurgerLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBurgerLoader.swift; sourceTree = "<group>"; };
 		DCD8F68524A4DC1C00064ED9 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		DCD8F68724A4DC7700064ED9 /* BurgerMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapper.swift; sourceTree = "<group>"; };
@@ -42,6 +56,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DC765CCF24C9CA82007D7999 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC765CD724C9CA82007D7999 /* BurgerList.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DCEBAA4E2487DFBD0024BFA9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -60,11 +82,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DC765CD324C9CA82007D7999 /* BurgerListAPIEndToEndTests */ = {
+			isa = PBXGroup;
+			children = (
+				DC765CD424C9CA82007D7999 /* BurgerListAPIEndToEndTests.swift */,
+				DC765CD624C9CA82007D7999 /* Info.plist */,
+			);
+			path = BurgerListAPIEndToEndTests;
+			sourceTree = "<group>";
+		};
 		DC8671BB24911EC0007DA501 /* Burger API */ = {
 			isa = PBXGroup;
 			children = (
 				DCD8F68724A4DC7700064ED9 /* BurgerMapper.swift */,
 				DC8671BC24911ED6007DA501 /* RemoteBurgerLoader.swift */,
+				DC765CDD24C9CB2C007D7999 /* URLSessionHTTPClient.swift */,
 				DCD8F68524A4DC1C00064ED9 /* HTTPClient.swift */,
 			);
 			path = "Burger API";
@@ -84,6 +116,7 @@
 			children = (
 				DCEBAA532487DFBD0024BFA9 /* BurgerList */,
 				DCEBAA5E2487DFBD0024BFA9 /* BurgerListTests */,
+				DC765CD324C9CA82007D7999 /* BurgerListAPIEndToEndTests */,
 				DCEBAA522487DFBD0024BFA9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -93,6 +126,7 @@
 			children = (
 				DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */,
 				DCEBAA5A2487DFBD0024BFA9 /* BurgerListTests.xctest */,
+				DC765CD224C9CA82007D7999 /* BurgerListAPIEndToEndTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -138,6 +172,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		DC765CD124C9CA82007D7999 /* BurgerListAPIEndToEndTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC765CDC24C9CA82007D7999 /* Build configuration list for PBXNativeTarget "BurgerListAPIEndToEndTests" */;
+			buildPhases = (
+				DC765CCE24C9CA82007D7999 /* Sources */,
+				DC765CCF24C9CA82007D7999 /* Frameworks */,
+				DC765CD024C9CA82007D7999 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DC765CD924C9CA82007D7999 /* PBXTargetDependency */,
+			);
+			name = BurgerListAPIEndToEndTests;
+			productName = BurgerListAPIEndToEndTests;
+			productReference = DC765CD224C9CA82007D7999 /* BurgerListAPIEndToEndTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		DCEBAA502487DFBD0024BFA9 /* BurgerList */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DCEBAA652487DFBD0024BFA9 /* Build configuration list for PBXNativeTarget "BurgerList" */;
@@ -180,10 +232,13 @@
 		DCEBAA482487DFBD0024BFA9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1120;
+				LastSwiftUpdateCheck = 1160;
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Gustavo Londono";
 				TargetAttributes = {
+					DC765CD124C9CA82007D7999 = {
+						CreatedOnToolsVersion = 11.6;
+					};
 					DCEBAA502487DFBD0024BFA9 = {
 						CreatedOnToolsVersion = 11.2.1;
 						LastSwiftMigration = 1120;
@@ -208,11 +263,19 @@
 			targets = (
 				DCEBAA502487DFBD0024BFA9 /* BurgerList */,
 				DCEBAA592487DFBD0024BFA9 /* BurgerListTests */,
+				DC765CD124C9CA82007D7999 /* BurgerListAPIEndToEndTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		DC765CD024C9CA82007D7999 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DCEBAA4F2487DFBD0024BFA9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -230,6 +293,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DC765CCE24C9CA82007D7999 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC765CD524C9CA82007D7999 /* BurgerListAPIEndToEndTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DCEBAA4D2487DFBD0024BFA9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -239,6 +310,7 @@
 				DC8671BD24911ED6007DA501 /* RemoteBurgerLoader.swift in Sources */,
 				DCD8F68624A4DC1C00064ED9 /* HTTPClient.swift in Sources */,
 				DCEBAA6E2487E4D00024BFA9 /* BurgerLoader.swift in Sources */,
+				DC765CDE24C9CB2C007D7999 /* URLSessionHTTPClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +326,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		DC765CD924C9CA82007D7999 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCEBAA502487DFBD0024BFA9 /* BurgerList */;
+			targetProxy = DC765CD824C9CA82007D7999 /* PBXContainerItemProxy */;
+		};
 		DCEBAA5D2487DFBD0024BFA9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DCEBAA502487DFBD0024BFA9 /* BurgerList */;
@@ -262,6 +339,44 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		DC765CDA24C9CA82007D7999 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = EN79VQJFV3;
+				INFOPLIST_FILE = BurgerListAPIEndToEndTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gustavo.londono.BurgerListAPIEndToEndTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DC765CDB24C9CA82007D7999 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = EN79VQJFV3;
+				INFOPLIST_FILE = BurgerListAPIEndToEndTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gustavo.londono.BurgerListAPIEndToEndTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		DCEBAA632487DFBD0024BFA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -473,6 +588,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DC765CDC24C9CA82007D7999 /* Build configuration list for PBXNativeTarget "BurgerListAPIEndToEndTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC765CDA24C9CA82007D7999 /* Debug */,
+				DC765CDB24C9CA82007D7999 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DCEBAA4B2487DFBD0024BFA9 /* Build configuration list for PBXProject "BurgerList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -9,28 +9,6 @@
 import XCTest
 import BurgerList
 
-class URLSessionHttpClient {
-    private let session: URLSession
-    
-    init(session: URLSession = .shared) {
-        self.session = session
-    }
-    
-    struct UnexpectedValue: Error { }
-    
-    func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
-        session.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                completion(.failure(error))
-            } else if let data = data, let response = response as? HTTPURLResponse {
-                completion(.success((response, data)))
-            } else {
-                completion(.failure(UnexpectedValue()))
-            }
-        }.resume()
-    }
-}
-
 class URLSessionHttpClientTest: XCTestCase {
     
     override func setUpWithError() throws {
@@ -164,8 +142,8 @@ class URLSessionHttpClientTest: XCTestCase {
         return capturedResult
     }
     
-    private func makeSUT() -> URLSessionHttpClient {
-        return URLSessionHttpClient()
+    private func makeSUT() -> URLSessionHTTPClient {
+        return URLSessionHTTPClient()
     }
     
     private class URLProtocolStub: URLProtocol {
