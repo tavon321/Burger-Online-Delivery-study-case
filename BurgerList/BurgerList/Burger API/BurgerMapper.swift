@@ -12,32 +12,32 @@ internal final class BurgerMapper {
     
     private static var ok200 = 200
     
-    private struct BurgerRoot: Decodable {
-        let items: [RemoteBurger]
-        
-        var burgers: [Burger] {
-            return items.map({ $0.burger })
-        }
-    }
+//    private struct BurgerRoot: Decodable {
+//        let items: [RemoteBurger]
+//
+//        var burgers: [Burger] {
+//            return items.map({ $0.burger })
+//        }
+//    }
     
     private struct RemoteBurger: Decodable {
-        let id: UUID
+        let uuid: UUID
         let name: String
         let description: String?
-        let image: URL?
+        let imageURL: URL?
         
         var burger: Burger {
-            return Burger(id: id,
+            return Burger(id: uuid,
                           name: name,
                           description: description,
-                          imageURL: image)
+                          imageURL: imageURL)
         }
     }
     
     internal static func map(_ data: Data, response: HTTPURLResponse) -> RemoteBurgerLoader.Result {
-        guard response.isOK, let root = try? JSONDecoder().decode(BurgerRoot.self, from: data) else {
+        guard response.isOK, let burgers = try? JSONDecoder().decode([RemoteBurger].self, from: data) else {
             return .failure(RemoteBurgerLoader.Error.invalidData)
         }
-        return .success(root.burgers)
+        return .success(burgers.map({ $0.burger }))
     }
 }
