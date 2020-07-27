@@ -119,17 +119,16 @@ class RemoteBurgerLoaderTests: XCTestCase {
                           image: URL? = nil) -> (model: Burger, json: [String: Any]) {
         let model = Burger(id: id, name: name, description: description, imageURL: image)
         let json = [
-            "id": id.uuidString,
+            "uuid": id.uuidString,
             "name": name,
             "description": description,
-            "image": image?.absoluteString
+            "imageURL": image?.absoluteString
             ].compactMapValues( { return $0 })
         
         return (model, json)
     }
     
     private func makeItemsJson(_ items: [[String: Any]]) -> Data {
-        let items = ["items": items]
         return try! JSONSerialization.data(withJSONObject: items)
     }
     
