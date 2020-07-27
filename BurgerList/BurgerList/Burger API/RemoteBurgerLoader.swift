@@ -25,7 +25,7 @@ public final class RemoteBurgerLoader: BurgerLoader {
     }
     
     public func load(completion: @escaping (Result) -> Void) {
-        client.get(form: url) { [weak self] result in
+        client.get(from: url) { [weak self] result in
             guard self != nil else { return }
             switch result {
             case .success(let successTuple):

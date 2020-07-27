@@ -107,16 +107,10 @@ class RemoteBurgerLoaderTests: XCTestCase {
         let client = HTTPClientSpy()
         let sut = RemoteBurgerLoader(httpClient: client, url: url)
         
-        trakForMemoryLeaks(sut, file: file, line: line)
-        trakForMemoryLeaks(client, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
+        trackForMemoryLeaks(client, file: file, line: line)
         
         return (sut, client)
-    }
-    
-    private func trakForMemoryLeaks(_ object: AnyObject, file: StaticString = #file, line: UInt = #line) {
-        addTeardownBlock { [weak object] in
-            XCTAssertNil(object, "Instance should have being deallocated. Potential memory leak", file: file, line: line)
-        }
     }
     
     private func makeItem(id: UUID = UUID(),
@@ -175,7 +169,7 @@ class RemoteBurgerLoaderTests: XCTestCase {
             return messages.map( { $0.url })
         }
         
-        func get(form url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
+        func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
             messages.append((url, completion))
         }
         

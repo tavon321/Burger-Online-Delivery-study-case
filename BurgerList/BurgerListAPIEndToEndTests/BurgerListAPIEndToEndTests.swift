@@ -11,8 +11,11 @@ import BurgerList
 
 class BurgerListAPIEndToEndTests: XCTestCase {
     
-//    func test_endToEndTestGetBurgerResult_matchesFixedTestAccountData() {
-//        let client = URLSessionHTTPClient()
-//        let loader = RemoteBurgerLoader(httpClient: client, url: URL(string: "")!)
-//    }
+    func test_endToEndTestGetBurgerResult_matchesFixedTestAccountData() {
+        let testServerURL = URL(string: "https://localhost:3000/burgerList")!
+        let client = URLSessionHTTPClient()
+        let loader = RemoteBurgerLoader(httpClient: client, url: testServerURL)
+        
+        let exp = expectation(description: "wait for load completion")
+    }
 }
