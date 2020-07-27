@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol BurgerLoader {
-    typealias BurgerListResult = Result<[Burger], Error>
+    typealias Result = Swift.Result<[Burger], Error>
     
-    func load(completion: @escaping (BurgerListResult) -> Void)
+    func load(completion: @escaping (Result) -> Void)
 }

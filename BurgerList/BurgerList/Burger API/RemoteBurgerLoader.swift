@@ -9,7 +9,7 @@
 import Foundation
 
 public final class RemoteBurgerLoader: BurgerLoader {
-    public typealias Result = BurgerLoader.BurgerListResult
+    public typealias Result = BurgerLoader.Result
     
     private let client: HTTPClient
     private let url: URL
