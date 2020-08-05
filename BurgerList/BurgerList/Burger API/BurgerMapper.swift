@@ -11,15 +11,7 @@ import Foundation
 internal final class BurgerMapper {
     
     private static var ok200 = 200
-    
-//    private struct BurgerRoot: Decodable {
-//        let items: [RemoteBurger]
-//
-//        var burgers: [Burger] {
-//            return items.map({ $0.burger })
-//        }
-//    }
-    
+
     private struct RemoteBurger: Decodable {
         let uuid: UUID
         let name: String
