@@ -10,8 +10,6 @@ import Foundation
 
 internal final class BurgerMapper {
     
-    private static var ok200 = 200
-
     private struct RemoteBurger: Decodable {
         let uuid: UUID
         let name: String
