@@ -80,6 +80,7 @@ class URLSessionHttpClientTest: XCTestCase {
     var anyError: NSError {
         return NSError(domain: "any error", code: 0)
     }
+    
     var anyURL: URL {
         return URL(string: "http://any-url.com")!
     }
