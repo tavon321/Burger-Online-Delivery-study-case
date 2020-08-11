@@ -25,7 +25,7 @@ class BurgerListAPIEndToEndTests: XCTestCase {
     // Helpers
     private func getBurgerResult() -> BurgerLoader.Result? {
         let testServerURL = URL(string: "https://5f1ed78757e3290016863dd1.mockapi.io/burgers")!
-        let client = URLSessionHTTPClient()
+        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
         let loader = RemoteBurgerLoader(httpClient: client, url: testServerURL)
         
         trackForMemoryLeaks(client)
