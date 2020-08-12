@@ -93,22 +93,46 @@ Given the customer doesn't have connectivity
 ### Load Menu From Cache Use Case
 
 #### Data
-   * URL
+   * MAX_AGE: 14 days
    
 #### Primary course (happy path):
    1. Execute "Load Burger Menu" command with above data.
-   1. System retrieves menu data from the cache.
-   1. System validates cache is less than two weeks old.
-   1. System delivers cached feed data.
+   2. System retrieves menu data from the cache.
+   3. System validates cache is less than MAX_AGE old.
+   4. System validates cache is less than two weeks old.
+   5. System delivers cached feed data.
 
 #### Retrieval error course (sad path):
-   1. System delivers invalid data error.
+   1. System delivers error.
 
 #### Empty cache (sad path):
    1. System delivers connectivity error.
    
 #### Expired cache course (sad path):
-   1. System delivers no menu.
+   1. System deletes cache.
+   2. System delivers no menu.
+   
+---
+
+### Cache Feed Use Case
+
+#### Data
+   * Burger Items
+   
+#### Primary course (happy path):
+   1. Execute "Save Burger Menu" command with above data.
+   2. System encodes burger items.
+   3. System timestamp new cache.
+   4. System delete the old cache dat.
+   5. System saves the new cache data.
+   6. System delivers success message.
+
+#### Deleting error course (sad path):
+   1. System delivers error.
+   
+#### Saving error course (sad path):
+   1. System delivers error.
+   
    
 ## Flowchart
 ![image](https://drive.google.com/uc?export=view&id=1p6TjTjornO5K6Gn0RrEx8vW40s5VAdWh)
