@@ -1,5 +1,5 @@
 //
-//  RemoteBurgerLoaderTests.swift
+//  LoadBurgerFromRemoteUseCaseTests.swift
 //  BurgerListTests
 //
 //  Created by Gustavo Londono on 6/9/20.
@@ -9,7 +9,7 @@
 import XCTest
 import BurgerList
 
-class RemoteBurgerLoaderTests: XCTestCase {
+class LoadBurgerFromRemoteUseCaseTests: XCTestCase {
     
     func test_init_doesNotRequestDataFromUrl() {
         let (_, client) = makeSUT()
