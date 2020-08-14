@@ -137,7 +137,6 @@
 		DCE1E05724A6359A000325B1 /* BurgerAPI */ = {
 			isa = PBXGroup;
 			children = (
-				DCB38B9C24CBC7290009C6B7 /* Helpers */,
 				DC208125248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift */,
 				DCE9FBB624B36613004D526E /* URLSessionHttpClientTest.swift */,
 			);
@@ -178,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				DCEBAA612487DFBD0024BFA9 /* Info.plist */,
+				DCB38B9C24CBC7290009C6B7 /* Helpers */,
 				DC6C67F224E6C6540071525B /* BurgerCache */,
 				DCE1E05724A6359A000325B1 /* BurgerAPI */,
 			);

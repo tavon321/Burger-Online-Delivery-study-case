@@ -55,6 +55,9 @@ class CacheFeedUseCaseTests: XCTestCase {
         let store = BurgerStore()
         let sut = LocalBurgerLoader(store: store)
         
+        trackForMemoryLeaks(store)
+        trackForMemoryLeaks(sut)
+        
         return (sut: sut, store: store)
     }
 }
