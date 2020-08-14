@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import BurgerList
 
 class LocalBurgerLoader {
     private let store: BurgerStore
@@ -15,7 +16,7 @@ class LocalBurgerLoader {
         self.store = store
     }
     
-    func save() {
+    func save(_ items: [Burger]) {
         store.deleteCachedBurgerCallCount += 1
     }
 }
@@ -27,19 +28,33 @@ class BurgerStore {
 class CacheFeedUseCaseTests: XCTestCase {
 
     func test_init_doesNotDeleteCacheUponCreation() {
-        let store = BurgerStore()
-        _ = LocalBurgerLoader(store: store)
-        
+        let (_, store) = createSUT()
+            
         XCTAssertEqual(store.deleteCachedBurgerCallCount, 0)
     }
     
     func test_save_requestCacheDeletion() {
-        let store = BurgerStore()
-        let sut = LocalBurgerLoader(store: store)
+        let (sut, store) = createSUT()
+        let items = [uniqueItem, uniqueItem]
         
-        sut.save()
+        sut.save(items)
         
         XCTAssertEqual(store.deleteCachedBurgerCallCount, 1)
     }
-
+    
+    // MARK: - Helpers
+    private var uniqueItem: Burger {
+        return Burger(id: UUID(), name: "a name", description: "a description", imageURL: anyURL)
+    }
+    
+    private var anyURL: URL {
+        return URL(string: "http://any-url.com")!
+    }
+    
+    private func createSUT() -> (sut: LocalBurgerLoader, store: BurgerStore) {
+        let store = BurgerStore()
+        let sut = LocalBurgerLoader(store: store)
+        
+        return (sut: sut, store: store)
+    }
 }
