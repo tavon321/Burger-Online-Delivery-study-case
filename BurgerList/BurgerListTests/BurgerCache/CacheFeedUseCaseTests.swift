@@ -14,6 +14,10 @@ class LocalBurgerLoader {
     init(store: BurgerStore) {
         self.store = store
     }
+    
+    func save() {
+        store.deleteCachedBurgerCallCount += 1
+    }
 }
 
 class BurgerStore {
@@ -27,6 +31,15 @@ class CacheFeedUseCaseTests: XCTestCase {
         _ = LocalBurgerLoader(store: store)
         
         XCTAssertEqual(store.deleteCachedBurgerCallCount, 0)
+    }
+    
+    func test_save_requestCacheDeletion() {
+        let store = BurgerStore()
+        let sut = LocalBurgerLoader(store: store)
+        
+        sut.save()
+        
+        XCTAssertEqual(store.deleteCachedBurgerCallCount, 1)
     }
 
 }
