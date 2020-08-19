@@ -23,6 +23,11 @@ class LocalBurgerLoader {
 
 class BurgerStore {
     var deleteCachedBurgerCallCount = 0
+    var insertCallCount = 0
+    
+    func completeDeletion(with error: Error, at index: Int = 0) {
+        
+    }
 }
 
 class CacheFeedUseCaseTests: XCTestCase {
@@ -42,6 +47,17 @@ class CacheFeedUseCaseTests: XCTestCase {
         XCTAssertEqual(store.deleteCachedBurgerCallCount, 1)
     }
     
+    func test_save_doesNotRequestCacheInsertionOnDeletionError() {
+        let (sut, store) = createSUT()
+        let items = [uniqueItem, uniqueItem]
+        
+        sut.save(items)
+        
+        store.completeDeletion(with: anyError)
+        
+        XCTAssertEqual(store.insertCallCount, 0)
+    }
+    
     // MARK: - Helpers
     private var uniqueItem: Burger {
         return Burger(id: UUID(), name: "a name", description: "a description", imageURL: anyURL)
@@ -49,6 +65,10 @@ class CacheFeedUseCaseTests: XCTestCase {
     
     private var anyURL: URL {
         return URL(string: "http://any-url.com")!
+    }
+    
+    var anyError: NSError {
+        return NSError(domain: "any error", code: 0)
     }
     
     private func createSUT() -> (sut: LocalBurgerLoader, store: BurgerStore) {
