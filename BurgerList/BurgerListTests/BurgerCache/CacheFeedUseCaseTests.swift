@@ -31,7 +31,6 @@ class BurgerStore {
     typealias DeletionCompletion = (Error?) -> Void
     
     var deleteCachedBurgerCallCount = 0
-    var insertCallCount = 0
     var insertions = [(items: [Burger], timestamp: Date)]()
     
     private var deletionCompletions = [DeletionCompletion]()
@@ -50,7 +49,6 @@ class BurgerStore {
     }
     
     func insert(_ items: [Burger], timestamp: Date = Date()) {
-        insertCallCount += 1
         insertions.append((items: items, timestamp: timestamp))
     }
 }
@@ -80,18 +78,7 @@ class CacheFeedUseCaseTests: XCTestCase {
         
         store.completeDeletion(with: anyError)
         
-        XCTAssertEqual(store.insertCallCount, 0)
-    }
-    
-    func test_save_requestCacheInsertionOnDeletionSuccess() {
-        let (sut, store) = createSUT()
-        let items = [uniqueItem, uniqueItem]
-        
-        sut.save(items)
-        
-        store.completeDeletionSuccessfully()
-        
-        XCTAssertEqual(store.insertCallCount, 1)
+        XCTAssertEqual(store.insertions.count, 0)
     }
     
     func test_save_requestCacheInsertionWihtTimestampOnDeletionSuccess() {
