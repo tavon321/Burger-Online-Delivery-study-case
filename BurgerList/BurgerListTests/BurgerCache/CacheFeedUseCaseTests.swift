@@ -11,15 +11,17 @@ import XCTest
 
 class LocalBurgerLoader {
     private let store: BurgerStore
+    private let currentDate: () -> Date
     
-    init(store: BurgerStore) {
+    init(store: BurgerStore, currentDate: @escaping () -> Date) {
         self.store = store
+        self.currentDate = currentDate
     }
     
     func save(_ items: [Burger]) {
         store.deleteCacheFeed { [unowned self] error in
             if error == nil {
-                self.store.insert(items)
+                self.store.insert(items, timestamp: self.currentDate())
             }
         }
     }
@@ -30,6 +32,7 @@ class BurgerStore {
     
     var deleteCachedBurgerCallCount = 0
     var insertCallCount = 0
+    var insertions = [(items: [Burger], timestamp: Date)]()
     
     private var deletionCompletions = [DeletionCompletion]()
     
@@ -46,8 +49,9 @@ class BurgerStore {
         deletionCompletions[index](nil)
     }
     
-    func insert(_ items: [Burger]) {
-         insertCallCount += 1
+    func insert(_ items: [Burger], timestamp: Date = Date()) {
+        insertCallCount += 1
+        insertions.append((items: items, timestamp: timestamp))
     }
 }
 
@@ -88,7 +92,20 @@ class CacheFeedUseCaseTests: XCTestCase {
         store.completeDeletionSuccessfully()
         
         XCTAssertEqual(store.insertCallCount, 1)
+    }
+    
+    func test_save_requestCacheInsertionWihtTimestampOnDeletionSuccess() {
+        let timestamp = Date()
+        let (sut, store) = createSUT(currentDate: { timestamp })
+        let items = [uniqueItem, uniqueItem]
         
+        sut.save(items)
+        
+        store.completeDeletionSuccessfully()
+        
+        XCTAssertEqual(store.insertions.count, 1)
+        XCTAssertEqual(store.insertions.first?.items, items)
+        XCTAssertEqual(store.insertions.first?.timestamp, timestamp)
     }
     
     // MARK: - Helpers
@@ -104,9 +121,9 @@ class CacheFeedUseCaseTests: XCTestCase {
         return NSError(domain: "any error", code: 0)
     }
     
-    private func createSUT() -> (sut: LocalBurgerLoader, store: BurgerStore) {
+    private func createSUT(currentDate: @escaping () -> Date = Date.init) -> (sut: LocalBurgerLoader, store: BurgerStore) {
         let store = BurgerStore()
-        let sut = LocalBurgerLoader(store: store)
+        let sut = LocalBurgerLoader(store: store, currentDate: currentDate )
         
         trackForMemoryLeaks(store)
         trackForMemoryLeaks(sut)
