@@ -18,8 +18,9 @@ class LocalBurgerLoader {
         self.currentDate = currentDate
     }
     
-    func save(_ items: [Burger]) {
+    func save(_ items: [Burger], completion: @escaping (Error?) -> Void) {
         store.deleteCacheFeed { [unowned self] error in
+            completion(error)
             if error == nil {
                 self.store.insert(items, timestamp: self.currentDate())
             }
@@ -70,7 +71,7 @@ class CacheFeedUseCaseTests: XCTestCase {
         let (sut, store) = createSUT()
         let items = [uniqueItem, uniqueItem]
         
-        sut.save(items)
+        sut.save(items) { _ in }
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
     }
@@ -79,7 +80,8 @@ class CacheFeedUseCaseTests: XCTestCase {
         let (sut, store) = createSUT()
         let items = [uniqueItem, uniqueItem]
         
-        sut.save(items)
+        sut.save(items) { _ in }
+        
         store.completeDeletion(with: anyError)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
@@ -90,11 +92,27 @@ class CacheFeedUseCaseTests: XCTestCase {
         let (sut, store) = createSUT(currentDate: { timestamp })
         let items = [uniqueItem, uniqueItem]
         
-        sut.save(items)
+        sut.save(items) { _ in }
         
         store.completeDeletionSuccessfully()
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed, .insert(items, timestamp)])
+    }
+    
+    func test_save_failsDeletionError() {
+        let (sut, store) = createSUT()
+        let items = [uniqueItem, uniqueItem]
+        let expectedError = anyError
+        let exp = expectation(description: "Wait for save error in completion")
+        
+        sut.save(items) { receivedError in
+            XCTAssertEqual(expectedError, receivedError as NSError?)
+            exp.fulfill()
+        }
+        
+        store.completeDeletion(with: expectedError)
+        
+        wait(for: [exp], timeout: 0.1)
     }
     
     // MARK: - Helpers
@@ -112,7 +130,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     
     private func createSUT(currentDate: @escaping () -> Date = Date.init) -> (sut: LocalBurgerLoader, store: BurgerStore) {
         let store = BurgerStore()
-        let sut = LocalBurgerLoader(store: store, currentDate: currentDate )
+        let sut = LocalBurgerLoader(store: store, currentDate: currentDate)
         
         trackForMemoryLeaks(store)
         trackForMemoryLeaks(sut)
