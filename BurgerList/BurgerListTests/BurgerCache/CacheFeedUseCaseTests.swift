@@ -29,53 +29,11 @@ class LocalBurgerLoader {
     }
 }
 
-class BurgerStore {
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
-
-    private (set) var receivedMessages = [ReceivedMessage]()
-    
-    enum ReceivedMessage: Equatable {
-        case deleteCachedFeed
-        case insert([Burger], Date)
-    }
-    
-    private var deletionCompletions = [DeletionCompletion]()
-    private var insertionCompletions = [InsertionCompletion]()
-    
-    func deleteCacheFeed(completion: @escaping DeletionCompletion) {
-        deletionCompletions.append(completion)
-        
-        receivedMessages.append(.deleteCachedFeed)
-    }
-    
-    func completeDeletion(with error: Error, at index: Int = 0) {
-        deletionCompletions[index](error)
-    }
-    
-    func completeDeletionSuccessfully(at index: Int = 0) {
-        deletionCompletions[index](nil)
-    }
-    
-    func completeInsertionSuccessfully(at index: Int = 0) {
-        insertionCompletions[index](nil)
-    }
-    
-    func completeInsertion(with error: Error, at index: Int = 0) {
-        insertionCompletions[index](error)
-    }
-    
-    func insert(_ items: [Burger], timestamp: Date = Date(), completion: @escaping (Error?) -> Void) {
-        receivedMessages.append(.insert(items, timestamp))
-        insertionCompletions.append(completion)
-    }
-}
-
 class CacheFeedUseCaseTests: XCTestCase {
-
+    
     func test_init_doesNotMessageStoreCacheUponCreation() {
         let (_, store) = createSUT()
-            
+        
         XCTAssertEqual(store.receivedMessages, [])
     }
     
@@ -160,6 +118,48 @@ class CacheFeedUseCaseTests: XCTestCase {
         XCTAssertEqual(receivedError as NSError?, error)
     }
     
+    private class BurgerStoreSpy: BurgerStore {
+        typealias DeletionCompletion = (Error?) -> Void
+        typealias InsertionCompletion = (Error?) -> Void
+        
+        private (set) var receivedMessages = [ReceivedMessage]()
+        
+        enum ReceivedMessage: Equatable {
+            case deleteCachedFeed
+            case insert([Burger], Date)
+        }
+        
+        private var deletionCompletions = [DeletionCompletion]()
+        private var insertionCompletions = [InsertionCompletion]()
+        
+        func deleteCacheFeed(completion: @escaping DeletionCompletion) {
+            deletionCompletions.append(completion)
+            
+            receivedMessages.append(.deleteCachedFeed)
+        }
+        
+        func insert(_ items: [Burger], timestamp: Date = Date(), completion: @escaping (Error?) -> Void) {
+            receivedMessages.append(.insert(items, timestamp))
+            insertionCompletions.append(completion)
+        }
+        
+        func completeDeletion(with error: Error, at index: Int = 0) {
+            deletionCompletions[index](error)
+        }
+        
+        func completeDeletionSuccessfully(at index: Int = 0) {
+            deletionCompletions[index](nil)
+        }
+        
+        func completeInsertionSuccessfully(at index: Int = 0) {
+            insertionCompletions[index](nil)
+        }
+        
+        func completeInsertion(with error: Error, at index: Int = 0) {
+            insertionCompletions[index](error)
+        }
+    }
+    
     private var uniqueItem: Burger {
         return Burger(id: UUID(), name: "a name", description: "a description", imageURL: anyURL)
     }
@@ -174,8 +174,8 @@ class CacheFeedUseCaseTests: XCTestCase {
     
     private func createSUT(currentDate: @escaping () -> Date = Date.init,
                            file: StaticString = #file,
-                           line: UInt = #line) -> (sut: LocalBurgerLoader, store: BurgerStore) {
-        let store = BurgerStore()
+                           line: UInt = #line) -> (sut: LocalBurgerLoader, store: BurgerStoreSpy) {
+        let store = BurgerStoreSpy()
         let sut = LocalBurgerLoader(store: store, currentDate: currentDate)
         
         trackForMemoryLeaks(store, file: file, line: line)

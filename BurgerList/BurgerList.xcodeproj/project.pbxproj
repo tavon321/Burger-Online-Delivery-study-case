@@ -10,6 +10,7 @@
 		DC0115C124CF0E3C002A7CB7 /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
 		DC0115C424CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0115C324CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift */; };
 		DC208126248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC208125248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift */; };
+		DC68462B24FD6F46009FF676 /* BurgerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68462A24FD6F46009FF676 /* BurgerStore.swift */; };
 		DC6C67F424E6C6840071525B /* CacheFeedUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6C67F324E6C6840071525B /* CacheFeedUseCaseTests.swift */; };
 		DC765CD524C9CA82007D7999 /* BurgerListAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC765CD424C9CA82007D7999 /* BurgerListAPIEndToEndTests.swift */; };
 		DC765CD724C9CA82007D7999 /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		DC0115C324CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+statusCode.swift"; sourceTree = "<group>"; };
 		DC208125248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadBurgerFromRemoteUseCaseTests.swift; sourceTree = "<group>"; };
+		DC68462A24FD6F46009FF676 /* BurgerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerStore.swift; sourceTree = "<group>"; };
 		DC6C67F324E6C6840071525B /* CacheFeedUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFeedUseCaseTests.swift; sourceTree = "<group>"; };
 		DC765CD224C9CA82007D7999 /* BurgerListAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC765CD424C9CA82007D7999 /* BurgerListAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListAPIEndToEndTests.swift; sourceTree = "<group>"; };
@@ -95,6 +97,14 @@
 				DC0115C324CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DC68462924FD6F32009FF676 /* Burger Cache */ = {
+			isa = PBXGroup;
+			children = (
+				DC68462A24FD6F46009FF676 /* BurgerStore.swift */,
+			);
+			path = "Burger Cache";
 			sourceTree = "<group>";
 		};
 		DC6C67F224E6C6540071525B /* BurgerCache */ = {
@@ -166,6 +176,7 @@
 		DCEBAA532487DFBD0024BFA9 /* BurgerList */ = {
 			isa = PBXGroup;
 			children = (
+				DC68462924FD6F32009FF676 /* Burger Cache */,
 				DC8671BB24911EC0007DA501 /* Burger API */,
 				DCEBAA702487E7660024BFA9 /* BurgerFeature */,
 				DCEBAA552487DFBD0024BFA9 /* Info.plist */,
@@ -340,6 +351,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC68462B24FD6F46009FF676 /* BurgerStore.swift in Sources */,
 				DCD8F68824A4DC7700064ED9 /* BurgerMapper.swift in Sources */,
 				DCEBAA6C2487DFDB0024BFA9 /* Burger.swift in Sources */,
 				DC8671BD24911ED6007DA501 /* RemoteBurgerLoader.swift in Sources */,
