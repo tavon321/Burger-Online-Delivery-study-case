@@ -129,41 +129,44 @@ class CacheFeedUseCaseTests: XCTestCase {
     
     func test_save_failsInsertionError() {
         let (sut, store) = createSUT()
-        let items = [uniqueItem, uniqueItem]
         let insertionError = anyError
-        let exp = expectation(description: "Wait for save error in completion")
         
-        sut.save(items) { receivedError in
-            XCTAssertEqual(insertionError, receivedError as NSError?)
-            exp.fulfill()
+        expect(sut: sut, toCompleteWith: insertionError) {
+            store.completeDeletionSuccessfully()
+            store.completeInsertion(with: insertionError)
         }
-        
-        store.completeDeletionSuccessfully()
-        store.completeInsertion(with: insertionError)
-        
-        wait(for: [exp], timeout: 0.1)
     }
     
     func test_save_succeedsOnSucessfulInsertion() {
         let (sut, store) = createSUT()
-        let items = [uniqueItem, uniqueItem]
+        
+        expect(sut: sut, toCompleteWith: nil) {
+            store.completeDeletionSuccessfully()
+            store.completeInsertionSuccessfully()
+        }
+    }
+    
+    // MARK: - Helpers
+    private func expect(sut: LocalBurgerLoader,
+                        toCompleteWith error: NSError?,
+                        file: StaticString = #file,
+                        line: UInt = #line,
+                        when action: () -> Void) {
         let exp = expectation(description: "Wait for save completion")
         
         var receivedError: Error?
-        sut.save(items) { error in
+        sut.save([uniqueItem, uniqueItem]) { error in
             receivedError = error
             exp.fulfill()
         }
         
-        store.completeDeletionSuccessfully()
-        store.completeInsertionSuccessfully()
+        action()
         
         wait(for: [exp], timeout: 1)
         
-        XCTAssertNil(receivedError)
+        XCTAssertEqual(receivedError as NSError?, error)
     }
     
-    // MARK: - Helpers
     private var uniqueItem: Burger {
         return Burger(id: UUID(), name: "a name", description: "a description", imageURL: anyURL)
     }
@@ -176,12 +179,14 @@ class CacheFeedUseCaseTests: XCTestCase {
         return NSError(domain: "any error", code: 0)
     }
     
-    private func createSUT(currentDate: @escaping () -> Date = Date.init) -> (sut: LocalBurgerLoader, store: BurgerStore) {
+    private func createSUT(currentDate: @escaping () -> Date = Date.init,
+                           file: StaticString = #file,
+                           line: UInt = #line) -> (sut: LocalBurgerLoader, store: BurgerStore) {
         let store = BurgerStore()
         let sut = LocalBurgerLoader(store: store, currentDate: currentDate)
         
-        trackForMemoryLeaks(store)
-        trackForMemoryLeaks(sut)
+        trackForMemoryLeaks(store, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
         
         return (sut: sut, store: store)
     }
