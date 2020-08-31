@@ -34,7 +34,7 @@ class LoadBurgerFromRemoteUseCaseTests: XCTestCase {
         XCTAssertEqual(client.requestedURLs, [url, url])
     }
     
-    func test_load_deliversErrorOnClienError() {
+    func test_load_deliversErrorOnClientError() {
         let (sut, client) = makeSUT()
         
         expect(sut, toCompleteWithResult: failure(.connectivity)) {
