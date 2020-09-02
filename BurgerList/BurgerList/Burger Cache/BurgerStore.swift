@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol BurgerStore {
+public protocol BurgerStore {
     typealias DeletionCompletion = (Error?) -> Void
     typealias InsertionCompletion = (Error?) -> Void
     
