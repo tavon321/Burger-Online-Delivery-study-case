@@ -20,10 +20,10 @@ class LocalBurgerLoader {
     
     func save(_ items: [Burger], completion: @escaping (Error?) -> Void) {
         store.deleteCacheFeed { [unowned self] error in
-            if error == nil {
-                self.store.insert(items, timestamp: self.currentDate(), completion: completion)
+            if let cacheDeletionError = error {
+                completion(cacheDeletionError)
             } else {
-                completion(error)
+                self.store.insert(items, timestamp: self.currentDate(), completion: completion)
             }
         }
     }
