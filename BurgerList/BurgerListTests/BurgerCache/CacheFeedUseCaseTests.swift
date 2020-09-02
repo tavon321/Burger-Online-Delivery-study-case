@@ -19,11 +19,15 @@ class LocalBurgerLoader {
     }
     
     func save(_ items: [Burger], completion: @escaping (Error?) -> Void) {
-        store.deleteCacheFeed { [unowned self] error in
+        store.deleteCacheFeed { [weak self] error in
+            guard let self = self else { return }
             if let cacheDeletionError = error {
                 completion(cacheDeletionError)
             } else {
-                self.store.insert(items, timestamp: self.currentDate(), completion: completion)
+                self.store.insert(items, timestamp: self.currentDate()) { [weak self] insertionError in
+                    guard self != nil else { return }
+                    completion(insertionError)
+                }
             }
         }
     }
@@ -95,6 +99,37 @@ class CacheFeedUseCaseTests: XCTestCase {
             store.completeDeletionSuccessfully()
             store.completeInsertionSuccessfully()
         }
+    }
+    
+    func test_save_doesNotDeliverDeletionErrorAfterSUTInstanceHasBeenDeallocated() {
+        let store = BurgerStoreSpy()
+        var sut: LocalBurgerLoader? = LocalBurgerLoader(store: store, currentDate: Date.init)
+        
+        var capturedError: Error?
+        sut?.save([uniqueItem], completion: { error in
+            capturedError = error
+        })
+        
+        sut = nil
+        store.completeDeletion(with: anyError)
+        
+        XCTAssertNil(capturedError)
+    }
+    
+    func test_save_doesNotDeliverInsertionErrorAfterSUTInstanceHasBeenDeallocated() {
+        let store = BurgerStoreSpy()
+        var sut: LocalBurgerLoader? = LocalBurgerLoader(store: store, currentDate: Date.init)
+        
+        var capturedError: Error?
+        sut?.save([uniqueItem], completion: { error in
+            capturedError = error
+        })
+        
+        store.completeDeletionSuccessfully()
+        sut = nil
+        store.completeInsertion(with: anyError)
+        
+        XCTAssertNil(capturedError)
     }
     
     // MARK: - Helpers
