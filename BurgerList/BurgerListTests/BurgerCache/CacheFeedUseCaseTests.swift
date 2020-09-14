@@ -41,12 +41,13 @@ class CacheFeedUseCaseTests: XCTestCase {
         let timestamp = Date()
         let (sut, store) = createSUT(currentDate: { timestamp })
         let items = [uniqueItem, uniqueItem]
+        let localItems = items.toLocal()
         
         sut.save(items) { _ in }
         
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed, .insert(items, timestamp)])
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed, .insert(localItems, timestamp)])
     }
     
     func test_save_failsDeletionError() {
@@ -137,7 +138,7 @@ class CacheFeedUseCaseTests: XCTestCase {
         
         enum ReceivedMessage: Equatable {
             case deleteCachedFeed
-            case insert([Burger], Date)
+            case insert([LocalBurger], Date)
         }
         
         private var deletionCompletions = [DeletionCompletion]()
@@ -149,7 +150,7 @@ class CacheFeedUseCaseTests: XCTestCase {
             receivedMessages.append(.deleteCachedFeed)
         }
         
-        func insert(_ items: [Burger], timestamp: Date = Date(), completion: @escaping (Error?) -> Void) {
+        func insert(_ items: [LocalBurger], timestamp: Date = Date(), completion: @escaping (Error?) -> Void) {
             receivedMessages.append(.insert(items, timestamp))
             insertionCompletions.append(completion)
         }
@@ -193,5 +194,11 @@ class CacheFeedUseCaseTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         
         return (sut: sut, store: store)
+    }
+}
+
+private extension Array where Element == Burger {
+    func toLocal() -> [LocalBurger] {
+        return map { LocalBurger(id: $0.id, name: $0.name, description: $0.description, imageURL: $0.imageURL) }
     }
 }

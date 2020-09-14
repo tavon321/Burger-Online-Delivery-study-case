@@ -31,9 +31,16 @@ final public class LocalBurgerLoader {
     }
     
     private func cache(items: [Burger], completion: @escaping (SaveResult) -> Void) {
-        store.insert(items, timestamp: self.currentDate()) { [weak self] insertionError in
+        store.insert(items.toLocal(), timestamp: self.currentDate()) { [weak self] insertionError in
             guard self != nil else { return }
             completion(insertionError)
         }
+    }
+}
+
+private extension Array where Element == Burger {
+    
+    func toLocal() -> [LocalBurger] {
+        return map { LocalBurger(id: $0.id, name: $0.name, description: $0.description, imageURL: $0.imageURL) }
     }
 }
