@@ -21,14 +21,14 @@ class CacheFeedUseCaseTests: XCTestCase {
         let (sut, store) = createSUT()
         let items = [uniqueItem, uniqueItem]
         
-        sut.save(items) { _ in }
+        sut.save(uniqueItems().models) { _ in }
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
     }
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
         let (sut, store) = createSUT()
-        let items = [uniqueItem, uniqueItem]
+        let items = uniqueItems().models
         
         sut.save(items) { _ in }
         
@@ -40,14 +40,13 @@ class CacheFeedUseCaseTests: XCTestCase {
     func test_save_requestCacheInsertionWihtTimestampOnDeletionSuccess() {
         let timestamp = Date()
         let (sut, store) = createSUT(currentDate: { timestamp })
-        let items = [uniqueItem, uniqueItem]
-        let localItems = items.toLocal()
+        let items = uniqueItems()
         
-        sut.save(items) { _ in }
+        sut.save(items.models) { _ in }
         
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed, .insert(localItems, timestamp)])
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed, .insert(items.localItems, timestamp)])
     }
     
     func test_save_failsDeletionError() {
@@ -83,7 +82,7 @@ class CacheFeedUseCaseTests: XCTestCase {
         var sut: LocalBurgerLoader? = LocalBurgerLoader(store: store, currentDate: Date.init)
         
         var capturedError: Error?
-        sut?.save([uniqueItem], completion: { error in
+        sut?.save(uniqueItems().models, completion: { error in
             capturedError = error
         })
         
@@ -118,7 +117,7 @@ class CacheFeedUseCaseTests: XCTestCase {
         let exp = expectation(description: "Wait for save completion")
         
         var receivedError: Error?
-        sut.save([uniqueItem, uniqueItem]) { error in
+        sut.save(uniqueItems().models) { error in
             receivedError = error
             exp.fulfill()
         }
@@ -176,6 +175,13 @@ class CacheFeedUseCaseTests: XCTestCase {
         return Burger(id: UUID(), name: "a name", description: "a description", imageURL: anyURL)
     }
     
+    private func uniqueItems() -> (models: [Burger], localItems: [LocalBurger]) {
+        let items = [uniqueItem, uniqueItem]
+        let localItems = items.map { LocalBurger(id: $0.id, name: $0.name, description: $0.description, imageURL: $0.imageURL) }
+        
+        return (models: items, localItems: localItems)
+    }
+    
     private var anyURL: URL {
         return URL(string: "http://any-url.com")!
     }
@@ -194,11 +200,5 @@ class CacheFeedUseCaseTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         
         return (sut: sut, store: store)
-    }
-}
-
-private extension Array where Element == Burger {
-    func toLocal() -> [LocalBurger] {
-        return map { LocalBurger(id: $0.id, name: $0.name, description: $0.description, imageURL: $0.imageURL) }
     }
 }
