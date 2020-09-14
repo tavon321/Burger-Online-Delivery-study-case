@@ -8,13 +8,6 @@
 
 import Foundation
 
-struct RemoteBurger: Decodable {
-    let uuid: UUID
-    let name: String
-    let description: String?
-    let imageURL: URL?
-}
-
 internal final class BurgerMapper {
     
     internal static func map(_ data: Data, response: HTTPURLResponse) throws -> [RemoteBurger] {
