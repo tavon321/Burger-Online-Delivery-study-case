@@ -44,6 +44,22 @@ class LoadBurgerFromCacheTests: XCTestCase {
         
         wait(for: [exp], timeout: 0.1)
     }
+    
+    func test_load_deliversNoBurgersOnEmptyCache() {
+        let (sut, client) = makeSUT()
+        
+        let exp = expectation(description: "Wait for result")
+        sut.load { result in
+            switch result {
+            case .success(let burgers):
+                XCTAssertTrue(burgers.isEmpty)
+            default:
+               XCTFail("Expected empty burgers, got \(result) instead")
+            }
+            exp.fulfill()
+        }
+
+        client.completeRetreival(with: [])
         
         wait(for: [exp], timeout: 0.1)
     }

@@ -23,6 +23,8 @@ final public class LocalBurgerLoader {
         store.retreive { error in
             if let error = error {
                 completion(.failure(error))
+            } else {
+                completion(.success([]))
             }
         }
     }
