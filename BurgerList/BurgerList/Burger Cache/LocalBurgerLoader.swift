@@ -19,8 +19,8 @@ final public class LocalBurgerLoader {
         self.currentDate = currentDate
     }
     
-    public func load() {
-        store.retreive()
+    public func load(completion: @escaping (Error?) -> Void) {
+        store.retreive(completion: completion)
     }
     
     public func save(_ items: [Burger], completion: @escaping (SaveResult) -> Void) {

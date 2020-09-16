@@ -20,9 +20,27 @@ class LoadBurgerFromCacheTests: XCTestCase {
     func test_load_requestCacheRetreival() {
         let (sut, client) = makeSUT()
         
-        sut.load()
+        sut.load { _ in }
         
         XCTAssertEqual(client.receivedMessages, [.retreiveCache])
+    }
+    
+    func test_load_failsErrorOnStoreError() {
+        let (sut, client) = makeSUT()
+        let expectedError = anyError
+        
+        var receivedError: Error?
+        let exp = expectation(description: "Wait for error")
+        sut.load { error in
+            receivedError = error
+            exp.fulfill()
+        }
+        
+        client.completeRetreival(with: expectedError)
+        
+        XCTAssertEqual(receivedError as NSError?, expectedError)
+        
+        wait(for: [exp], timeout: 0.1)
     }
     
     // MARK: - Helpers
@@ -36,6 +54,10 @@ class LoadBurgerFromCacheTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         
         return (sut: sut, store: store)
+    }
+    
+    var anyError: NSError {
+        return NSError(domain: "any error", code: 0)
     }
     
 }

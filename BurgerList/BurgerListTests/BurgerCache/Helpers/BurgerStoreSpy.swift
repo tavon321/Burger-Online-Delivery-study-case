@@ -11,9 +11,6 @@ import BurgerList
 
 class BurgerStoreSpy: BurgerStore {
     
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
-    
     private (set) var receivedMessages = [ReceivedMessage]()
     
     enum ReceivedMessage: Equatable {
@@ -24,6 +21,7 @@ class BurgerStoreSpy: BurgerStore {
     
     private var deletionCompletions = [DeletionCompletion]()
     private var insertionCompletions = [InsertionCompletion]()
+    private var retreivalCompletions = [RetreivalCompletion]()
     
     func deleteCacheFeed(completion: @escaping DeletionCompletion) {
         deletionCompletions.append(completion)
@@ -31,7 +29,8 @@ class BurgerStoreSpy: BurgerStore {
         receivedMessages.append(.deleteCachedFeed)
     }
     
-    func retreive() {
+    func retreive(completion: @escaping RetreivalCompletion) {
+        retreivalCompletions.append(completion)
         receivedMessages.append(.retreiveCache)
     }
     
@@ -54,5 +53,9 @@ class BurgerStoreSpy: BurgerStore {
     
     func completeInsertion(with error: Error, at index: Int = 0) {
         insertionCompletions[index](error)
+    }
+    
+    func completeRetreival(with error: Error, at index: Int = 0) {
+        retreivalCompletions[index](error)
     }
 }
