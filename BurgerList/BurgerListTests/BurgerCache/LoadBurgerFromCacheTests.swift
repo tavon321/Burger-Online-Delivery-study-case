@@ -29,16 +29,21 @@ class LoadBurgerFromCacheTests: XCTestCase {
         let (sut, client) = makeSUT()
         let expectedError = anyError
         
-        var receivedError: Error?
-        let exp = expectation(description: "Wait for error")
-        sut.load { error in
-            receivedError = error
+        let exp = expectation(description: "Wait for result")
+        sut.load { result in
+            switch result {
+            case let .failure(receivedError as NSError):
+                XCTAssertEqual(receivedError, expectedError)
+            default:
+                XCTFail("Expected failure, got \(result) instead")
+            }
             exp.fulfill()
         }
         
         client.completeRetreival(with: expectedError)
         
-        XCTAssertEqual(receivedError as NSError?, expectedError)
+        wait(for: [exp], timeout: 0.1)
+    }
         
         wait(for: [exp], timeout: 0.1)
     }
