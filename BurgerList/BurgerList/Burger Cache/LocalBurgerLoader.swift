@@ -19,6 +19,10 @@ final public class LocalBurgerLoader {
         self.currentDate = currentDate
     }
     
+    public func load() {
+        store.retreive()
+    }
+    
     public func save(_ items: [Burger], completion: @escaping (SaveResult) -> Void) {
         store.deleteCacheFeed { [weak self] error in
             guard let self = self else { return }

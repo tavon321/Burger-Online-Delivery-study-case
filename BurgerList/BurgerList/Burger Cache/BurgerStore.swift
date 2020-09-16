@@ -14,4 +14,5 @@ public protocol BurgerStore {
     
     func deleteCacheFeed(completion: @escaping DeletionCompletion)
     func insert(_ items: [LocalBurger], timestamp: Date, completion: @escaping (Error?) -> Void)
+    func retreive()
 }

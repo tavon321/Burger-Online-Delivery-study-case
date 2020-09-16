@@ -17,10 +17,18 @@ class LoadBurgerFromCacheTests: XCTestCase {
         XCTAssertEqual(client.receivedMessages, [])
     }
     
+    func test_load_requestCacheRetreival() {
+        let (sut, client) = makeSUT()
+        
+        sut.load()
+        
+        XCTAssertEqual(client.receivedMessages, [.retreiveCache])
+    }
+    
     // MARK: - Helpers
     private func makeSUT(currentDate: @escaping () -> Date = Date.init,
-                           file: StaticString = #file,
-                           line: UInt = #line) -> (sut: LocalBurgerLoader, store: BurgerStoreSpy) {
+                         file: StaticString = #file,
+                         line: UInt = #line) -> (sut: LocalBurgerLoader, store: BurgerStoreSpy) {
         let store = BurgerStoreSpy()
         let sut = LocalBurgerLoader(store: store, currentDate: currentDate)
         
@@ -29,5 +37,5 @@ class LoadBurgerFromCacheTests: XCTestCase {
         
         return (sut: sut, store: store)
     }
-
+    
 }
