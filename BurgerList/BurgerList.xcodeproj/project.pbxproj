@@ -11,6 +11,8 @@
 		DC0115C424CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0115C324CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift */; };
 		DC03E02A24FFDE8800BDB35E /* LocalBurgerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC03E02924FFDE8800BDB35E /* LocalBurgerLoader.swift */; };
 		DC208126248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC208125248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift */; };
+		DC53EB31251255D00080AB78 /* LoadBurgerFromCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC53EB30251255D00080AB78 /* LoadBurgerFromCacheTests.swift */; };
+		DC53EB3425125F330080AB78 /* BurgerStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC53EB3325125F330080AB78 /* BurgerStoreSpy.swift */; };
 		DC68462B24FD6F46009FF676 /* BurgerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68462A24FD6F46009FF676 /* BurgerStore.swift */; };
 		DC6C67F424E6C6840071525B /* CacheFeedUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6C67F324E6C6840071525B /* CacheFeedUseCaseTests.swift */; };
 		DC765CD524C9CA82007D7999 /* BurgerListAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC765CD424C9CA82007D7999 /* BurgerListAPIEndToEndTests.swift */; };
@@ -49,6 +51,8 @@
 		DC0115C324CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+statusCode.swift"; sourceTree = "<group>"; };
 		DC03E02924FFDE8800BDB35E /* LocalBurgerLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBurgerLoader.swift; sourceTree = "<group>"; };
 		DC208125248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadBurgerFromRemoteUseCaseTests.swift; sourceTree = "<group>"; };
+		DC53EB30251255D00080AB78 /* LoadBurgerFromCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadBurgerFromCacheTests.swift; sourceTree = "<group>"; };
+		DC53EB3325125F330080AB78 /* BurgerStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerStoreSpy.swift; sourceTree = "<group>"; };
 		DC68462A24FD6F46009FF676 /* BurgerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerStore.swift; sourceTree = "<group>"; };
 		DC6C67F324E6C6840071525B /* CacheFeedUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFeedUseCaseTests.swift; sourceTree = "<group>"; };
 		DC765CD224C9CA82007D7999 /* BurgerListAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +109,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		DC53EB3225125F250080AB78 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DC53EB3325125F330080AB78 /* BurgerStoreSpy.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		DC68462924FD6F32009FF676 /* Burger Cache */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,7 +130,9 @@
 		DC6C67F224E6C6540071525B /* BurgerCache */ = {
 			isa = PBXGroup;
 			children = (
+				DC53EB3225125F250080AB78 /* Helpers */,
 				DC6C67F324E6C6840071525B /* CacheFeedUseCaseTests.swift */,
+				DC53EB30251255D00080AB78 /* LoadBurgerFromCacheTests.swift */,
 			);
 			path = BurgerCache;
 			sourceTree = "<group>";
@@ -388,6 +402,8 @@
 			files = (
 				DC208126248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift in Sources */,
 				DCE9FBB724B36613004D526E /* URLSessionHttpClientTest.swift in Sources */,
+				DC53EB31251255D00080AB78 /* LoadBurgerFromCacheTests.swift in Sources */,
+				DC53EB3425125F330080AB78 /* BurgerStoreSpy.swift in Sources */,
 				DC6C67F424E6C6840071525B /* CacheFeedUseCaseTests.swift in Sources */,
 				DCB38B9E24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift in Sources */,
 			);
