@@ -9,7 +9,7 @@
 import XCTest
 import BurgerList
 
-class LoadBurgerFromCacheTests: XCTestCase {
+class LoadBurgerFromCacheUseCaseTests: XCTestCase {
     
     func test_init_doesnotMessageStoreUponCreation() {
         let (_, client) = makeSUT()
