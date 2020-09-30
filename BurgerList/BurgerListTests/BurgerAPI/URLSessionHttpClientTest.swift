@@ -77,18 +77,6 @@ class URLSessionHttpClientTest: XCTestCase {
     }
     
     // MARK: Helpers
-    var anyError: NSError {
-        return NSError(domain: "any error", code: 0)
-    }
-    
-    var anyURL: URL {
-        return URL(string: "http://any-url.com")!
-    }
-    
-    var anyData: Data {
-        return Data("any data".utf8)
-    }
-    
     var nonHTTTPURLResponse: URLResponse {
         return URLResponse(url: anyURL, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
     }

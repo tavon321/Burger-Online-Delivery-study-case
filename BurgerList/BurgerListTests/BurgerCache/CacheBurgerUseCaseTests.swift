@@ -139,14 +139,6 @@ class CacheFeedUseCaseTests: XCTestCase {
         return (models: items, localItems: localItems)
     }
     
-    private var anyURL: URL {
-        return URL(string: "http://any-url.com")!
-    }
-    
-    var anyError: NSError {
-        return NSError(domain: "any error", code: 0)
-    }
-    
     private func createSUT(currentDate: @escaping () -> Date = Date.init,
                            file: StaticString = #file,
                            line: UInt = #line) -> (sut: LocalBurgerLoader, store: BurgerStoreSpy) {

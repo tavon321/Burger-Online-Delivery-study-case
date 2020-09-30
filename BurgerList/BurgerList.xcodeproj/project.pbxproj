@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29E0B29F2524DC5100661112 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E0B29E2524DC5100661112 /* SharedTestHelpers.swift */; };
 		DC0115C124CF0E3C002A7CB7 /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
 		DC0115C424CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0115C324CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift */; };
 		DC03E02A24FFDE8800BDB35E /* LocalBurgerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC03E02924FFDE8800BDB35E /* LocalBurgerLoader.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		29E0B29E2524DC5100661112 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		DC0115C324CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+statusCode.swift"; sourceTree = "<group>"; };
 		DC03E02924FFDE8800BDB35E /* LocalBurgerLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBurgerLoader.swift; sourceTree = "<group>"; };
 		DC208125248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadBurgerFromRemoteUseCaseTests.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */,
+				29E0B29E2524DC5100661112 /* SharedTestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 			files = (
 				DC208126248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift in Sources */,
 				DCE9FBB724B36613004D526E /* URLSessionHttpClientTest.swift in Sources */,
+				29E0B29F2524DC5100661112 /* SharedTestHelpers.swift in Sources */,
 				DC53EB31251255D00080AB78 /* LoadBurgerFromCacheUseCaseTests.swift in Sources */,
 				DC53EB3425125F330080AB78 /* BurgerStoreSpy.swift in Sources */,
 				DC6C67F424E6C6840071525B /* CacheBurgerUseCaseTests.swift in Sources */,

@@ -68,6 +68,7 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         wait(for: [exp], timeout: 0.1)
         
     }
+    
     private func makeSUT(currentDate: @escaping () -> Date = Date.init,
                          file: StaticString = #file,
                          line: UInt = #line) -> (sut: LocalBurgerLoader, store: BurgerStoreSpy) {
@@ -80,8 +81,15 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         return (sut: sut, store: store)
     }
     
-    var anyError: NSError {
-        return NSError(domain: "any error", code: 0)
+    private var uniqueItem: Burger {
+        return Burger(id: UUID(), name: "a name", description: "a description", imageURL: anyURL)
+    }
+    
+    private func uniqueItems() -> (models: [Burger], localItems: [LocalBurger]) {
+        let items = [uniqueItem, uniqueItem]
+        let localItems = items.map { LocalBurger(id: $0.id, name: $0.name, description: $0.description, imageURL: $0.imageURL) }
+        
+        return (models: items, localItems: localItems)
     }
     
 }
