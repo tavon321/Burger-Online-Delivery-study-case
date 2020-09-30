@@ -12,21 +12,21 @@ import BurgerList
 class LoadBurgerFromCacheUseCaseTests: XCTestCase {
     
     func test_init_doesnotMessageStoreUponCreation() {
-        let (_, client) = makeSUT()
+        let (_, store) = makeSUT()
         
-        XCTAssertEqual(client.receivedMessages, [])
+        XCTAssertEqual(store.receivedMessages, [])
     }
     
     func test_load_requestCacheRetreival() {
-        let (sut, client) = makeSUT()
+        let (sut, store) = makeSUT()
         
         sut.load { _ in }
         
-        XCTAssertEqual(client.receivedMessages, [.retreiveCache])
+        XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
     
     func test_load_failsErrorOnStoreError() {
-        let (sut, client) = makeSUT()
+        let (sut, store) = makeSUT()
         let expectedError = anyError
         
         let exp = expectation(description: "Wait for result")
@@ -40,13 +40,13 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
             exp.fulfill()
         }
         
-        client.completeRetreival(with: expectedError)
+        store.completeRetreival(with: expectedError)
         
         wait(for: [exp], timeout: 0.1)
     }
     
     func test_load_deliversNoBurgersOnEmptyCache() {
-        let (sut, client) = makeSUT()
+        let (sut, store) = makeSUT()
         
         let exp = expectation(description: "Wait for result")
         sut.load { result in
@@ -59,7 +59,7 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
             exp.fulfill()
         }
 
-        client.completeRetreival(with: [])
+        store.completeRetreival(with: [])
         
         wait(for: [exp], timeout: 0.1)
     }
