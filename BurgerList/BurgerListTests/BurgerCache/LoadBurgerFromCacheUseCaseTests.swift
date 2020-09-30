@@ -28,43 +28,46 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
     func test_load_failsErrorOnStoreError() {
         let (sut, store) = makeSUT()
         let expectedError = anyError
-        
-        let exp = expectation(description: "Wait for result")
-        sut.load { result in
-            switch result {
-            case let .failure(receivedError as NSError):
-                XCTAssertEqual(receivedError, expectedError)
-            default:
-                XCTFail("Expected failure, got \(result) instead")
-            }
-            exp.fulfill()
+
+        expect(sut, toCompleteWith: .failure(expectedError)) {
+            store.completeRetreival(with: expectedError)
         }
-        
-        store.completeRetreival(with: expectedError)
-        
-        wait(for: [exp], timeout: 0.1)
     }
     
     func test_load_deliversNoBurgersOnEmptyCache() {
         let (sut, store) = makeSUT()
+        let emptyBurgers = [Burger]()
+        
+        expect(sut, toCompleteWith: .success(emptyBurgers)) {
+            store.completeRetreival(with: emptyBurgers)
+        }
+    }
+    
+    // MARK: - Helpers
+    private func expect(_ sut: LocalBurgerLoader,
+                        toCompleteWith expectedResult: BurgerLoader.Result,
+                        file: StaticString = #file,
+                        line: UInt = #line,
+                        when action: () -> Void) {
         
         let exp = expectation(description: "Wait for result")
-        sut.load { result in
-            switch result {
-            case .success(let burgers):
-                XCTAssertTrue(burgers.isEmpty)
+        sut.load { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case let (.success(receivedBurgers), .success(expectedBurgers)):
+                XCTAssertEqual(receivedBurgers, expectedBurgers)
+            case let (.failure(receivedError as NSError), .failure(expectedError as NSError)):
+                XCTAssertEqual(receivedError, expectedError)
             default:
-               XCTFail("Expected empty burgers, got \(result) instead")
+               XCTFail("Expected \(expectedResult), got \(receivedResult) instead")
             }
             exp.fulfill()
         }
 
-        store.completeRetreival(with: [])
+        action()
         
         wait(for: [exp], timeout: 0.1)
+        
     }
-    
-    // MARK: - Helpers
     private func makeSUT(currentDate: @escaping () -> Date = Date.init,
                          file: StaticString = #file,
                          line: UInt = #line) -> (sut: LocalBurgerLoader, store: BurgerStoreSpy) {
