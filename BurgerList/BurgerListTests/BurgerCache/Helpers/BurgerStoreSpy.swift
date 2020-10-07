@@ -56,10 +56,15 @@ class BurgerStoreSpy: BurgerStore {
     }
     
     func completeRetreival(with error: Error, at index: Int = 0) {
-        retreivalCompletions[index](error)
+        retreivalCompletions[index](.failure(error))
     }
     
-    func completeRetreival(with items: [Burger], at index: Int = 0) {
-        retreivalCompletions[index](nil)
+    func completeRetreival(with items: [LocalBurger], timestamp: Date, at index: Int = 0) {
+        let cachedBurgers = CachedBurgers(burgers: items, timestamp: timestamp)
+        retreivalCompletions[index](.success(cachedBurgers))
+    }
+    
+    func completeRetreivalWithEmptyCache(at index: Int = 0) {
+        retreivalCompletions[index](.success(nil))
     }
 }

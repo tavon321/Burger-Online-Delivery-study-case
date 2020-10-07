@@ -20,11 +20,16 @@ final public class LocalBurgerLoader {
     }
     
     public func load(completion: @escaping (BurgerLoader.Result) -> Void) {
-        store.retreive { error in
-            if let error = error {
+        store.retreive { result in
+            switch result {
+            case .success(let cacheBurgers):
+                guard let burgers = cacheBurgers?.burgers else {
+                    return completion(.success([]))
+                }
+                
+                completion(.success(burgers.toModels))
+            case .failure(let error):
                 completion(.failure(error))
-            } else {
-                completion(.success([]))
             }
         }
     }
@@ -41,7 +46,7 @@ final public class LocalBurgerLoader {
     }
     
     private func cache(items: [Burger], completion: @escaping (SaveResult) -> Void) {
-        store.insert(items.toLocal(), timestamp: self.currentDate()) { [weak self] insertionError in
+        store.insert(items.toLocal, timestamp: self.currentDate()) { [weak self] insertionError in
             guard self != nil else { return }
             completion(insertionError)
         }
@@ -50,7 +55,14 @@ final public class LocalBurgerLoader {
 
 private extension Array where Element == Burger {
     
-    func toLocal() -> [LocalBurger] {
+    var toLocal: [LocalBurger] {
         return map { LocalBurger(id: $0.id, name: $0.name, description: $0.description, imageURL: $0.imageURL) }
+    }
+}
+
+private extension Array where Element == LocalBurger {
+    
+    var toModels: [Burger] {
+        return map { Burger(id: $0.id, name: $0.name, description: $0.description, imageURL: $0.imageURL) }
     }
 }

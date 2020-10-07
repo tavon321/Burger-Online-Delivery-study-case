@@ -8,10 +8,12 @@
 
 import Foundation
 
+public typealias CachedBurgers = (burgers: [LocalBurger], timestamp: Date)
+
 public protocol BurgerStore {
     typealias DeletionCompletion = (Error?) -> Void
     typealias InsertionCompletion = (Error?) -> Void
-    typealias RetreivalCompletion = (Error?) -> Void
+    typealias RetreivalCompletion = (Result<CachedBurgers?, Error>) -> Void
     
     func deleteCacheFeed(completion: @escaping DeletionCompletion)
     func insert(_ items: [LocalBurger], timestamp: Date, completion: @escaping (Error?) -> Void)

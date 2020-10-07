@@ -39,7 +39,19 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         let emptyBurgers = [Burger]()
         
         expect(sut, toCompleteWith: .success(emptyBurgers)) {
-            store.completeRetreival(with: emptyBurgers)
+            store.completeRetreivalWithEmptyCache()
+        }
+    }
+    
+    func test_load_deliversBurgersOnLessThanTwoWeeksOldCache() {
+        let fixedCurrentDate = Date()
+        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: 1)
+        let burgerList = uniqueItems()
+        
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+        
+        expect(sut, toCompleteWith: .success(burgerList.models)) {
+            store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
         }
     }
     
@@ -54,9 +66,9 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         sut.load { receivedResult in
             switch (receivedResult, expectedResult) {
             case let (.success(receivedBurgers), .success(expectedBurgers)):
-                XCTAssertEqual(receivedBurgers, expectedBurgers)
+                XCTAssertEqual(receivedBurgers, expectedBurgers, file: file, line: line)
             case let (.failure(receivedError as NSError), .failure(expectedError as NSError)):
-                XCTAssertEqual(receivedError, expectedError)
+                XCTAssertEqual(receivedError, expectedError, file: file, line: line)
             default:
                XCTFail("Expected \(expectedResult), got \(receivedResult) instead")
             }
@@ -92,4 +104,14 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         return (models: items, localItems: localItems)
     }
     
+}
+
+private extension Date {
+    func adding(days: Int) -> Date {
+        return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
+    }
+    
+    func adding(seconds: TimeInterval) -> Date {
+        return self + seconds
+    }
 }
