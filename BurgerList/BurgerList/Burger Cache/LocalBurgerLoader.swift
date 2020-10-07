@@ -20,18 +20,27 @@ final public class LocalBurgerLoader {
     }
     
     public func load(completion: @escaping (BurgerLoader.Result) -> Void) {
-        store.retreive { result in
+        store.retreive { [unowned self] result in
             switch result {
-            case .success(let cacheBurgers):
-                guard let burgers = cacheBurgers?.burgers else {
+            case .success(let cachedBurgers):
+                guard let cachedBurgers = cachedBurgers, self.validate(cachedBurgers.timestamp) else {
                     return completion(.success([]))
                 }
                 
-                completion(.success(burgers.toModels))
+                completion(.success(cachedBurgers.burgers.toModels))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
+    }
+  
+    private func validate(_ timestamp: Date) -> Bool {
+        let calendar = Calendar(identifier: .gregorian)
+        guard let maxCacheAge = calendar.date(byAdding: .day, value: 14, to: timestamp) else {
+            return false
+        }
+        
+        return currentDate() < maxCacheAge
     }
     
     public func save(_ items: [Burger], completion: @escaping (SaveResult) -> Void) {

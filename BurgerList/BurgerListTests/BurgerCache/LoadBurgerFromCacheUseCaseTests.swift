@@ -55,6 +55,18 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         }
     }
     
+    func test_load_deliversNoBurgersOnTwoWeeksOldCache() {
+        let fixedCurrentDate = Date()
+        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14)
+        let burgerList = uniqueItems()
+        
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+        
+        expect(sut, toCompleteWith: .success([])) {
+            store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+        }
+    }
+    
     // MARK: - Helpers
     private func expect(_ sut: LocalBurgerLoader,
                         toCompleteWith expectedResult: BurgerLoader.Result,
