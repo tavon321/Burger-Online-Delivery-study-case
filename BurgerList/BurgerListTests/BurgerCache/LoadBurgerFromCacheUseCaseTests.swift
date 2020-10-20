@@ -123,6 +123,18 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retreiveCache, .deleteCachedFeed])
     }
     
+    func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
+        let store = BurgerStoreSpy()
+        var sut: LocalBurgerLoader? = LocalBurgerLoader(store: store, currentDate: Date.init)
+        
+        var capturedResult = [BurgerLoader.Result]()
+        sut?.load { capturedResult.append($0) }
+        
+        sut = nil
+        store.completeRetreivalWithEmptyCache()
+        
+        XCTAssertTrue(capturedResult.isEmpty)
+    }
     
     func test_load_deletesCacheOnMoreThanTwoWeeksOldCache() {
         let fixedCurrentDate = Date()

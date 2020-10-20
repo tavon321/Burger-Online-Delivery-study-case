@@ -22,7 +22,8 @@ final public class LocalBurgerLoader {
     }
     
     public func load(completion: @escaping (BurgerLoader.Result) -> Void) {
-        store.retreive { [unowned self] result in
+        store.retreive { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let cachedBurgers):
                 guard let cachedBurgers = cachedBurgers else {
