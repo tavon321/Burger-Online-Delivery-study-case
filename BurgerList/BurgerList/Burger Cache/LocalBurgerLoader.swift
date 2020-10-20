@@ -25,7 +25,12 @@ final public class LocalBurgerLoader {
         store.retreive { [unowned self] result in
             switch result {
             case .success(let cachedBurgers):
-                guard let cachedBurgers = cachedBurgers, self.validate(cachedBurgers.timestamp) else {
+                guard let cachedBurgers = cachedBurgers else {
+                    return completion(.success([]))
+                }
+                
+                guard self.validate(cachedBurgers.timestamp) else {
+                    self.store.deleteCacheFeed { _ in }
                     return completion(.success([]))
                 }
                 

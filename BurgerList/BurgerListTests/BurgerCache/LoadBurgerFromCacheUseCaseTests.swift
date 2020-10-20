@@ -99,7 +99,7 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
     
     func test_load_doesNotDeletesCacheOnLessThanTwoWeeksOldCache() {
         let fixedCurrentDate = Date()
-        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: -1)
+        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: 1)
         let burgerList = uniqueItems()
         
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
@@ -108,6 +108,19 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
         
         XCTAssertEqual(store.receivedMessages, [.retreiveCache])
+    }
+    
+    func test_load_deletesCacheOnTwoWeeksOldCache() {
+        let fixedCurrentDate = Date()
+        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14)
+        let burgerList = uniqueItems()
+        
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+        
+        sut.load { _ in }
+        store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+        
+        XCTAssertEqual(store.receivedMessages, [.retreiveCache, .deleteCachedFeed])
     }
     
     // MARK: - Helpers
