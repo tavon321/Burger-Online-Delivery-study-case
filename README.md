@@ -99,14 +99,15 @@ Given the customer doesn't have connectivity
    1. Execute "Load Burger Menu" command with above data.
    2. System retrieves menu data from the cache.
    3. System validates cache is less than MAX_AGE old.
-   4. System validates cache is less than two weeks old.
-   5. System delivers cached feed data.
+   4. System delivers cached burger list data.
 
 #### Retrieval error course (sad path):
-   1. System delivers error.
+   1. System delete cache.
+   2. System delivers error.
 
 #### Empty cache (sad path):
-   1. System delivers connectivity error.
+   1. System delete cache.
+   2. System delivers connectivity error.
    
 #### Expired cache course (sad path):
    1. System deletes cache.
