@@ -55,6 +55,15 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         }
     }
     
+    func test_load_deletesCacheOnRetreivalError() {
+        let (sut, store) = makeSUT()
+        
+        sut.load { _ in }
+        store.completeRetreival(with: anyError)
+        
+        XCTAssertEqual(store.receivedMessages, [.retreiveCache, .deleteCachedFeed])
+    }
+    
     func test_load_deliversNoBurgersOnTwoWeeksOldCache() {
         let fixedCurrentDate = Date()
         let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14)

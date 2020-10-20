@@ -31,6 +31,7 @@ final public class LocalBurgerLoader {
                 
                 completion(.success(cachedBurgers.burgers.toModels))
             case .failure(let error):
+                self.store.deleteCacheFeed { _ in }
                 completion(.failure(error))
             }
         }
