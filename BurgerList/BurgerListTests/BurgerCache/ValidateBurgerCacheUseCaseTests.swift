@@ -35,6 +35,19 @@ class ValidateBurgerCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
 
+    func test_validate_doesNotDeletesCacheOnLessThanTwoWeeksOldCache() {
+        let fixedCurrentDate = Date()
+        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: 1)
+        let burgerList = uniqueItems()
+
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+
+        sut.validateCache()
+        store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+
+        XCTAssertEqual(store.receivedMessages, [.retreiveCache])
+    }
+
     // MARK: - Helpers
     private func makeSUT(currentDate: @escaping () -> Date = Date.init,
                          file: StaticString = #file,
@@ -46,5 +59,26 @@ class ValidateBurgerCacheUseCaseTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
 
         return (sut: sut, store: store)
+    }
+
+    private var uniqueItem: Burger {
+        return Burger(id: UUID(), name: "a name", description: "a description", imageURL: anyURL)
+    }
+
+    private func uniqueItems() -> (models: [Burger], localItems: [LocalBurger]) {
+        let items = [uniqueItem, uniqueItem]
+        let localItems = items.map { LocalBurger(id: $0.id, name: $0.name, description: $0.description, imageURL: $0.imageURL) }
+
+        return (models: items, localItems: localItems)
+    }
+}
+
+private extension Date {
+    func adding(days: Int) -> Date {
+        return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
+    }
+
+    func adding(seconds: TimeInterval) -> Date {
+        return self + seconds
     }
 }

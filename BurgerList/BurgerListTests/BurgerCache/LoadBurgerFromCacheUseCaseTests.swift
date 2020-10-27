@@ -97,7 +97,7 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
     
-    func test_load_doesNotDeletesCacheOnLessThanTwoWeeksOldCache() {
+    func test_load_hasNoSideEffectOnLessThanTwoWeeksOldCache() {
         let fixedCurrentDate = Date()
         let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: 1)
         let burgerList = uniqueItems()
