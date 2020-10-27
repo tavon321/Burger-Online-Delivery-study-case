@@ -8,7 +8,7 @@
 
 import Foundation
 
-final public class LocalBurgerLoader {
+final public class LocalBurgerLoader: BurgerLoader {
     private let store: BurgerStore
     private let currentDate: () -> Date
     private let calendar = Calendar(identifier: .gregorian)
@@ -20,7 +20,7 @@ final public class LocalBurgerLoader {
         self.store = store
         self.currentDate = currentDate
     }
-  
+
     private func validate(_ timestamp: Date) -> Bool {
         guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
             return false
