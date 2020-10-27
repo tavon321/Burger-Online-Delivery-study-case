@@ -20,7 +20,17 @@ final public class LocalBurgerLoader {
         self.store = store
         self.currentDate = currentDate
     }
-    
+  
+    private func validate(_ timestamp: Date) -> Bool {
+        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
+            return false
+        }
+        
+        return currentDate() < maxCacheAge
+    }
+}
+
+extension LocalBurgerLoader {
     public func load(completion: @escaping (BurgerLoader.Result) -> Void) {
         store.retreive { [weak self] result in
             guard let self = self else { return }
@@ -29,14 +39,36 @@ final public class LocalBurgerLoader {
                 guard let cachedBurgers = cachedBurgers, self.validate(cachedBurgers.timestamp) else {
                     return completion(.success([]))
                 }
-                
+
                 completion(.success(cachedBurgers.burgers.toModels))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
+}
 
+extension LocalBurgerLoader {
+    public func save(_ items: [Burger], completion: @escaping (SaveResult) -> Void) {
+        store.deleteCacheFeed { [weak self] error in
+            guard let self = self else { return }
+            if let cacheDeletionError = error {
+                completion(cacheDeletionError)
+            } else {
+                self.cache(items: items, completion: completion)
+            }
+        }
+    }
+
+    private func cache(items: [Burger], completion: @escaping (SaveResult) -> Void) {
+        store.insert(items.toLocal, timestamp: self.currentDate()) { [weak self] insertionError in
+            guard self != nil else { return }
+            completion(insertionError)
+        }
+    }
+}
+
+extension LocalBurgerLoader {
     public func validateCache() {
         store.retreive { [weak self] result in
             guard let self = self else { return }
@@ -48,32 +80,6 @@ final public class LocalBurgerLoader {
             case .failure:
                 self.store.deleteCacheFeed { _ in }
             }
-        }
-    }
-  
-    private func validate(_ timestamp: Date) -> Bool {
-        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
-            return false
-        }
-        
-        return currentDate() < maxCacheAge
-    }
-    
-    public func save(_ items: [Burger], completion: @escaping (SaveResult) -> Void) {
-        store.deleteCacheFeed { [weak self] error in
-            guard let self = self else { return }
-            if let cacheDeletionError = error {
-                completion(cacheDeletionError)
-            } else {
-                self.cache(items: items, completion: completion)
-            }
-        }
-    }
-    
-    private func cache(items: [Burger], completion: @escaping (SaveResult) -> Void) {
-        store.insert(items.toLocal, timestamp: self.currentDate()) { [weak self] insertionError in
-            guard self != nil else { return }
-            completion(insertionError)
         }
     }
 }
