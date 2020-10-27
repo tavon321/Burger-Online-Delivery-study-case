@@ -43,8 +43,13 @@ final public class LocalBurgerLoader {
     }
 
     public func validateCache() {
-        store.retreive { _ in }
-        store.deleteCacheFeed { _ in }
+        store.retreive { [unowned self] result in
+            switch result {
+            case .success: break
+            case .failure:
+                self.store.deleteCacheFeed { _ in }
+            }
+        }
     }
   
     private func validate(_ timestamp: Date) -> Bool {

@@ -26,6 +26,15 @@ class ValidateBurgerCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retreiveCache, .deleteCachedFeed])
     }
 
+    func test_validateCache_doesNotDeleteCacheOnEmptyCache() {
+        let (sut, store) = makeSUT()
+
+        sut.validateCache()
+        store.completeRetreivalWithEmptyCache()
+
+        XCTAssertEqual(store.receivedMessages, [.retreiveCache])
+    }
+
     // MARK: - Helpers
     private func makeSUT(currentDate: @escaping () -> Date = Date.init,
                          file: StaticString = #file,
