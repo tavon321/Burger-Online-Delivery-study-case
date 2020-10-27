@@ -75,6 +75,18 @@ class ValidateBurgerCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retreiveCache, .deleteCachedFeed])
     }
 
+    func test_validate_doesNotDeleteCacheAfterSUTInstanceHasBeenDeallocated() {
+        let store = BurgerStoreSpy()
+        var sut: LocalBurgerLoader? = LocalBurgerLoader(store: store, currentDate: Date.init)
+
+        sut?.validateCache()
+
+        sut = nil
+        store.completeRetreival(with: anyError)
+
+        XCTAssertTrue(store.receivedMessages.isEmpty)
+    }
+
     // MARK: - Helpers
     private func makeSUT(currentDate: @escaping () -> Date = Date.init,
                          file: StaticString = #file,
