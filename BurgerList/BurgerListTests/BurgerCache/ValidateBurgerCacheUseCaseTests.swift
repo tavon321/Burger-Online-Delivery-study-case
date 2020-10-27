@@ -84,7 +84,7 @@ class ValidateBurgerCacheUseCaseTests: XCTestCase {
         sut = nil
         store.completeRetreival(with: anyError)
 
-        XCTAssertTrue(store.receivedMessages.isEmpty)
+        XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
 
     // MARK: - Helpers
