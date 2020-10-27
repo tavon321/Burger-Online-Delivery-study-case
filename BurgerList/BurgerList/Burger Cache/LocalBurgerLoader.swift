@@ -37,10 +37,14 @@ final public class LocalBurgerLoader {
                 
                 completion(.success(cachedBurgers.burgers.toModels))
             case .failure(let error):
-                self.store.deleteCacheFeed { _ in }
                 completion(.failure(error))
             }
         }
+    }
+
+    public func validateCache() {
+        store.retreive { _ in }
+        store.deleteCacheFeed { _ in }
     }
   
     private func validate(_ timestamp: Date) -> Bool {

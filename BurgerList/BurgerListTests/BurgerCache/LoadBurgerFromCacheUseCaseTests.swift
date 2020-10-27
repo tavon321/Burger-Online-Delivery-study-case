@@ -79,13 +79,13 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         }
     }
     
-    func test_load_deletesCacheOnRetreivalError() {
+    func test_load_hasNotSideEffectsOnRetreivalError() {
         let (sut, store) = makeSUT()
         
         sut.load { _ in }
         store.completeRetreival(with: anyError)
         
-        XCTAssertEqual(store.receivedMessages, [.retreiveCache, .deleteCachedFeed])
+        XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
     
     func test_load_doesNotDeletesCacheOnEmptyCache() {
