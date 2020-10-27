@@ -26,12 +26,7 @@ final public class LocalBurgerLoader {
             guard let self = self else { return }
             switch result {
             case .success(let cachedBurgers):
-                guard let cachedBurgers = cachedBurgers else {
-                    return completion(.success([]))
-                }
-                
-                guard self.validate(cachedBurgers.timestamp) else {
-                    self.store.deleteCacheFeed { _ in }
+                guard let cachedBurgers = cachedBurgers, self.validate(cachedBurgers.timestamp) else {
                     return completion(.success([]))
                 }
                 
@@ -45,7 +40,10 @@ final public class LocalBurgerLoader {
     public func validateCache() {
         store.retreive { [unowned self] result in
             switch result {
-            case .success: break
+            case .success(let cachedBurgers):
+                if let cachedBurgers = cachedBurgers, !self.validate(cachedBurgers.timestamp) {
+                    self.store.deleteCacheFeed { _ in }
+                }
             case .failure:
                 self.store.deleteCacheFeed { _ in }
             }

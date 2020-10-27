@@ -110,7 +110,7 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
     
-    func test_load_deletesCacheOnTwoWeeksOldCache() {
+    func test_load_hasNoSideEffectsOnTwoWeeksOldCache() {
         let fixedCurrentDate = Date()
         let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14)
         let burgerList = uniqueItems()
@@ -120,7 +120,20 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         sut.load { _ in }
         store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
         
-        XCTAssertEqual(store.receivedMessages, [.retreiveCache, .deleteCachedFeed])
+        XCTAssertEqual(store.receivedMessages, [.retreiveCache])
+    }
+
+    func test_load_hasNoSideEffectsOnMoreThanTwoWeeksOldCache() {
+        let fixedCurrentDate = Date()
+        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: -1)
+        let burgerList = uniqueItems()
+
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+
+        sut.load { _ in }
+        store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+
+        XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
     
     func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
@@ -134,19 +147,6 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         store.completeRetreivalWithEmptyCache()
         
         XCTAssertTrue(capturedResult.isEmpty)
-    }
-    
-    func test_load_deletesCacheOnMoreThanTwoWeeksOldCache() {
-        let fixedCurrentDate = Date()
-        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: -1)
-        let burgerList = uniqueItems()
-        
-        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
-        
-        sut.load { _ in }
-        store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
-        
-        XCTAssertEqual(store.receivedMessages, [.retreiveCache, .deleteCachedFeed])
     }
     
     // MARK: - Helpers

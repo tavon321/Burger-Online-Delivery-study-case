@@ -48,6 +48,33 @@ class ValidateBurgerCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
 
+    func test_load_deletesCacheOnTwoWeeksOldCache() {
+        let fixedCurrentDate = Date()
+        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14)
+        let burgerList = uniqueItems()
+
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+
+        sut.validateCache()
+        store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+
+        XCTAssertEqual(store.receivedMessages, [.retreiveCache, .deleteCachedFeed])
+    }
+
+
+    func test_load_deletesCacheOnMoreThanTwoWeeksOldCache() {
+        let fixedCurrentDate = Date()
+        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: -1)
+        let burgerList = uniqueItems()
+
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+
+        sut.validateCache()
+        store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+
+        XCTAssertEqual(store.receivedMessages, [.retreiveCache, .deleteCachedFeed])
+    }
+
     // MARK: - Helpers
     private func makeSUT(currentDate: @escaping () -> Date = Date.init,
                          file: StaticString = #file,
