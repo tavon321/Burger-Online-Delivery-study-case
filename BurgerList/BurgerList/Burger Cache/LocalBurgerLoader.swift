@@ -8,25 +8,35 @@
 
 import Foundation
 
-final public class LocalBurgerLoader: BurgerLoader {
-    private let store: BurgerStore
+private final class BurgerCachePolicy {
     private let currentDate: () -> Date
     private let calendar = Calendar(identifier: .gregorian)
     private let maxCacheAgeInDays = 14
-    
+
+    init(currentDate: @escaping () -> Date) {
+        self.currentDate = currentDate
+    }
+
+    func validate(_ timestamp: Date) -> Bool {
+        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
+            return false
+        }
+
+        return currentDate() < maxCacheAge
+    }
+}
+
+final public class LocalBurgerLoader: BurgerLoader {
+    private let store: BurgerStore
+    private let currentDate: () -> Date
+    private let cachePolicy: BurgerCachePolicy
+
     public typealias SaveResult = Error?
     
     public init(store: BurgerStore, currentDate: @escaping () -> Date) {
         self.store = store
         self.currentDate = currentDate
-    }
-
-    private func validate(_ timestamp: Date) -> Bool {
-        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
-            return false
-        }
-        
-        return currentDate() < maxCacheAge
+        self.cachePolicy = BurgerCachePolicy(currentDate: currentDate)
     }
 }
 
@@ -36,7 +46,7 @@ extension LocalBurgerLoader {
             guard let self = self else { return }
             switch result {
             case .success(let cachedBurgers):
-                guard let cachedBurgers = cachedBurgers, self.validate(cachedBurgers.timestamp) else {
+                guard let cachedBurgers = cachedBurgers, self.cachePolicy.validate(cachedBurgers.timestamp) else {
                     return completion(.success([]))
                 }
 
@@ -74,7 +84,7 @@ extension LocalBurgerLoader {
             guard let self = self else { return }
             switch result {
             case .success(let cachedBurgers):
-                if let cachedBurgers = cachedBurgers, !self.validate(cachedBurgers.timestamp) {
+                if let cachedBurgers = cachedBurgers, !self.cachePolicy.validate(cachedBurgers.timestamp) {
                     self.store.deleteCacheFeed { _ in }
                 }
             case .failure:
