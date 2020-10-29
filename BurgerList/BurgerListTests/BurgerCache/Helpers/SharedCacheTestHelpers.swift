@@ -17,7 +17,8 @@ var anyData: Data { return Data("any data".utf8) }
 extension Date {
 
     func minusBurgerCacheMaxAge() -> Date {
-        return adding(days: -14)
+        let burgerCacheMaxAgeInDay = 14
+        return adding(days: -burgerCacheMaxAgeInDayu)
     }
 
     func adding(days: Int) -> Date {
