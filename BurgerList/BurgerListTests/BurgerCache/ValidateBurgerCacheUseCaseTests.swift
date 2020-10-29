@@ -35,9 +35,9 @@ class ValidateBurgerCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
 
-    func test_validate_doesNotDeletesCacheOnLessThanTwoWeeksOldCache() {
+    func test_validate_doesNotDeletesCacheOnNonExpiredCache() {
         let fixedCurrentDate = Date()
-        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: 1)
+        let lessThanTwoWeekTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge().adding(seconds: 1)
         let burgerList = uniqueItems()
 
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
@@ -48,29 +48,29 @@ class ValidateBurgerCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
 
-    func test_load_deletesCacheOnTwoWeeksOldCache() {
+    func test_load_deletesCacheOnExpiringCache() {
         let fixedCurrentDate = Date()
-        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14)
+        let expiringTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge()
         let burgerList = uniqueItems()
 
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
         sut.validateCache()
-        store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+        store.completeRetreival(with: burgerList.localItems, timestamp: expiringTimestamp)
 
         XCTAssertEqual(store.receivedMessages, [.retreiveCache, .deleteCachedFeed])
     }
 
 
-    func test_load_deletesCacheOnMoreThanTwoWeeksOldCache() {
+    func test_load_deletesCacheOnExpiredCache() {
         let fixedCurrentDate = Date()
-        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: -1)
+        let expiredTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge().adding(seconds: -1)
         let burgerList = uniqueItems()
 
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
         sut.validateCache()
-        store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+        store.completeRetreival(with: burgerList.localItems, timestamp: expiredTimestamp)
 
         XCTAssertEqual(store.receivedMessages, [.retreiveCache, .deleteCachedFeed])
     }

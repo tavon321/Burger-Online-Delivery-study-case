@@ -1,5 +1,5 @@
 //
-//  SharedTestHelpers.swift
+//  SharedCacheTestHelpers.swift
 //  BurgerListTests
 //
 //  Created by Tavo on 30/09/20.
@@ -15,6 +15,11 @@ var anyError: NSError { return NSError(domain: "any error", code: 0) }
 var anyData: Data { return Data("any data".utf8) }
 
 extension Date {
+
+    func minusBurgerCacheMaxAge() -> Date {
+        return adding(days: -14)
+    }
+
     func adding(days: Int) -> Date {
         return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
     }

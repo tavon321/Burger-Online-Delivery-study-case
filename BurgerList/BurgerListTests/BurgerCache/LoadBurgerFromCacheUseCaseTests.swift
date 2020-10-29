@@ -43,39 +43,39 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         }
     }
     
-    func test_load_deliversBurgersOnLessThanTwoWeeksOldCache() {
+    func test_load_deliversBurgersOnNonExpiredCache() {
         let fixedCurrentDate = Date()
-        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: 1)
+        let nonExpiredTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge().adding(seconds: 1)
         let burgerList = uniqueItems()
         
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         expect(sut, toCompleteWith: .success(burgerList.models)) {
-            store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+            store.completeRetreival(with: burgerList.localItems, timestamp: nonExpiredTimestamp)
         }
     }
 
-    func test_load_deliversNoBurgersOnTwoWeeksOldCache() {
+    func test_load_deliversNoBurgersOnExpirationDate() {
         let fixedCurrentDate = Date()
-        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14)
+        let expirationTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge()
         let burgerList = uniqueItems()
         
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         expect(sut, toCompleteWith: .success([])) {
-            store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+            store.completeRetreival(with: burgerList.localItems, timestamp: expirationTimestamp)
         }
     }
     
-    func test_load_deliversNoBurgersOnMoreThanTwoWeeksOldCache() {
+    func test_load_deliversNoBurgersOnMoreThanExpiredCache() {
         let fixedCurrentDate = Date()
-        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: -1)
+        let expirationTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge().adding(seconds: -1)
         let burgerList = uniqueItems()
         
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         expect(sut, toCompleteWith: .success([])) {
-            store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+            store.completeRetreival(with: burgerList.localItems, timestamp: expirationTimestamp)
         }
     }
     
@@ -97,41 +97,41 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
     
-    func test_load_hasNoSideEffectOnLessThanTwoWeeksOldCache() {
+    func test_load_hasNoSideEffectOnNonExpiredCache() {
         let fixedCurrentDate = Date()
-        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: 1)
+        let nonExpiredTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: 1)
         let burgerList = uniqueItems()
         
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         sut.load { _ in }
-        store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+        store.completeRetreival(with: burgerList.localItems, timestamp: nonExpiredTimestamp)
         
         XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
     
-    func test_load_hasNoSideEffectsOnTwoWeeksOldCache() {
+    func test_load_hasNoSideEffectsOnExpiredCache() {
         let fixedCurrentDate = Date()
-        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14)
+        let expiredTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge()
         let burgerList = uniqueItems()
         
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         sut.load { _ in }
-        store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+        store.completeRetreival(with: burgerList.localItems, timestamp: expiredTimestamp)
         
         XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
 
-    func test_load_hasNoSideEffectsOnMoreThanTwoWeeksOldCache() {
+    func test_load_hasNoSideEffectsOnMoreThanExpiredCache() {
         let fixedCurrentDate = Date()
-        let lessThanTwoWeekTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: -1)
+        let expiredTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge().adding(seconds: -1)
         let burgerList = uniqueItems()
 
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
         sut.load { _ in }
-        store.completeRetreival(with: burgerList.localItems, timestamp: lessThanTwoWeekTimestamp)
+        store.completeRetreival(with: burgerList.localItems, timestamp: expiredTimestamp)
 
         XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
