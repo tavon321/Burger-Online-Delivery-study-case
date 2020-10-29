@@ -9,20 +9,16 @@
 import Foundation
 
 private final class BurgerCachePolicy {
-    private let currentDate: () -> Date
+
     private let calendar = Calendar(identifier: .gregorian)
     private let maxCacheAgeInDays = 14
 
-    init(currentDate: @escaping () -> Date) {
-        self.currentDate = currentDate
-    }
-
-    func validate(_ timestamp: Date) -> Bool {
+    func validate(_ timestamp: Date, against date: Date) -> Bool {
         guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
             return false
         }
 
-        return currentDate() < maxCacheAge
+        return date < maxCacheAge
     }
 }
 
@@ -36,7 +32,7 @@ final public class LocalBurgerLoader: BurgerLoader {
     public init(store: BurgerStore, currentDate: @escaping () -> Date) {
         self.store = store
         self.currentDate = currentDate
-        self.cachePolicy = BurgerCachePolicy(currentDate: currentDate)
+        self.cachePolicy = BurgerCachePolicy()
     }
 }
 
@@ -46,7 +42,8 @@ extension LocalBurgerLoader {
             guard let self = self else { return }
             switch result {
             case .success(let cachedBurgers):
-                guard let cachedBurgers = cachedBurgers, self.cachePolicy.validate(cachedBurgers.timestamp) else {
+                guard let cachedBurgers = cachedBurgers, self.cachePolicy.validate(cachedBurgers.timestamp,
+                                                                                   against: self.currentDate()) else {
                     return completion(.success([]))
                 }
 
@@ -84,7 +81,8 @@ extension LocalBurgerLoader {
             guard let self = self else { return }
             switch result {
             case .success(let cachedBurgers):
-                if let cachedBurgers = cachedBurgers, !self.cachePolicy.validate(cachedBurgers.timestamp) {
+                if let cachedBurgers = cachedBurgers, !self.cachePolicy.validate(cachedBurgers.timestamp,
+                                                                                 against: self.currentDate()) {
                     self.store.deleteCacheFeed { _ in }
                 }
             case .failure:
