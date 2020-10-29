@@ -17,14 +17,16 @@ var anyData: Data { return Data("any data".utf8) }
 extension Date {
 
     func minusBurgerCacheMaxAge() -> Date {
-        let burgerCacheMaxAgeInDay = 14
-        return adding(days: -burgerCacheMaxAgeInDayu)
+        let burgerCacheMaxAgeInDays = 14
+        return adding(days: -burgerCacheMaxAgeInDays)
     }
 
-    func adding(days: Int) -> Date {
+    private func adding(days: Int) -> Date {
         return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
     }
+}
 
+extension Date {
     func adding(seconds: TimeInterval) -> Date {
         return self + seconds
     }
