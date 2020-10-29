@@ -8,21 +8,6 @@
 
 import Foundation
 
-private final class BurgerCachePolicy {
-    static private let calendar = Calendar(identifier: .gregorian)
-    static private let maxCacheAgeInDays = 14
-
-    private init() {}
-
-    static func validate(_ timestamp: Date, against date: Date) -> Bool {
-        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
-            return false
-        }
-
-        return date < maxCacheAge
-    }
-}
-
 final public class LocalBurgerLoader: BurgerLoader {
     private let store: BurgerStore
     private let currentDate: () -> Date
