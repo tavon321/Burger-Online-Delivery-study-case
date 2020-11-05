@@ -99,7 +99,7 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
     
     func test_load_hasNoSideEffectOnNonExpiredCache() {
         let fixedCurrentDate = Date()
-        let nonExpiredTimestamp = fixedCurrentDate.adding(days: -14).adding(seconds: 1)
+        let nonExpiredTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge().adding(seconds: 1)
         let burgerList = uniqueItems()
         
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
