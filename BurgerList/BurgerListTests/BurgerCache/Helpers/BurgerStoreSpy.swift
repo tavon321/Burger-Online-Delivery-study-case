@@ -65,6 +65,6 @@ class BurgerStoreSpy: BurgerStore {
     }
     
     func completeRetreivalWithEmptyCache(at index: Int = 0) {
-        retreivalCompletions[index](.success(nil))
+        retreivalCompletions[index](.success(.none))
     }
 }

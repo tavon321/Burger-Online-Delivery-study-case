@@ -83,7 +83,7 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         
         sut.load { _ in }
-        store.completeRetreival(with: anyError)
+        store.completeRetreivalWithEmptyCache()
         
         XCTAssertEqual(store.receivedMessages, [.retreiveCache])
     }
