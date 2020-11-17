@@ -17,7 +17,7 @@ class CodableBurgerStore {
 
 class CodableBurgerStoreTests: XCTestCase {
 
-    func test_retreive_deliversEmptyOnEmptyCache() {
+    func test_retrieve_deliversEmptyOnEmptyCache() {
         let sut = CodableBurgerStore()
 
         let exp = expectation(description: "wait for retrieval")
@@ -35,7 +35,7 @@ class CodableBurgerStoreTests: XCTestCase {
         wait(for: [exp], timeout: 0.1)
     }
 
-    func test_retreive_hasNoSideEffectsOnEmptyCache() {
+    func test_retrieve_hasNoSideEffectsOnEmptyCache() {
         let sut = CodableBurgerStore()
 
         let exp = expectation(description: "wait for retrieval")

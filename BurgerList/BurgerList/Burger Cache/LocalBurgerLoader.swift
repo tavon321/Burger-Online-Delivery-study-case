@@ -22,7 +22,7 @@ final public class LocalBurgerLoader: BurgerLoader {
 
 extension LocalBurgerLoader {
     public func load(completion: @escaping (BurgerLoader.Result) -> Void) {
-        store.retreive { [weak self] result in
+        store.retrieve { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let cachedBurgers):
@@ -61,7 +61,7 @@ extension LocalBurgerLoader {
 
 extension LocalBurgerLoader {
     public func validateCache() {
-        store.retreive { [weak self] result in
+        store.retrieve { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let cachedBurgers):

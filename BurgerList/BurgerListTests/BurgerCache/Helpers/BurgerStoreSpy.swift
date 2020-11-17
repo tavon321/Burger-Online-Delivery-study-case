@@ -29,7 +29,7 @@ class BurgerStoreSpy: BurgerStore {
         receivedMessages.append(.deleteCachedFeed)
     }
     
-    func retreive(completion: @escaping RetreivalCompletion) {
+    func retrieve(completion: @escaping RetreivalCompletion) {
         retreivalCompletions.append(completion)
         receivedMessages.append(.retreiveCache)
     }
