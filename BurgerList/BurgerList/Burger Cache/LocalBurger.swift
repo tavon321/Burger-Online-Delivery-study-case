@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LocalBurger: Equatable {
+public struct LocalBurger: Equatable, Codable {
     public let id: UUID
     public let name: String
     public let description: String?
