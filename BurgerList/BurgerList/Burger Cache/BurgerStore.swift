@@ -16,6 +16,6 @@ public protocol BurgerStore {
     typealias RetreivalCompletion = (Result<CachedBurgers?, Error>) -> Void
     
     func deleteCacheFeed(completion: @escaping DeletionCompletion)
-    func insert(_ items: [LocalBurger], timestamp: Date, completion: @escaping (Error?) -> Void)
+    func insert(_ items: [LocalBurger], timestamp: Date, completion: @escaping InsertionCompletion)
     func retreive(completion: @escaping RetreivalCompletion)
 }
