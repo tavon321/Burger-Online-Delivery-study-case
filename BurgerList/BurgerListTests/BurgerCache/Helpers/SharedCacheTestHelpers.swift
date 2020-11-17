@@ -7,12 +7,18 @@
 //
 
 import Foundation
+import BurgerList
 
-var anyURL: URL { return URL(string: "https://a-url.com")! }
+ var uniqueBurger: Burger {
+    return Burger(id: UUID(), name: "a name", description: "a description", imageURL: anyURL)
+}
 
-var anyError: NSError { return NSError(domain: "any error", code: 0) }
+func uniqueBurgers() -> (models: [Burger], localItems: [LocalBurger]) {
+    let items = [uniqueBurger, uniqueBurger]
+    let localItems = items.map { LocalBurger(id: $0.id, name: $0.name, description: $0.description, imageURL: $0.imageURL) }
 
-var anyData: Data { return Data("any data".utf8) }
+    return (models: items, localItems: localItems)
+}
 
 extension Date {
 

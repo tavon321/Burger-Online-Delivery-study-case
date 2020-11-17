@@ -46,7 +46,7 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
     func test_load_deliversBurgersOnNonExpiredCache() {
         let fixedCurrentDate = Date()
         let nonExpiredTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge().adding(seconds: 1)
-        let burgerList = uniqueItems()
+        let burgerList = uniqueBurgers()
         
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
@@ -58,7 +58,7 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
     func test_load_deliversNoBurgersOnExpirationDate() {
         let fixedCurrentDate = Date()
         let expirationTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge()
-        let burgerList = uniqueItems()
+        let burgerList = uniqueBurgers()
         
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
@@ -70,7 +70,7 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
     func test_load_deliversNoBurgersOnMoreThanExpiredCache() {
         let fixedCurrentDate = Date()
         let expirationTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge().adding(seconds: -1)
-        let burgerList = uniqueItems()
+        let burgerList = uniqueBurgers()
         
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
@@ -100,7 +100,7 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
     func test_load_hasNoSideEffectOnNonExpiredCache() {
         let fixedCurrentDate = Date()
         let nonExpiredTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge().adding(seconds: 1)
-        let burgerList = uniqueItems()
+        let burgerList = uniqueBurgers()
         
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
@@ -113,7 +113,7 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
     func test_load_hasNoSideEffectsOnExpiredCache() {
         let fixedCurrentDate = Date()
         let expiredTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge()
-        let burgerList = uniqueItems()
+        let burgerList = uniqueBurgers()
         
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
@@ -126,7 +126,7 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
     func test_load_hasNoSideEffectsOnMoreThanExpiredCache() {
         let fixedCurrentDate = Date()
         let expiredTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge().adding(seconds: -1)
-        let burgerList = uniqueItems()
+        let burgerList = uniqueBurgers()
 
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
@@ -185,17 +185,6 @@ class LoadBurgerFromCacheUseCaseTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         
         return (sut: sut, store: store)
-    }
-    
-    private var uniqueItem: Burger {
-        return Burger(id: UUID(), name: "a name", description: "a description", imageURL: anyURL)
-    }
-    
-    private func uniqueItems() -> (models: [Burger], localItems: [LocalBurger]) {
-        let items = [uniqueItem, uniqueItem]
-        let localItems = items.map { LocalBurger(id: $0.id, name: $0.name, description: $0.description, imageURL: $0.imageURL) }
-        
-        return (models: items, localItems: localItems)
     }
     
 }

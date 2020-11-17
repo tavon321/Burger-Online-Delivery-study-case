@@ -20,14 +20,14 @@ class CacheFeedUseCaseTests: XCTestCase {
     func test_save_requestCacheDeletion() {
         let (sut, store) = createSUT()
         
-        sut.save(uniqueItems().models) { _ in }
+        sut.save(uniqueBurgers().models) { _ in }
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
     }
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
         let (sut, store) = createSUT()
-        let items = uniqueItems().models
+        let items = uniqueBurgers().models
         
         sut.save(items) { _ in }
         
@@ -39,7 +39,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     func test_save_requestCacheInsertionWithTimestampOnDeletionSuccess() {
         let timestamp = Date()
         let (sut, store) = createSUT(currentDate: { timestamp })
-        let items = uniqueItems()
+        let items = uniqueBurgers()
         
         sut.save(items.models) { _ in }
         
@@ -81,7 +81,7 @@ class CacheFeedUseCaseTests: XCTestCase {
         var sut: LocalBurgerLoader? = LocalBurgerLoader(store: store, currentDate: Date.init)
         
         var capturedError: Error?
-        sut?.save(uniqueItems().models, completion: { error in
+        sut?.save(uniqueBurgers().models, completion: { error in
             capturedError = error
         })
         
@@ -96,7 +96,7 @@ class CacheFeedUseCaseTests: XCTestCase {
         var sut: LocalBurgerLoader? = LocalBurgerLoader(store: store, currentDate: Date.init)
         
         var capturedError: Error?
-        sut?.save([uniqueItem], completion: { error in
+        sut?.save([uniqueBurger], completion: { error in
             capturedError = error
         })
         
@@ -116,7 +116,7 @@ class CacheFeedUseCaseTests: XCTestCase {
         let exp = expectation(description: "Wait for save completion")
         
         var receivedError: Error?
-        sut.save(uniqueItems().models) { error in
+        sut.save(uniqueBurgers().models) { error in
             receivedError = error
             exp.fulfill()
         }
@@ -126,17 +126,6 @@ class CacheFeedUseCaseTests: XCTestCase {
         wait(for: [exp], timeout: 1)
         
         XCTAssertEqual(receivedError as NSError?, error)
-    }
-    
-    private var uniqueItem: Burger {
-        return Burger(id: UUID(), name: "a name", description: "a description", imageURL: anyURL)
-    }
-    
-    private func uniqueItems() -> (models: [Burger], localItems: [LocalBurger]) {
-        let items = [uniqueItem, uniqueItem]
-        let localItems = items.map { LocalBurger(id: $0.id, name: $0.name, description: $0.description, imageURL: $0.imageURL) }
-        
-        return (models: items, localItems: localItems)
     }
     
     private func createSUT(currentDate: @escaping () -> Date = Date.init,

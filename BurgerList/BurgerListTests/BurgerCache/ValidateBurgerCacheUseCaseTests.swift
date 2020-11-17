@@ -38,7 +38,7 @@ class ValidateBurgerCacheUseCaseTests: XCTestCase {
     func test_validate_doesNotDeletesCacheOnNonExpiredCache() {
         let fixedCurrentDate = Date()
         let lessThanTwoWeekTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge().adding(seconds: 1)
-        let burgerList = uniqueItems()
+        let burgerList = uniqueBurgers()
 
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
@@ -51,7 +51,7 @@ class ValidateBurgerCacheUseCaseTests: XCTestCase {
     func test_load_deletesCacheOnExpiringCache() {
         let fixedCurrentDate = Date()
         let expiringTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge()
-        let burgerList = uniqueItems()
+        let burgerList = uniqueBurgers()
 
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
@@ -65,7 +65,7 @@ class ValidateBurgerCacheUseCaseTests: XCTestCase {
     func test_load_deletesCacheOnExpiredCache() {
         let fixedCurrentDate = Date()
         let expiredTimestamp = fixedCurrentDate.minusBurgerCacheMaxAge().adding(seconds: -1)
-        let burgerList = uniqueItems()
+        let burgerList = uniqueBurgers()
 
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
@@ -98,16 +98,5 @@ class ValidateBurgerCacheUseCaseTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
 
         return (sut: sut, store: store)
-    }
-
-    private var uniqueItem: Burger {
-        return Burger(id: UUID(), name: "a name", description: "a description", imageURL: anyURL)
-    }
-
-    private func uniqueItems() -> (models: [Burger], localItems: [LocalBurger]) {
-        let items = [uniqueItem, uniqueItem]
-        let localItems = items.map { LocalBurger(id: $0.id, name: $0.name, description: $0.description, imageURL: $0.imageURL) }
-
-        return (models: items, localItems: localItems)
     }
 }
