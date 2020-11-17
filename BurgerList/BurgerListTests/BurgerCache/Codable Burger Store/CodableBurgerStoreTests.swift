@@ -17,7 +17,7 @@ class CodableBurgerStore {
 
 class CodableBurgerStoreTests: XCTestCase {
 
-    func test_retreive_delivers_emptyOnEmptyCache() {
+    func test_retreive_deliversEmptyOnEmptyCache() {
         let sut = CodableBurgerStore()
 
         let exp = expectation(description: "wait for retrieval")
@@ -29,6 +29,26 @@ class CodableBurgerStoreTests: XCTestCase {
                 XCTFail("Expected nil result, got \(result) instead")
             }
 
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 0.1)
+    }
+
+    func test_retreive_hasNoSideEffectsOnEmptyCache() {
+        let sut = CodableBurgerStore()
+
+        let exp = expectation(description: "wait for retrieval")
+        sut.retreive { firstResult in
+            sut.retreive { secondResult in
+                switch (firstResult, secondResult) {
+                case let (.success(firstCache), .success(secondCache)):
+                    XCTAssertNil(firstCache)
+                    XCTAssertNil(secondCache)
+                default:
+                    XCTFail("Expected retrieving twice from empty cache to deliver same empty result, got \(firstResult) and \(secondResult) instead")
+                }
+            }
             exp.fulfill()
         }
 
