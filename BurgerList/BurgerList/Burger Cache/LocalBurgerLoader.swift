@@ -27,7 +27,8 @@ extension LocalBurgerLoader {
             switch result {
             case .success(let cachedBurgers):
                 guard let cachedBurgers = cachedBurgers,
-                      BurgerCachePolicy.validate(cachedBurgers.timestamp, against: self.currentDate()) else {
+                      BurgerCachePolicy.validate(cachedBurgers.timestamp,
+                                                 against: self.currentDate()) else {
                     return completion(.success([]))
                 }
 
@@ -65,8 +66,9 @@ extension LocalBurgerLoader {
             guard let self = self else { return }
             switch result {
             case .success(let cachedBurgers):
-                if let cachedBurgers = cachedBurgers, !BurgerCachePolicy.validate(cachedBurgers.timestamp,
-                                                                                  against: self.currentDate()) {
+                if let cachedBurgers = cachedBurgers,
+                   !BurgerCachePolicy.validate(cachedBurgers.timestamp,
+                                               against: self.currentDate()) {
                     self.store.deleteCacheFeed { _ in }
                 }
             case .failure:
