@@ -43,7 +43,7 @@ class LoadBurgerFromRemoteUseCaseTests: XCTestCase {
         }
     }
     
-    func test_load_deliversNon200HTTPResponse() {
+    func test_load_deliversInvalidDataErrorOnNon200HTTPResponse() {
         let (sut, client) = makeSUT()
         let samples = [199, 201, 300, 400, 500].enumerated()
         
