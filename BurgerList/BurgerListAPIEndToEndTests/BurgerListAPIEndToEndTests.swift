@@ -17,8 +17,10 @@ class BurgerListAPIEndToEndTests: XCTestCase {
             burgers.enumerated().forEach { (index, receivedBurger) in
                 XCTAssertEqual(receivedBurger, expectedItem(at: index))
             }
-        default:
-            XCTFail("Expected Success")
+        case .failure(let error):
+            XCTFail("Expected Success, got \(error) instead")
+        case .none:
+            XCTFail("Expected Success, got no result instead")
         }
     }
     
