@@ -88,21 +88,7 @@ class CodableBurgerStoreTests: XCTestCase {
     func test_retrieve_hasNoSideEffectsOnEmptyCache() {
         let sut = makeSUT()
 
-        let exp = expectation(description: "wait for retrieval")
-        sut.retreive { firstResult in
-            sut.retreive { secondResult in
-                switch (firstResult, secondResult) {
-                case let (.success(firstCache), .success(secondCache)):
-                    XCTAssertNil(firstCache)
-                    XCTAssertNil(secondCache)
-                default:
-                    XCTFail("Expected retrieving twice from empty cache to deliver same empty result, got \(firstResult) and \(secondResult) instead")
-                }
-            }
-            exp.fulfill()
-        }
-
-        wait(for: [exp], timeout: 0.1)
+        expect(sut, toRetrieveTwiceWith: .success(nil))
     }
 
     func test_retrieveAfterInsertingToEmptyCache_deliversInsertedValues() {
@@ -110,12 +96,7 @@ class CodableBurgerStoreTests: XCTestCase {
         let expectedBurgers = uniqueBurgers().localItems
         let expectedTimestamp = Date()
 
-        let exp = expectation(description: "    wait for retrieval")
-        sut.insert(expectedBurgers, timestamp: expectedTimestamp) { insertionError in
-            XCTAssertNil(insertionError, "Expected Burgers to ve insterted succesfully")
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 0.1)
+        insert(expectedBurgers, at: expectedTimestamp, to: sut)
 
         expect(sut, toCompleteWith: .success((burgers: expectedBurgers, timestamp: expectedTimestamp)))
     }
@@ -125,28 +106,9 @@ class CodableBurgerStoreTests: XCTestCase {
         let expectedBurgers = uniqueBurgers().localItems
         let expectedTimestamp = Date()
 
-        let exp = expectation(description: "wait for retrieval")
-        sut.insert(expectedBurgers, timestamp: expectedTimestamp) { insertionError in
-            XCTAssertNil(insertionError, "Expected Burgers to ve insterted succesfully")
-            sut.retreive { firstResult in
-                sut.retreive { secondResult in
-                    switch (firstResult, secondResult) {
-                    case let (.success(cachedBurgers1), .success(cachedBurgers2)):
-                        XCTAssertEqual(cachedBurgers1?.burgers, expectedBurgers)
-                        XCTAssertEqual(cachedBurgers1?.timestamp, expectedTimestamp)
+        insert(expectedBurgers, at: expectedTimestamp, to: sut)
 
-                        XCTAssertEqual(cachedBurgers2?.burgers, expectedBurgers)
-                        XCTAssertEqual(cachedBurgers2?.timestamp, expectedTimestamp)
-                    default:
-                        XCTFail("Expected retrieving \(expectedBurgers) and \(expectedTimestamp) twice from cache, got \(firstResult) and \(secondResult) instead")
-                    }
-                }
-
-            }
-            exp.fulfill()
-        }
-
-        wait(for: [exp], timeout: 0.1)
+        expect(sut, toRetrieveTwiceWith: .success((burgers: expectedBurgers, timestamp: expectedTimestamp)))
     }
 
     // MARK: - Helpers
@@ -175,6 +137,23 @@ class CodableBurgerStoreTests: XCTestCase {
         }
 
         wait(for: [exp], timeout: 0.1)
+    }
+
+    private func insert(_ burgers: [LocalBurger], at timestamp: Date, to sut: CodableBurgerStore) {
+        let exp = expectation(description: "wait for cache insetion")
+        sut.insert(burgers, timestamp: timestamp) { insertionError in
+            XCTAssertNil(insertionError, "Expected Burgers to ve insterted succesfully")
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 0.1)
+    }
+
+    private func expect(_ sut: CodableBurgerStore,
+                        toRetrieveTwiceWith expectedResult: Result<CachedBurgers?, Error>,
+                        file: StaticString = #file,
+                        line: UInt = #line) {
+        expect(sut, toCompleteWith: expectedResult, file: file, line: line)
+        expect(sut, toCompleteWith: expectedResult, file: file, line: line)
     }
 
     func testStoreUrl() -> URL {
