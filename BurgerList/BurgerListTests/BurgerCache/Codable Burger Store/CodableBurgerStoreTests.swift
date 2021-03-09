@@ -82,20 +82,7 @@ class CodableBurgerStoreTests: XCTestCase {
 
     func test_retrieve_deliversEmptyOnEmptyCache() {
         let sut = makeSUT()
-
-        let exp = expectation(description: "wait for retrieval")
-        sut.retreive { result in
-            switch result {
-            case .success(let cachedBurgers):
-                XCTAssertNil(cachedBurgers)
-            default:
-                XCTFail("Expected nil result, got \(result) instead")
-            }
-
-            exp.fulfill()
-        }
-
-        wait(for: [exp], timeout: 0.1)
+        expect(sut, toCompleteWith: .success(nil))
     }
 
     func test_retrieve_hasNoSideEffectsOnEmptyCache() {
@@ -123,22 +110,14 @@ class CodableBurgerStoreTests: XCTestCase {
         let expectedBurgers = uniqueBurgers().localItems
         let expectedTimestamp = Date()
 
-        let exp = expectation(description: "wait for retrieval")
+        let exp = expectation(description: "    wait for retrieval")
         sut.insert(expectedBurgers, timestamp: expectedTimestamp) { insertionError in
             XCTAssertNil(insertionError, "Expected Burgers to ve insterted succesfully")
-            sut.retreive { retrieveResult in
-                switch retrieveResult {
-                case let .success(cachedBurgers):
-                    XCTAssertEqual(cachedBurgers?.burgers, expectedBurgers)
-                    XCTAssertEqual(cachedBurgers?.timestamp, expectedTimestamp)
-                default:
-                    XCTFail("Expected success with \(expectedBurgers) and \(expectedTimestamp), got \(retrieveResult) instead")
-                }
-            }
             exp.fulfill()
         }
-
         wait(for: [exp], timeout: 0.1)
+
+        expect(sut, toCompleteWith: .success((burgers: expectedBurgers, timestamp: expectedTimestamp)))
     }
 
     func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
@@ -176,6 +155,26 @@ class CodableBurgerStoreTests: XCTestCase {
 
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
+    }
+
+    private func expect(_ sut: CodableBurgerStore,
+                        toCompleteWith expectedResult: Result<CachedBurgers?, Error>,
+                        file: StaticString = #file,
+                        line: UInt = #line) {
+        let exp = expectation(description: "Wait for result")
+        sut.retreive { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case let (.success(receivedCache), .success(expectedCache)):
+                XCTAssertEqual(receivedCache?.burgers, expectedCache?.burgers)
+                XCTAssertEqual(receivedCache?.timestamp, expectedCache?.timestamp)
+            default:
+                XCTFail("Expected \(expectedResult), got \(receivedResult) instead")
+            }
+
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 0.1)
     }
 
     func testStoreUrl() -> URL {
