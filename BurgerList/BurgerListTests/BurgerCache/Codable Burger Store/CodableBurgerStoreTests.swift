@@ -139,12 +139,14 @@ class CodableBurgerStoreTests: XCTestCase {
     func test_insert_overridesProviouslyInsertedValues() {
         // When
         let sut = makeSUT()
-        insert(uniqueBurgers().localItems, at: Date(), to: sut)
+        let firstInsertionError = insert(uniqueBurgers().localItems, at: Date(), to: sut)
+        XCTAssertNil(firstInsertionError)
 
         // Given
         let exepctedBurgers = uniqueBurgers().localItems
         let expectedTimestamp = Date()
-        insert(exepctedBurgers, at: expectedTimestamp, to: sut)
+        let secondInsertionError = insert(exepctedBurgers, at: expectedTimestamp, to: sut)
+        XCTAssertNil(secondInsertionError)
 
         // Then
         expect(sut, toCompleteWith: .success(CachedBurgers(burgers: exepctedBurgers,
@@ -181,13 +183,18 @@ class CodableBurgerStoreTests: XCTestCase {
         wait(for: [exp], timeout: 0.1)
     }
 
-    private func insert(_ burgers: [LocalBurger], at timestamp: Date, to sut: CodableBurgerStore) {
+    @discardableResult
+    private func insert(_ burgers: [LocalBurger], at timestamp: Date, to sut: CodableBurgerStore) -> Error? {
         let exp = expectation(description: "wait for cache insetion")
-        sut.insert(burgers, timestamp: timestamp) { insertionError in
-            XCTAssertNil(insertionError, "Expected Burgers to ve insterted succesfully")
+
+        var insertionError: Error?
+        sut.insert(burgers, timestamp: timestamp) { receivedError in
+            insertionError = receivedError
             exp.fulfill()
         }
         wait(for: [exp], timeout: 0.1)
+
+        return insertionError
     }
 
     private func expect(_ sut: CodableBurgerStore,
