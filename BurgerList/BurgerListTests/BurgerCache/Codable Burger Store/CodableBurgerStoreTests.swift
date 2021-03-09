@@ -9,7 +9,7 @@
 import XCTest
 import BurgerList
 
-class CodableBurgerStore {
+class CodableBurgerStore: BurgerStore {
 
     private struct Cache: Codable {
         let burgers: [CodableLocalBurger]
@@ -44,7 +44,7 @@ class CodableBurgerStore {
         self.storeUrl = storeUrl
     }
 
-    func retreive(completion: @escaping BurgerStore.RetreivalCompletion) {
+    func retrieve(completion: @escaping BurgerStore.RetreivalCompletion) {
         guard let data = try? Data(contentsOf: storeUrl) else {
             return completion(.success(nil))
         }
@@ -70,6 +70,10 @@ class CodableBurgerStore {
         } catch {
             completion(error)
         }
+    }
+
+    func deleteCacheFeed(completion: @escaping BurgerStore.DeletionCompletion) {
+        completion(nil)
     }
 }
 
@@ -165,6 +169,18 @@ class CodableBurgerStoreTests: XCTestCase {
         XCTAssertNotNil(insertionError)
     }
 
+    func test_delete_hasNoSideEffects() {
+        let sut = makeSUT()
+
+        let exp =  expectation(description: "Wait for deletion")
+        sut.deleteCacheFeed { receivedError in
+            XCTAssertNil(receivedError)
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 0.1)
+    }
+
     // MARK: - Helpers
     private func makeSUT(url: URL? = nil, file: StaticString = #file, line: UInt = #line) -> CodableBurgerStore {
         let sut = CodableBurgerStore(storeUrl: url ?? testStoreUrl())
@@ -178,7 +194,7 @@ class CodableBurgerStoreTests: XCTestCase {
                         file: StaticString = #file,
                         line: UInt = #line) {
         let exp = expectation(description: "Wait for result")
-        sut.retreive { receivedResult in
+        sut.retrieve { receivedResult in
             switch (receivedResult, expectedResult) {
             case (.success(.none), .success(.none)), (.failure, .failure):
                 break
