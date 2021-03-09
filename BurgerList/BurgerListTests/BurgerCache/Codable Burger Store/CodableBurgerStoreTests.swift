@@ -68,18 +68,16 @@ class CodableBurgerStore {
 
 class CodableBurgerStoreTests: XCTestCase {
 
-    override class func setUp() {
+    override func setUp() {
         super.setUp()
 
-        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("burgers.store")
-        try? FileManager.default.removeItem(at: storeURL)
+        try? FileManager.default.removeItem(at: storeUrl())
     }
 
     override func tearDown() {
         super.tearDown()
 
-        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("burgers.store")
-        try? FileManager.default.removeItem(at: storeURL)
+        try? FileManager.default.removeItem(at: storeUrl())
     }
 
     func test_retrieve_deliversEmptyOnEmptyCache() {
@@ -145,10 +143,14 @@ class CodableBurgerStoreTests: XCTestCase {
 
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CodableBurgerStore {
-        let storeUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("burgers.store")
-        let sut = CodableBurgerStore(storeUrl: storeUrl)
+        let sut = CodableBurgerStore(storeUrl: storeUrl())
 
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
+    }
+
+
+    func storeUrl(file: StaticString = #file) -> URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("burgers.store")
     }
 }
