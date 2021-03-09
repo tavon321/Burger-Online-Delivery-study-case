@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		29E0B29F2524DC5100661112 /* SharedCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E0B29E2524DC5100661112 /* SharedCacheTestHelpers.swift */; };
 		40904990254861F1007FB742 /* ValidateBurgerCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4090498F254861F1007FB742 /* ValidateBurgerCacheUseCaseTests.swift */; };
+		40A943AF25F8129900BC786D /* CodableBurgerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A943AE25F8129900BC786D /* CodableBurgerStore.swift */; };
 		40DAA068256477A900B1AEC0 /* CodableBurgerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA067256477A900B1AEC0 /* CodableBurgerStoreTests.swift */; };
 		40DAA0702564827100B1AEC0 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */; };
 		40FC239F254B662600290628 /* BurgerCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FC239E254B662600290628 /* BurgerCachePolicy.swift */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		29E0B29E2524DC5100661112 /* SharedCacheTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCacheTestHelpers.swift; sourceTree = "<group>"; };
 		4090498F254861F1007FB742 /* ValidateBurgerCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateBurgerCacheUseCaseTests.swift; sourceTree = "<group>"; };
+		40A943AE25F8129900BC786D /* CodableBurgerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableBurgerStore.swift; sourceTree = "<group>"; };
 		40DAA067256477A900B1AEC0 /* CodableBurgerStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableBurgerStoreTests.swift; sourceTree = "<group>"; };
 		40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		40FC239E254B662600290628 /* BurgerCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerCachePolicy.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				DC03E02924FFDE8800BDB35E /* LocalBurgerLoader.swift */,
 				DCABB351250FD5E600D002E9 /* LocalBurger.swift */,
 				40FC239E254B662600290628 /* BurgerCachePolicy.swift */,
+				40A943AE25F8129900BC786D /* CodableBurgerStore.swift */,
 			);
 			path = "Burger Cache";
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				DCABB352250FD5E600D002E9 /* LocalBurger.swift in Sources */,
 				DCD8F68824A4DC7700064ED9 /* BurgerMapper.swift in Sources */,
 				DCEBAA6C2487DFDB0024BFA9 /* Burger.swift in Sources */,
+				40A943AF25F8129900BC786D /* CodableBurgerStore.swift in Sources */,
 				40FC239F254B662600290628 /* BurgerCachePolicy.swift in Sources */,
 				DC8671BD24911ED6007DA501 /* RemoteBurgerLoader.swift in Sources */,
 				DCD8F68624A4DC1C00064ED9 /* HTTPClient.swift in Sources */,
