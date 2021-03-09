@@ -38,10 +38,14 @@ class CodableBurgerStore {
         }
     }
 
-    private let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("burgers.store")
+    private let storeUrl: URL
+
+    init(storeUrl: URL) {
+        self.storeUrl = storeUrl
+    }
 
     func retreive(completion: @escaping BurgerStore.RetreivalCompletion) {
-        guard let data = try? Data(contentsOf: storeURL) else {
+        guard let data = try? Data(contentsOf: storeUrl) else {
             return completion(.success(nil))
         }
         let decoder = JSONDecoder()
@@ -56,7 +60,7 @@ class CodableBurgerStore {
         let cache = Cache(burgers: items.map(CodableLocalBurger.init), timestamp: timestamp)
         let encoded = try! encoder.encode(cache)
 
-        try! encoded.write(to: storeURL)
+        try! encoded.write(to: storeUrl)
 
         completion(nil)
     }
@@ -141,9 +145,10 @@ class CodableBurgerStoreTests: XCTestCase {
 
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CodableBurgerStore {
-        let sut = CodableBurgerStore()
+        let storeUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("burgers.store")
+        let sut = CodableBurgerStore(storeUrl: storeUrl)
 
         trackForMemoryLeaks(sut, file: file, line: line)
-        return CodableBurgerStore()
+        return sut
     }
 }
