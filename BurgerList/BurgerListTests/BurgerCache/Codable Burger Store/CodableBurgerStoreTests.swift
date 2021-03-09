@@ -121,9 +121,34 @@ class CodableBurgerStoreTests: XCTestCase {
         let storeURL = testStoreUrl()
         let sut = makeSUT(url: storeURL)
 
+        // Write an invalid String file
         try! "Invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
 
         expect(sut, toCompleteWith: .failure(anyError))
+    }
+
+    func test_retreive_hasNoSideEffectsOnFailure() {
+        let storeURL = testStoreUrl()
+        let sut = makeSUT(url: storeURL)
+
+        try! "Invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
+
+        expect(sut, toCompleteWith: .failure(anyError))
+    }
+
+    func test_insert_overridesProviouslyInsertedValues() {
+        // When
+        let sut = makeSUT()
+        insert(uniqueBurgers().localItems, at: Date(), to: sut)
+
+        // Given
+        let exepctedBurgers = uniqueBurgers().localItems
+        let expectedTimestamp = Date()
+        insert(exepctedBurgers, at: expectedTimestamp, to: sut)
+
+        // Then
+        expect(sut, toCompleteWith: .success(CachedBurgers(burgers: exepctedBurgers,
+                                                           timestamp: expectedTimestamp)))
     }
 
     // MARK: - Helpers
