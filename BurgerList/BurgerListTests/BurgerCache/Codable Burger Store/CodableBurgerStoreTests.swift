@@ -71,13 +71,13 @@ class CodableBurgerStoreTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        try? FileManager.default.removeItem(at: testStoreUrl())
+        setUpEmptyStoreState()
     }
 
     override func tearDown() {
         super.tearDown()
 
-        try? FileManager.default.removeItem(at: testStoreUrl())
+        undoStoreState()
     }
 
     func test_retrieve_deliversEmptyOnEmptyCache() {
@@ -149,8 +149,19 @@ class CodableBurgerStoreTests: XCTestCase {
         return sut
     }
 
-
     func testStoreUrl() -> URL {
         FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
+    }
+
+    private func setUpEmptyStoreState() {
+        deleteStoreArtifacts()
+    }
+
+    private func undoStoreState() {
+        deleteStoreArtifacts()
+    }
+
+    private func deleteStoreArtifacts() {
+        try? FileManager.default.removeItem(at: testStoreUrl())
     }
 }
