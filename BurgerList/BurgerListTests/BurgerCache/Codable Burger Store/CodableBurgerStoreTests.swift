@@ -91,7 +91,7 @@ class CodableBurgerStoreTests: XCTestCase {
         expect(sut, toRetrieveTwiceWith: .success(nil))
     }
 
-    func test_retrieveAfterInsertingToEmptyCache_deliversInsertedValues() {
+    func test_retrievee_deliversValueOnNonEmptyCache() {
         let sut = makeSUT()
         let expectedBurgers = uniqueBurgers().localItems
         let expectedTimestamp = Date()
