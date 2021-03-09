@@ -73,6 +73,10 @@ class CodableBurgerStore: BurgerStore {
     }
 
     func deleteCacheFeed(completion: @escaping BurgerStore.DeletionCompletion) {
+        guard FileManager.default.fileExists(atPath: storeUrl.path) else {
+            return completion(nil)
+        }
+        try! FileManager.default.removeItem(at: storeUrl)
         completion(nil)
     }
 }
@@ -93,7 +97,7 @@ class CodableBurgerStoreTests: XCTestCase {
 
     func test_retrieve_deliversEmptyOnEmptyCache() {
         let sut = makeSUT()
-        expect(sut, toCompleteWith: .success(nil))
+        expect(sut, toRetrieve: .success(nil))
     }
 
     func test_retrieve_hasNoSideEffectsOnEmptyCache() {
@@ -109,7 +113,7 @@ class CodableBurgerStoreTests: XCTestCase {
 
         insert(expectedBurgers, at: expectedTimestamp, to: sut)
 
-        expect(sut, toCompleteWith: .success(CachedBurgers(burgers: expectedBurgers,
+        expect(sut, toRetrieve: .success(CachedBurgers(burgers: expectedBurgers,
                                                            timestamp: expectedTimestamp)))
     }
 
@@ -131,7 +135,7 @@ class CodableBurgerStoreTests: XCTestCase {
         // Write an invalid String file
         try! "Invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
 
-        expect(sut, toCompleteWith: .failure(anyError))
+        expect(sut, toRetrieve: .failure(anyError))
     }
 
     func test_retreive_hasNoSideEffectsOnFailure() {
@@ -140,7 +144,7 @@ class CodableBurgerStoreTests: XCTestCase {
 
         try! "Invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
 
-        expect(sut, toCompleteWith: .failure(anyError))
+        expect(sut, toRetrieve: .failure(anyError))
     }
 
     func test_insert_overridesProviouslyInsertedValues() {
@@ -156,7 +160,7 @@ class CodableBurgerStoreTests: XCTestCase {
         XCTAssertNil(latestInsertionError)
 
         // Then
-        expect(sut, toCompleteWith: .success(CachedBurgers(burgers: latestBurgers,
+        expect(sut, toRetrieve: .success(CachedBurgers(burgers: latestBurgers,
                                                            timestamp: latestTimestamp)))
     }
 
@@ -172,13 +176,34 @@ class CodableBurgerStoreTests: XCTestCase {
     func test_delete_hasNoSideEffects() {
         let sut = makeSUT()
 
+        let deletionError = deleteCache(from: sut)
+        XCTAssertNil(deletionError)
+
+        expect(sut, toRetrieve: .success(nil))
+    }
+
+    func test_delete_emptiesPreviouslyInsertedCache() {
+        let sut = makeSUT()
+        insert(uniqueBurgers().localItems, at: Date(), to: sut)
+
+        let deletionError = deleteCache(from: sut)
+        XCTAssertNil(deletionError)
+
+        expect(sut, toRetrieve: .success(nil))
+    }
+
+    private func deleteCache(from sut: CodableBurgerStore) -> Error? {
         let exp =  expectation(description: "Wait for deletion")
+
+        var deletionError: Error?
         sut.deleteCacheFeed { receivedError in
-            XCTAssertNil(receivedError)
+            deletionError = receivedError
             exp.fulfill()
         }
 
         wait(for: [exp], timeout: 0.1)
+
+        return deletionError
     }
 
     // MARK: - Helpers
@@ -190,7 +215,7 @@ class CodableBurgerStoreTests: XCTestCase {
     }
 
     private func expect(_ sut: CodableBurgerStore,
-                        toCompleteWith expectedResult: Result<CachedBurgers?, Error>,
+                        toRetrieve expectedResult: Result<CachedBurgers?, Error>,
                         file: StaticString = #file,
                         line: UInt = #line) {
         let exp = expectation(description: "Wait for result")
@@ -229,8 +254,8 @@ class CodableBurgerStoreTests: XCTestCase {
                         toRetrieveTwiceWith expectedResult: Result<CachedBurgers?, Error>,
                         file: StaticString = #file,
                         line: UInt = #line) {
-        expect(sut, toCompleteWith: expectedResult, file: file, line: line)
-        expect(sut, toCompleteWith: expectedResult, file: file, line: line)
+        expect(sut, toRetrieve: expectedResult, file: file, line: line)
+        expect(sut, toRetrieve: expectedResult, file: file, line: line)
     }
 
     func testStoreUrl() -> URL {
