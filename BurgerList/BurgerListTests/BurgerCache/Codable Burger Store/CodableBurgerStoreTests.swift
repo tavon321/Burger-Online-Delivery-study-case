@@ -127,13 +127,42 @@ class CodableBurgerStoreTests: XCTestCase {
         sut.insert(expectedBurgers, timestamp: expectedTimestamp) { insertionError in
             XCTAssertNil(insertionError, "Expected Burgers to ve insterted succesfully")
             sut.retreive { retrieveResult in
-                switch (retrieveResult) {
+                switch retrieveResult {
                 case let .success(cachedBurgers):
                     XCTAssertEqual(cachedBurgers?.burgers, expectedBurgers)
                     XCTAssertEqual(cachedBurgers?.timestamp, expectedTimestamp)
                 default:
-                    XCTFail("Expected succes with \(expectedBurgers) and \(expectedTimestamp), got \(retrieveResult) instead")
+                    XCTFail("Expected success with \(expectedBurgers) and \(expectedTimestamp), got \(retrieveResult) instead")
                 }
+            }
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 0.1)
+    }
+
+    func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
+        let sut = makeSUT()
+        let expectedBurgers = uniqueBurgers().localItems
+        let expectedTimestamp = Date()
+
+        let exp = expectation(description: "wait for retrieval")
+        sut.insert(expectedBurgers, timestamp: expectedTimestamp) { insertionError in
+            XCTAssertNil(insertionError, "Expected Burgers to ve insterted succesfully")
+            sut.retreive { firstResult in
+                sut.retreive { secondResult in
+                    switch (firstResult, secondResult) {
+                    case let (.success(cachedBurgers1), .success(cachedBurgers2)):
+                        XCTAssertEqual(cachedBurgers1?.burgers, expectedBurgers)
+                        XCTAssertEqual(cachedBurgers1?.timestamp, expectedTimestamp)
+
+                        XCTAssertEqual(cachedBurgers2?.burgers, expectedBurgers)
+                        XCTAssertEqual(cachedBurgers2?.timestamp, expectedTimestamp)
+                    default:
+                        XCTFail("Expected retrieving \(expectedBurgers) and \(expectedTimestamp) twice from cache, got \(firstResult) and \(secondResult) instead")
+                    }
+                }
+
             }
             exp.fulfill()
         }
