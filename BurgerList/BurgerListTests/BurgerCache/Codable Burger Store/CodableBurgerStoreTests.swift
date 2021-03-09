@@ -12,8 +12,30 @@ import BurgerList
 class CodableBurgerStore {
 
     private struct Cache: Codable {
-        let burgers: [LocalBurger]
+        let burgers: [CodableLocalBurger]
         let timestamp: Date
+
+        var localBuger: [LocalBurger] {
+            return burgers.map({ $0.local })
+        }
+    }
+
+    private struct CodableLocalBurger: Equatable, Codable {
+        public let id: UUID
+        public let name: String
+        public let description: String?
+        public let imageURL: URL?
+
+        init(_ local: LocalBurger) {
+            self.id = local.id
+            self.name = local.name
+            self.description = local.description
+            self.imageURL = local.imageURL
+        }
+
+        var local: LocalBurger {
+            LocalBurger(id: id, name: name, description: description, imageURL: imageURL)
+        }
     }
 
     private let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("burgers.store")
@@ -24,14 +46,15 @@ class CodableBurgerStore {
         }
         let decoder = JSONDecoder()
         let cache = try! decoder.decode(Cache.self, from: data)
-        let cachedBurgers = CachedBurgers(burgers: cache.burgers, timestamp: cache.timestamp)
+        let cachedBurgers = CachedBurgers(burgers: cache.localBuger, timestamp: cache.timestamp)
 
         completion(.success(cachedBurgers))
     }
 
     func insert(_ items: [LocalBurger], timestamp: Date, completion: @escaping BurgerStore.InsertionCompletion) {
         let encoder = JSONEncoder()
-        let encoded = try! encoder.encode(Cache(burgers: items, timestamp: timestamp))
+        let cache = Cache(burgers: items.map(CodableLocalBurger.init), timestamp: timestamp)
+        let encoded = try! encoder.encode(cache)
 
         try! encoded.write(to: storeURL)
 
