@@ -79,7 +79,7 @@ class CodableBurgerStoreTests: XCTestCase {
     }
 
     func test_retrieve_deliversEmptyOnEmptyCache() {
-        let sut = CodableBurgerStore()
+        let sut = makeSUT()
 
         let exp = expectation(description: "wait for retrieval")
         sut.retreive { result in
@@ -97,7 +97,7 @@ class CodableBurgerStoreTests: XCTestCase {
     }
 
     func test_retrieve_hasNoSideEffectsOnEmptyCache() {
-        let sut = CodableBurgerStore()
+        let sut = makeSUT()
 
         let exp = expectation(description: "wait for retrieval")
         sut.retreive { firstResult in
@@ -117,7 +117,7 @@ class CodableBurgerStoreTests: XCTestCase {
     }
 
     func test_retrieveAfterInsertingToEmptyCache_deliversInsertedValues() {
-        let sut = CodableBurgerStore()
+        let sut = makeSUT()
         let expectedBurgers = uniqueBurgers().localItems
         let expectedTimestamp = Date()
 
@@ -137,5 +137,10 @@ class CodableBurgerStoreTests: XCTestCase {
         }
 
         wait(for: [exp], timeout: 0.1)
+    }
+
+    // MARK: - Helpers
+    private func makeSUT() -> CodableBurgerStore {
+        return CodableBurgerStore()
     }
 }
