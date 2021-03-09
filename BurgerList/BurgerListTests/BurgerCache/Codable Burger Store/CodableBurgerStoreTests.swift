@@ -76,8 +76,12 @@ class CodableBurgerStore: BurgerStore {
         guard FileManager.default.fileExists(atPath: storeUrl.path) else {
             return completion(nil)
         }
-        try! FileManager.default.removeItem(at: storeUrl)
-        completion(nil)
+        do {
+            try FileManager.default.removeItem(at: storeUrl)
+            completion(nil)
+        } catch {
+            completion(error)
+        }
     }
 }
 
@@ -97,13 +101,13 @@ class CodableBurgerStoreTests: XCTestCase {
 
     func test_retrieve_deliversEmptyOnEmptyCache() {
         let sut = makeSUT()
-        expect(sut, toRetrieve: .success(nil))
+        expect(sut, toRetrieve: .success(.none))
     }
 
     func test_retrieve_hasNoSideEffectsOnEmptyCache() {
         let sut = makeSUT()
 
-        expect(sut, toRetrieveTwiceWith: .success(nil))
+        expect(sut, toRetrieveTwiceWith: .success(.none))
     }
 
     func test_retrievee_deliversValueOnNonEmptyCache() {
@@ -128,7 +132,7 @@ class CodableBurgerStoreTests: XCTestCase {
                                                                 timestamp: expectedTimestamp)))
     }
 
-    func test_retreive_deliersFaiilureOnRetreivalError() {
+    func test_retreive_deliversFailureOnRetreivalError() {
         let storeURL = testStoreUrl()
         let sut = makeSUT(url: storeURL)
 
@@ -179,7 +183,7 @@ class CodableBurgerStoreTests: XCTestCase {
         let deletionError = deleteCache(from: sut)
         XCTAssertNil(deletionError)
 
-        expect(sut, toRetrieve: .success(nil))
+        expect(sut, toRetrieve: .success(.none))
     }
 
     func test_delete_emptiesPreviouslyInsertedCache() {
@@ -189,7 +193,16 @@ class CodableBurgerStoreTests: XCTestCase {
         let deletionError = deleteCache(from: sut)
         XCTAssertNil(deletionError)
 
-        expect(sut, toRetrieve: .success(nil))
+        expect(sut, toRetrieve: .success(.none))
+    }
+
+    func test_delete_deliversErrorOnInsertionError() {
+        let nonDeletePermissionUrl = adminDirectory()
+        let sut = makeSUT(url: nonDeletePermissionUrl)
+
+        let deletionError = deleteCache(from: sut)
+
+        XCTAssertNotNil(deletionError, "Expected cached deletion fail")
     }
 
     private func deleteCache(from sut: CodableBurgerStore) -> Error? {
@@ -224,8 +237,8 @@ class CodableBurgerStoreTests: XCTestCase {
             case (.success(.none), .success(.none)), (.failure, .failure):
                 break
             case let (.success(receivedCache), .success(expectedCache)):
-                XCTAssertEqual(receivedCache?.burgers, expectedCache?.burgers)
-                XCTAssertEqual(receivedCache?.timestamp, expectedCache?.timestamp)
+                XCTAssertEqual(receivedCache?.burgers, expectedCache?.burgers, file: file, line: line)
+                XCTAssertEqual(receivedCache?.timestamp, expectedCache?.timestamp, file: file, line: line)
             default:
                 XCTFail("Expected \(expectedResult), got \(receivedResult) instead" , file: file, line: line)
             }
@@ -260,6 +273,10 @@ class CodableBurgerStoreTests: XCTestCase {
 
     func testStoreUrl() -> URL {
         FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
+    }
+
+    private func adminDirectory() -> URL {
+        return FileManager.default.urls(for: .adminApplicationDirectory, in: .systemDomainMask).first!
     }
 
     private func setUpEmptyStoreState() {
