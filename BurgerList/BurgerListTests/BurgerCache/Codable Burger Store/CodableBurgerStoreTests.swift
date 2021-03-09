@@ -118,16 +118,17 @@ class CodableBurgerStoreTests: XCTestCase {
     }
 
     func test_retreive_deliersFaiilureOnRetreivalError() {
-        let sut = makeSUT()
+        let storeURL = testStoreUrl()
+        let sut = makeSUT(url: storeURL)
 
-        try! "Invalid data".write(to: testStoreUrl(), atomically: false, encoding: .utf8)
+        try! "Invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
 
         expect(sut, toCompleteWith: .failure(anyError))
     }
 
     // MARK: - Helpers
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CodableBurgerStore {
-        let sut = CodableBurgerStore(storeUrl: testStoreUrl())
+    private func makeSUT(url: URL? = nil, file: StaticString = #file, line: UInt = #line) -> CodableBurgerStore {
+        let sut = CodableBurgerStore(storeUrl: url ?? testStoreUrl())
 
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
