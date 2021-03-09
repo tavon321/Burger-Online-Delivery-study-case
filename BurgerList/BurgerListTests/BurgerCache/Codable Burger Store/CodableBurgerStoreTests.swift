@@ -140,7 +140,10 @@ class CodableBurgerStoreTests: XCTestCase {
     }
 
     // MARK: - Helpers
-    private func makeSUT() -> CodableBurgerStore {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CodableBurgerStore {
+        let sut = CodableBurgerStore()
+
+        trackForMemoryLeaks(sut, file: file, line: line)
         return CodableBurgerStore()
     }
 }
