@@ -143,14 +143,14 @@ class CodableBurgerStoreTests: XCTestCase {
         XCTAssertNil(firstInsertionError)
 
         // Given
-        let exepctedBurgers = uniqueBurgers().localItems
-        let expectedTimestamp = Date()
-        let secondInsertionError = insert(exepctedBurgers, at: expectedTimestamp, to: sut)
-        XCTAssertNil(secondInsertionError)
+        let latestBurgers = uniqueBurgers().localItems
+        let latestTimestamp = Date()
+        let latestInsertionError = insert(latestBurgers, at: latestTimestamp, to: sut)
+        XCTAssertNil(latestInsertionError)
 
         // Then
-        expect(sut, toCompleteWith: .success(CachedBurgers(burgers: exepctedBurgers,
-                                                           timestamp: expectedTimestamp)))
+        expect(sut, toCompleteWith: .success(CachedBurgers(burgers: latestBurgers,
+                                                           timestamp: latestTimestamp)))
     }
 
     // MARK: - Helpers
