@@ -60,13 +60,16 @@ class CodableBurgerStore {
     }
 
     func insert(_ items: [LocalBurger], timestamp: Date, completion: @escaping BurgerStore.InsertionCompletion) {
-        let encoder = JSONEncoder()
-        let cache = Cache(burgers: items.map(CodableLocalBurger.init), timestamp: timestamp)
-        let encoded = try! encoder.encode(cache)
+        do {
+            let encoder = JSONEncoder()
+            let cache = Cache(burgers: items.map(CodableLocalBurger.init), timestamp: timestamp)
+            let encoded = try encoder.encode(cache)
 
-        try! encoded.write(to: storeUrl)
-
-        completion(nil)
+            try encoded.write(to: storeUrl)
+            completion(nil)
+        } catch {
+            completion(error)
+        }
     }
 }
 
@@ -151,6 +154,15 @@ class CodableBurgerStoreTests: XCTestCase {
         // Then
         expect(sut, toCompleteWith: .success(CachedBurgers(burgers: latestBurgers,
                                                            timestamp: latestTimestamp)))
+    }
+
+    func test_insert_deliversErrorOnInsertionError() {
+        let invalidUrl = URL(string: "invalid://store-url")!
+        let sut = makeSUT(url: invalidUrl)
+
+        let insertionError = insert(uniqueBurgers().localItems, at: Date(), to: sut)
+
+        XCTAssertNotNil(insertionError)
     }
 
     // MARK: - Helpers
