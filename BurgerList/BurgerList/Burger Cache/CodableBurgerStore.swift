@@ -40,6 +40,7 @@ public class CodableBurgerStore: BurgerStore {
     private let storeUrl: URL
     private let queue = DispatchQueue(label: "\(CodableBurgerStore.self)Queue",
                                       qos: .userInitiated,
+                                      attributes: .concurrent,
                                       target: DispatchQueue.global())
 
     public init(storeUrl: URL) {
@@ -68,7 +69,7 @@ public class CodableBurgerStore: BurgerStore {
     public func insert(_ items: [LocalBurger], timestamp: Date, completion: @escaping BurgerStore.InsertionCompletion) {
         let storeUrl = self.storeUrl
 
-        queue.async {
+        queue.async(flags: .barrier) {
             do {
                 let encoder = JSONEncoder()
                 let cache = Cache(burgers: items.map(CodableLocalBurger.init), timestamp: timestamp)
@@ -85,7 +86,7 @@ public class CodableBurgerStore: BurgerStore {
     public func deleteCacheFeed(completion: @escaping BurgerStore.DeletionCompletion) {
         let storeUrl = self.storeUrl
 
-        queue.async {
+        queue.async(flags: .barrier) {
             guard FileManager.default.fileExists(atPath: storeUrl.path) else {
                 return completion(nil)
             }
