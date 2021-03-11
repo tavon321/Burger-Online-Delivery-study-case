@@ -38,48 +38,63 @@ public class CodableBurgerStore: BurgerStore {
     }
 
     private let storeUrl: URL
+    private let queue = DispatchQueue(label: "\(CodableBurgerStore.self)Queue",
+                                      qos: .userInitiated,
+                                      target: DispatchQueue.global())
 
     public init(storeUrl: URL) {
         self.storeUrl = storeUrl
     }
 
     public func retrieve(completion: @escaping BurgerStore.RetreivalCompletion) {
-        guard let data = try? Data(contentsOf: storeUrl) else {
-            return completion(.success(nil))
-        }
+        let storeUrl = self.storeUrl
 
-        do {
-            let decoder = JSONDecoder()
-            let cache = try decoder.decode(Cache.self, from: data)
-            let cachedBurgers = CachedBurgers(burgers: cache.localBuger, timestamp: cache.timestamp)
-            completion(.success(cachedBurgers))
-        } catch {
-            completion(.failure(error))
+        queue.async {
+            guard let data = try? Data(contentsOf: storeUrl) else {
+                return completion(.success(nil))
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let cache = try decoder.decode(Cache.self, from: data)
+                let cachedBurgers = CachedBurgers(burgers: cache.localBuger, timestamp: cache.timestamp)
+                completion(.success(cachedBurgers))
+            } catch {
+                completion(.failure(error))
+            }
         }
     }
 
     public func insert(_ items: [LocalBurger], timestamp: Date, completion: @escaping BurgerStore.InsertionCompletion) {
-        do {
-            let encoder = JSONEncoder()
-            let cache = Cache(burgers: items.map(CodableLocalBurger.init), timestamp: timestamp)
-            let encoded = try encoder.encode(cache)
+        let storeUrl = self.storeUrl
 
-            try encoded.write(to: storeUrl)
-            completion(nil)
-        } catch {
-            completion(error)
+        queue.async {
+            do {
+                let encoder = JSONEncoder()
+                let cache = Cache(burgers: items.map(CodableLocalBurger.init), timestamp: timestamp)
+                let encoded = try encoder.encode(cache)
+
+                try encoded.write(to: storeUrl)
+                completion(nil)
+            } catch {
+                completion(error)
+            }
         }
     }
 
     public func deleteCacheFeed(completion: @escaping BurgerStore.DeletionCompletion) {
-        guard FileManager.default.fileExists(atPath: storeUrl.path) else {
-            return completion(nil)
-        }
-        do {
-            try FileManager.default.removeItem(at: storeUrl)
-            completion(nil)
-        } catch {
-            completion(error)
+        let storeUrl = self.storeUrl
+
+        queue.async {
+            guard FileManager.default.fileExists(atPath: storeUrl.path) else {
+                return completion(nil)
+            }
+            do {
+                try FileManager.default.removeItem(at: storeUrl)
+                completion(nil)
+            } catch {
+                completion(error)
+            }
         }
     }
 }
