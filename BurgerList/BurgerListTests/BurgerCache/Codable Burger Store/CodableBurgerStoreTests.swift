@@ -127,6 +127,34 @@ class CodableBurgerStoreTests: XCTestCase {
         let deletionError = deleteCache(from: sut)
 
         XCTAssertNotNil(deletionError, "Expected cached deletion fail")
+        expect(sut, toRetrieve: .success(.none))
+    }
+
+    func test_storeSideEffects_runSerially() {
+        let sut = makeSUT()
+
+        var completeOperationsInOrder = [XCTestExpectation]()
+
+        let op1 = expectation(description: "Operation 1")
+        sut.insert(uniqueBurgers().localItems, timestamp: Date()) { _ in
+            completeOperationsInOrder.append(op1)
+            op1.fulfill()
+        }
+
+        let op2 = expectation(description: "Operation 2")
+        sut.deleteCacheFeed { _ in
+            completeOperationsInOrder.append(op2)
+            op2.fulfill()
+        }
+
+        let op3 = expectation(description: "Operation 3")
+        sut.deleteCacheFeed { _ in
+            completeOperationsInOrder.append(op3)
+            op3.fulfill()
+        }
+
+        waitForExpectations(timeout: 0.1)
+        XCTAssertEqual(completeOperationsInOrder, [op1, op2, op3], "Expected side effects to run serially")
     }
 
     // MARK: - Helpers
