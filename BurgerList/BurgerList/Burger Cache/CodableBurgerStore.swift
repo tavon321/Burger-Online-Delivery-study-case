@@ -48,9 +48,7 @@ public class CodableBurgerStore: BurgerStore {
     }
 
     public func retrieve(completion: @escaping BurgerStore.RetreivalCompletion) {
-        let storeUrl = self.storeUrl
-
-        queue.async {
+        queue.async { [storeUrl] in
             guard let data = try? Data(contentsOf: storeUrl) else {
                 return completion(.success(nil))
             }
@@ -67,9 +65,7 @@ public class CodableBurgerStore: BurgerStore {
     }
 
     public func insert(_ items: [LocalBurger], timestamp: Date, completion: @escaping BurgerStore.InsertionCompletion) {
-        let storeUrl = self.storeUrl
-
-        queue.async(flags: .barrier) {
+        queue.async(flags: .barrier) { [storeUrl] in
             do {
                 let encoder = JSONEncoder()
                 let cache = Cache(burgers: items.map(CodableLocalBurger.init), timestamp: timestamp)
@@ -84,9 +80,7 @@ public class CodableBurgerStore: BurgerStore {
     }
 
     public func deleteCacheFeed(completion: @escaping BurgerStore.DeletionCompletion) {
-        let storeUrl = self.storeUrl
-
-        queue.async(flags: .barrier) {
+        queue.async(flags: .barrier) { [storeUrl] in
             guard FileManager.default.fileExists(atPath: storeUrl.path) else {
                 return completion(nil)
             }
