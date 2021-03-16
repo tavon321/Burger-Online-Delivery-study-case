@@ -44,7 +44,6 @@ public final class RemoteBurgerLoader: BurgerLoader {
             return .failure(error)
         }
     }
-    
 }
 
 private extension Array where Element == RemoteBurger {
