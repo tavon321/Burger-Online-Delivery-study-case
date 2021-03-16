@@ -121,6 +121,14 @@
 			path = "Codable Burger Store";
 			sourceTree = "<group>";
 		};
+		715283642601740300ED13D2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DCABB351250FD5E600D002E9 /* LocalBurger.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		DC0115C224CF116B002A7CB7 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,9 +149,9 @@
 		DC68462924FD6F32009FF676 /* Burger Cache */ = {
 			isa = PBXGroup;
 			children = (
+				715283642601740300ED13D2 /* Models */,
 				DC68462A24FD6F46009FF676 /* BurgerStore.swift */,
 				DC03E02924FFDE8800BDB35E /* LocalBurgerLoader.swift */,
-				DCABB351250FD5E600D002E9 /* LocalBurger.swift */,
 				40FC239E254B662600290628 /* BurgerCachePolicy.swift */,
 				40A943AE25F8129900BC786D /* CodableBurgerStore.swift */,
 			);
