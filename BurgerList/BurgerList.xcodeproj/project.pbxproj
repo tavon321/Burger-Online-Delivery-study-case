@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		29E0B29F2524DC5100661112 /* SharedCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E0B29E2524DC5100661112 /* SharedCacheTestHelpers.swift */; };
+		401E0BA42602786100F83952 /* BurgerStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401E0BA32602786100F83952 /* BurgerStoreSpecs.swift */; };
 		40904990254861F1007FB742 /* ValidateBurgerCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4090498F254861F1007FB742 /* ValidateBurgerCacheUseCaseTests.swift */; };
 		40A943AF25F8129900BC786D /* CodableBurgerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A943AE25F8129900BC786D /* CodableBurgerStore.swift */; };
 		40DAA068256477A900B1AEC0 /* CodableBurgerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA067256477A900B1AEC0 /* CodableBurgerStoreTests.swift */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		29E0B29E2524DC5100661112 /* SharedCacheTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCacheTestHelpers.swift; sourceTree = "<group>"; };
+		401E0BA32602786100F83952 /* BurgerStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerStoreSpecs.swift; sourceTree = "<group>"; };
 		4090498F254861F1007FB742 /* ValidateBurgerCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateBurgerCacheUseCaseTests.swift; sourceTree = "<group>"; };
 		40A943AE25F8129900BC786D /* CodableBurgerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableBurgerStore.swift; sourceTree = "<group>"; };
 		40DAA067256477A900B1AEC0 /* CodableBurgerStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableBurgerStoreTests.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				DC53EB30251255D00080AB78 /* LoadBurgerFromCacheUseCaseTests.swift */,
 				4090498F254861F1007FB742 /* ValidateBurgerCacheUseCaseTests.swift */,
 				40DAA0662564778A00B1AEC0 /* Codable Burger Store */,
+				401E0BA32602786100F83952 /* BurgerStoreSpecs.swift */,
 			);
 			path = BurgerCache;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				DC53EB3425125F330080AB78 /* BurgerStoreSpy.swift in Sources */,
 				40DAA068256477A900B1AEC0 /* CodableBurgerStoreTests.swift in Sources */,
 				DC6C67F424E6C6840071525B /* CacheBurgerUseCaseTests.swift in Sources */,
+				401E0BA42602786100F83952 /* BurgerStoreSpecs.swift in Sources */,
 				DCB38B9E24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
