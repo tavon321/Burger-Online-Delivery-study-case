@@ -18,7 +18,6 @@ protocol BurgerStoreSpecs {
     
     func test_insert_overridesProviouslyInsertedValues()
     
-    func test_delete_hasNoSideEffects()
     func test_delete_emptiesPreviouslyInsertedCache()
     
     func test_storeSideEffects_runSerially()
@@ -35,6 +34,6 @@ protocol FailableInsertBurgerStoreSpecs: BurgerStoreSpecs {
 }
 
 protocol FailableDeleteBurgerStoreSpecs: BurgerStoreSpecs {
-    func test_delete_deliversErrorOnInsertionError()
-    func test_delete_hasNoSideEffectsOndeletionError()
+    func test_delete_deliversErrorOnDeletionError()
+    func test_delete_hasNoSideEffectsOnDeletionError()
 }

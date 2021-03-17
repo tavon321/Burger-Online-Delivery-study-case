@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		29E0B29F2524DC5100661112 /* SharedCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E0B29E2524DC5100661112 /* SharedCacheTestHelpers.swift */; };
 		401E0BA42602786100F83952 /* BurgerStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401E0BA32602786100F83952 /* BurgerStoreSpecs.swift */; };
+		401E0BA92602792E00F83952 /* XCTestCase+BurgerStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401E0BA82602792E00F83952 /* XCTestCase+BurgerStoreSpecs.swift */; };
+		401E0BB4260280B200F83952 /* XCTestCase+FailableRetreiveBurgerSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401E0BB3260280B200F83952 /* XCTestCase+FailableRetreiveBurgerSpecs.swift */; };
+		401E0BC52602833D00F83952 /* XCTestCase+FailableInsertBurgerSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401E0BC42602833D00F83952 /* XCTestCase+FailableInsertBurgerSpecs.swift */; };
+		401E0BCD260284AF00F83952 /* XCTestCase+FailableDeleteBurgerSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401E0BCC260284AF00F83952 /* XCTestCase+FailableDeleteBurgerSpecs.swift */; };
 		40904990254861F1007FB742 /* ValidateBurgerCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4090498F254861F1007FB742 /* ValidateBurgerCacheUseCaseTests.swift */; };
 		40A943AF25F8129900BC786D /* CodableBurgerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A943AE25F8129900BC786D /* CodableBurgerStore.swift */; };
 		40DAA068256477A900B1AEC0 /* CodableBurgerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA067256477A900B1AEC0 /* CodableBurgerStoreTests.swift */; };
@@ -57,6 +61,10 @@
 /* Begin PBXFileReference section */
 		29E0B29E2524DC5100661112 /* SharedCacheTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCacheTestHelpers.swift; sourceTree = "<group>"; };
 		401E0BA32602786100F83952 /* BurgerStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerStoreSpecs.swift; sourceTree = "<group>"; };
+		401E0BA82602792E00F83952 /* XCTestCase+BurgerStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+BurgerStoreSpecs.swift"; sourceTree = "<group>"; };
+		401E0BB3260280B200F83952 /* XCTestCase+FailableRetreiveBurgerSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableRetreiveBurgerSpecs.swift"; sourceTree = "<group>"; };
+		401E0BC42602833D00F83952 /* XCTestCase+FailableInsertBurgerSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableInsertBurgerSpecs.swift"; sourceTree = "<group>"; };
+		401E0BCC260284AF00F83952 /* XCTestCase+FailableDeleteBurgerSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableDeleteBurgerSpecs.swift"; sourceTree = "<group>"; };
 		4090498F254861F1007FB742 /* ValidateBurgerCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateBurgerCacheUseCaseTests.swift; sourceTree = "<group>"; };
 		40A943AE25F8129900BC786D /* CodableBurgerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableBurgerStore.swift; sourceTree = "<group>"; };
 		40DAA067256477A900B1AEC0 /* CodableBurgerStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableBurgerStoreTests.swift; sourceTree = "<group>"; };
@@ -115,6 +123,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		401E0BB12602805A00F83952 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				401E0BA32602786100F83952 /* BurgerStoreSpecs.swift */,
+				401E0BA82602792E00F83952 /* XCTestCase+BurgerStoreSpecs.swift */,
+				401E0BB3260280B200F83952 /* XCTestCase+FailableRetreiveBurgerSpecs.swift */,
+				401E0BC42602833D00F83952 /* XCTestCase+FailableInsertBurgerSpecs.swift */,
+				401E0BCC260284AF00F83952 /* XCTestCase+FailableDeleteBurgerSpecs.swift */,
+				40DAA0662564778A00B1AEC0 /* Codable Burger Store */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
 		40DAA0662564778A00B1AEC0 /* Codable Burger Store */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,11 +185,10 @@
 			isa = PBXGroup;
 			children = (
 				DC53EB3225125F250080AB78 /* Helpers */,
+				401E0BB12602805A00F83952 /* Store */,
 				DC6C67F324E6C6840071525B /* CacheBurgerUseCaseTests.swift */,
 				DC53EB30251255D00080AB78 /* LoadBurgerFromCacheUseCaseTests.swift */,
 				4090498F254861F1007FB742 /* ValidateBurgerCacheUseCaseTests.swift */,
-				40DAA0662564778A00B1AEC0 /* Codable Burger Store */,
-				401E0BA32602786100F83952 /* BurgerStoreSpecs.swift */,
 			);
 			path = BurgerCache;
 			sourceTree = "<group>";
@@ -442,13 +462,17 @@
 				DC208126248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift in Sources */,
 				40904990254861F1007FB742 /* ValidateBurgerCacheUseCaseTests.swift in Sources */,
 				40DAA0702564827100B1AEC0 /* SharedTestHelpers.swift in Sources */,
+				401E0BC52602833D00F83952 /* XCTestCase+FailableInsertBurgerSpecs.swift in Sources */,
+				401E0BCD260284AF00F83952 /* XCTestCase+FailableDeleteBurgerSpecs.swift in Sources */,
 				DCE9FBB724B36613004D526E /* URLSessionHttpClientTest.swift in Sources */,
+				401E0BA92602792E00F83952 /* XCTestCase+BurgerStoreSpecs.swift in Sources */,
 				29E0B29F2524DC5100661112 /* SharedCacheTestHelpers.swift in Sources */,
 				DC53EB31251255D00080AB78 /* LoadBurgerFromCacheUseCaseTests.swift in Sources */,
 				DC53EB3425125F330080AB78 /* BurgerStoreSpy.swift in Sources */,
 				40DAA068256477A900B1AEC0 /* CodableBurgerStoreTests.swift in Sources */,
 				DC6C67F424E6C6840071525B /* CacheBurgerUseCaseTests.swift in Sources */,
 				401E0BA42602786100F83952 /* BurgerStoreSpecs.swift in Sources */,
+				401E0BB4260280B200F83952 /* XCTestCase+FailableRetreiveBurgerSpecs.swift in Sources */,
 				DCB38B9E24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
