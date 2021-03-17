@@ -9,6 +9,35 @@
 import XCTest
 import BurgerList
 
+protocol BurgerStoreSpecs {
+    func test_retrieve_deliversEmptyOnEmptyCache()
+    func test_retrieve_hasNoSideEffectsOnEmptyCache()
+    func test_retrieve_deliversValueOnNonEmptyCache()
+    func test_retrieve_hasNoSideEffectsOnNonEmptyCache()
+    
+    func test_insert_overridesProviouslyInsertedValues()
+    
+    func test_delete_hasNoSideEffects()
+    func test_delete_emptiesPreviouslyInsertedCache()
+    
+    func test_storeSideEffects_runSerially()
+}
+
+protocol FailableRetreiveBurgerStoreSpecs {
+    func test_retreive_deliversFailureOnRetreivalError()
+    func test_retreive_hasNoSideEffectsOnRetreivalError()
+}
+
+protocol FailableInsertBurgerStoreSpecs {
+    func test_insert_deliversErrorOnInsertionError()
+    func test_insert_hasNoSideEffectsOnInsertionError()
+}
+
+protocol FailableDeleteBurgerStoreSpecs {
+    func test_delete_deliversErrorOnInsertionError()
+    func test_delete_hasNoSideEffectsOndeletionError()
+}
+
 class CodableBurgerStoreTests: XCTestCase {
 
     override func setUp() {
@@ -34,7 +63,7 @@ class CodableBurgerStoreTests: XCTestCase {
         expect(sut, toRetrieveTwiceWith: .success(.none))
     }
 
-    func test_retrievee_deliversValueOnNonEmptyCache() {
+    func test_retrieve_deliversValueOnNonEmptyCache() {
         let sut = makeSUT()
         let expectedBurgers = uniqueBurgers().localItems
         let expectedTimestamp = Date()
@@ -42,7 +71,7 @@ class CodableBurgerStoreTests: XCTestCase {
         insert(expectedBurgers, at: expectedTimestamp, to: sut)
 
         expect(sut, toRetrieve: .success(CachedBurgers(burgers: expectedBurgers,
-                                                           timestamp: expectedTimestamp)))
+                                                       timestamp: expectedTimestamp)))
     }
 
     func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
@@ -66,13 +95,13 @@ class CodableBurgerStoreTests: XCTestCase {
         expect(sut, toRetrieve: .failure(anyError))
     }
 
-    func test_retreive_hasNoSideEffectsOnFailure() {
+    func test_retreive_hasNoSideEffectsOnRetreivalError() {
         let storeURL = testStoreUrl()
         let sut = makeSUT(url: storeURL)
 
         try! "Invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
-
-        expect(sut, toRetrieve: .failure(anyError))
+        
+        expect(sut, toRetrieveTwiceWith: .failure(anyError))
     }
 
     func test_insert_overridesProviouslyInsertedValues() {
@@ -100,12 +129,14 @@ class CodableBurgerStoreTests: XCTestCase {
 
         XCTAssertNotNil(insertionError)
     }
-
-    func test_delete_hasNoSideEffects() {
-        let sut = makeSUT()
-
-        let deletionError = deleteCache(from: sut)
-        XCTAssertNil(deletionError)
+    
+    func test_insert_hasNoSideEffectsOnInsertionError() {
+        let invalidUrl = URL(string: "invalid://store-url")!
+        let sut = makeSUT(url: invalidUrl)
+        let timestamp = Date()
+        let burgers = uniqueBurgers().localItems
+        
+        insert(burgers, at: timestamp, to: sut)
 
         expect(sut, toRetrieve: .success(.none))
     }
@@ -127,6 +158,14 @@ class CodableBurgerStoreTests: XCTestCase {
         let deletionError = deleteCache(from: sut)
 
         XCTAssertNotNil(deletionError, "Expected cached deletion fail")
+    }
+    
+    func test_delete_hasNoSideEffectsOndeletionError() {
+        let nonDeletePermissionUrl = adminDirectory()
+        let sut = makeSUT(url: nonDeletePermissionUrl)
+
+        deleteCache(from: sut)
+        
         expect(sut, toRetrieve: .success(.none))
     }
 
@@ -172,7 +211,8 @@ class CodableBurgerStoreTests: XCTestCase {
         let exp = expectation(description: "Wait for result")
         sut.retrieve { receivedResult in
             switch (receivedResult, expectedResult) {
-            case (.success(.none), .success(.none)), (.failure, .failure):
+            case (.success(.none), .success(.none)),
+                 (.failure, .failure):
                 break
             case let (.success(receivedCache), .success(expectedCache)):
                 XCTAssertEqual(receivedCache?.burgers, expectedCache?.burgers, file: file, line: line)
@@ -186,7 +226,16 @@ class CodableBurgerStoreTests: XCTestCase {
 
         wait(for: [exp], timeout: 0.1)
     }
-
+    
+    private func expect(_ sut: BurgerStore,
+                        toRetrieveTwiceWith expectedResult: Result<CachedBurgers?, Error>,
+                        file: StaticString = #file,
+                        line: UInt = #line) {
+        expect(sut, toRetrieve: expectedResult, file: file, line: line)
+        expect(sut, toRetrieve: expectedResult, file: file, line: line)
+    }
+    
+    @discardableResult
     private func deleteCache(from sut: BurgerStore) -> Error? {
         let exp =  expectation(description: "Wait for deletion")
 
@@ -215,15 +264,7 @@ class CodableBurgerStoreTests: XCTestCase {
         return insertionError
     }
 
-    private func expect(_ sut: BurgerStore,
-                        toRetrieveTwiceWith expectedResult: Result<CachedBurgers?, Error>,
-                        file: StaticString = #file,
-                        line: UInt = #line) {
-        expect(sut, toRetrieve: expectedResult, file: file, line: line)
-        expect(sut, toRetrieve: expectedResult, file: file, line: line)
-    }
-
-    func testStoreUrl() -> URL {
+    private func testStoreUrl() -> URL {
         FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
     }
 
