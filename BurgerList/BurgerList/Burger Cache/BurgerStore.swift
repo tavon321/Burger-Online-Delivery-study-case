@@ -15,21 +15,15 @@ public protocol BurgerStore {
     typealias InsertionCompletion = (Error?) -> Void
     typealias RetreivalCompletion = (Result<CachedBurgers?, Error>) -> Void
 
-    /*
-     The completion handler can be invoked in any thread.
-     Clients are responsible to dispatch to appropiate threads, if needed.
-     */
+    /// The completion handler can be invoked in any thread.
+    /// Clients are responsible to dispatch to appropriate threads, if needed.
     func deleteCacheFeed(completion: @escaping DeletionCompletion)
 
-    /*
-     The completion handler can be invoked in any thread.
-     Clients are responsible to dispatch to appropiate threads, if needed.
-     */
+    /// The completion handler can be invoked in any thread.
+    /// Clients are responsible to dispatch to appropiate threads, if needed.
     func insert(_ items: [LocalBurger], timestamp: Date, completion: @escaping InsertionCompletion)
 
-    /*
-     The completion handler can be invoked in any thread.
-     Clients are responsible to dispatch to appropiate threads, if needed.
-     */
+    /// The completion handler can be invoked in any thread.
+    /// Clients are responsible to dispatch to appropiate threads, if needed.
     func retrieve(completion: @escaping RetreivalCompletion)
 }

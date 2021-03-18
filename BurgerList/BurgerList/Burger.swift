@@ -8,7 +8,6 @@
 
 import Foundation
 
-// Main Dish
 public struct Burger: Equatable {
     public let id: UUID
     public let name: String

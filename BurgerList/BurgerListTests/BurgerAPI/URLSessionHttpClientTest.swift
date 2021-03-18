@@ -23,7 +23,7 @@ class URLSessionHttpClientTest: XCTestCase {
         let url = anyURL
         let exp = expectation(description: "Wait for request")
         
-        URLProtocolStub.observerRequest { request in
+        URLProtocolStub.observeRequest { request in
             XCTAssertEqual(request.url, url)
             XCTAssertEqual(request.httpMethod, "GET")
             exp.fulfill()
@@ -171,7 +171,7 @@ class URLSessionHttpClientTest: XCTestCase {
             return request
         }
         
-        static func observerRequest(observer: @escaping (URLRequest) -> Void) {
+        static func observeRequest(observer: @escaping (URLRequest) -> Void) {
             requestObserver = observer
         }
         
