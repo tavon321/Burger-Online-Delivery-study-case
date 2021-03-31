@@ -1,6 +1,6 @@
 # Burger-Online-Delivery-study-case
 
-This project is to holistically apply aswift app development knowledge
+This project is to holistically apply swift app development knowledge
 
 ## BDD Scenarios
 
@@ -8,7 +8,7 @@ This project is to holistically apply aswift app development knowledge
 
 ```
 As a online customer
-I want the app to automatically laod all my latest menu
+I want the app to automatically load all my latest menu
 So i can always try something new on the restaurant
 ```
 
