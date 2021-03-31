@@ -15,9 +15,9 @@ So i can always try something new on the restaurant
 #### Scenario 
 ```
 Given the customer has connectivity
-   When the customer requests to see oue menu
-      Then the app should display the latest menu from remote
-        And replace the cache with the new menu    
+When the customer requests to see the menu
+Then the app should display the latest menu from remote
+And replace the cache with the new menu    
 ```
 
 ### Narrative #2
@@ -31,21 +31,21 @@ So I can beging looking for a dish until the connection is back.
 #### Scenario 
 ```
 Given the customer doesn't have connectivity
-  And there’s a cached version of the menu
-  And the cache is less than two weeks old
- When the customer requests to see the menu
-  Then the app should display the latest menu saved
+And there’s a cached version of the menu
+And the cache is less than two weeks old
+When the customer requests to see the menu
+Then the app should display the latest menu saved
 
 Given the customer doesn't have connectivity
-  And there’s a cached version of the menu
-    And the cache is two weeks old or more
- When the customer requests to see the menu
-  Then the app should display an error message
+And there’s a cached version of the menu
+And the cache is two weeks old or more
+When the customer requests to see the menu
+Then the app should display an error message
 
 Given the customer doesn't have connectivity
-  And the cache is empty
- When the customer requests to see the menu
-   Then the app should display an error message 
+And the cache is empty
+When the customer requests to see the menu
+Then the app should display an error message 
 ```
 
 ## Use Cases
