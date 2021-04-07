@@ -47,7 +47,7 @@ public class CodableBurgerStore: BurgerStore {
         self.storeUrl = storeUrl
     }
 
-    public func retrieve(completion: @escaping BurgerStore.RetreivalCompletion) {
+    public func retrieve(completion: @escaping BurgerStore.RetrievalCompletion) {
         queue.async { [storeUrl] in
             guard let data = try? Data(contentsOf: storeUrl) else {
                 return completion(.success(nil))

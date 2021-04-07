@@ -21,7 +21,7 @@ class BurgerStoreSpy: BurgerStore {
     
     private var deletionCompletions = [DeletionCompletion]()
     private var insertionCompletions = [InsertionCompletion]()
-    private var retreivalCompletions = [RetreivalCompletion]()
+    private var retreivalCompletions = [RetrievalCompletion]()
     
     func deleteCacheFeed(completion: @escaping DeletionCompletion) {
         deletionCompletions.append(completion)
@@ -29,7 +29,7 @@ class BurgerStoreSpy: BurgerStore {
         receivedMessages.append(.deleteCachedFeed)
     }
     
-    func retrieve(completion: @escaping RetreivalCompletion) {
+    func retrieve(completion: @escaping RetrievalCompletion) {
         retreivalCompletions.append(completion)
         receivedMessages.append(.retreiveCache)
     }

@@ -18,6 +18,11 @@
 		40DAA068256477A900B1AEC0 /* CodableBurgerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA067256477A900B1AEC0 /* CodableBurgerStoreTests.swift */; };
 		40DAA0702564827100B1AEC0 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */; };
 		40FC239F254B662600290628 /* BurgerCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FC239E254B662600290628 /* BurgerCachePolicy.swift */; };
+		71B28AF3261DDDA100DF448B /* CoreDataBurgerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28AF2261DDDA100DF448B /* CoreDataBurgerStoreTests.swift */; };
+		71B28AFA261DDFA800DF448B /* CoreDataBurgerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28AF9261DDFA800DF448B /* CoreDataBurgerStore.swift */; };
+		71B28B02261DE15900DF448B /* ManageBurger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B01261DE15900DF448B /* ManageBurger.swift */; };
+		71B28B07261DE2A600DF448B /* ManagedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B06261DE2A600DF448B /* ManagedCache.swift */; };
+		71B28B0D261DE8CB00DF448B /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */; };
 		DC0115C124CF0E3C002A7CB7 /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
 		DC0115C424CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0115C324CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift */; };
 		DC03E02A24FFDE8800BDB35E /* LocalBurgerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC03E02924FFDE8800BDB35E /* LocalBurgerLoader.swift */; };
@@ -70,6 +75,11 @@
 		40DAA067256477A900B1AEC0 /* CodableBurgerStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableBurgerStoreTests.swift; sourceTree = "<group>"; };
 		40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		40FC239E254B662600290628 /* BurgerCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerCachePolicy.swift; sourceTree = "<group>"; };
+		71B28AF2261DDDA100DF448B /* CoreDataBurgerStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBurgerStoreTests.swift; sourceTree = "<group>"; };
+		71B28AF9261DDFA800DF448B /* CoreDataBurgerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBurgerStore.swift; sourceTree = "<group>"; };
+		71B28B01261DE15900DF448B /* ManageBurger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBurger.swift; sourceTree = "<group>"; };
+		71B28B06261DE2A600DF448B /* ManagedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedCache.swift; sourceTree = "<group>"; };
+		71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		DC0115C324CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+statusCode.swift"; sourceTree = "<group>"; };
 		DC03E02924FFDE8800BDB35E /* LocalBurgerLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBurgerLoader.swift; sourceTree = "<group>"; };
 		DC208125248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadBurgerFromRemoteUseCaseTests.swift; sourceTree = "<group>"; };
@@ -140,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				40DAA067256477A900B1AEC0 /* CodableBurgerStoreTests.swift */,
+				71B28AF2261DDDA100DF448B /* CoreDataBurgerStoreTests.swift */,
 			);
 			path = "Codable Burger Store";
 			sourceTree = "<group>";
@@ -150,6 +161,33 @@
 				DCABB351250FD5E600D002E9 /* LocalBurger.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		71B28AF7261DDF9100DF448B /* Codable */ = {
+			isa = PBXGroup;
+			children = (
+				40A943AE25F8129900BC786D /* CodableBurgerStore.swift */,
+			);
+			path = Codable;
+			sourceTree = "<group>";
+		};
+		71B28AF8261DDF9900DF448B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				71B28B0B261DE8B700DF448B /* Helpers */,
+				71B28AF9261DDFA800DF448B /* CoreDataBurgerStore.swift */,
+				71B28B01261DE15900DF448B /* ManageBurger.swift */,
+				71B28B06261DE2A600DF448B /* ManagedCache.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		71B28B0B261DE8B700DF448B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		DC0115C224CF116B002A7CB7 /* Helpers */ = {
@@ -172,11 +210,12 @@
 		DC68462924FD6F32009FF676 /* Burger Cache */ = {
 			isa = PBXGroup;
 			children = (
+				71B28AF8261DDF9900DF448B /* CoreData */,
+				71B28AF7261DDF9100DF448B /* Codable */,
 				715283642601740300ED13D2 /* Models */,
 				DC68462A24FD6F46009FF676 /* BurgerStore.swift */,
 				DC03E02924FFDE8800BDB35E /* LocalBurgerLoader.swift */,
 				40FC239E254B662600290628 /* BurgerCachePolicy.swift */,
-				40A943AE25F8129900BC786D /* CodableBurgerStore.swift */,
 			);
 			path = "Burger Cache";
 			sourceTree = "<group>";
@@ -446,12 +485,16 @@
 				DCEBAA6C2487DFDB0024BFA9 /* Burger.swift in Sources */,
 				40A943AF25F8129900BC786D /* CodableBurgerStore.swift in Sources */,
 				40FC239F254B662600290628 /* BurgerCachePolicy.swift in Sources */,
+				71B28B0D261DE8CB00DF448B /* CoreDataHelpers.swift in Sources */,
+				71B28AFA261DDFA800DF448B /* CoreDataBurgerStore.swift in Sources */,
 				DC8671BD24911ED6007DA501 /* RemoteBurgerLoader.swift in Sources */,
 				DCD8F68624A4DC1C00064ED9 /* HTTPClient.swift in Sources */,
 				DCABB350250FD59700D002E9 /* RemoteBurger.swift in Sources */,
 				DCEBAA6E2487E4D00024BFA9 /* BurgerLoader.swift in Sources */,
 				DC765CDE24C9CB2C007D7999 /* URLSessionHTTPClient.swift in Sources */,
 				DC0115C424CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift in Sources */,
+				71B28B07261DE2A600DF448B /* ManagedCache.swift in Sources */,
+				71B28B02261DE15900DF448B /* ManageBurger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +505,7 @@
 				DC208126248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift in Sources */,
 				40904990254861F1007FB742 /* ValidateBurgerCacheUseCaseTests.swift in Sources */,
 				40DAA0702564827100B1AEC0 /* SharedTestHelpers.swift in Sources */,
+				71B28AF3261DDDA100DF448B /* CoreDataBurgerStoreTests.swift in Sources */,
 				401E0BC52602833D00F83952 /* XCTestCase+FailableInsertBurgerSpecs.swift in Sources */,
 				401E0BCD260284AF00F83952 /* XCTestCase+FailableDeleteBurgerSpecs.swift in Sources */,
 				DCE9FBB724B36613004D526E /* URLSessionHttpClientTest.swift in Sources */,

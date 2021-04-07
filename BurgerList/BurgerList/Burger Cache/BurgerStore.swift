@@ -13,7 +13,7 @@ public typealias CachedBurgers = (burgers: [LocalBurger], timestamp: Date)
 public protocol BurgerStore {
     typealias DeletionCompletion = (Error?) -> Void
     typealias InsertionCompletion = (Error?) -> Void
-    typealias RetreivalCompletion = (Result<CachedBurgers?, Error>) -> Void
+    typealias RetrievalCompletion = (Result<CachedBurgers?, Error>) -> Void
 
     /// The completion handler can be invoked in any thread.
     /// Clients are responsible to dispatch to appropriate threads, if needed.
@@ -25,5 +25,5 @@ public protocol BurgerStore {
 
     /// The completion handler can be invoked in any thread.
     /// Clients are responsible to dispatch to appropiate threads, if needed.
-    func retrieve(completion: @escaping RetreivalCompletion)
+    func retrieve(completion: @escaping RetrievalCompletion)
 }

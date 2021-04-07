@@ -10,6 +10,7 @@ import XCTest
 import BurgerList
 
 class CodableBurgerStoreTests: XCTestCase, FailableBurgeStore {
+    
     override func setUp() {
         super.setUp()
 
