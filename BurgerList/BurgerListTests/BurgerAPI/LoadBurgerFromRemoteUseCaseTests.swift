@@ -31,6 +31,7 @@ class LoadBurgerFromRemoteUseCaseTests: XCTestCase {
         
         sut.load(completion: { _ in })
         sut.load(completion: { _ in })
+
         XCTAssertEqual(client.requestedURLs, [url, url])
     }
     

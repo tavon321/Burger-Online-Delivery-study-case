@@ -9,13 +9,31 @@
 import CoreData
 
 public class CoreDataBurgerStore: BurgerStore {
+    
+    private static let modelName = "BurgerStore"
+    private static let model = NSManagedObjectModel.with(name: modelName, in: Bundle(for: CoreDataBurgerStore.self))
 
     private let container: NSPersistentContainer
     private let context: NSManagedObjectContext
 
-    public init(storeURL: URL, bundle: Bundle = .main) throws {
-        container = try NSPersistentContainer.load(modelName: "FeedStore", url: storeURL, in: bundle)
-        context = container.newBackgroundContext()
+    enum StoreError: Error {
+        case modelNotFound
+        case failedToLoadPersistentContainer(Error)
+    }
+    
+    public init(storeURL: URL) throws {
+        guard let model = CoreDataBurgerStore.model else {
+            throw StoreError.modelNotFound
+        }
+        
+        do {
+            container = try NSPersistentContainer.load(name: CoreDataBurgerStore.modelName,
+                                                       model: model,
+                                                       url: storeURL)
+            context = container.newBackgroundContext()
+        } catch {
+            throw StoreError.failedToLoadPersistentContainer(error)
+        }
     }
 
     public func retrieve(completion: @escaping RetrievalCompletion) {

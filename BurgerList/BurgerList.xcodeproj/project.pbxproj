@@ -141,6 +141,7 @@
 				401E0BB3260280B200F83952 /* XCTestCase+FailableRetreiveBurgerSpecs.swift */,
 				401E0BC42602833D00F83952 /* XCTestCase+FailableInsertBurgerSpecs.swift */,
 				401E0BCC260284AF00F83952 /* XCTestCase+FailableDeleteBurgerSpecs.swift */,
+				712ECE41261FC4A400224A9B /* CoreData */,
 				40DAA0662564778A00B1AEC0 /* Codable Burger Store */,
 			);
 			path = Store;
@@ -150,9 +151,16 @@
 			isa = PBXGroup;
 			children = (
 				40DAA067256477A900B1AEC0 /* CodableBurgerStoreTests.swift */,
-				71B28AF2261DDDA100DF448B /* CoreDataBurgerStoreTests.swift */,
 			);
 			path = "Codable Burger Store";
+			sourceTree = "<group>";
+		};
+		712ECE41261FC4A400224A9B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				71B28AF2261DDDA100DF448B /* CoreDataBurgerStoreTests.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		715283642601740300ED13D2 /* Models */ = {
@@ -729,10 +737,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = EN79VQJFV3;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -745,6 +753,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gustavo.londono.BurgerList;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
