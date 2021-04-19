@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias FailableBurgeStore = FailableRetreiveBurgerStoreSpecs & FailableInsertBurgerStoreSpecs & FailableDeleteBurgerStoreSpecs
+typealias FailableBurgeStore = FailableRetrieveBurgerStoreSpecs & FailableInsertBurgerStoreSpecs & FailableDeleteBurgerStoreSpecs
 
 protocol BurgerStoreSpecs {
     func test_retrieve_deliversEmptyOnEmptyCache()
@@ -23,9 +23,9 @@ protocol BurgerStoreSpecs {
     func test_storeSideEffects_runSerially()
 }
 
-protocol FailableRetreiveBurgerStoreSpecs: BurgerStoreSpecs {
-    func test_retreive_deliversFailureOnRetreivalError()
-    func test_retreive_hasNoSideEffectsOnRetreivalError()
+protocol FailableRetrieveBurgerStoreSpecs: BurgerStoreSpecs {
+    func test_retrieve_deliversFailureOnRetreivalError()
+    func test_retrieve_hasNoSideEffectsOnRetreivalError()
 }
 
 protocol FailableInsertBurgerStoreSpecs: BurgerStoreSpecs {

@@ -136,4 +136,3 @@ extension BurgerStoreSpecs where Self: XCTestCase  {
         return insertionError
     }
 }
-

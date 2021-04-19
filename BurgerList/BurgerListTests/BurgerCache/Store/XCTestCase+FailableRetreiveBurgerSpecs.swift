@@ -9,7 +9,7 @@
 import XCTest
 import BurgerList
 
-extension FailableRetreiveBurgerStoreSpecs where Self: XCTestCase {
+extension FailableRetrieveBurgerStoreSpecs where Self: XCTestCase {
     func assertRetrieveDeliversFailureOnRetrievalError(for sut: BurgerStore, file: StaticString = #file, line: UInt = #line) {
         expect(sut, toRetrieve: .failure(anyError))
     }
