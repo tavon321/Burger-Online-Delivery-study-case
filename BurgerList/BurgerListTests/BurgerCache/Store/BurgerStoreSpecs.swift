@@ -24,8 +24,8 @@ protocol BurgerStoreSpecs {
 }
 
 protocol FailableRetrieveBurgerStoreSpecs: BurgerStoreSpecs {
-    func test_retrieve_deliversFailureOnRetreivalError()
-    func test_retrieve_hasNoSideEffectsOnRetreivalError()
+    func test_retrieve_deliversFailureOnRetrievalError()
+    func test_retrieve_hasNoSideEffectsOnRetrievalError()
 }
 
 protocol FailableInsertBurgerStoreSpecs: BurgerStoreSpecs {

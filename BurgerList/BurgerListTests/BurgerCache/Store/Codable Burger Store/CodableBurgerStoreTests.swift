@@ -47,7 +47,7 @@ class CodableBurgerStoreTests: XCTestCase, FailableBurgeStore {
         assertRetreiveHasNoSideEffectsOnNonEmptyCache(for: sut)
     }
 
-    func test_retreive_deliversFailureOnRetreivalError() {
+    func test_retrieve_deliversFailureOnRetrievalError() {
         let storeURL = testStoreUrl()
         let sut = makeSUT(url: storeURL)
 
@@ -57,7 +57,7 @@ class CodableBurgerStoreTests: XCTestCase, FailableBurgeStore {
         assertRetrieveDeliversFailureOnRetrievalError(for: sut)
     }
 
-    func test_retreive_hasNoSideEffectsOnRetreivalError() {
+    func test_retrieve_hasNoSideEffectsOnRetrievalError() {
         let storeURL = testStoreUrl()
         let sut = makeSUT(url: storeURL)
 
