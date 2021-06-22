@@ -26,7 +26,7 @@ class CodableBurgerStoreTests: XCTestCase, FailableBurgeStore {
     func test_retrieve_deliversEmptyOnEmptyCache() {
         let sut = makeSUT()
         
-        assertRetrieveDeliversEmptyonEmptyCache(for: sut)
+        assertRetrieveDeliversEmptyOnEmptyCache(for: sut)
     }
 
     func test_retrieve_hasNoSideEffectsOnEmptyCache() {

@@ -11,7 +11,7 @@ import BurgerList
 
 extension BurgerStoreSpecs where Self: XCTestCase  {
     
-    func assertRetrieveDeliversEmptyonEmptyCache(for sut: BurgerStore, file: StaticString = #file, line: UInt = #line) {
+    func assertRetrieveDeliversEmptyOnEmptyCache(for sut: BurgerStore, file: StaticString = #file, line: UInt = #line) {
         expect(sut, toRetrieve: .success(.none))
     }
     

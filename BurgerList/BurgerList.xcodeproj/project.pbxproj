@@ -18,7 +18,7 @@
 		40DAA068256477A900B1AEC0 /* CodableBurgerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA067256477A900B1AEC0 /* CodableBurgerStoreTests.swift */; };
 		40DAA0702564827100B1AEC0 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */; };
 		40FC239F254B662600290628 /* BurgerCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FC239E254B662600290628 /* BurgerCachePolicy.swift */; };
-		711A664C2682AC31000B6EDF /* BurgetStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 711A664A2682AC31000B6EDF /* BurgetStore.xcdatamodeld */; };
+		711A664C2682AC31000B6EDF /* BurgerStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 711A664A2682AC31000B6EDF /* BurgerStore.xcdatamodeld */; };
 		71B28AF3261DDDA100DF448B /* CoreDataBurgerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28AF2261DDDA100DF448B /* CoreDataBurgerStoreTests.swift */; };
 		71B28AFA261DDFA800DF448B /* CoreDataBurgerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28AF9261DDFA800DF448B /* CoreDataBurgerStore.swift */; };
 		71B28B02261DE15900DF448B /* ManageBurger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B01261DE15900DF448B /* ManageBurger.swift */; };
@@ -188,7 +188,7 @@
 				71B28AF9261DDFA800DF448B /* CoreDataBurgerStore.swift */,
 				71B28B01261DE15900DF448B /* ManageBurger.swift */,
 				71B28B06261DE2A600DF448B /* ManagedCache.swift */,
-				711A664A2682AC31000B6EDF /* BurgetStore.xcdatamodeld */,
+				711A664A2682AC31000B6EDF /* BurgerStore.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -497,7 +497,7 @@
 				40A943AF25F8129900BC786D /* CodableBurgerStore.swift in Sources */,
 				40FC239F254B662600290628 /* BurgerCachePolicy.swift in Sources */,
 				71B28B0D261DE8CB00DF448B /* CoreDataHelpers.swift in Sources */,
-				711A664C2682AC31000B6EDF /* BurgetStore.xcdatamodeld in Sources */,
+				711A664C2682AC31000B6EDF /* BurgerStore.xcdatamodeld in Sources */,
 				71B28AFA261DDFA800DF448B /* CoreDataBurgerStore.swift in Sources */,
 				DC8671BD24911ED6007DA501 /* RemoteBurgerLoader.swift in Sources */,
 				DCD8F68624A4DC1C00064ED9 /* HTTPClient.swift in Sources */,
@@ -844,13 +844,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		711A664A2682AC31000B6EDF /* BurgetStore.xcdatamodeld */ = {
+		711A664A2682AC31000B6EDF /* BurgerStore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				711A664B2682AC31000B6EDF /* BurgetStore.xcdatamodel */,
 			);
 			currentVersion = 711A664B2682AC31000B6EDF /* BurgetStore.xcdatamodel */;
-			path = BurgetStore.xcdatamodeld;
+			path = BurgerStore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
