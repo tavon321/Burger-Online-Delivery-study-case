@@ -26,7 +26,7 @@ extension ManagedCache {
         return ManagedCache(context: context)
     }
 
-    internal var localFeed: [LocalBurger] {
+    internal var localBurgers: [LocalBurger] {
         return burgers.compactMap { ($0 as? ManagedBurger)?.local }
     }
 }

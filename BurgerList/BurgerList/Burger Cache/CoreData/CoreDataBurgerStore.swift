@@ -40,7 +40,7 @@ public class CoreDataBurgerStore: BurgerStore {
         perform { context in
             do {
                 if let cache = try ManagedCache.find(in: context) {
-                    completion(.success(CachedBurgers(burgers: cache.localFeed, timestamp: cache.timestamp)))
+                    completion(.success(CachedBurgers(burgers: cache.localBurgers, timestamp: cache.timestamp)))
                 } else {
                     completion(.success(nil))
                 }
@@ -79,5 +79,16 @@ public class CoreDataBurgerStore: BurgerStore {
     private func perform(_ action: @escaping (NSManagedObjectContext) -> Void) {
         let context = self.context
         context.perform { action(context) }
+    }
+    
+    private func cleanUpReferencesToPersistentStores() {
+        context.performAndWait {
+            let coordinator = self.container.persistentStoreCoordinator
+            try? coordinator.persistentStores.forEach(coordinator.remove)
+        }
+    }
+    
+    deinit {
+        cleanUpReferencesToPersistentStores()
     }
 }

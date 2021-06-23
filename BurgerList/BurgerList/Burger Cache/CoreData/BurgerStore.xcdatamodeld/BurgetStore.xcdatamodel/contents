@@ -2,17 +2,17 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20E232" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ManagedBurger" representedClassName="ManagedBurger" syncable="YES">
         <attribute name="burgerDescription" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
-        <relationship name="cache" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedBurger" inverseName="cache" inverseEntity="ManagedBurger"/>
+        <relationship name="cache" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedCache" inverseName="burgers" inverseEntity="ManagedCache"/>
     </entity>
     <entity name="ManagedCache" representedClassName="ManagedCache" syncable="YES">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="burgers" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedBurger"/>
+        <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="burgers" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ManagedBurger" inverseName="cache" inverseEntity="ManagedBurger"/>
     </entity>
     <elements>
-        <element name="ManagedCache" positionX="-63" positionY="-18" width="128" height="14"/>
-        <element name="ManagedBurger" positionX="-54" positionY="9" width="128" height="14"/>
+        <element name="ManagedBurger" positionX="-54" positionY="9" width="128" height="104"/>
+        <element name="ManagedCache" positionX="-63" positionY="-18" width="128" height="59"/>
     </elements>
 </model>

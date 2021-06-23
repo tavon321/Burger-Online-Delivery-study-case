@@ -186,8 +186,8 @@
 			children = (
 				71B28B0B261DE8B700DF448B /* Helpers */,
 				71B28AF9261DDFA800DF448B /* CoreDataBurgerStore.swift */,
-				71B28B01261DE15900DF448B /* ManageBurger.swift */,
 				71B28B06261DE2A600DF448B /* ManagedCache.swift */,
+				71B28B01261DE15900DF448B /* ManageBurger.swift */,
 				711A664A2682AC31000B6EDF /* BurgerStore.xcdatamodeld */,
 			);
 			path = CoreData;
