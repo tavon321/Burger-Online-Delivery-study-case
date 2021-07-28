@@ -24,6 +24,8 @@
 		71B28B02261DE15900DF448B /* ManageBurger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B01261DE15900DF448B /* ManageBurger.swift */; };
 		71B28B07261DE2A600DF448B /* ManagedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B06261DE2A600DF448B /* ManagedCache.swift */; };
 		71B28B0D261DE8CB00DF448B /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */; };
+		71C6AFD926B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */; };
+		71C6AFDB26B1BFFC0080DF0D /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
 		DC0115C124CF0E3C002A7CB7 /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
 		DC0115C424CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0115C324CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift */; };
 		DC03E02A24FFDE8800BDB35E /* LocalBurgerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC03E02924FFDE8800BDB35E /* LocalBurgerLoader.swift */; };
@@ -48,6 +50,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		71C6AFDC26B1BFFC0080DF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCEBAA482487DFBD0024BFA9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCEBAA502487DFBD0024BFA9;
+			remoteInfo = BurgerList;
+		};
 		DC765CD824C9CA82007D7999 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DCEBAA482487DFBD0024BFA9 /* Project object */;
@@ -82,6 +91,9 @@
 		71B28B01261DE15900DF448B /* ManageBurger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBurger.swift; sourceTree = "<group>"; };
 		71B28B06261DE2A600DF448B /* ManagedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedCache.swift; sourceTree = "<group>"; };
 		71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
+		71C6AFD626B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListCacheIntegrationTests.swift; sourceTree = "<group>"; };
+		71C6AFDA26B1BFFC0080DF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC0115C324CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+statusCode.swift"; sourceTree = "<group>"; };
 		DC03E02924FFDE8800BDB35E /* LocalBurgerLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBurgerLoader.swift; sourceTree = "<group>"; };
 		DC208125248FC1630043BC6E /* LoadBurgerFromRemoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadBurgerFromRemoteUseCaseTests.swift; sourceTree = "<group>"; };
@@ -109,6 +121,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		71C6AFD326B1BFFC0080DF0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71C6AFDB26B1BFFC0080DF0D /* BurgerList.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DC765CCF24C9CA82007D7999 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -199,6 +219,15 @@
 				71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		71C6AFD726B1BFFC0080DF0D /* BurgerListCacheIntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */,
+				71C6AFDA26B1BFFC0080DF0D /* Info.plist */,
+			);
+			path = BurgerListCacheIntegrationTests;
 			sourceTree = "<group>";
 		};
 		DC0115C224CF116B002A7CB7 /* Helpers */ = {
@@ -297,6 +326,7 @@
 				DCEBAA532487DFBD0024BFA9 /* BurgerList */,
 				DCEBAA5E2487DFBD0024BFA9 /* BurgerListTests */,
 				DC765CD324C9CA82007D7999 /* BurgerListAPIEndToEndTests */,
+				71C6AFD726B1BFFC0080DF0D /* BurgerListCacheIntegrationTests */,
 				DCEBAA522487DFBD0024BFA9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -307,6 +337,7 @@
 				DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */,
 				DCEBAA5A2487DFBD0024BFA9 /* BurgerListTests.xctest */,
 				DC765CD224C9CA82007D7999 /* BurgerListAPIEndToEndTests.xctest */,
+				71C6AFD626B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -355,6 +386,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		71C6AFD526B1BFFC0080DF0D /* BurgerListCacheIntegrationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71C6AFE026B1BFFC0080DF0D /* Build configuration list for PBXNativeTarget "BurgerListCacheIntegrationTests" */;
+			buildPhases = (
+				71C6AFD226B1BFFC0080DF0D /* Sources */,
+				71C6AFD326B1BFFC0080DF0D /* Frameworks */,
+				71C6AFD426B1BFFC0080DF0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				71C6AFDD26B1BFFC0080DF0D /* PBXTargetDependency */,
+			);
+			name = BurgerListCacheIntegrationTests;
+			productName = BurgerListCacheIntegrationTests;
+			productReference = 71C6AFD626B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		DC765CD124C9CA82007D7999 /* BurgerListAPIEndToEndTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DC765CDC24C9CA82007D7999 /* Build configuration list for PBXNativeTarget "BurgerListAPIEndToEndTests" */;
@@ -415,10 +464,13 @@
 		DCEBAA482487DFBD0024BFA9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1160;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = "Gustavo Londono";
 				TargetAttributes = {
+					71C6AFD526B1BFFC0080DF0D = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
 					DC765CD124C9CA82007D7999 = {
 						CreatedOnToolsVersion = 11.6;
 					};
@@ -447,11 +499,19 @@
 				DCEBAA502487DFBD0024BFA9 /* BurgerList */,
 				DCEBAA592487DFBD0024BFA9 /* BurgerListTests */,
 				DC765CD124C9CA82007D7999 /* BurgerListAPIEndToEndTests */,
+				71C6AFD526B1BFFC0080DF0D /* BurgerListCacheIntegrationTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		71C6AFD426B1BFFC0080DF0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DC765CD024C9CA82007D7999 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -476,6 +536,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		71C6AFD226B1BFFC0080DF0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71C6AFD926B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DC765CCE24C9CA82007D7999 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -536,6 +604,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		71C6AFDD26B1BFFC0080DF0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCEBAA502487DFBD0024BFA9 /* BurgerList */;
+			targetProxy = 71C6AFDC26B1BFFC0080DF0D /* PBXContainerItemProxy */;
+		};
 		DC765CD924C9CA82007D7999 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DCEBAA502487DFBD0024BFA9 /* BurgerList */;
@@ -549,6 +622,44 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		71C6AFDE26B1BFFC0080DF0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = J642JTAX63;
+				INFOPLIST_FILE = BurgerListCacheIntegrationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				PRODUCT_BUNDLE_IDENTIFIER = tavo.BurgerListCacheIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		71C6AFDF26B1BFFC0080DF0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = J642JTAX63;
+				INFOPLIST_FILE = BurgerListCacheIntegrationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				PRODUCT_BUNDLE_IDENTIFIER = tavo.BurgerListCacheIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		DC765CDA24C9CA82007D7999 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -805,6 +916,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		71C6AFE026B1BFFC0080DF0D /* Build configuration list for PBXNativeTarget "BurgerListCacheIntegrationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71C6AFDE26B1BFFC0080DF0D /* Debug */,
+				71C6AFDF26B1BFFC0080DF0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DC765CDC24C9CA82007D7999 /* Build configuration list for PBXNativeTarget "BurgerListAPIEndToEndTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
