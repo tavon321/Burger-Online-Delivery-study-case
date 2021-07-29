@@ -26,6 +26,7 @@
 		71B28B0D261DE8CB00DF448B /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */; };
 		71C6AFD926B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */; };
 		71C6AFDB26B1BFFC0080DF0D /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
+		71C6AFE126B207090080DF0D /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
 		DC0115C124CF0E3C002A7CB7 /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
 		DC0115C424CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0115C324CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift */; };
 		DC03E02A24FFDE8800BDB35E /* LocalBurgerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC03E02924FFDE8800BDB35E /* LocalBurgerLoader.swift */; };
@@ -540,6 +541,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71C6AFE126B207090080DF0D /* XCTestCase+TrackForMemoryLeaks.swift in Sources */,
 				71C6AFD926B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
