@@ -26,7 +26,7 @@ class BurgerListCacheIntegrationTests: XCTestCase {
     func test_load_deliversNoItemsOnEmptyCache() {
         let sut = makeSUT()
         
-        expect(sut, burgers: [])
+        expect(sut, toLoad: [])
     }
     
     func test_load_deliversItemsSavedOnSeparateInstance() {
@@ -34,19 +34,38 @@ class BurgerListCacheIntegrationTests: XCTestCase {
         let loadSut = makeSUT()
         let burgers = uniqueBurgers().models
         
-        let saveExp = expectation(description: "Wait for save completion")
-        saveSut.save(burgers) { saveError in
-            XCTAssertNil(saveError)
-            saveExp.fulfill()
-        }
-        wait(for: [saveExp], timeout: 0.1)
+        expect(saveSut, toSave: burgers)
+        expect(loadSut, toLoad: burgers)
+    }
+    
+    func test_save_overrridesItemsSavedOnASeparatedInstance() {
+        let sutToPerformFirstSave = makeSUT()
+        let sutToPerformLastSave = makeSUT()
+        let sutToPerformLoad = makeSUT()
         
-        expect(loadSut, burgers: burgers)
+        let firstBurgers = uniqueBurgers().models
+        let lastBurgers = uniqueBurgers().models
+        
+        expect(sutToPerformFirstSave, toSave: firstBurgers)
+        expect(sutToPerformLastSave, toSave: lastBurgers)
+        expect(sutToPerformLoad, toLoad: lastBurgers)
     }
     
     // MARK: - Helpers
     private func expect(_ sut: LocalBurgerLoader,
-                        burgers: [Burger],
+                        toSave burgers: [Burger],
+                        file: StaticString = #file,
+                        line: UInt = #line) {
+        let saveExp = expectation(description: "Wait for save completion")
+        sut.save(burgers) { saveError in
+            XCTAssertNil(saveError)
+            saveExp.fulfill()
+        }
+        wait(for: [saveExp], timeout: 0.1)
+    }
+    
+    private func expect(_ sut: LocalBurgerLoader,
+                        toLoad burgers: [Burger],
                         file: StaticString = #file,
                         line: UInt = #line) {
         let loadExp = expectation(description: "Wait for load completion")
