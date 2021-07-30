@@ -21,6 +21,7 @@
 		711A664C2682AC31000B6EDF /* BurgerStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 711A664A2682AC31000B6EDF /* BurgerStore.xcdatamodeld */; };
 		712FEACE26B327BE00770D2D /* SharedCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E0B29E2524DC5100661112 /* SharedCacheTestHelpers.swift */; };
 		712FEACF26B3284100770D2D /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */; };
+		7193084726B46271001B5A26 /* BurgerListiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7193083E26B46271001B5A26 /* BurgerListiOS.framework */; };
 		71B28AF3261DDDA100DF448B /* CoreDataBurgerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28AF2261DDDA100DF448B /* CoreDataBurgerStoreTests.swift */; };
 		71B28AFA261DDFA800DF448B /* CoreDataBurgerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28AF9261DDFA800DF448B /* CoreDataBurgerStore.swift */; };
 		71B28B02261DE15900DF448B /* ManageBurger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B01261DE15900DF448B /* ManageBurger.swift */; };
@@ -53,6 +54,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7193084826B46271001B5A26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCEBAA482487DFBD0024BFA9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7193083D26B46271001B5A26;
+			remoteInfo = BurgerListiOS;
+		};
 		71C6AFDC26B1BFFC0080DF0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DCEBAA482487DFBD0024BFA9 /* Project object */;
@@ -89,6 +97,10 @@
 		40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		40FC239E254B662600290628 /* BurgerCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerCachePolicy.swift; sourceTree = "<group>"; };
 		711A664B2682AC31000B6EDF /* BurgetStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BurgetStore.xcdatamodel; sourceTree = "<group>"; };
+		7193083E26B46271001B5A26 /* BurgerListiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BurgerListiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7193084126B46271001B5A26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7193084626B46271001B5A26 /* BurgerListiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7193084D26B46271001B5A26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71B28AF2261DDDA100DF448B /* CoreDataBurgerStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBurgerStoreTests.swift; sourceTree = "<group>"; };
 		71B28AF9261DDFA800DF448B /* CoreDataBurgerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBurgerStore.swift; sourceTree = "<group>"; };
 		71B28B01261DE15900DF448B /* ManageBurger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBurger.swift; sourceTree = "<group>"; };
@@ -124,6 +136,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7193083B26B46271001B5A26 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7193084326B46271001B5A26 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7193084726B46271001B5A26 /* BurgerListiOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		71C6AFD326B1BFFC0080DF0D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -194,6 +221,22 @@
 				DCABB351250FD5E600D002E9 /* LocalBurger.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		7193083F26B46271001B5A26 /* BurgerListiOS */ = {
+			isa = PBXGroup;
+			children = (
+				7193084126B46271001B5A26 /* Info.plist */,
+			);
+			path = BurgerListiOS;
+			sourceTree = "<group>";
+		};
+		7193084A26B46271001B5A26 /* BurgerListiOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				7193084D26B46271001B5A26 /* Info.plist */,
+			);
+			path = BurgerListiOSTests;
 			sourceTree = "<group>";
 		};
 		71B28AF7261DDF9100DF448B /* Codable */ = {
@@ -330,6 +373,8 @@
 				DCEBAA5E2487DFBD0024BFA9 /* BurgerListTests */,
 				DC765CD324C9CA82007D7999 /* BurgerListAPIEndToEndTests */,
 				71C6AFD726B1BFFC0080DF0D /* BurgerListCacheIntegrationTests */,
+				7193083F26B46271001B5A26 /* BurgerListiOS */,
+				7193084A26B46271001B5A26 /* BurgerListiOSTests */,
 				DCEBAA522487DFBD0024BFA9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -341,6 +386,8 @@
 				DCEBAA5A2487DFBD0024BFA9 /* BurgerListTests.xctest */,
 				DC765CD224C9CA82007D7999 /* BurgerListAPIEndToEndTests.xctest */,
 				71C6AFD626B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.xctest */,
+				7193083E26B46271001B5A26 /* BurgerListiOS.framework */,
+				7193084626B46271001B5A26 /* BurgerListiOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -379,6 +426,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		7193083926B46271001B5A26 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DCEBAA4C2487DFBD0024BFA9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -389,6 +443,42 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		7193083D26B46271001B5A26 /* BurgerListiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7193084F26B46271001B5A26 /* Build configuration list for PBXNativeTarget "BurgerListiOS" */;
+			buildPhases = (
+				7193083926B46271001B5A26 /* Headers */,
+				7193083A26B46271001B5A26 /* Sources */,
+				7193083B26B46271001B5A26 /* Frameworks */,
+				7193083C26B46271001B5A26 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BurgerListiOS;
+			productName = BurgerListiOS;
+			productReference = 7193083E26B46271001B5A26 /* BurgerListiOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7193084526B46271001B5A26 /* BurgerListiOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7193085226B46271001B5A26 /* Build configuration list for PBXNativeTarget "BurgerListiOSTests" */;
+			buildPhases = (
+				7193084226B46271001B5A26 /* Sources */,
+				7193084326B46271001B5A26 /* Frameworks */,
+				7193084426B46271001B5A26 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7193084926B46271001B5A26 /* PBXTargetDependency */,
+			);
+			name = BurgerListiOSTests;
+			productName = BurgerListiOSTests;
+			productReference = 7193084626B46271001B5A26 /* BurgerListiOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		71C6AFD526B1BFFC0080DF0D /* BurgerListCacheIntegrationTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 71C6AFE026B1BFFC0080DF0D /* Build configuration list for PBXNativeTarget "BurgerListCacheIntegrationTests" */;
@@ -471,6 +561,12 @@
 				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = "Gustavo Londono";
 				TargetAttributes = {
+					7193083D26B46271001B5A26 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					7193084526B46271001B5A26 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
 					71C6AFD526B1BFFC0080DF0D = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
@@ -503,11 +599,27 @@
 				DCEBAA592487DFBD0024BFA9 /* BurgerListTests */,
 				DC765CD124C9CA82007D7999 /* BurgerListAPIEndToEndTests */,
 				71C6AFD526B1BFFC0080DF0D /* BurgerListCacheIntegrationTests */,
+				7193083D26B46271001B5A26 /* BurgerListiOS */,
+				7193084526B46271001B5A26 /* BurgerListiOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7193083C26B46271001B5A26 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7193084426B46271001B5A26 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		71C6AFD426B1BFFC0080DF0D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -539,6 +651,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7193083A26B46271001B5A26 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7193084226B46271001B5A26 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		71C6AFD226B1BFFC0080DF0D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -610,6 +736,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		7193084926B46271001B5A26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7193083D26B46271001B5A26 /* BurgerListiOS */;
+			targetProxy = 7193084826B46271001B5A26 /* PBXContainerItemProxy */;
+		};
 		71C6AFDD26B1BFFC0080DF0D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DCEBAA502487DFBD0024BFA9 /* BurgerList */;
@@ -628,6 +759,100 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		7193085026B46271001B5A26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = J642JTAX63;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = BurgerListiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tavo.BurgerListiOS;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7193085126B46271001B5A26 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = J642JTAX63;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = BurgerListiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tavo.BurgerListiOS;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7193085326B46271001B5A26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J642JTAX63;
+				INFOPLIST_FILE = BurgerListiOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tavo.BurgerListiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7193085426B46271001B5A26 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J642JTAX63;
+				INFOPLIST_FILE = BurgerListiOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tavo.BurgerListiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		71C6AFDE26B1BFFC0080DF0D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -930,6 +1155,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7193084F26B46271001B5A26 /* Build configuration list for PBXNativeTarget "BurgerListiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7193085026B46271001B5A26 /* Debug */,
+				7193085126B46271001B5A26 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7193085226B46271001B5A26 /* Build configuration list for PBXNativeTarget "BurgerListiOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7193085326B46271001B5A26 /* Debug */,
+				7193085426B46271001B5A26 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		71C6AFE026B1BFFC0080DF0D /* Build configuration list for PBXNativeTarget "BurgerListCacheIntegrationTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
