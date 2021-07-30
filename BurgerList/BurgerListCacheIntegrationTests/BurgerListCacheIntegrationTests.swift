@@ -26,20 +26,7 @@ class BurgerListCacheIntegrationTests: XCTestCase {
     func test_load_deliversNoItemsOnEmptyCache() {
         let sut = makeSUT()
         
-        let exp = expectation(description: "Wait for load completion")
-        sut.load { result in
-            switch result {
-            case .success(let burgerList):
-                XCTAssertEqual(burgerList, [], "Expected empty feed")
-                
-            case .failure(let error):
-                XCTFail("Expected success, got \(error) instead")
-            }
-            
-            exp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 0.1)
+        expect(sut, burgers: [])
     }
     
     func test_load_deliversItemsSavedOnSeparateInstance() {
@@ -54,11 +41,19 @@ class BurgerListCacheIntegrationTests: XCTestCase {
         }
         wait(for: [saveExp], timeout: 0.1)
         
+        expect(loadSut, burgers: burgers)
+    }
+    
+    // MARK: - Helpers
+    private func expect(_ sut: LocalBurgerLoader,
+                        burgers: [Burger],
+                        file: StaticString = #file,
+                        line: UInt = #line) {
         let loadExp = expectation(description: "Wait for load completion")
-        loadSut.load { result in
+        sut.load { result in
             switch result {
             case .success(let burgerList):
-                XCTAssertEqual(burgerList, burgers)
+                XCTAssertEqual(burgerList, burgers, file: file, line: line)
             case .failure(let error):
                 XCTFail("Expected success, got \(error) instead")
             }
@@ -68,7 +63,6 @@ class BurgerListCacheIntegrationTests: XCTestCase {
         wait(for: [loadExp], timeout: 0.1)
     }
     
-    // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> LocalBurgerLoader {
         let store = try! CoreDataBurgerStore(storeURL: testSpecificStoreURL())
         let sut =  LocalBurgerLoader(store: store, currentDate: Date.init)
