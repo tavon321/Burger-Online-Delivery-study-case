@@ -99,8 +99,7 @@ Then the app should display an error message
    1. Execute "Load Burger Menu" command with above data.
    2. System retrieves menu data from the cache.
    3. System validates cache is less than MAX_AGE old.
-   4. System validates cache is less than two weeks old.
-   5. System delivers cached feed data.
+   4. System delivers cached burger list data.
 
 #### Retrieval error course (sad path):
    1. System delivers error.
@@ -109,12 +108,29 @@ Then the app should display an error message
    1. System delivers connectivity error.
    
 #### Expired cache course (sad path):
-   1. System deletes cache.
-   2. System delivers no menu.
+   1. System delivers no menu.
    
 ---
 
-### Cache Feed Use Case
+### Validate Menu Use Case
+
+#### Data
+   * MAX_AGE: 14 days
+   
+#### Primary course (happy path):
+   1. Execute "Validate Cache" command with above data.
+   2. System retrieves menu data from the cache.
+   3. System validates cache is less than MAX_AGE old.
+
+#### Retrieval error course (sad path):
+   1. System delete cache.
+
+#### Empty cache (sad path):
+   1. System delete cache.
+   
+---
+
+### Cache Menu Use Case
 
 #### Data
    * Burger Items

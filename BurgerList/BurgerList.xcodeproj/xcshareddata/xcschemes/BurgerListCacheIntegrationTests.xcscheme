@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1210"
+   LastUpgradeVersion = "1250"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -25,13 +25,12 @@
       <Testables>
          <TestableReference
             skipped = "NO"
-            parallelizable = "YES"
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DC765CD124C9CA82007D7999"
-               BuildableName = "BurgerListAPIEndToEndTests.xctest"
-               BlueprintName = "BurgerListAPIEndToEndTests"
+               BlueprintIdentifier = "71C6AFD526B1BFFC0080DF0D"
+               BuildableName = "BurgerListCacheIntegrationTests.xctest"
+               BlueprintName = "BurgerListCacheIntegrationTests"
                ReferencedContainer = "container:BurgerList.xcodeproj">
             </BuildableReference>
          </TestableReference>

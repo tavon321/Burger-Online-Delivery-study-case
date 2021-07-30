@@ -27,6 +27,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
+      enableThreadSanitizer = "YES"
       codeCoverageEnabled = "YES"
       onlyGenerateCoverageForSpecifiedTargets = "YES">
       <CodeCoverageTargets>
@@ -37,8 +38,27 @@
             BlueprintName = "BurgerList"
             ReferencedContainer = "container:BurgerList.xcodeproj">
          </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "7193083D26B46271001B5A26"
+            BuildableName = "BurgerListiOS.framework"
+            BlueprintName = "BurgerListiOS"
+            ReferencedContainer = "container:BurgerList.xcodeproj">
+         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DC765CD124C9CA82007D7999"
+               BuildableName = "BurgerListAPIEndToEndTests.xctest"
+               BlueprintName = "BurgerListAPIEndToEndTests"
+               ReferencedContainer = "container:BurgerList.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
          <TestableReference
             skipped = "NO"
             parallelizable = "YES"
@@ -48,6 +68,26 @@
                BlueprintIdentifier = "DCEBAA592487DFBD0024BFA9"
                BuildableName = "BurgerListTests.xctest"
                BlueprintName = "BurgerListTests"
+               ReferencedContainer = "container:BurgerList.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "71C6AFD526B1BFFC0080DF0D"
+               BuildableName = "BurgerListCacheIntegrationTests.xctest"
+               BlueprintName = "BurgerListCacheIntegrationTests"
+               ReferencedContainer = "container:BurgerList.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7193084526B46271001B5A26"
+               BuildableName = "BurgerListiOSTests.xctest"
+               BlueprintName = "BurgerListiOSTests"
                ReferencedContainer = "container:BurgerList.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -63,33 +103,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-com.apple.CoreData.ConcurrencyDebug 1"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-com.apple.CoreData.SQLDebug 1"
-            isEnabled = "NO">
-         </CommandLineArgument>
-      </CommandLineArguments>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "SQLITE_AUTO_TRACE"
-            value = "1"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "SQLITE_ENABLE_THREAD_ASSERTIONS"
-            value = "1"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "SQLITE_ENABLE_FILE_ASSERTIONS"
-            value = "1"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

@@ -28,12 +28,26 @@ public final class RemoteBurgerLoader: BurgerLoader {
         client.get(from: url) { [weak self] result in
             guard self != nil else { return }
             switch result {
-            case .success(let successTuple):
-                completion(BurgerMapper.map(successTuple.data, response: successTuple.response))
+            case let .success((response, data)):
+                completion(RemoteBurgerLoader.map(data, from: response))
             case .failure:
                 completion(.failure(Error.connectivity))
             }
         }
     }
- 
+    
+    private static func map(_ data: Data, from response: HTTPURLResponse) -> Result {
+        do {
+            let items = try BurgerMapper.map(data, response: response)
+            return .success(items.toModels())
+        } catch {
+            return .failure(error)
+        }
+    }
+}
+
+private extension Array where Element == RemoteBurger {
+    func toModels() -> [Burger] {
+        return map { Burger(id: $0.uuid, name: $0.name, description: $0.description, imageURL: $0.imageURL) }
+    }
 }

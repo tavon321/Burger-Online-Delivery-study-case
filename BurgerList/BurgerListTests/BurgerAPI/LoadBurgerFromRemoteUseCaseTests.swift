@@ -31,10 +31,11 @@ class LoadBurgerFromRemoteUseCaseTests: XCTestCase {
         
         sut.load(completion: { _ in })
         sut.load(completion: { _ in })
+
         XCTAssertEqual(client.requestedURLs, [url, url])
     }
     
-    func test_load_deliversErrorOnClienError() {
+    func test_load_deliversConnectivityErrorOnClientError() {
         let (sut, client) = makeSUT()
         
         expect(sut, toCompleteWithResult: failure(.connectivity)) {
@@ -43,7 +44,7 @@ class LoadBurgerFromRemoteUseCaseTests: XCTestCase {
         }
     }
     
-    func test_load_deliversNon200HTTPResponse() {
+    func test_load_deliversInvalidDataErrorOnNon200HTTPResponse() {
         let (sut, client) = makeSUT()
         let samples = [199, 201, 300, 400, 500].enumerated()
         

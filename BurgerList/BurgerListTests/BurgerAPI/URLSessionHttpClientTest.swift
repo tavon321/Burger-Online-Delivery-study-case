@@ -23,7 +23,7 @@ class URLSessionHttpClientTest: XCTestCase {
         let url = anyURL
         let exp = expectation(description: "Wait for request")
         
-        URLProtocolStub.observerRequest { request in
+        URLProtocolStub.observeRequest { request in
             XCTAssertEqual(request.url, url)
             XCTAssertEqual(request.httpMethod, "GET")
             exp.fulfill()
@@ -38,7 +38,8 @@ class URLSessionHttpClientTest: XCTestCase {
         let requestedError = anyError
         let receivedError = resultErrorFor(data: nil, response: nil, error: requestedError)
         
-        XCTAssertEqual(requestedError, receivedError as NSError?)
+        XCTAssertEqual(requestedError.code, (receivedError as NSError?)?.code)
+        XCTAssertEqual(requestedError.domain, (receivedError as NSError?)?.domain)
     }
 
     func test_getFromUrl_failsOnAllInvalidCasesValues() {
@@ -77,18 +78,6 @@ class URLSessionHttpClientTest: XCTestCase {
     }
     
     // MARK: Helpers
-    var anyError: NSError {
-        return NSError(domain: "any error", code: 0)
-    }
-    
-    var anyURL: URL {
-        return URL(string: "http://any-url.com")!
-    }
-    
-    var anyData: Data {
-        return Data("any data".utf8)
-    }
-    
     var nonHTTTPURLResponse: URLResponse {
         return URLResponse(url: anyURL, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
     }
@@ -182,7 +171,7 @@ class URLSessionHttpClientTest: XCTestCase {
             return request
         }
         
-        static func observerRequest(observer: @escaping (URLRequest) -> Void) {
+        static func observeRequest(observer: @escaping (URLRequest) -> Void) {
             requestObserver = observer
         }
         
