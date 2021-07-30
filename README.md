@@ -1,5 +1,7 @@
 # Burger-Online-Delivery-study-case
 
+[![Build Status](https://travis-ci.com/tavon321/Burger-Online-Delivery-study-case.svg?branch=master)](https://travis-ci.com/tavon321/Burger-Online-Delivery-study-case)
+
 This project is to holistically apply swift app development knowledge
 
 ## BDD Scenarios
