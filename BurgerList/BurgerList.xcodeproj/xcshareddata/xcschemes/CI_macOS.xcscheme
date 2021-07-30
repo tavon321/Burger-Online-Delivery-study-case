@@ -42,7 +42,6 @@
       <Testables>
          <TestableReference
             skipped = "NO"
-            parallelizable = "YES"
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
@@ -54,13 +53,23 @@
          </TestableReference>
          <TestableReference
             skipped = "NO"
-            parallelizable = "YES"
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DCEBAA592487DFBD0024BFA9"
                BuildableName = "BurgerListTests.xctest"
                BlueprintName = "BurgerListTests"
+               ReferencedContainer = "container:BurgerList.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "71C6AFD526B1BFFC0080DF0D"
+               BuildableName = "BurgerListCacheIntegrationTests.xctest"
+               BlueprintName = "BurgerListCacheIntegrationTests"
                ReferencedContainer = "container:BurgerList.xcodeproj">
             </BuildableReference>
          </TestableReference>
