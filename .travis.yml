@@ -2,3 +2,4 @@ os: osx
 osx_image: xcode12.5
 language: swift
 script: xcodebuild clean build test -project BurgerList/BurgerList.xcodeproj -scheme "CI_macOS" CODE_SIGN_IDENTITY="" CODE_SIGNNG_REQUIRED=NO
+script: xcodebuild clean build test -project BurgerList/BurgerList.xcodeproj -scheme "CI_iOS" CODE_SIGN_IDENTITY="" CODE_SIGNNG_REQUIRED=NO
