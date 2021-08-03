@@ -36,6 +36,6 @@ extension BurgerListCell {
         descriptionLabel.text = viewModel.description
         descriptionLabel.isHidden = viewModel.description == nil
         
-        burgerImageView.image = UIImage(named: viewModel.imageName ?? "placeholder")
+        fadeIn(UIImage(named: viewModel.imageName ?? "placeholder"))
     }
 }
