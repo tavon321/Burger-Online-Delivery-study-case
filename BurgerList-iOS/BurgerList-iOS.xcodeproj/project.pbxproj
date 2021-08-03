@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71AAA93C26B9731E00578309 /* BurgerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AAA93B26B9731E00578309 /* BurgerListViewController.swift */; };
+		71AAA93E26B9777400578309 /* BurgerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AAA93D26B9777400578309 /* BurgerListCell.swift */; };
+		71AAA94026B979AA00578309 /* BurgerListViewModel+ProtoypeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AAA93F26B979AA00578309 /* BurgerListViewModel+ProtoypeData.swift */; };
 		71B5A6F926B821DC00A35DEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B5A6F826B821DC00A35DEC /* AppDelegate.swift */; };
 		71B5A6FB26B821DC00A35DEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B5A6FA26B821DC00A35DEC /* SceneDelegate.swift */; };
 		71B5A70026B821DC00A35DEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71B5A6FE26B821DC00A35DEC /* Main.storyboard */; };
@@ -25,6 +28,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		71AAA93B26B9731E00578309 /* BurgerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListViewController.swift; sourceTree = "<group>"; };
+		71AAA93D26B9777400578309 /* BurgerListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListCell.swift; sourceTree = "<group>"; };
+		71AAA93F26B979AA00578309 /* BurgerListViewModel+ProtoypeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BurgerListViewModel+ProtoypeData.swift"; sourceTree = "<group>"; };
 		71B5A6F526B821DC00A35DEC /* BurgerList-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BurgerList-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71B5A6F826B821DC00A35DEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71B5A6FA26B821DC00A35DEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,10 +85,13 @@
 			children = (
 				71B5A6F826B821DC00A35DEC /* AppDelegate.swift */,
 				71B5A6FA26B821DC00A35DEC /* SceneDelegate.swift */,
+				71AAA93B26B9731E00578309 /* BurgerListViewController.swift */,
 				71B5A6FE26B821DC00A35DEC /* Main.storyboard */,
 				71B5A70126B821DD00A35DEC /* Assets.xcassets */,
 				71B5A70326B821DD00A35DEC /* LaunchScreen.storyboard */,
 				71B5A70626B821DD00A35DEC /* Info.plist */,
+				71AAA93D26B9777400578309 /* BurgerListCell.swift */,
+				71AAA93F26B979AA00578309 /* BurgerListViewModel+ProtoypeData.swift */,
 			);
 			path = "BurgerList-iOS";
 			sourceTree = "<group>";
@@ -204,6 +213,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				71B5A6F926B821DC00A35DEC /* AppDelegate.swift in Sources */,
+				71AAA93C26B9731E00578309 /* BurgerListViewController.swift in Sources */,
+				71AAA94026B979AA00578309 /* BurgerListViewModel+ProtoypeData.swift in Sources */,
+				71AAA93E26B9777400578309 /* BurgerListCell.swift in Sources */,
 				71B5A6FB26B821DC00A35DEC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
