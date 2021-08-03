@@ -9,23 +9,13 @@
 /* Begin PBXBuildFile section */
 		71B5A6F926B821DC00A35DEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B5A6F826B821DC00A35DEC /* AppDelegate.swift */; };
 		71B5A6FB26B821DC00A35DEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B5A6FA26B821DC00A35DEC /* SceneDelegate.swift */; };
-		71B5A6FD26B821DC00A35DEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B5A6FC26B821DC00A35DEC /* ViewController.swift */; };
 		71B5A70026B821DC00A35DEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71B5A6FE26B821DC00A35DEC /* Main.storyboard */; };
 		71B5A70226B821DD00A35DEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71B5A70126B821DD00A35DEC /* Assets.xcassets */; };
 		71B5A70526B821DD00A35DEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71B5A70326B821DD00A35DEC /* LaunchScreen.storyboard */; };
-		71B5A71026B821DD00A35DEC /* BurgerList_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B5A70F26B821DD00A35DEC /* BurgerList_iOSTests.swift */; };
-		71B5A71B26B821DD00A35DEC /* BurgerList_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B5A71A26B821DD00A35DEC /* BurgerList_iOSUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		71B5A70C26B821DD00A35DEC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 71B5A6ED26B821DC00A35DEC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 71B5A6F426B821DC00A35DEC;
-			remoteInfo = "BurgerList-iOS";
-		};
-		71B5A71726B821DD00A35DEC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 71B5A6ED26B821DC00A35DEC /* Project object */;
 			proxyType = 1;
@@ -38,16 +28,12 @@
 		71B5A6F526B821DC00A35DEC /* BurgerList-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BurgerList-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71B5A6F826B821DC00A35DEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71B5A6FA26B821DC00A35DEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		71B5A6FC26B821DC00A35DEC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		71B5A6FF26B821DC00A35DEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		71B5A70126B821DD00A35DEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71B5A70426B821DD00A35DEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		71B5A70626B821DD00A35DEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71B5A70B26B821DD00A35DEC /* BurgerList-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BurgerList-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		71B5A70F26B821DD00A35DEC /* BurgerList_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerList_iOSTests.swift; sourceTree = "<group>"; };
 		71B5A71126B821DD00A35DEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		71B5A71626B821DD00A35DEC /* BurgerList-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BurgerList-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		71B5A71A26B821DD00A35DEC /* BurgerList_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerList_iOSUITests.swift; sourceTree = "<group>"; };
 		71B5A71C26B821DD00A35DEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,13 +46,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		71B5A70826B821DD00A35DEC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		71B5A71326B821DD00A35DEC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -91,7 +70,6 @@
 			children = (
 				71B5A6F526B821DC00A35DEC /* BurgerList-iOS.app */,
 				71B5A70B26B821DD00A35DEC /* BurgerList-iOSTests.xctest */,
-				71B5A71626B821DD00A35DEC /* BurgerList-iOSUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,7 +79,6 @@
 			children = (
 				71B5A6F826B821DC00A35DEC /* AppDelegate.swift */,
 				71B5A6FA26B821DC00A35DEC /* SceneDelegate.swift */,
-				71B5A6FC26B821DC00A35DEC /* ViewController.swift */,
 				71B5A6FE26B821DC00A35DEC /* Main.storyboard */,
 				71B5A70126B821DD00A35DEC /* Assets.xcassets */,
 				71B5A70326B821DD00A35DEC /* LaunchScreen.storyboard */,
@@ -113,7 +90,6 @@
 		71B5A70E26B821DD00A35DEC /* BurgerList-iOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				71B5A70F26B821DD00A35DEC /* BurgerList_iOSTests.swift */,
 				71B5A71126B821DD00A35DEC /* Info.plist */,
 			);
 			path = "BurgerList-iOSTests";
@@ -122,7 +98,6 @@
 		71B5A71926B821DD00A35DEC /* BurgerList-iOSUITests */ = {
 			isa = PBXGroup;
 			children = (
-				71B5A71A26B821DD00A35DEC /* BurgerList_iOSUITests.swift */,
 				71B5A71C26B821DD00A35DEC /* Info.plist */,
 			);
 			path = "BurgerList-iOSUITests";
@@ -166,24 +141,6 @@
 			productReference = 71B5A70B26B821DD00A35DEC /* BurgerList-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		71B5A71526B821DD00A35DEC /* BurgerList-iOSUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 71B5A72526B821DD00A35DEC /* Build configuration list for PBXNativeTarget "BurgerList-iOSUITests" */;
-			buildPhases = (
-				71B5A71226B821DD00A35DEC /* Sources */,
-				71B5A71326B821DD00A35DEC /* Frameworks */,
-				71B5A71426B821DD00A35DEC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				71B5A71826B821DD00A35DEC /* PBXTargetDependency */,
-			);
-			name = "BurgerList-iOSUITests";
-			productName = "BurgerList-iOSUITests";
-			productReference = 71B5A71626B821DD00A35DEC /* BurgerList-iOSUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,10 +154,6 @@
 						CreatedOnToolsVersion = 12.5.1;
 					};
 					71B5A70A26B821DD00A35DEC = {
-						CreatedOnToolsVersion = 12.5.1;
-						TestTargetID = 71B5A6F426B821DC00A35DEC;
-					};
-					71B5A71526B821DD00A35DEC = {
 						CreatedOnToolsVersion = 12.5.1;
 						TestTargetID = 71B5A6F426B821DC00A35DEC;
 					};
@@ -221,7 +174,6 @@
 			targets = (
 				71B5A6F426B821DC00A35DEC /* BurgerList-iOS */,
 				71B5A70A26B821DD00A35DEC /* BurgerList-iOSTests */,
-				71B5A71526B821DD00A35DEC /* BurgerList-iOSUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -244,13 +196,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		71B5A71426B821DD00A35DEC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -258,7 +203,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71B5A6FD26B821DC00A35DEC /* ViewController.swift in Sources */,
 				71B5A6F926B821DC00A35DEC /* AppDelegate.swift in Sources */,
 				71B5A6FB26B821DC00A35DEC /* SceneDelegate.swift in Sources */,
 			);
@@ -268,15 +212,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71B5A71026B821DD00A35DEC /* BurgerList_iOSTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		71B5A71226B821DD00A35DEC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				71B5A71B26B821DD00A35DEC /* BurgerList_iOSUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,11 +222,6 @@
 			isa = PBXTargetDependency;
 			target = 71B5A6F426B821DC00A35DEC /* BurgerList-iOS */;
 			targetProxy = 71B5A70C26B821DD00A35DEC /* PBXContainerItemProxy */;
-		};
-		71B5A71826B821DD00A35DEC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 71B5A6F426B821DC00A35DEC /* BurgerList-iOS */;
-			targetProxy = 71B5A71726B821DD00A35DEC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -513,46 +443,6 @@
 			};
 			name = Release;
 		};
-		71B5A72626B821DD00A35DEC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J642JTAX63;
-				INFOPLIST_FILE = "BurgerList-iOSUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "tavo.BurgerList-iOSUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "BurgerList-iOS";
-			};
-			name = Debug;
-		};
-		71B5A72726B821DD00A35DEC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J642JTAX63;
-				INFOPLIST_FILE = "BurgerList-iOSUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "tavo.BurgerList-iOSUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "BurgerList-iOS";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -579,15 +469,6 @@
 			buildConfigurations = (
 				71B5A72326B821DD00A35DEC /* Debug */,
 				71B5A72426B821DD00A35DEC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		71B5A72526B821DD00A35DEC /* Build configuration list for PBXNativeTarget "BurgerList-iOSUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				71B5A72626B821DD00A35DEC /* Debug */,
-				71B5A72726B821DD00A35DEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
