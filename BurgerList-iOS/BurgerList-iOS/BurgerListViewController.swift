@@ -14,7 +14,16 @@ struct BurgerListViewModel {
 }
 
 class BurgerListViewController: UITableViewController {
-    private let burgers = BurgerListViewModel.prototypeFeed
+    private var burgers = [BurgerListViewModel]()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let refreshControl = self.refreshControl {
+            refresh(refreshControl)
+        }
+        tableView.setContentOffset(CGPoint(x: 0, y: -tableView.contentInset.top), animated: false)
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return burgers.count
@@ -29,6 +38,14 @@ class BurgerListViewController: UITableViewController {
     }
     
     @IBAction func refresh(_ sender: UIRefreshControl) {
+        refreshControl?.beginRefreshing()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            if self.burgers.isEmpty {
+                self.burgers = BurgerListViewModel.prototypeFeed
+                self.tableView.reloadData()
+            }
+            self.refreshControl?.endRefreshing()
+        }
     }
 }
 
