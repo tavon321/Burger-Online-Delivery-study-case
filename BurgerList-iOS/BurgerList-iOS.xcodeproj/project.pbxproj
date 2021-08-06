@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		716925E726BD7798009FE969 /* BurgerListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716925E626BD7798009FE969 /* BurgerListViewControllerTests.swift */; };
 		71AAA93C26B9731E00578309 /* BurgerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AAA93B26B9731E00578309 /* BurgerListViewController.swift */; };
 		71AAA93E26B9777400578309 /* BurgerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AAA93D26B9777400578309 /* BurgerListCell.swift */; };
 		71AAA94026B979AA00578309 /* BurgerListViewModel+ProtoypeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AAA93F26B979AA00578309 /* BurgerListViewModel+ProtoypeData.swift */; };
@@ -28,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		716925E526BD7797009FE969 /* BurgerList-iOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BurgerList-iOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		716925E626BD7798009FE969 /* BurgerListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListViewControllerTests.swift; sourceTree = "<group>"; };
 		71AAA93B26B9731E00578309 /* BurgerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListViewController.swift; sourceTree = "<group>"; };
 		71AAA93D26B9777400578309 /* BurgerListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListCell.swift; sourceTree = "<group>"; };
 		71AAA93F26B979AA00578309 /* BurgerListViewModel+ProtoypeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BurgerListViewModel+ProtoypeData.swift"; sourceTree = "<group>"; };
@@ -100,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				71B5A71126B821DD00A35DEC /* Info.plist */,
+				716925E626BD7798009FE969 /* BurgerListViewControllerTests.swift */,
+				716925E526BD7797009FE969 /* BurgerList-iOSTests-Bridging-Header.h */,
 			);
 			path = "BurgerList-iOSTests";
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 					};
 					71B5A70A26B821DD00A35DEC = {
 						CreatedOnToolsVersion = 12.5.1;
+						LastSwiftMigration = 1250;
 						TestTargetID = 71B5A6F426B821DC00A35DEC;
 					};
 				};
@@ -224,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				716925E726BD7798009FE969 /* BurgerListViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +423,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J642JTAX63;
 				INFOPLIST_FILE = "BurgerList-iOSTests/Info.plist";
@@ -427,6 +435,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "tavo.BurgerList-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BurgerList-iOSTests/BurgerList-iOSTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BurgerList-iOS.app/BurgerList-iOS";
@@ -438,6 +448,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J642JTAX63;
 				INFOPLIST_FILE = "BurgerList-iOSTests/Info.plist";
@@ -449,6 +460,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "tavo.BurgerList-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BurgerList-iOSTests/BurgerList-iOSTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BurgerList-iOS.app/BurgerList-iOS";
