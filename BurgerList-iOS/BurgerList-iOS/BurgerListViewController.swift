@@ -27,6 +27,9 @@ class BurgerListViewController: UITableViewController {
         
         return cell
     }
+    
+    @IBAction func refresh(_ sender: UIRefreshControl) {
+    }
 }
 
 extension BurgerListCell {

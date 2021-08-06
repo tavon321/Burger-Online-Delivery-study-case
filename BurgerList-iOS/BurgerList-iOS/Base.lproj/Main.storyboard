@@ -101,6 +101,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Burgers" id="mpf-HU-k58"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="tJS-yL-Iaz">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="6sL-by-kVn" eventType="valueChanged" id="BHE-Me-Vy1"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DRC-gw-Ris" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
