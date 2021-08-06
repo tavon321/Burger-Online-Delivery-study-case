@@ -14,19 +14,22 @@ struct BurgerListViewModel {
 }
 
 protocol BurgerLoader {
+    func load()
 }
 
 class BurgerListViewController: UITableViewController {
     private var burgers = [BurgerListViewModel]()
     private var loader: BurgerLoader?
     
-    init(loader: BurgerLoader) {
+    convenience init(loader: BurgerLoader) {
+        self.init()
         self.loader = loader
-        super.init(style: .plain)
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        loader?.load()
     }
     
     override func viewWillAppear(_ animated: Bool) {
