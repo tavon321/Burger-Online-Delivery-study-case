@@ -13,8 +13,21 @@ struct BurgerListViewModel {
     let imageName: String?
 }
 
+protocol BurgerLoader {
+}
+
 class BurgerListViewController: UITableViewController {
     private var burgers = [BurgerListViewModel]()
+    private var loader: BurgerLoader?
+    
+    init(loader: BurgerLoader) {
+        self.loader = loader
+        super.init(style: .plain)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
