@@ -10,7 +10,7 @@ import XCTest
 import UIKit
 import BurgerList
 
-final class BurgerListViewController: UIViewController {
+final class BurgerListViewController: UITableViewController {
     private var loader: BurgerLoader?
     
     convenience init(loader: BurgerLoader) {
@@ -22,6 +22,12 @@ final class BurgerListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refresh()
+    }
+    
+    @objc private func refresh() {
         loader?.load { _ in }
     }
 }
@@ -36,14 +42,23 @@ class BurgerListControllerTests: XCTestCase {
     
     func test_viewDidLoad_loadsBugerList() {
         let (sut, loader) = makeSUT()
-        
         sut.loadViewIfNeeded()
         
         XCTAssertEqual(loader.loaderCallCount, 1)
     }
     
-    // MARK: - Helpers
+    func test_pullToRefresh_loadBurgeList() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        sut.refreshControl?.simulatePullToRefresh()
+        XCTAssertEqual(loader.loaderCallCount, 2)
+        
+        sut.refreshControl?.simulatePullToRefresh()
+        XCTAssertEqual(loader.loaderCallCount, 3)
+    }
     
+    // MARK: - Helpers
     private func makeSUT(file: StaticString = #file,
                          line: UInt = #line) -> (sut: BurgerListViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
@@ -60,6 +75,16 @@ class BurgerListControllerTests: XCTestCase {
         
         func load(completion: @escaping (BurgerLoader.Result) -> Void) {
             loaderCallCount += 1
+        }
+    }
+}
+
+private extension UIRefreshControl {
+    func simulatePullToRefresh() {
+        allTargets.forEach { target in
+            actions(forTarget: target, forControlEvent: .valueChanged)?.forEach({
+                (target as NSObject).perform(Selector($0))
+            })
         }
     }
 }
