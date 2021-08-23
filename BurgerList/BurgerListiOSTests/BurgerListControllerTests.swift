@@ -51,14 +51,14 @@ class BurgerListControllerTests: XCTestCase {
         XCTAssertEqual(loader.loaderCallCount, 1)
     }
     
-    func test_pullToRefresh_loadBurgeList() {
+    func test_userInitiatedReload_loadBurgeList() {
         let (sut, loader) = makeSUT()
         sut.loadViewIfNeeded()
         
-        sut.refreshControl?.simulatePullToRefresh()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loaderCallCount, 2)
         
-        sut.refreshControl?.simulatePullToRefresh()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loaderCallCount, 3)
     }
     
@@ -79,18 +79,18 @@ class BurgerListControllerTests: XCTestCase {
         XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
     }
     
-    func test_pullToRefresh_showsLoadingIndicator() {
+    func test_userInitiatedReload_showsLoadingIndicator() {
         let (sut, _) = makeSUT()
         
-        sut.refreshControl?.simulatePullToRefresh()
+        sut.simulateUserInitiatedReload()
         
         XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
     }
     
-    func test_pullToRefresh_hidesLoadingIndicatorOnLoaderCompletion() {
+    func test_userInitiatedReload_hidesLoadingIndicatorOnLoaderCompletion() {
         let (sut, loader) = makeSUT()
         
-        sut.refreshControl?.simulatePullToRefresh()
+        sut.simulateUserInitiatedReload()
         loader.completeBurgerLoading()
         
         XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
@@ -121,6 +121,12 @@ class BurgerListControllerTests: XCTestCase {
         func completeBurgerLoading() {
             completions[0](.success([]))
         }
+    }
+}
+
+private extension BurgerListViewController {
+    func simulateUserInitiatedReload() {
+        refreshControl?.simulatePullToRefresh()
     }
 }
 
