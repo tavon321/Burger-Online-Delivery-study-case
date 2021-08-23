@@ -30,7 +30,9 @@ final class BurgerListViewController: UITableViewController {
     }
     
     @objc private func refresh() {
-        loader?.load { _ in }
+        loader?.load { [weak self] _ in
+            self?.refreshControl?.endRefreshing()
+        }
     }
 }
 
@@ -68,6 +70,15 @@ class BurgerListControllerTests: XCTestCase {
         XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
     }
     
+    func test_viewDidLoad_hidesLoadingIndicatorOnLoaderCompletion() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBurgerLoading()
+        
+        XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
+    }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file,
                          line: UInt = #line) -> (sut: BurgerListViewController, loader: LoaderSpy) {
@@ -81,10 +92,17 @@ class BurgerListControllerTests: XCTestCase {
     }
     
     class LoaderSpy: BurgerLoader {
-        private(set) var loaderCallCount = 0
+        var loaderCallCount: Int {
+            completions.count
+        }
+        private(set) var completions = [(BurgerLoader.Result) -> Void]()
         
         func load(completion: @escaping (BurgerLoader.Result) -> Void) {
-            loaderCallCount += 1
+            completions.append(completion)
+        }
+        
+        func completeBurgerLoading() {
+            completions[0](.success([]))
         }
     }
 }
