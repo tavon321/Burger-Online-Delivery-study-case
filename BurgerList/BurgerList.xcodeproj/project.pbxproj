@@ -21,6 +21,7 @@
 		711A664C2682AC31000B6EDF /* BurgerStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 711A664A2682AC31000B6EDF /* BurgerStore.xcdatamodeld */; };
 		712FEACE26B327BE00770D2D /* SharedCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E0B29E2524DC5100661112 /* SharedCacheTestHelpers.swift */; };
 		712FEACF26B3284100770D2D /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */; };
+		7146322826C1B86E0005CF50 /* BurgerListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */; };
 		7193084726B46271001B5A26 /* BurgerListiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7193083E26B46271001B5A26 /* BurgerListiOS.framework */; };
 		71B28AF3261DDDA100DF448B /* CoreDataBurgerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28AF2261DDDA100DF448B /* CoreDataBurgerStoreTests.swift */; };
 		71B28AFA261DDFA800DF448B /* CoreDataBurgerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28AF9261DDFA800DF448B /* CoreDataBurgerStore.swift */; };
@@ -97,6 +98,7 @@
 		40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		40FC239E254B662600290628 /* BurgerCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerCachePolicy.swift; sourceTree = "<group>"; };
 		711A664B2682AC31000B6EDF /* BurgetStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BurgetStore.xcdatamodel; sourceTree = "<group>"; };
+		7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListControllerTests.swift; sourceTree = "<group>"; };
 		7193083E26B46271001B5A26 /* BurgerListiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BurgerListiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7193084126B46271001B5A26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7193084626B46271001B5A26 /* BurgerListiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				7193084126B46271001B5A26 /* Info.plist */,
+				7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */,
 			);
 			path = BurgerListiOS;
 			sourceTree = "<group>";
@@ -729,6 +732,7 @@
 				DC6C67F424E6C6840071525B /* CacheBurgerUseCaseTests.swift in Sources */,
 				401E0BA42602786100F83952 /* BurgerStoreSpecs.swift in Sources */,
 				401E0BB4260280B200F83952 /* XCTestCase+FailableRetreiveBurgerSpecs.swift in Sources */,
+				7146322826C1B86E0005CF50 /* BurgerListControllerTests.swift in Sources */,
 				DCB38B9E24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
