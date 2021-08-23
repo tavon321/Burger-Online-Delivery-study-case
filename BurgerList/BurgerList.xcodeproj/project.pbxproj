@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,8 @@
 		71B28B07261DE2A600DF448B /* ManagedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B06261DE2A600DF448B /* ManagedCache.swift */; };
 		71B28B0D261DE8CB00DF448B /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */; };
 		71C1893E26D40BC000BAC99B /* BurgerListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */; };
+		71C1894226D42CB300BAC99B /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; platformFilter = ios; };
+		71C1894326D42CB300BAC99B /* BurgerList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		71C6AFD926B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */; };
 		71C6AFDB26B1BFFC0080DF0D /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
 		71C6AFE126B207090080DF0D /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
@@ -62,6 +64,13 @@
 			remoteGlobalIDString = 7193083D26B46271001B5A26;
 			remoteInfo = BurgerListiOS;
 		};
+		71C1894426D42CB300BAC99B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCEBAA482487DFBD0024BFA9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCEBAA502487DFBD0024BFA9;
+			remoteInfo = BurgerList;
+		};
 		71C6AFDC26B1BFFC0080DF0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DCEBAA482487DFBD0024BFA9 /* Project object */;
@@ -84,6 +93,20 @@
 			remoteInfo = BurgerList;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		71C1894626D42CB300BAC99B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				71C1894326D42CB300BAC99B /* BurgerList.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		29E0B29E2524DC5100661112 /* SharedCacheTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCacheTestHelpers.swift; sourceTree = "<group>"; };
@@ -142,6 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71C1894226D42CB300BAC99B /* BurgerList.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +294,13 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		71C1894126D42CB300BAC99B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		71C6AFD726B1BFFC0080DF0D /* BurgerListCacheIntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +410,7 @@
 				7193083F26B46271001B5A26 /* BurgerListiOS */,
 				7193084A26B46271001B5A26 /* BurgerListiOSTests */,
 				DCEBAA522487DFBD0024BFA9 /* Products */,
+				71C1894126D42CB300BAC99B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -454,10 +486,12 @@
 				7193083A26B46271001B5A26 /* Sources */,
 				7193083B26B46271001B5A26 /* Frameworks */,
 				7193083C26B46271001B5A26 /* Resources */,
+				71C1894626D42CB300BAC99B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				71C1894526D42CB300BAC99B /* PBXTargetDependency */,
 			);
 			name = BurgerListiOS;
 			productName = BurgerListiOS;
@@ -744,6 +778,12 @@
 			isa = PBXTargetDependency;
 			target = 7193083D26B46271001B5A26 /* BurgerListiOS */;
 			targetProxy = 7193084826B46271001B5A26 /* PBXContainerItemProxy */;
+		};
+		71C1894526D42CB300BAC99B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = DCEBAA502487DFBD0024BFA9 /* BurgerList */;
+			targetProxy = 71C1894426D42CB300BAC99B /* PBXContainerItemProxy */;
 		};
 		71C6AFDD26B1BFFC0080DF0D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

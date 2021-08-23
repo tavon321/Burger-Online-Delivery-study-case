@@ -8,11 +8,12 @@
 
 import XCTest
 import UIKit
+import BurgerList
 
 final class BurgerListViewController: UIViewController {
-    private var loader: BurgerListControllerTests.LoaderSpy?
+    private var loader: BurgerLoader?
     
-    convenience init(loader: BurgerListControllerTests.LoaderSpy) {
+    convenience init(loader: BurgerLoader) {
         self.init()
         
         self.loader = loader
@@ -21,7 +22,7 @@ final class BurgerListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loader?.load()
+        loader?.load { _ in }
     }
 }
 
@@ -44,10 +45,10 @@ class BurgerListControllerTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    class LoaderSpy {
+    class LoaderSpy: BurgerLoader {
         private(set) var loaderCallCount = 0
         
-        func load() {
+        func load(completion: @escaping (BurgerLoader.Result) -> Void) {
             loaderCallCount += 1
         }
     }
