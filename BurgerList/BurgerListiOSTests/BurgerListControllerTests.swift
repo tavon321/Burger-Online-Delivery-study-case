@@ -67,7 +67,7 @@ class BurgerListControllerTests: XCTestCase {
         
         sut.loadViewIfNeeded()
         
-        XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
+        XCTAssertEqual(sut.isShowingLodingIndicator, true)
     }
     
     func test_viewDidLoad_hidesLoadingIndicatorOnLoaderCompletion() {
@@ -76,7 +76,7 @@ class BurgerListControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         loader.completeBurgerLoading()
         
-        XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
+        XCTAssertEqual(sut.isShowingLodingIndicator, false)
     }
     
     func test_userInitiatedReload_showsLoadingIndicator() {
@@ -84,7 +84,7 @@ class BurgerListControllerTests: XCTestCase {
         
         sut.simulateUserInitiatedReload()
         
-        XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
+        XCTAssertEqual(sut.isShowingLodingIndicator, true)
     }
     
     func test_userInitiatedReload_hidesLoadingIndicatorOnLoaderCompletion() {
@@ -93,7 +93,7 @@ class BurgerListControllerTests: XCTestCase {
         sut.simulateUserInitiatedReload()
         loader.completeBurgerLoading()
         
-        XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
+        XCTAssertEqual(sut.isShowingLodingIndicator, false)
     }
     
     // MARK: - Helpers
@@ -127,6 +127,10 @@ class BurgerListControllerTests: XCTestCase {
 private extension BurgerListViewController {
     func simulateUserInitiatedReload() {
         refreshControl?.simulatePullToRefresh()
+    }
+    
+    var isShowingLodingIndicator: Bool? {
+        refreshControl?.isRefreshing
     }
 }
 
