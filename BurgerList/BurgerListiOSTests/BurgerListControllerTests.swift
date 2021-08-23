@@ -1,6 +1,6 @@
 //
 //  BurgerListControllerTests.swift
-//  BurgerListTests
+//  BurgerListiOSTests
 //
 //  Created by Gustavo on 9/08/21.
 //  Copyright © 2021 Gustavo Londono. All rights reserved.
@@ -29,15 +29,13 @@ final class BurgerListViewController: UIViewController {
 class BurgerListControllerTests: XCTestCase {
     
     func test_init_doesNotMesssageLoader() {
-        let loader = LoaderSpy()
-        _ = BurgerListViewController(loader: loader)
+        let (_, loader) = makeSUT()
         
         XCTAssertEqual(loader.loaderCallCount, 0)
     }
     
     func test_viewDidLoad_loadsBugerList() {
-        let loader = LoaderSpy()
-        let sut = BurgerListViewController(loader: loader)
+        let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
         
@@ -45,6 +43,18 @@ class BurgerListControllerTests: XCTestCase {
     }
     
     // MARK: - Helpers
+    
+    private func makeSUT(file: StaticString = #file,
+                         line: UInt = #line) -> (sut: BurgerListViewController, loader: LoaderSpy) {
+        let loader = LoaderSpy()
+        let sut = BurgerListViewController(loader: loader)
+        
+        trackForMemoryLeaks(loader, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
+        
+        return (sut: sut, loader: loader)
+    }
+    
     class LoaderSpy: BurgerLoader {
         private(set) var loaderCallCount = 0
         

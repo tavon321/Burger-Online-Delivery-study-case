@@ -30,6 +30,7 @@
 		71C1893E26D40BC000BAC99B /* BurgerListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */; };
 		71C1894226D42CB300BAC99B /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; platformFilter = ios; };
 		71C1894326D42CB300BAC99B /* BurgerList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		71C1894826D42D1B00BAC99B /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
 		71C6AFD926B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */; };
 		71C6AFDB26B1BFFC0080DF0D /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
 		71C6AFE126B207090080DF0D /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
@@ -699,6 +700,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71C1894826D42D1B00BAC99B /* XCTestCase+TrackForMemoryLeaks.swift in Sources */,
 				71C1893E26D40BC000BAC99B /* BurgerListControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
