@@ -42,32 +42,32 @@ class BurgerListControllerTests: XCTestCase {
     func test_loadBurgerActions_requestBurgerListFromLoader() {
         let (sut, loader) = makeSUT()
         
-        XCTAssertEqual(loader.loaderCallCount, 0)
+        XCTAssertEqual(loader.loaderCallCount, 0, "Expected NO loading request when the view isn't loaded")
         
         sut.loadViewIfNeeded()
-        XCTAssertEqual(loader.loaderCallCount, 1)
+        XCTAssertEqual(loader.loaderCallCount, 1, "Expected loading request when the view did load")
         
         sut.simulateUserInitiatedReload()
-        XCTAssertEqual(loader.loaderCallCount, 2)
+        XCTAssertEqual(loader.loaderCallCount, 2, "Expected a request when the user initiates a load")
         
         sut.simulateUserInitiatedReload()
-        XCTAssertEqual(loader.loaderCallCount, 3)
+        XCTAssertEqual(loader.loaderCallCount, 3, "Expected a 2nd request when the user initiates a load")
     }
     
-    func test_viewDidLoad_showsLoadingIndicator() {
+    func test_loadingFeedIndicator_isVisibleWhileLoadingBurgerList() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        XCTAssertEqual(sut.isShowingLodingIndicator, true)
+        XCTAssertEqual(sut.isShowingLodingIndicator, true, "Expected loading indicator once the view is loaded")
         
         loader.completeBurgerLoading(at: 0)
-        XCTAssertEqual(sut.isShowingLodingIndicator, false)
+        XCTAssertEqual(sut.isShowingLodingIndicator, false, "Expected no loading indicator once the view loading is completed")
         
         sut.simulateUserInitiatedReload()
-        XCTAssertEqual(sut.isShowingLodingIndicator, true)
+        XCTAssertEqual(sut.isShowingLodingIndicator, true, "Expected loading indicator once the user initiates a refresh")
         
         loader.completeBurgerLoading(at: 1)
-        XCTAssertEqual(sut.isShowingLodingIndicator, false)
+        XCTAssertEqual(sut.isShowingLodingIndicator, false, "Expected no loading indicater once user initiated refresh ended")
     }
     
     // MARK: - Helpers
