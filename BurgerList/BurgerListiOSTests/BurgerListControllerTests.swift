@@ -7,11 +7,22 @@
 //
 
 import XCTest
+import UIKit
 
-final class BurgerListViewController {
-    init(loader: BurgerListControllerTests.LoaderSpy) {
+final class BurgerListViewController: UIViewController {
+    private var loader: BurgerListControllerTests.LoaderSpy?
+    
+    convenience init(loader: BurgerListControllerTests.LoaderSpy) {
+        self.init()
+        
+        self.loader = loader
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        loader?.load()
+    }
 }
 
 class BurgerListControllerTests: XCTestCase {
@@ -23,8 +34,21 @@ class BurgerListControllerTests: XCTestCase {
         XCTAssertEqual(loader.loaderCallCount, 0)
     }
     
+    func test_viewDidLoad_loadsBugerList() {
+        let loader = LoaderSpy()
+        let sut = BurgerListViewController(loader: loader)
+        
+        sut.loadViewIfNeeded()
+        
+        XCTAssertEqual(loader.loaderCallCount, 1)
+    }
+    
     // MARK: - Helpers
     class LoaderSpy {
         private(set) var loaderCallCount = 0
+        
+        func load() {
+            loaderCallCount += 1
+        }
     }
 }
