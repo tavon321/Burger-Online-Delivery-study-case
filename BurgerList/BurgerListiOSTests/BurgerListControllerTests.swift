@@ -9,33 +9,7 @@
 import XCTest
 import UIKit
 import BurgerList
-
-final class BurgerListViewController: UITableViewController {
-    private var loader: BurgerLoader?
-    
-    convenience init(loader: BurgerLoader) {
-        self.init()
-        
-        self.loader = loader
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        
-        refresh()
-    }
-    
-    @objc private func refresh() {
-        refreshControl?.beginRefreshing()
-        
-        loader?.load { [weak self] _ in
-            self?.refreshControl?.endRefreshing()
-        }
-    }
-}
+import BurgerListiOS
 
 class BurgerListControllerTests: XCTestCase {
     
