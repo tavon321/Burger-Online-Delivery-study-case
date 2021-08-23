@@ -24,12 +24,13 @@ final class BurgerListViewController: UITableViewController {
         
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        refreshControl?.beginRefreshing()
         
         refresh()
     }
     
     @objc private func refresh() {
+        refreshControl?.beginRefreshing()
+        
         loader?.load { [weak self] _ in
             self?.refreshControl?.endRefreshing()
         }
@@ -38,22 +39,13 @@ final class BurgerListViewController: UITableViewController {
 
 class BurgerListControllerTests: XCTestCase {
     
-    func test_init_doesNotMesssageLoader() {
-        let (_, loader) = makeSUT()
+    func test_loadBurgerActions_requestBurgerListFromLoader() {
+        let (sut, loader) = makeSUT()
         
         XCTAssertEqual(loader.loaderCallCount, 0)
-    }
-    
-    func test_viewDidLoad_loadsBugerList() {
-        let (sut, loader) = makeSUT()
-        sut.loadViewIfNeeded()
         
-        XCTAssertEqual(loader.loaderCallCount, 1)
-    }
-    
-    func test_userInitiatedReload_loadBurgeList() {
-        let (sut, loader) = makeSUT()
         sut.loadViewIfNeeded()
+        XCTAssertEqual(loader.loaderCallCount, 1)
         
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loaderCallCount, 2)
@@ -63,36 +55,18 @@ class BurgerListControllerTests: XCTestCase {
     }
     
     func test_viewDidLoad_showsLoadingIndicator() {
-        let (sut, _) = makeSUT()
-        
-        sut.loadViewIfNeeded()
-        
-        XCTAssertEqual(sut.isShowingLodingIndicator, true)
-    }
-    
-    func test_viewDidLoad_hidesLoadingIndicatorOnLoaderCompletion() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        loader.completeBurgerLoading()
+        XCTAssertEqual(sut.isShowingLodingIndicator, true)
         
+        loader.completeBurgerLoading(at: 0)
         XCTAssertEqual(sut.isShowingLodingIndicator, false)
-    }
-    
-    func test_userInitiatedReload_showsLoadingIndicator() {
-        let (sut, _) = makeSUT()
         
         sut.simulateUserInitiatedReload()
-        
         XCTAssertEqual(sut.isShowingLodingIndicator, true)
-    }
-    
-    func test_userInitiatedReload_hidesLoadingIndicatorOnLoaderCompletion() {
-        let (sut, loader) = makeSUT()
         
-        sut.simulateUserInitiatedReload()
-        loader.completeBurgerLoading()
-        
+        loader.completeBurgerLoading(at: 1)
         XCTAssertEqual(sut.isShowingLodingIndicator, false)
     }
     
@@ -118,8 +92,8 @@ class BurgerListControllerTests: XCTestCase {
             completions.append(completion)
         }
         
-        func completeBurgerLoading() {
-            completions[0](.success([]))
+        func completeBurgerLoading(at index: Int) {
+            completions[index](.success([]))
         }
     }
 }
