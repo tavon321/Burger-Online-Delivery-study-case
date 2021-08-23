@@ -11,19 +11,21 @@ import XCTest
 final class BurgerListViewController {
     init(loader: LoaderSpy) {
     }
+    
 }
 
-class BurgerListControllerTests: XCTest {
+class LoaderSpy {
+    private(set) var loaderCallCount = 0
+}
+
+class BurgerListControllerTests: XCTestCase {
     
     func test_init_doesNotMesssageLoader() {
         let loader = LoaderSpy()
         _ = BurgerListViewController(loader: loader)
         
-        XCTAssertEqual(loader.loadCallCount, 0)
+        XCTAssertEqual(loader.loaderCallCount, 0)
     }
     
     // MARK: - Helpers
-    class LoaderSpy {
-        private(set) var loaderCallCount = 0
-    }
 }

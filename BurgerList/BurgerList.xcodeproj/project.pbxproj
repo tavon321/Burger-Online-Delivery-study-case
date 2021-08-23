@@ -21,13 +21,13 @@
 		711A664C2682AC31000B6EDF /* BurgerStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 711A664A2682AC31000B6EDF /* BurgerStore.xcdatamodeld */; };
 		712FEACE26B327BE00770D2D /* SharedCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E0B29E2524DC5100661112 /* SharedCacheTestHelpers.swift */; };
 		712FEACF26B3284100770D2D /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */; };
-		7146322826C1B86E0005CF50 /* BurgerListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */; };
 		7193084726B46271001B5A26 /* BurgerListiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7193083E26B46271001B5A26 /* BurgerListiOS.framework */; };
 		71B28AF3261DDDA100DF448B /* CoreDataBurgerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28AF2261DDDA100DF448B /* CoreDataBurgerStoreTests.swift */; };
 		71B28AFA261DDFA800DF448B /* CoreDataBurgerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28AF9261DDFA800DF448B /* CoreDataBurgerStore.swift */; };
 		71B28B02261DE15900DF448B /* ManageBurger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B01261DE15900DF448B /* ManageBurger.swift */; };
 		71B28B07261DE2A600DF448B /* ManagedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B06261DE2A600DF448B /* ManagedCache.swift */; };
 		71B28B0D261DE8CB00DF448B /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */; };
+		71C1893E26D40BC000BAC99B /* BurgerListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */; };
 		71C6AFD926B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */; };
 		71C6AFDB26B1BFFC0080DF0D /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
 		71C6AFE126B207090080DF0D /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
@@ -229,7 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				7193084126B46271001B5A26 /* Info.plist */,
-				7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */,
 			);
 			path = BurgerListiOS;
 			sourceTree = "<group>";
@@ -237,6 +236,7 @@
 		7193084A26B46271001B5A26 /* BurgerListiOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */,
 				7193084D26B46271001B5A26 /* Info.plist */,
 			);
 			path = BurgerListiOSTests;
@@ -665,6 +665,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71C1893E26D40BC000BAC99B /* BurgerListControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,7 +733,6 @@
 				DC6C67F424E6C6840071525B /* CacheBurgerUseCaseTests.swift in Sources */,
 				401E0BA42602786100F83952 /* BurgerStoreSpecs.swift in Sources */,
 				401E0BB4260280B200F83952 /* XCTestCase+FailableRetreiveBurgerSpecs.swift in Sources */,
-				7146322826C1B86E0005CF50 /* BurgerListControllerTests.swift in Sources */,
 				DCB38B9E24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
