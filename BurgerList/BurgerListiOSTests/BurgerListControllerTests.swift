@@ -9,13 +9,9 @@
 import XCTest
 
 final class BurgerListViewController {
-    init(loader: LoaderSpy) {
+    init(loader: BurgerListControllerTests.LoaderSpy) {
     }
     
-}
-
-class LoaderSpy {
-    private(set) var loaderCallCount = 0
 }
 
 class BurgerListControllerTests: XCTestCase {
@@ -28,4 +24,7 @@ class BurgerListControllerTests: XCTestCase {
     }
     
     // MARK: - Helpers
+    class LoaderSpy {
+        private(set) var loaderCallCount = 0
+    }
 }
