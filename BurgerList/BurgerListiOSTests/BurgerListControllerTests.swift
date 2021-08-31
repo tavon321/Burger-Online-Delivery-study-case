@@ -35,13 +35,13 @@ class BurgerListControllerTests: XCTestCase {
         XCTAssertEqual(sut.isShowingLodingIndicator, true, "Expected loading indicator once the view is loaded")
         
         loader.completeBurgerLoading(at: 0)
-        XCTAssertEqual(sut.isShowingLodingIndicator, false, "Expected no loading indicator once the view loading is completed")
+        XCTAssertEqual(sut.isShowingLodingIndicator, false, "Expected no loading indicator once the view loading is completed successfully")
         
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(sut.isShowingLodingIndicator, true, "Expected loading indicator once the user initiates a refresh")
         
-        loader.completeBurgerLoading(at: 1)
-        XCTAssertEqual(sut.isShowingLodingIndicator, false, "Expected no loading indicater once user initiated refresh ended")
+        loader.completeBurgerLoading(with: anyError, at: 1)
+        XCTAssertEqual(sut.isShowingLodingIndicator, false, "Expected no loading indicater once user initiated refresh ended with error")
     }
     
     func test_loadBurgerListCompletion_renderCellView() {
