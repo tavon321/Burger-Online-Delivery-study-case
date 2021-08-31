@@ -11,6 +11,7 @@ import BurgerList
 
 public protocol BurgerImageLoader {
     func loadImageData(from url: URL)
+    func cancelImageDataLoad(from url: URL)
 }
 
 public final class BurgerListViewController: UITableViewController {
@@ -70,5 +71,10 @@ public final class BurgerListViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let url = tableModel[indexPath.row].imageURL else { return }
+        imageLoader?.cancelImageDataLoad(from: url)
     }
 }

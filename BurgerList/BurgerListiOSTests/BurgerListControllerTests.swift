@@ -85,7 +85,6 @@ class BurgerListControllerTests: XCTestCase {
         
         sut.loadViewIfNeeded()
         loader.completeBurgerLoading(with: [burger0, burger1])
-        
         XCTAssertEqual(loader.loadedImageURLs, [], "Expecte no image URL reques until views became visible")
         
         sut.simulateBurgerViewVisible(at: 0)
@@ -95,6 +94,24 @@ class BurgerListControllerTests: XCTestCase {
         sut.simulateBurgerViewVisible(at: 1)
         XCTAssertEqual(loader.loadedImageURLs, [burger0.imageURL, burger1.imageURL],
                        "Expected first and second image URL Requested once the view is visible")
+    }
+    
+    func test_burgerView_cancelsLoadsImageURLWhenNotVisible() {
+        let burger0 = makeBurger(name: "a name", imageURL: URL(string:"http://url-0.com")!)
+        let burger1 = makeBurger(name: "a name", imageURL: URL(string:"http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBurgerLoading(with: [burger0, burger1])
+        XCTAssertEqual(loader.cancelledImageURLs, [], "Expecte no cancelled image URL until the image is not visible")
+        
+        sut.simulateBurgerViewNotVisible(at: 0)
+        XCTAssertEqual(loader.cancelledImageURLs, [burger0.imageURL],
+                       "Expected one image to be cancelled once the image is not visible")
+        
+        sut.simulateBurgerViewNotVisible(at: 1)
+        XCTAssertEqual(loader.cancelledImageURLs, [burger0.imageURL, burger1.imageURL],
+                       "Expected all the images to be cancelled once the second image is not visiblle")
     }
     
     // MARK: - Helpers
@@ -119,7 +136,7 @@ class BurgerListControllerTests: XCTestCase {
                         at index: Int,
                         file: StaticString = #file,
                         line: UInt = #line) {
-        let view = sut.burgerImageView(at: index) as? BurgerCell
+        let view = sut.burgerImageView(at: index)
         
         XCTAssertNotNil(view,
                         "Expected \(BurgerCell.self) instance, got \(String(describing: view)) instead",
@@ -163,6 +180,7 @@ class BurgerListControllerTests: XCTestCase {
     }
     
     class LoaderSpy: BurgerLoader, BurgerImageLoader {
+        
         private(set) var burgerRequest = [(BurgerLoader.Result) -> Void]()
         
         var burgerRequestCallCount: Int {
@@ -184,21 +202,36 @@ class BurgerListControllerTests: XCTestCase {
         
         // MARK: BurgerImageLoader
         private(set) var loadedImageURLs = [URL]()
+        private(set) var cancelledImageURLs = [URL]()
         
         func loadImageData(from url: URL) {
             loadedImageURLs.append(url)
+        }
+        
+        func cancelImageDataLoad(from url: URL) {
+            cancelledImageURLs.append(url)
         }
     }
 }
 
 private extension BurgerListViewController {
     
-    func simulateBurgerViewVisible(at index: Int) {
-        _ = burgerImageView(at: index)
+    @discardableResult
+    func simulateBurgerViewVisible(at index: Int) -> BurgerCell? {
+        return burgerImageView(at: index)
     }
     
     func simulateUserInitiatedReload() {
         refreshControl?.simulatePullToRefresh()
+    }
+    
+    func simulateBurgerViewNotVisible(at row: Int) {
+        guard let view = simulateBurgerViewVisible(at: row) else { return }
+        
+        let delegate = tableView.delegate
+        let index = IndexPath(row: row, section: burgerImageSection)
+        
+        delegate?.tableView?(tableView, didEndDisplaying: view, forRowAt: index)
     }
     
     var isShowingLodingIndicator: Bool? {
@@ -209,11 +242,11 @@ private extension BurgerListViewController {
         tableView.numberOfRows(inSection: burgerImageSection)
     }
     
-    func burgerImageView(at row: Int) -> UITableViewCell? {
+    func burgerImageView(at row: Int) -> BurgerCell? {
         let ds = tableView.dataSource
         let index = IndexPath(row: row, section: burgerImageSection)
         
-        return ds?.tableView(tableView, cellForRowAt: index)
+        return ds?.tableView(tableView, cellForRowAt: index) as? BurgerCell
     }
     
     private var burgerImageSection: Int { 0 }
