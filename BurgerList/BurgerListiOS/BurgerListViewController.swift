@@ -9,15 +9,19 @@
 import UIKit
 import BurgerList
 
+public protocol BurgerImageDataLoadTask {
+    func cancel()
+}
+
 public protocol BurgerImageLoader {
-    func loadImageData(from url: URL)
-    func cancelImageDataLoad(from url: URL)
+    func loadImageData(from url: URL) -> BurgerImageDataLoadTask
 }
 
 public final class BurgerListViewController: UITableViewController {
     private var burgerloader: BurgerLoader?
     private var imageLoader: BurgerImageLoader?
     private var tableModel = [Burger]()
+    private var tasks = [IndexPath: BurgerImageDataLoadTask]()
     
     public convenience init(burgerLoader: BurgerLoader,
                             imageLoader: BurgerImageLoader) {
@@ -67,7 +71,7 @@ public final class BurgerListViewController: UITableViewController {
         cell.descriptionLabel.isHidden = cellModel.description == nil
         
         if let url = cellModel.imageURL {
-            imageLoader?.loadImageData(from: url)
+            tasks[indexPath] = imageLoader?.loadImageData(from: url)
         }
         
         return cell
@@ -75,6 +79,7 @@ public final class BurgerListViewController: UITableViewController {
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let url = tableModel[indexPath.row].imageURL else { return }
-        imageLoader?.cancelImageDataLoad(from: url)
+        tasks[indexPath]?.cancel()
+        tasks[indexPath] = nil
     }
 }
