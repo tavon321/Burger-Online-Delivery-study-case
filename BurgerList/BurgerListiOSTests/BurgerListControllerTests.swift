@@ -16,16 +16,16 @@ class BurgerListControllerTests: XCTestCase {
     func test_loadBurgerActions_requestBurgerListFromLoader() {
         let (sut, loader) = makeSUT()
         
-        XCTAssertEqual(loader.loaderCallCount, 0, "Expected NO loading request when the view isn't loaded")
+        XCTAssertEqual(loader.burgerRequestCallCount, 0, "Expected NO loading request when the view isn't loaded")
         
         sut.loadViewIfNeeded()
-        XCTAssertEqual(loader.loaderCallCount, 1, "Expected loading request when the view did load")
+        XCTAssertEqual(loader.burgerRequestCallCount, 1, "Expected loading request when the view did load")
         
         sut.simulateUserInitiatedReload()
-        XCTAssertEqual(loader.loaderCallCount, 2, "Expected a request when the user initiates a load")
+        XCTAssertEqual(loader.burgerRequestCallCount, 2, "Expected a request when the user initiates a load")
         
         sut.simulateUserInitiatedReload()
-        XCTAssertEqual(loader.loaderCallCount, 3, "Expected a 2nd request when the user initiates a load")
+        XCTAssertEqual(loader.burgerRequestCallCount, 3, "Expected a 2nd request when the user initiates a load")
     }
     
     func test_loadingFeedIndicator_isVisibleWhileLoadingBurgerList() {
@@ -78,6 +78,25 @@ class BurgerListControllerTests: XCTestCase {
         assertThat(sut, isRendering: [burger0])
     }
     
+    func test_burgerView_loadsImageURLWhenVisible() {
+        let burger0 = makeBurger(name: "a name", imageURL: URL(string:"http://url-0.com")!)
+        let burger1 = makeBurger(name: "a name", imageURL: URL(string:"http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBurgerLoading(with: [burger0, burger1])
+        
+        XCTAssertEqual(loader.loadedImageURLs, [], "Expecte no image URL reques until views became visible")
+        
+        sut.simulateBurgerViewVisible(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [burger0.imageURL],
+                       "Expected first image URL Requested once the view is visible")
+        
+        sut.simulateBurgerViewVisible(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [burger0.imageURL, burger1.imageURL],
+                       "Expected first and second image URL Requested once the view is visible")
+    }
+    
     // MARK: - Helpers
     private func assertThat(_ sut: BurgerListViewController,
                             isRendering burgers: [Burger],
@@ -128,7 +147,7 @@ class BurgerListControllerTests: XCTestCase {
                          line: UInt = #line)
     -> (sut: BurgerListViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = BurgerListViewController(loader: loader)
+        let sut = BurgerListViewController(burgerLoader: loader, imageLoader: loader)
         
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
@@ -143,27 +162,41 @@ class BurgerListControllerTests: XCTestCase {
         Burger(id: UUID(), name: name, description: description, imageURL: imageURL)
     }
     
-    class LoaderSpy: BurgerLoader {
-        var loaderCallCount: Int {
-            completions.count
-        }
-        private(set) var completions = [(BurgerLoader.Result) -> Void]()
+    class LoaderSpy: BurgerLoader, BurgerImageLoader {
+        private(set) var burgerRequest = [(BurgerLoader.Result) -> Void]()
         
+        var burgerRequestCallCount: Int {
+            burgerRequest.count
+        }
+        
+        // MARK: BurgerLoader
         func load(completion: @escaping (BurgerLoader.Result) -> Void) {
-            completions.append(completion)
+            burgerRequest.append(completion)
         }
         
         func completeBurgerLoading(with burgers: [Burger] = [], at index: Int = 0) {
-            completions[index](.success(burgers))
+            burgerRequest[index](.success(burgers))
         }
         
         func completeBurgerLoading(with error: Error, at index: Int = 0) {
-            completions[index](.failure(error))
+            burgerRequest[index](.failure(error))
+        }
+        
+        // MARK: BurgerImageLoader
+        private(set) var loadedImageURLs = [URL]()
+        
+        func loadImageData(from url: URL) {
+            loadedImageURLs.append(url)
         }
     }
 }
 
 private extension BurgerListViewController {
+    
+    func simulateBurgerViewVisible(at index: Int) {
+        _ = burgerImageView(at: index)
+    }
+    
     func simulateUserInitiatedReload() {
         refreshControl?.simulatePullToRefresh()
     }

@@ -9,14 +9,21 @@
 import UIKit
 import BurgerList
 
+public protocol BurgerImageLoader {
+    func loadImageData(from url: URL)
+}
+
 public final class BurgerListViewController: UITableViewController {
-    private var loader: BurgerLoader?
+    private var burgerloader: BurgerLoader?
+    private var imageLoader: BurgerImageLoader?
     private var tableModel = [Burger]()
     
-    public convenience init(loader: BurgerLoader) {
+    public convenience init(burgerLoader: BurgerLoader,
+                            imageLoader: BurgerImageLoader) {
         self.init()
         
-        self.loader = loader
+        self.burgerloader = burgerLoader
+        self.imageLoader = imageLoader
     }
     
     public override func viewDidLoad() {
@@ -31,7 +38,7 @@ public final class BurgerListViewController: UITableViewController {
     @objc private func refresh() {
         refreshControl?.beginRefreshing()
         
-        loader?.load { [weak self] result in
+        burgerloader?.load { [weak self] result in
             switch result {
             case .success(let burgers):
                 self?.tableModel = burgers
@@ -57,6 +64,10 @@ public final class BurgerListViewController: UITableViewController {
         cell.nameLabel.text = cellModel.name
         cell.descriptionLabel.text = cellModel.description
         cell.descriptionLabel.isHidden = cellModel.description == nil
+        
+        if let url = cellModel.imageURL {
+            imageLoader?.loadImageData(from: url)
+        }
         
         return cell
     }
