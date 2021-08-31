@@ -32,10 +32,16 @@ public final class BurgerListViewController: UITableViewController {
         refreshControl?.beginRefreshing()
         
         loader?.load { [weak self] result in
-            self?.refreshControl?.endRefreshing()
+            switch result {
+            case .success(let burgers):
+                self?.tableModel = burgers
+                self?.tableView.reloadData()
+            case .failure:
+                break
+                
+            }
             
-            self?.tableModel = (try? result.get()) ?? []
-            self?.tableView.reloadData()
+            self?.refreshControl?.endRefreshing()
         }
     }
     

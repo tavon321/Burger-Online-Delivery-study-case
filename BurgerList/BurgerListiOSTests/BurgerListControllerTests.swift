@@ -50,7 +50,6 @@ class BurgerListControllerTests: XCTestCase {
         let burger2 = makeBurger(name: "a name", imageURL: anyURL)
         let burger3 = makeBurger(name: "a name", description: "a desccription", imageURL: anyURL)
         
-        
         let (sut, loader) = makeSUT()
         
         assertThat(sut, isRendering: [])
@@ -63,6 +62,20 @@ class BurgerListControllerTests: XCTestCase {
         sut.simulateUserInitiatedReload()
         loader.completeBurgerLoading(with: burgers, at: 1)
         assertThat(sut, isRendering: burgers)
+    }
+    
+    func test_loadBurgerCompletion_doesNotAlterCurrentRenderingState() {
+        let burger0 = makeBurger(name: "a name", description: "a desccription")
+        
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBurgerLoading(with: [burger0])
+        assertThat(sut, isRendering: [burger0])
+        
+        sut.simulateUserInitiatedReload()
+        loader.completeBurgerLoading(with: anyError)
+        assertThat(sut, isRendering: [burger0])
     }
     
     // MARK: - Helpers
@@ -142,6 +155,10 @@ class BurgerListControllerTests: XCTestCase {
         
         func completeBurgerLoading(with burgers: [Burger] = [], at index: Int = 0) {
             completions[index](.success(burgers))
+        }
+        
+        func completeBurgerLoading(with error: Error, at index: Int = 0) {
+            completions[index](.failure(error))
         }
     }
 }
