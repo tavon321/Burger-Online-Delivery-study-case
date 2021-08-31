@@ -11,6 +11,7 @@ import BurgerList
 
 public final class BurgerListViewController: UITableViewController {
     private var loader: BurgerLoader?
+    private var tableModel = [Burger]()
     
     public convenience init(loader: BurgerLoader) {
         self.init()
@@ -30,8 +31,27 @@ public final class BurgerListViewController: UITableViewController {
     @objc private func refresh() {
         refreshControl?.beginRefreshing()
         
-        loader?.load { [weak self] _ in
+        loader?.load { [weak self] result in
             self?.refreshControl?.endRefreshing()
+            
+            self?.tableModel = (try? result.get()) ?? []
+            self?.tableView.reloadData()
         }
+    }
+    
+    public override func tableView(_ tableView: UITableView,
+                                   numberOfRowsInSection section: Int) -> Int {
+        return tableModel.count
+    }
+    
+    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellModel = tableModel[indexPath.row]
+        let cell = BurgerCell()
+        
+        cell.nameLabel.text = cellModel.name
+        cell.descriptionLabel.text = cellModel.description
+        cell.descriptionLabel.isHidden = cellModel.description == nil
+        
+        return cell
     }
 }
