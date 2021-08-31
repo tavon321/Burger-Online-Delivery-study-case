@@ -22,7 +22,7 @@ class BurgerListControllerTests: XCTestCase {
         XCTAssertEqual(loader.loaderCallCount, 1, "Expected loading request when the view did load")
         
         sut.simulateUserInitiatedReload()
-        XCTAssertEqual(loader.loaderCallCount, 2, "Expected a request when the user initiates a load")ƒ
+        XCTAssertEqual(loader.loaderCallCount, 2, "Expected a request when the user initiates a load")
         
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loaderCallCount, 3, "Expected a 2nd request when the user initiates a load")
