@@ -44,7 +44,7 @@ class BurgerListControllerTests: XCTestCase {
         XCTAssertEqual(sut.isShowingLodingIndicator, false, "Expected no loading indicater once user initiated refresh ended")
     }
     
-    func test_loadBurgerListCompletion() {
+    func test_loadBurgerListCompletion_renderCellView() {
         let burger0 = makeBurger(name: "a name", description: "a desccription")
         let burger1 = makeBurger(name: "a name")
         let burger2 = makeBurger(name: "a name", imageURL: anyURL)
