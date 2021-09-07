@@ -32,16 +32,16 @@ class BurgerListControllerTests: XCTestCase {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        XCTAssertEqual(sut.isShowingLodingIndicator, true, "Expected loading indicator once the view is loaded")
+        XCTAssertEqual(sut.isShowingLoadingIndicator, true, "Expected loading indicator once the view is loaded")
         
         loader.completeBurgerLoading(at: 0)
-        XCTAssertEqual(sut.isShowingLodingIndicator, false, "Expected no loading indicator once the view loading is completed successfully")
+        XCTAssertEqual(sut.isShowingLoadingIndicator, false, "Expected no loading indicator once the view loading is completed successfully")
         
         sut.simulateUserInitiatedReload()
-        XCTAssertEqual(sut.isShowingLodingIndicator, true, "Expected loading indicator once the user initiates a refresh")
+        XCTAssertEqual(sut.isShowingLoadingIndicator, true, "Expected loading indicator once the user initiates a refresh")
         
         loader.completeBurgerLoading(with: anyError, at: 1)
-        XCTAssertEqual(sut.isShowingLodingIndicator, false, "Expected no loading indicater once user initiated refresh ended with error")
+        XCTAssertEqual(sut.isShowingLoadingIndicator, false, "Expected no loading indicater once user initiated refresh ended with error")
     }
     
     func test_loadBurgerListCompletion_renderCellView() {
@@ -114,6 +114,29 @@ class BurgerListControllerTests: XCTestCase {
                        "Expected all the images to be cancelled once the second image is not visiblle")
     }
     
+    
+    func test_burgerViewLoadingIndicator_isVisibleWhenLoadingImage() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBurgerLoading(with: [makeBurger(imageURL: anyURL),
+                                            makeBurger(imageURL: anyURL)])
+        
+        let view0 = sut.simulateBurgerViewVisible(at: 0)
+        let view1 = sut.simulateBurgerViewVisible(at: 1)
+        
+        XCTAssertEqual(view0?.isShowingImageLoadingIndicator, true, "Expected loading indicator for first view while loading first image")
+        XCTAssertEqual(view1?.isShowingImageLoadingIndicator, true, "Expected loading indicator for second view while loading second image")
+        
+        loader.completeImageLoading(at: 0)
+        XCTAssertEqual(view0?.isShowingImageLoadingIndicator, false, "Expected no loading indicator for first view once first image loading completes successfully")
+        XCTAssertEqual(view1?.isShowingImageLoadingIndicator, true, "Expected no loading indicator state change for second view once first image loading completes successfully")
+        
+        loader.completeImageLoadingWithError(at: 1)
+        XCTAssertEqual(view0?.isShowingImageLoadingIndicator, false, "Expected no loading indicator state change for first view once second image loading completes with error")
+        XCTAssertEqual(view1?.isShowingImageLoadingIndicator, false, "Expected no loading indicator for second view once second image loading completes with error")
+    }
+    
     // MARK: - Helpers
     private func assertThat(_ sut: BurgerListViewController,
                             isRendering burgers: [Burger],
@@ -126,7 +149,9 @@ class BurgerListControllerTests: XCTestCase {
         }
         
         burgers.enumerated()
-            .forEach({ assert(sut, hasViewCofiguredFor: $1, at: $0,
+            .forEach({ assert(sut,
+                              hasViewCofiguredFor: $1,
+                              at: $0,
                               file: file,
                               line: line) })
     }
@@ -136,26 +161,26 @@ class BurgerListControllerTests: XCTestCase {
                         at index: Int,
                         file: StaticString = #file,
                         line: UInt = #line) {
-        let view = sut.burgerImageView(at: index)
+        guard let view = sut.burgerImageView(at: index) else {
+            XCTFail("Expected \(BurgerCell.self) instance",
+                    file: file,
+                    line: line)
+            return
+        }
         
-        XCTAssertNotNil(view,
-                        "Expected \(BurgerCell.self) instance, got \(String(describing: view)) instead",
-                        file: file,
-                        line: line)
-        
-        let burgerDescription = burger.description != nil
-        XCTAssertEqual(view?.isShowingDescription, burgerDescription,
-                       "Expected 'isShowingDescription' to be \(burgerDescription) on burger\(index)",
+        let isShowingburgerDescription = burger.description != nil
+        XCTAssertEqual(view.isShowingDescription, isShowingburgerDescription,
+                       "Expected 'isShowingDescription' to be \(isShowingburgerDescription) on burger\(index)",
                        file: file,
                        line: line)
         
-        XCTAssertEqual(view?.descriptionText, burger.description,
-                       "Expected 'descriptionText' to be \(String(describing: burger.description)), got \(String(describing: view?.descriptionText))",
+        XCTAssertEqual(view.descriptionText, burger.description,
+                       "Expected 'descriptionText' to be \(String(describing: burger.description)), got \(String(describing: view.descriptionText))",
                        file: file,
                        line: line)
         
-        XCTAssertEqual(view?.nameText, burger.name,
-                       "Expected 'nameText' to be \(burger.name), got \(String(describing: view?.nameText))",
+        XCTAssertEqual(view.nameText, burger.name,
+                       "Expected 'nameText' to be \(burger.name), got \(String(describing: view.nameText))",
                        file: file,
                        line: line)
     }
@@ -172,7 +197,7 @@ class BurgerListControllerTests: XCTestCase {
         return (sut: sut, loader: loader)
     }
     
-    private func makeBurger(name: String,
+    private func makeBurger(name: String = "any name",
                             description: String? = nil,
                             imageURL: URL? = nil)
     -> Burger {
@@ -209,12 +234,25 @@ class BurgerListControllerTests: XCTestCase {
         }
         
         // MARK: BurgerImageLoader
-        private(set) var loadedImageURLs = [URL]()
+        private var imageRequests = [(url: URL, completion: (BurgerImageLoader.Result) -> Void)]()
+        
+        var loadedImageURLs: [URL] {
+            imageRequests.map { $0.url }
+        }
+        
         private(set) var cancelledImageURLs = [URL]()
         
-        func loadImageData(from url: URL) -> BurgerImageDataLoadTask {
-            loadedImageURLs.append(url)
+        func loadImageData(from url: URL, completion: @escaping (BurgerImageLoader.Result) -> Void) -> BurgerImageDataLoadTask {
+            imageRequests.append((url, completion))
             return TaskSpy { [weak self] in self?.cancelledImageURLs.append(url) }
+        }
+        
+        func completeImageLoading(with imageData: Data = Data(), at index: Int = 0) {
+            imageRequests[index].completion(.success(imageData))
+        }
+        
+        func completeImageLoadingWithError(at index: Int = 0) {
+            imageRequests[index].completion(.failure(anyError))
         }
     }
 }
@@ -239,7 +277,7 @@ private extension BurgerListViewController {
         delegate?.tableView?(tableView, didEndDisplaying: view, forRowAt: index)
     }
     
-    var isShowingLodingIndicator: Bool? {
+    var isShowingLoadingIndicator: Bool? {
         refreshControl?.isRefreshing
     }
     
@@ -268,6 +306,10 @@ private extension BurgerCell {
     
     var nameText: String? {
         nameLabel.text
+    }
+    
+    var isShowingImageLoadingIndicator: Bool {
+        imageContainer.isShimmering
     }
 }
 private extension UIRefreshControl {

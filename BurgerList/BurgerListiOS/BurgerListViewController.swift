@@ -14,7 +14,10 @@ public protocol BurgerImageDataLoadTask {
 }
 
 public protocol BurgerImageLoader {
-    func loadImageData(from url: URL) -> BurgerImageDataLoadTask
+    typealias Result = Swift.Result<Data, Error>
+    
+    func loadImageData(from url: URL,
+                       completion: @escaping (Result) -> Void) -> BurgerImageDataLoadTask
 }
 
 public final class BurgerListViewController: UITableViewController {
@@ -69,16 +72,21 @@ public final class BurgerListViewController: UITableViewController {
         cell.nameLabel.text = cellModel.name
         cell.descriptionLabel.text = cellModel.description
         cell.descriptionLabel.isHidden = cellModel.description == nil
+        cell.imageContainer.startShimmering()
         
         if let url = cellModel.imageURL {
-            tasks[indexPath] = imageLoader?.loadImageData(from: url)
+            tasks[indexPath] =
+                imageLoader?.loadImageData(from: url) { [weak self] result in
+                    guard self != nil else { return }
+                    cell.imageContainer.stopShimmering()
+                }
         }
         
         return cell
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let url = tableModel[indexPath.row].imageURL else { return }
+        guard tableModel[indexPath.row].imageURL != nil else { return }
         tasks[indexPath]?.cancel()
         tasks[indexPath] = nil
     }

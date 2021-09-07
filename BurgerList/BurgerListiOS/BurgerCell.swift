@@ -11,4 +11,5 @@ import UIKit
 public class BurgerCell: UITableViewCell {
     public let nameLabel = UILabel()
     public let descriptionLabel = UILabel()
+    public let imageContainer = UIView()
 }
