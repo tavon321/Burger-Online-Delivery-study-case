@@ -72,12 +72,19 @@ public final class BurgerListViewController: UITableViewController {
         cell.nameLabel.text = cellModel.name
         cell.descriptionLabel.text = cellModel.description
         cell.descriptionLabel.isHidden = cellModel.description == nil
+        cell.burgerImageView.image = nil
         cell.imageContainer.startShimmering()
         
         if let url = cellModel.imageURL {
             tasks[indexPath] =
                 imageLoader?.loadImageData(from: url) { [weak self] result in
                     guard self != nil else { return }
+                    switch result {
+                    case .success(let imageData):
+                        cell.burgerImageView.image = UIImage(data: imageData)
+                    case .failure:
+                        break
+                    }
                     cell.imageContainer.stopShimmering()
                 }
         }
