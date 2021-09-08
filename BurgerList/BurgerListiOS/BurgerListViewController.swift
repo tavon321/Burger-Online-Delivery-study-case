@@ -20,7 +20,7 @@ public protocol BurgerImageLoader {
                        completion: @escaping (Result) -> Void) -> BurgerImageDataLoadTask
 }
 
-public final class BurgerListViewController: UITableViewController {
+public final class BurgerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var burgerloader: BurgerLoader?
     private var imageLoader: BurgerImageLoader?
     private var tableModel = [Burger]()
@@ -39,6 +39,7 @@ public final class BurgerListViewController: UITableViewController {
         
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.prefetchDataSource = self
         
         refresh()
     }
@@ -104,5 +105,16 @@ public final class BurgerListViewController: UITableViewController {
         guard tableModel[indexPath.row].imageURL != nil else { return }
         tasks[indexPath]?.cancel()
         tasks[indexPath] = nil
+    }
+    
+    public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach { indexPath in
+            let cellModel = tableModel[indexPath.row]
+            
+            guard let imageURL = cellModel.imageURL else { return }
+            
+            _ = imageLoader?.loadImageData(from: imageURL) { _ in }
+        }
+        
     }
 }

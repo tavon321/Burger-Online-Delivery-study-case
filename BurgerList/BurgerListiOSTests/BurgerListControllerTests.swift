@@ -269,6 +269,22 @@ class BurgerListControllerTests: XCTestCase {
                        line: line)
     }
     
+    func test_burgerView_preloadsImageURLWhenNearVisible() {
+            let burger0 = makeBurger(imageURL: URL(string: "http://url-0.com")!)
+            let burger1 = makeBurger(imageURL: URL(string: "http://url-1.com")!)
+            let (sut, loader) = makeSUT()
+
+            sut.loadViewIfNeeded()
+            loader.completeBurgerLoading(with: [burger0, burger1])
+            XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until image is near visible")
+
+            sut.simulateBurgerViewNearVisible(at: 0)
+            XCTAssertEqual(loader.loadedImageURLs, [burger0.imageURL], "Expected first image URL request once first image is near visible")
+
+            sut.simulateBurgerViewNearVisible(at: 1)
+            XCTAssertEqual(loader.loadedImageURLs, [burger0.imageURL, burger1.imageURL], "Expected second image URL request once second image is near visible")
+        }
+    
     private func makeSUT(file: StaticString = #file,
                          line: UInt = #line)
     -> (sut: BurgerListViewController, loader: LoaderSpy) {
@@ -359,6 +375,13 @@ private extension BurgerListViewController {
         let index = IndexPath(row: row, section: burgerImageSection)
         
         delegate?.tableView?(tableView, didEndDisplaying: view, forRowAt: index)
+    }
+    
+    func simulateBurgerViewNearVisible(at row: Int) {
+        let ds = tableView.prefetchDataSource
+        let index = IndexPath(row: row, section: burgerImageSection)
+        
+        ds?.tableView(tableView, prefetchRowsAt: [index])
     }
     
     var isShowingLoadingIndicator: Bool? {
