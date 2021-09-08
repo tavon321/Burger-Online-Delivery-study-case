@@ -182,6 +182,21 @@ class BurgerListControllerTests: XCTestCase {
         XCTAssertEqual(view1?.isShowingRetryAction, true, "Expected retry action for second view once second image loading completes with error")
     }
     
+    func test_burgerRetryButton_isVisibleOnInvalidData() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBurgerLoading(with: [makeBurger(imageURL: anyURL)])
+        
+        let view = sut.simulateBurgerViewVisible(at: 0)
+        XCTAssertEqual(view?.isShowingRetryAction, false, "Expected no retry action for first view while loading first image")
+        
+        let invalidImageData = Data("invalid data".utf8)
+        loader.completeImageLoading(with: invalidImageData)
+        
+        XCTAssertEqual(view?.isShowingRetryAction, true, "Expected retry button on successful load with invalid data")
+    }
+    
     // MARK: - Helpers
     private func assertThat(_ sut: BurgerListViewController,
                             isRendering burgers: [Burger],

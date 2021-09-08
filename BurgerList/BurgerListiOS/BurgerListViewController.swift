@@ -82,7 +82,10 @@ public final class BurgerListViewController: UITableViewController {
                     guard self != nil else { return }
                     switch result {
                     case .success(let imageData):
-                        cell.burgerImageView.image = UIImage(data: imageData)
+                        let image = UIImage(data: imageData)
+                        
+                        cell.burgerImageView.image = image
+                        cell.burgerImageRetryButton.isHidden = image != nil
                     case .failure:
                         cell.burgerImageRetryButton.isHidden = false
                     }
