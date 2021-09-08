@@ -76,9 +76,10 @@ public final class BurgerListViewController: UITableViewController {
         cell.burgerImageRetryButton.isHidden = true
         cell.imageContainer.startShimmering()
         
-        if let url = cellModel.imageURL {
-            tasks[indexPath] =
-                imageLoader?.loadImageData(from: url) { [weak self] result in
+        let loadImage = { [weak self] in
+            guard let self = self, let url = cellModel.imageURL else { return }
+            self.tasks[indexPath] =
+                self.imageLoader?.loadImageData(from: url) { [weak self] result in
                     guard self != nil else { return }
                     switch result {
                     case .success(let imageData):
@@ -92,6 +93,9 @@ public final class BurgerListViewController: UITableViewController {
                     cell.imageContainer.stopShimmering()
                 }
         }
+        
+        loadImage()
+        cell.onRetry = loadImage
         
         return cell
     }
