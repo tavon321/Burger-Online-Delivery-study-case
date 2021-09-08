@@ -160,6 +160,28 @@ class BurgerListControllerTests: XCTestCase {
         XCTAssertEqual(view1?.renderedImage, imageData1, "Expected image for second view once second image loading completes successfully")
     }
     
+    func test_burgerViewRetryButton_isVisibleOnImageURLLoadError() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBurgerLoading(with: [makeBurger(imageURL: anyURL),
+                                            makeBurger(imageURL: anyURL)])
+        
+        let view0 = sut.simulateBurgerViewVisible(at: 0)
+        let view1 = sut.simulateBurgerViewVisible(at: 1)
+        XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry action for first view while loading first image")
+        XCTAssertEqual(view1?.isShowingRetryAction, false, "Expected no retry action for second view while loading second image")
+        
+        let imageData = UIImage.make(withColor: .red).pngData()!
+        loader.completeImageLoading(with: imageData, at: 0)
+        XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry action for first view once first image loading completes successfully")
+        XCTAssertEqual(view1?.isShowingRetryAction, false, "Expected no retry action state change for second view once first image loading completes successfully")
+        
+        loader.completeImageLoadingWithError(at: 1)
+        XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry action state change for first view once second image loading completes with error")
+        XCTAssertEqual(view1?.isShowingRetryAction, true, "Expected retry action for second view once second image loading completes with error")
+    }
+    
     // MARK: - Helpers
     private func assertThat(_ sut: BurgerListViewController,
                             isRendering burgers: [Burger],
@@ -323,16 +345,20 @@ private extension BurgerCell {
         !descriptionLabel.isHidden
     }
     
+    var isShowingImageLoadingIndicator: Bool {
+        imageContainer.isShimmering
+    }
+    
+    var isShowingRetryAction: Bool {
+        return !burgerImageRetryButton.isHidden
+    }
+    
     var descriptionText: String? {
         descriptionLabel.text
     }
     
     var nameText: String? {
         nameLabel.text
-    }
-    
-    var isShowingImageLoadingIndicator: Bool {
-        imageContainer.isShimmering
     }
     
     var renderedImage: Data? {

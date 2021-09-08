@@ -13,4 +13,5 @@ public class BurgerCell: UITableViewCell {
     public let descriptionLabel = UILabel()
     public let imageContainer = UIView()
     public let burgerImageView = UIImageView()
+    public let burgerImageRetryButton = UIButton()
 }

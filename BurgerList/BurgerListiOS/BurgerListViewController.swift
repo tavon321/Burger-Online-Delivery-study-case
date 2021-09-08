@@ -73,6 +73,7 @@ public final class BurgerListViewController: UITableViewController {
         cell.descriptionLabel.text = cellModel.description
         cell.descriptionLabel.isHidden = cellModel.description == nil
         cell.burgerImageView.image = nil
+        cell.burgerImageRetryButton.isHidden = true
         cell.imageContainer.startShimmering()
         
         if let url = cellModel.imageURL {
@@ -83,7 +84,7 @@ public final class BurgerListViewController: UITableViewController {
                     case .success(let imageData):
                         cell.burgerImageView.image = UIImage(data: imageData)
                     case .failure:
-                        break
+                        cell.burgerImageRetryButton.isHidden = false
                     }
                     cell.imageContainer.stopShimmering()
                 }
