@@ -237,6 +237,23 @@ class BurgerListControllerTests: XCTestCase {
         XCTAssertEqual(loader.loadedImageURLs, [burger0.imageURL, burger1.imageURL], "Expected second image URL request once second image is near visible")
     }
     
+    func test_burgerView_cancelImageURLPreloadingWhenNotNearVisibleAnymore() {
+        let burger0 = makeBurger(imageURL: URL(string: "http://url-0.com")!)
+        let burger1 = makeBurger(imageURL: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBurgerLoading(with: [burger0, burger1])
+        XCTAssertEqual(loader.loadedImageURLs, [],
+                       "Expected no cancelled image URL requests until image is near visible")
+        
+        sut.simulateBurgerViewNotNearVisible(at: 0)
+        XCTAssertEqual(loader.cancelledImageURLs, [burger0.imageURL], "Expected first cancelled image URL once the image is no visible anymore")
+        
+        sut.simulateBurgerViewNotNearVisible(at: 1)
+        XCTAssertEqual(loader.cancelledImageURLs, [burger0.imageURL, burger1.imageURL], "Expected second cancelled image URL request once second image not visible anymore")
+    }
+    
     // MARK: - Helpers
     private func assertThat(_ sut: BurgerListViewController,
                             isRendering burgers: [Burger],
@@ -382,6 +399,14 @@ private extension BurgerListViewController {
         let index = IndexPath(row: row, section: burgerImageSection)
         
         ds?.tableView(tableView, prefetchRowsAt: [index])
+    }
+    
+    func simulateBurgerViewNotNearVisible(at row: Int) {
+        simulateBurgerViewNearVisible(at: row)
+        
+        let ds = tableView.prefetchDataSource
+        let index = IndexPath(row: row, section: burgerImageSection)
+        ds?.tableView?(tableView, cancelPrefetchingForRowsAt: [index])
     }
     
     var isShowingLoadingIndicator: Bool? {

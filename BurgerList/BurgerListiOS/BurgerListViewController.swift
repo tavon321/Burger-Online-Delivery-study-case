@@ -103,8 +103,7 @@ public final class BurgerListViewController: UITableViewController, UITableViewD
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard tableModel[indexPath.row].imageURL != nil else { return }
-        tasks[indexPath]?.cancel()
-        tasks[indexPath] = nil
+        cancelTask(forRowAt: indexPath)
     }
     
     public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
@@ -113,8 +112,18 @@ public final class BurgerListViewController: UITableViewController, UITableViewD
             
             guard let imageURL = cellModel.imageURL else { return }
             
-            _ = imageLoader?.loadImageData(from: imageURL) { _ in }
+            tasks[indexPath] = imageLoader?.loadImageData(from: imageURL) { _ in }
         }
-        
+    }
+    
+    public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach { indexPath in
+            cancelTask(forRowAt: indexPath)
+        }
+    }
+    
+    private func cancelTask(forRowAt indexPath: IndexPath) {
+        tasks[indexPath]?.cancel()
+        tasks[indexPath] = nil
     }
 }
