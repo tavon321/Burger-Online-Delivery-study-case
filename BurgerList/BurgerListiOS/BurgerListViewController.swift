@@ -13,13 +13,6 @@ public protocol BurgerImageDataLoadTask {
     func cancel()
 }
 
-public protocol BurgerImageLoader {
-    typealias Result = Swift.Result<Data, Error>
-    
-    func loadImageData(from url: URL,
-                       completion: @escaping (Result) -> Void) -> BurgerImageDataLoadTask
-}
-
 public final class BurgerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var burgerloader: BurgerLoader?
     private var imageLoader: BurgerImageLoader?

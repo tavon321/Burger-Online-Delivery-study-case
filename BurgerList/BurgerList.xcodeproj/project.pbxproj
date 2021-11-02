@@ -24,6 +24,7 @@
 		7146D6F126E7D17A00F3CAB5 /* UIView+Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146D6F026E7D17A00F3CAB5 /* UIView+Shimmering.swift */; };
 		7185138926DE72DA0026EB61 /* BurgerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7185138826DE72DA0026EB61 /* BurgerCell.swift */; };
 		7185138A26DEA7900026EB61 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */; };
+		718D61EC2731B7B900D9A4EE /* BurgerImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D61EB2731B7B900D9A4EE /* BurgerImageLoader.swift */; };
 		7193084726B46271001B5A26 /* BurgerListiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7193083E26B46271001B5A26 /* BurgerListiOS.framework */; };
 		71B28AF3261DDDA100DF448B /* CoreDataBurgerStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28AF2261DDDA100DF448B /* CoreDataBurgerStoreTests.swift */; };
 		71B28AFA261DDFA800DF448B /* CoreDataBurgerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28AF9261DDFA800DF448B /* CoreDataBurgerStore.swift */; };
@@ -129,6 +130,7 @@
 		7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListControllerTests.swift; sourceTree = "<group>"; };
 		7146D6F026E7D17A00F3CAB5 /* UIView+Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmering.swift"; sourceTree = "<group>"; };
 		7185138826DE72DA0026EB61 /* BurgerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerCell.swift; sourceTree = "<group>"; };
+		718D61EB2731B7B900D9A4EE /* BurgerImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerImageLoader.swift; sourceTree = "<group>"; };
 		7193083E26B46271001B5A26 /* BurgerListiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BurgerListiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7193084126B46271001B5A26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7193084626B46271001B5A26 /* BurgerListiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -265,11 +267,20 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		718D61EA2731B77B00D9A4EE /* BurgerListDataLoader */ = {
+			isa = PBXGroup;
+			children = (
+				718D61EB2731B7B900D9A4EE /* BurgerImageLoader.swift */,
+			);
+			path = BurgerListDataLoader;
+			sourceTree = "<group>";
+		};
 		7193083F26B46271001B5A26 /* BurgerListiOS */ = {
 			isa = PBXGroup;
 			children = (
-				7146D6EF26E7D16600F3CAB5 /* Utils */,
 				7193084126B46271001B5A26 /* Info.plist */,
+				718D61EA2731B77B00D9A4EE /* BurgerListDataLoader */,
+				7146D6EF26E7D16600F3CAB5 /* Utils */,
 				71C1894B26D43AAD00BAC99B /* BurgerListViewController.swift */,
 				7185138826DE72DA0026EB61 /* BurgerCell.swift */,
 			);
@@ -715,6 +726,7 @@
 				7146D6F126E7D17A00F3CAB5 /* UIView+Shimmering.swift in Sources */,
 				7185138926DE72DA0026EB61 /* BurgerCell.swift in Sources */,
 				71C1894C26D43AAD00BAC99B /* BurgerListViewController.swift in Sources */,
+				718D61EC2731B7B900D9A4EE /* BurgerImageLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
