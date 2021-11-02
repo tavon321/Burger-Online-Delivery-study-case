@@ -275,14 +275,38 @@
 			path = BurgerListDataLoader;
 			sourceTree = "<group>";
 		};
+		718D61ED2731B98F00D9A4EE /* Burger UI */ = {
+			isa = PBXGroup;
+			children = (
+				718D61EF2731B9AB00D9A4EE /* Views */,
+				718D61EE2731B9A300D9A4EE /* Controller */,
+			);
+			path = "Burger UI";
+			sourceTree = "<group>";
+		};
+		718D61EE2731B9A300D9A4EE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				71C1894B26D43AAD00BAC99B /* BurgerListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		718D61EF2731B9AB00D9A4EE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7146D6EF26E7D16600F3CAB5 /* Utils */,
+				7185138826DE72DA0026EB61 /* BurgerCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		7193083F26B46271001B5A26 /* BurgerListiOS */ = {
 			isa = PBXGroup;
 			children = (
 				7193084126B46271001B5A26 /* Info.plist */,
 				718D61EA2731B77B00D9A4EE /* BurgerListDataLoader */,
-				7146D6EF26E7D16600F3CAB5 /* Utils */,
-				71C1894B26D43AAD00BAC99B /* BurgerListViewController.swift */,
-				7185138826DE72DA0026EB61 /* BurgerCell.swift */,
+				718D61ED2731B98F00D9A4EE /* Burger UI */,
 			);
 			path = BurgerListiOS;
 			sourceTree = "<group>";
