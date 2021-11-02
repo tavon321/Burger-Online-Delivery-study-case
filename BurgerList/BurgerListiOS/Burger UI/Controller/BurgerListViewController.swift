@@ -9,10 +9,6 @@
 import UIKit
 import BurgerList
 
-public protocol BurgerImageDataLoadTask {
-    func cancel()
-}
-
 public final class BurgerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var burgerloader: BurgerLoader?
     private var imageLoader: BurgerImageLoader?

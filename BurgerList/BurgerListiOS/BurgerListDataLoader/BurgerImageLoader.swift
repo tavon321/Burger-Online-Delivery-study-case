@@ -8,6 +8,10 @@
 
 import Foundation
 
+public protocol BurgerImageDataLoadTask {
+    func cancel()
+}
+
 public protocol BurgerImageLoader {
     typealias Result = Swift.Result<Data, Error>
     
