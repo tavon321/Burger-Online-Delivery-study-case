@@ -10,44 +10,35 @@ import UIKit
 import BurgerList
 
 public final class BurgerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
-    private var burgerloader: BurgerLoader?
+    private var refreshController: BurgersRegfreshViewController?
     private var imageLoader: BurgerImageLoader?
-    private var tableModel = [Burger]()
     private var tasks = [IndexPath: BurgerImageDataLoadTask]()
+    
+    private var tableModel = [Burger]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     public convenience init(burgerLoader: BurgerLoader,
                             imageLoader: BurgerImageLoader) {
         self.init()
         
-        self.burgerloader = burgerLoader
+        self.refreshController =
+        BurgersRegfreshViewController(burgerLoader: burgerLoader)
         self.imageLoader = imageLoader
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl = refreshController?.view
+        refreshController?.onRefresh = { [weak self] burgers in
+            self?.tableModel = burgers
+        }
         tableView.prefetchDataSource = self
         
-        refresh()
-    }
-    
-    @objc private func refresh() {
-        refreshControl?.beginRefreshing()
-        
-        burgerloader?.load { [weak self] result in
-            switch result {
-            case .success(let burgers):
-                self?.tableModel = burgers
-                self?.tableView.reloadData()
-            case .failure:
-                break
-                
-            }
-            
-            self?.refreshControl?.endRefreshing()
-        }
+        refreshController?.refresh()
     }
     
     public override func tableView(_ tableView: UITableView,
