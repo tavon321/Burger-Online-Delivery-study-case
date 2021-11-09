@@ -10,7 +10,7 @@ import UIKit
 import BurgerList
 
 public final class BurgerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
-    private var refreshController: BurgersRegfreshViewController?
+    private var refreshController: BurgersRefreshViewController?
     private var imageLoader: BurgerImageLoader?
     private var tasks = [IndexPath: BurgerImageDataLoadTask]()
     
@@ -25,7 +25,7 @@ public final class BurgerListViewController: UITableViewController, UITableViewD
         self.init()
         
         self.refreshController =
-        BurgersRegfreshViewController(burgerLoader: burgerLoader)
+        BurgersRefreshViewController(burgerLoader: burgerLoader)
         self.imageLoader = imageLoader
     }
     

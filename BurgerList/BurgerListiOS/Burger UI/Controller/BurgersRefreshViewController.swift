@@ -1,5 +1,5 @@
 //
-//  BurgersRegfreshViewController.swift
+//  BurgersRefreshViewController.swift
 //  BurgerListiOS
 //
 //  Created by Gustavo on 3/11/21.
@@ -9,7 +9,7 @@
 import UIKit
 import BurgerList
 
-final class BurgersRegfreshViewController: NSObject {
+final class BurgersRefreshViewController: NSObject {
     private(set) lazy var view: UIRefreshControl = {
         let view = UIRefreshControl()
         view.addTarget(self, action: #selector(refresh), for: .valueChanged)
