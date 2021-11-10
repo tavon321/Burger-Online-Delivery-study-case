@@ -14,12 +14,19 @@ public final class BurgerUIComposer {
                                imageLoader: BurgerImageLoader) -> BurgerListViewController {
         let refreshController = BurgersRefreshViewController(burgerLoader: burgerLoader)
         let burgerController = BurgerListViewController(refreshController: refreshController)
-        refreshController.onRefresh = { [weak burgerController] burgers in
-            burgerController?.cellControllers = burgers.map({ model in
-                BurgerCellController(model: model, imageLoader: imageLoader)
-            })
-        }
+        refreshController.onRefresh = adaptToCellControllers(forwardingTo: burgerController,
+                                                             loader: imageLoader)
         
         return burgerController
+    }
+    
+    private static func adaptToCellControllers(forwardingTo controller: BurgerListViewController,
+                                               loader: BurgerImageLoader)
+    -> ([Burger]) -> Void {
+        return { [weak controller] burgers in
+            controller?.cellControllers = burgers.map({ model in
+                BurgerCellController(model: model, imageLoader: loader)
+            })
+        }
     }
 }
