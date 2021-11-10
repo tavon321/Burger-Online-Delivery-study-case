@@ -57,7 +57,7 @@ final class BurgerCellController {
         self.task = self.imageLoader.loadImageData(from: url) { _ in }
     }
     
-    deinit {
+    func cancelLoad() {
         task?.cancel()
     }
 }

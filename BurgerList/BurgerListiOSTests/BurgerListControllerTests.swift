@@ -306,7 +306,7 @@ class BurgerListControllerTests: XCTestCase {
                          line: UInt = #line)
     -> (sut: BurgerListViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = BurgerListViewController(burgerLoader: loader, imageLoader: loader)
+        let sut = BurgerUIComposer.compose(burgerLoader: loader, imageLoader: loader)
         
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
