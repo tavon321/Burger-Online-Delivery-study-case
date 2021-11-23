@@ -10,27 +10,24 @@ import Foundation
 import BurgerList
 
 class BurgersRefreshViewModel {
+    typealias Observer<T> = (T) -> Void
     private let burgerLoader: BurgerLoader
     
-    public var onChange: ((BurgersRefreshViewModel) -> Void)?
-    public var onBurgerLoad: (([Burger]) -> Void)?
-    
-    private(set) var isLoading: Bool = false {
-        didSet { onChange?(self) }
-    }
+    public var onLoadingStateChange: (Observer<Bool>)?
+    public var onBurgerLoad: (Observer<[Burger]>)?
     
     init(burgerLoader: BurgerLoader) {
         self.burgerLoader = burgerLoader
     }
     
     @objc func loadBurgers() {
-        isLoading = true
+        onLoadingStateChange?(true)
         burgerLoader.load { [weak self] result in
             if let burgers = try? result.get() {
                 self?.onBurgerLoad?(burgers)
             }
             
-            self?.isLoading = false
+            self?.onLoadingStateChange?(false)
         }
     }
 }
