@@ -7,30 +7,31 @@
 //
 
 import UIKit
-import BurgerList
 
 final class BurgersRefreshViewController: NSObject {
     private(set) lazy var view: UIRefreshControl = {
-        let view = UIRefreshControl()
-        view.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        return view
+        return binded(UIRefreshControl())
     }()
     
-    private let burgerLoader: BurgerLoader
-    var onRefresh: (([Burger]) -> Void)?
+    private let viewModel: BurgersRefreshViewModel
     
-    init(burgerLoader: BurgerLoader) {
-        self.burgerLoader = burgerLoader
+    init(viewModel: BurgersRefreshViewModel) {
+        self.viewModel = viewModel
     }
     
     @objc func refresh() {
-        view.beginRefreshing()
-        
-        burgerLoader.load { [weak self] result in
-            if let burgers = try? result.get() {
-                self?.onRefresh?(burgers)
+        viewModel.loadBurgers()
+    }
+    
+    private func binded(_ view: UIRefreshControl) -> UIRefreshControl {
+        viewModel.onChange = { [weak self] receivedViewModel in
+            if receivedViewModel.isLoading {
+                self?.view.beginRefreshing()
+            } else {
+                self?.view.endRefreshing()
             }
-            self?.view.endRefreshing()
         }
+        view.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return view
     }
 }

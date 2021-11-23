@@ -12,10 +12,11 @@ import BurgerList
 public final class BurgerUIComposer {
     public static func compose(burgerLoader: BurgerLoader,
                                imageLoader: BurgerImageLoader) -> BurgerListViewController {
-        let refreshController = BurgersRefreshViewController(burgerLoader: burgerLoader)
+        let viewModel = BurgersRefreshViewModel(burgerLoader: burgerLoader)
+        let refreshController = BurgersRefreshViewController(viewModel: viewModel)
         let burgerController = BurgerListViewController(refreshController: refreshController)
-        refreshController.onRefresh = adaptToCellControllers(forwardingTo: burgerController,
-                                                             loader: imageLoader)
+        viewModel.onBurgerLoad = adaptToCellControllers(forwardingTo: burgerController,
+                                                        loader: imageLoader)
         
         return burgerController
     }
