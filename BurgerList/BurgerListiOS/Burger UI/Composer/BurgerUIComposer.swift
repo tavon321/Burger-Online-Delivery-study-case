@@ -26,7 +26,8 @@ public final class BurgerUIComposer {
     -> ([Burger]) -> Void {
         return { [weak controller] burgers in
             controller?.cellControllers = burgers.map({ model in
-                BurgerCellController(model: model, imageLoader: loader)
+                let viewModel = BurgerImageViewModel(model: model, imageLoader: loader)
+                return BurgerCellController(viewModel: viewModel)
             })
         }
     }

@@ -19,6 +19,7 @@
 		40DAA0702564827100B1AEC0 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */; };
 		40FC239F254B662600290628 /* BurgerCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FC239E254B662600290628 /* BurgerCachePolicy.swift */; };
 		711A664C2682AC31000B6EDF /* BurgerStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 711A664A2682AC31000B6EDF /* BurgerStore.xcdatamodeld */; };
+		7122BB7B274EA7C000871542 /* BurgerImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7122BB7A274EA7C000871542 /* BurgerImageViewModel.swift */; };
 		712A88D02732CCF700FE7484 /* BurgersRefreshViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712A88CF2732CCF700FE7484 /* BurgersRefreshViewController.swift */; };
 		712FEACE26B327BE00770D2D /* SharedCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E0B29E2524DC5100661112 /* SharedCacheTestHelpers.swift */; };
 		712FEACF26B3284100770D2D /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */; };
@@ -131,6 +132,7 @@
 		40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		40FC239E254B662600290628 /* BurgerCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerCachePolicy.swift; sourceTree = "<group>"; };
 		711A664B2682AC31000B6EDF /* BurgetStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BurgetStore.xcdatamodel; sourceTree = "<group>"; };
+		7122BB7A274EA7C000871542 /* BurgerImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerImageViewModel.swift; sourceTree = "<group>"; };
 		712A88CF2732CCF700FE7484 /* BurgersRefreshViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgersRefreshViewController.swift; sourceTree = "<group>"; };
 		71339C4D274D37390071D07E /* BurgersRefreshViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgersRefreshViewModel.swift; sourceTree = "<group>"; };
 		7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListControllerTests.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				71339C4D274D37390071D07E /* BurgersRefreshViewModel.swift */,
+				7122BB7A274EA7C000871542 /* BurgerImageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 			files = (
 				7146D6F126E7D17A00F3CAB5 /* UIView+Shimmering.swift in Sources */,
 				7185138926DE72DA0026EB61 /* BurgerCell.swift in Sources */,
+				7122BB7B274EA7C000871542 /* BurgerImageViewModel.swift in Sources */,
 				71C1894C26D43AAD00BAC99B /* BurgerListViewController.swift in Sources */,
 				718D61EC2731B7B900D9A4EE /* BurgerImageLoader.swift in Sources */,
 				71C7F556273B44A30096AE7A /* BurgerCellController.swift in Sources */,

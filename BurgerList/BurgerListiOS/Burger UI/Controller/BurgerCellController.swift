@@ -10,54 +10,45 @@ import UIKit
 import BurgerList
 
 final class BurgerCellController {
-    private var task:  BurgerImageDataLoadTask?
-    private let model: Burger
-    private let imageLoader: BurgerImageLoader
     
-    init(model: Burger, imageLoader: BurgerImageLoader) {
-        self.model = model
-        self.imageLoader =  imageLoader
+    private var viewModel: BurgerImageViewModel
+    
+    init(viewModel: BurgerImageViewModel) {
+        self.viewModel = viewModel
     }
     
     func view() -> UITableViewCell {
-        let cell = BurgerCell()
-        
-        cell.nameLabel.text = model.name
-        cell.descriptionLabel.text = model.description
-        cell.descriptionLabel.isHidden = model.description == nil
+        return binded(BurgerCell())
+    }
+    
+    func binded(_ cell: BurgerCell) -> UITableViewCell {
+        cell.nameLabel.text = viewModel.name
+        cell.descriptionLabel.text = viewModel.description
+        cell.descriptionLabel.isHidden = viewModel.hasDescription
         cell.burgerImageView.image = nil
         cell.burgerImageRetryButton.isHidden = true
-        cell.imageContainer.startShimmering()
+        cell.onRetry = viewModel.loadImageData
         
-        let loadImage = { [weak self] in
-            guard let self = self, let url = self.model.imageURL else { return }
-            self.task = self.imageLoader.loadImageData(from: url) { [weak self] result in
-                    guard self != nil else { return }
-                    switch result {
-                    case .success(let imageData):
-                        let image = UIImage(data: imageData)
-                        
-                        cell.burgerImageView.image = image
-                        cell.burgerImageRetryButton.isHidden = image != nil
-                    case .failure:
-                        cell.burgerImageRetryButton.isHidden = false
-                    }
-                    cell.imageContainer.stopShimmering()
-                }
+        viewModel.onImageLoad = { [weak cell] image in
+            cell?.imageView?.image = image
         }
         
-        loadImage()
-        cell.onRetry = loadImage
+        viewModel.onImageLoadingStateChange = { [weak cell] isLoading in
+            isLoading ? cell?.startShimmering() : cell?.stopShimmering()
+        }
+        
+        viewModel.onShouldRetryImageLoadStateChange = { [weak cell] shouldRetry in
+            cell?.burgerImageRetryButton.isHidden = !shouldRetry
+        }
         
         return cell
     }
     
     func preload() {
-        guard let url = self.model.imageURL else { return }
-        self.task = self.imageLoader.loadImageData(from: url) { _ in }
+        viewModel.loadImageData()
     }
     
     func cancelLoad() {
-        task?.cancel()
+        viewModel.cancelImageDataLoad()
     }
 }
