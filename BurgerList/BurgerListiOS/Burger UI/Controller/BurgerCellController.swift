@@ -11,14 +11,17 @@ import BurgerList
 
 final class BurgerCellController {
     
-    private var viewModel: BurgerImageViewModel
+    private var viewModel: BurgerImageViewModel<UIImage>
     
-    init(viewModel: BurgerImageViewModel) {
+    init(viewModel: BurgerImageViewModel<UIImage>) {
         self.viewModel = viewModel
     }
     
     func view() -> UITableViewCell {
-        return binded(BurgerCell())
+        let cell = binded(BurgerCell())
+        viewModel.loadImageData()
+        
+        return cell
     }
     
     func binded(_ cell: BurgerCell) -> UITableViewCell {

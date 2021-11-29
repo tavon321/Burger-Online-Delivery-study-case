@@ -6,19 +6,23 @@
 //  Copyright © 2021 Gustavo Londono. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import BurgerList
 
-final class BurgerImageViewModel {
+final class BurgerImageViewModel<Image> {
     typealias Observer<T> = (T) -> Void
 
     private var task: BurgerImageDataLoadTask?
     private let model: Burger
     private let imageLoader: BurgerImageLoader
+    private let imageTransformer: (Data) -> Image?
 
-    init(model: Burger, imageLoader: BurgerImageLoader) {
+    init(model: Burger,
+         imageLoader: BurgerImageLoader,
+         imageTransformer: @escaping (Data) -> Image?) {
         self.model = model
         self.imageLoader = imageLoader
+        self.imageTransformer = imageTransformer
     }
     
     var name: String {
@@ -33,7 +37,7 @@ final class BurgerImageViewModel {
         return model.description != nil
     }
 
-    var onImageLoad: Observer<UIImage>?
+    var onImageLoad: Observer<Image>?
     var onImageLoadingStateChange: Observer<Bool>?
     var onShouldRetryImageLoadStateChange: Observer<Bool>?
 
@@ -50,17 +54,17 @@ final class BurgerImageViewModel {
     private func handle(_ result: BurgerImageLoader.Result) {
         switch result {
         case .success(let imageData):
-            if let image = UIImage(data: imageData) {
+            if let image = imageTransformer(imageData) {
                 onImageLoad?(image)
             }
         case .failure:
             onShouldRetryImageLoadStateChange?(true)
         }
         onImageLoadingStateChange?(false)
-    }
+        }
 
-    func cancelImageDataLoad() {
-        task?.cancel()
-        task = nil
-    }
+        func cancelImageDataLoad() {
+            task?.cancel()
+            task = nil
+        }
 }

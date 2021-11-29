@@ -8,6 +8,7 @@
 
 import Foundation
 import BurgerList
+import UIKit
 
 public final class BurgerUIComposer {
     public static func compose(burgerLoader: BurgerLoader,
@@ -26,7 +27,9 @@ public final class BurgerUIComposer {
     -> ([Burger]) -> Void {
         return { [weak controller] burgers in
             controller?.cellControllers = burgers.map({ model in
-                let viewModel = BurgerImageViewModel(model: model, imageLoader: loader)
+                let viewModel = BurgerImageViewModel(model: model,
+                                                     imageLoader: loader,
+                                                     imageTransformer: UIImage.init(data:))
                 return BurgerCellController(viewModel: viewModel)
             })
         }
