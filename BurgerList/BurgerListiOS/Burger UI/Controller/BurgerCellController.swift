@@ -27,17 +27,17 @@ final class BurgerCellController {
     func binded(_ cell: BurgerCell) -> UITableViewCell {
         cell.nameLabel.text = viewModel.name
         cell.descriptionLabel.text = viewModel.description
-        cell.descriptionLabel.isHidden = viewModel.hasDescription
+        cell.descriptionLabel.isHidden = !viewModel.hasDescription
         cell.burgerImageView.image = nil
         cell.burgerImageRetryButton.isHidden = true
         cell.onRetry = viewModel.loadImageData
         
         viewModel.onImageLoad = { [weak cell] image in
-            cell?.imageView?.image = image
+            cell?.burgerImageView.image = image
         }
         
         viewModel.onImageLoadingStateChange = { [weak cell] isLoading in
-            isLoading ? cell?.startShimmering() : cell?.stopShimmering()
+            isLoading ? cell?.imageContainer.startShimmering() : cell?.imageContainer.stopShimmering()
         }
         
         viewModel.onShouldRetryImageLoadStateChange = { [weak cell] shouldRetry in

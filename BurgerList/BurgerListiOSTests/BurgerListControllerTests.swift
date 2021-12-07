@@ -287,7 +287,7 @@ class BurgerListControllerTests: XCTestCase {
         
         let isShowingburgerDescription = burger.description != nil
         XCTAssertEqual(view.isShowingDescription, isShowingburgerDescription,
-                       "Expected 'isShowingDescription' to be \(isShowingburgerDescription) on burger\(index)",
+                       "Expected 'isShowingDescription' to be \(isShowingburgerDescription) on burger at index: \(index)",
                        file: file,
                        line: line)
         
