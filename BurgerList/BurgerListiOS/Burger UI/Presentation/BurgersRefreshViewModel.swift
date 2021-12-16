@@ -9,6 +9,7 @@
 import Foundation
 import BurgerList
 
+// MVVM approach
 class BurgersRefreshViewModel {
     typealias Observer<T> = (T) -> Void
     private let burgerLoader: BurgerLoader

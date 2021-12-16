@@ -13,25 +13,58 @@ import UIKit
 public final class BurgerUIComposer {
     public static func compose(burgerLoader: BurgerLoader,
                                imageLoader: BurgerImageLoader) -> BurgerListViewController {
-        let viewModel = BurgersRefreshViewModel(burgerLoader: burgerLoader)
-        let refreshController = BurgersRefreshViewController(viewModel: viewModel)
+        let presenter = BurgersPresenter(burgerLoader: burgerLoader)
+        let refreshController = BurgersRefreshViewController(presenter: presenter)
         let burgerController = BurgerListViewController(refreshController: refreshController)
-        viewModel.onBurgerLoad = adaptToCellControllers(forwardingTo: burgerController,
-                                                        loader: imageLoader)
+        
+        presenter.loadingBurgerView = refreshController
+        presenter.view = BurgerViewAdapter(controller: burgerController, imageLoader: imageLoader)
         
         return burgerController
     }
+}
+
+private final class BurgerViewAdapter: BurgerView {
+    private weak var controller: BurgerListViewController?
+    private let imageLoader: BurgerImageLoader
     
-    private static func adaptToCellControllers(forwardingTo controller: BurgerListViewController,
-                                               loader: BurgerImageLoader)
-    -> ([Burger]) -> Void {
-        return { [weak controller] burgers in
-            controller?.cellControllers = burgers.map({ model in
-                let viewModel = BurgerImageViewModel(model: model,
-                                                     imageLoader: loader,
-                                                     imageTransformer: UIImage.init(data:))
-                return BurgerCellController(viewModel: viewModel)
-            })
-        }
+    init(controller: BurgerListViewController, imageLoader: BurgerImageLoader) {
+        self.controller = controller
+        self.imageLoader = imageLoader
+    }
+    
+    func display(burgers: [Burger]) {
+        controller?.cellControllers = burgers.map({ model in
+            let viewModel = BurgerImageViewModel(model: model,
+                                                 imageLoader: imageLoader,
+                                                 imageTransformer: UIImage.init(data:))
+            return BurgerCellController(viewModel: viewModel)
+        })
     }
 }
+
+//public final class BurgerUIComposer {
+//    public static func compose(burgerLoader: BurgerLoader,
+//                               imageLoader: BurgerImageLoader) -> BurgerListViewController {
+//        let viewModel = BurgersRefreshViewModel(burgerLoader: burgerLoader)
+//        let refreshController = BurgersRefreshViewController(viewModel: viewModel)
+//        let burgerController = BurgerListViewController(refreshController: refreshController)
+//        viewModel.onBurgerLoad = adaptToCellControllers(forwardingTo: burgerController,
+//                                                        loader: imageLoader)
+//
+//        return burgerController
+//    }
+//
+//    private static func adaptToCellControllers(forwardingTo controller: BurgerListViewController,
+//                                               loader: BurgerImageLoader)
+//    -> ([Burger]) -> Void {
+//        return { [weak controller] burgers in
+//            controller?.cellControllers = burgers.map({ model in
+//                let viewModel = BurgerImageViewModel(model: model,
+//                                                     imageLoader: loader,
+//                                                     imageTransformer: UIImage.init(data:))
+//                return BurgerCellController(viewModel: viewModel)
+//            })
+//        }
+//    }
+//}
