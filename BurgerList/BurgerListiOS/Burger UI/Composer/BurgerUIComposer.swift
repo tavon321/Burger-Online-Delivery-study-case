@@ -14,7 +14,7 @@ public final class BurgerUIComposer {
     public static func compose(burgerLoader: BurgerLoader,
                                imageLoader: BurgerImageLoader) -> BurgerListViewController {
         let presenter = BurgersPresenter(burgerLoader: burgerLoader)
-        let refreshController = BurgersRefreshViewController(presenter: presenter)
+        let refreshController = BurgersRefreshViewController(loadBurgers: presenter.loadBurgers)
         let burgerController = BurgerListViewController(refreshController: refreshController)
         
         presenter.loadingBurgerView = WeakRefVirtualProxy(refreshController)

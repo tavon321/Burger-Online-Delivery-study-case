@@ -9,16 +9,17 @@
 import UIKit
 
 final class BurgersRefreshViewController: NSObject, LoadingBurgerView {
+    
     private(set) lazy var view: UIRefreshControl = loadView()
     
-    private let presenter: BurgersPresenter
+    private var loadBurgers: () -> Void
     
-    init(presenter: BurgersPresenter) {
-        self.presenter = presenter
+    init(loadBurgers: @escaping () -> Void) {
+        self.loadBurgers = loadBurgers
     }
     
     @objc func refresh() {
-        presenter.loadBurgers()
+        loadBurgers()
     }
     
     func display(_ viewModel: BurgerLoadingViewModel) {
