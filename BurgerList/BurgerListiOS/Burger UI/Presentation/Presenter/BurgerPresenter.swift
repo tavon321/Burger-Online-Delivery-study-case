@@ -20,7 +20,7 @@ class BurgersPresenter {
     typealias Observer<T> = (T) -> Void
     private let burgerLoader: BurgerLoader
     
-    var view: BurgerView?
+    var burgersView: BurgerView?
     weak var loadingBurgerView: LoadingBurgerView?
     
     init(burgerLoader: BurgerLoader) {
@@ -31,7 +31,7 @@ class BurgersPresenter {
         loadingBurgerView?.display(isLoading: true)
         burgerLoader.load { [weak self] result in
             if let burgers = try? result.get() {
-                self?.view?.display(burgers: burgers)
+                self?.burgersView?.display(burgers: burgers)
             }
             self?.loadingBurgerView?.display(isLoading: false)
         }

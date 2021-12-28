@@ -18,7 +18,7 @@ public final class BurgerUIComposer {
         let burgerController = BurgerListViewController(refreshController: refreshController)
         
         presenter.loadingBurgerView = refreshController
-        presenter.view = BurgerViewAdapter(controller: burgerController, imageLoader: imageLoader)
+        presenter.burgersView = BurgerViewAdapter(controller: burgerController, imageLoader: imageLoader)
         
         return burgerController
     }

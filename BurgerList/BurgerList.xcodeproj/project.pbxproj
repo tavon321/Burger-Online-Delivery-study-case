@@ -255,6 +255,23 @@
 			path = "Codable Burger Store";
 			sourceTree = "<group>";
 		};
+		712B40A1277B51B2001E424E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				71339C4D274D37390071D07E /* BurgersRefreshViewModel.swift */,
+				7122BB7A274EA7C000871542 /* BurgerImageViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		712B40A2277B51BE001E424E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				7178D9EA276B83F00012950D /* BurgerPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		712ECE41261FC4A400224A9B /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,9 +283,8 @@
 		71339C4C274D37290071D07E /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				71339C4D274D37390071D07E /* BurgersRefreshViewModel.swift */,
-				7122BB7A274EA7C000871542 /* BurgerImageViewModel.swift */,
-				7178D9EA276B83F00012950D /* BurgerPresenter.swift */,
+				712B40A2277B51BE001E424E /* Presenter */,
+				712B40A1277B51B2001E424E /* ViewModel */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
