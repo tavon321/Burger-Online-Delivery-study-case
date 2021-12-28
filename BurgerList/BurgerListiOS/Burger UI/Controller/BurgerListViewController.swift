@@ -11,6 +11,7 @@ import BurgerList
 
 public final class BurgerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var refreshController: BurgersRefreshViewController?
+    
     var cellControllers = [BurgerCellController]() {
         didSet {
             tableView.reloadData()

@@ -21,7 +21,7 @@ class BurgersPresenter {
     private let burgerLoader: BurgerLoader
     
     var burgersView: BurgerView?
-    weak var loadingBurgerView: LoadingBurgerView?
+    var loadingBurgerView: LoadingBurgerView?
     
     init(burgerLoader: BurgerLoader) {
         self.burgerLoader = burgerLoader

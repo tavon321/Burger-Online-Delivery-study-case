@@ -17,7 +17,7 @@ public final class BurgerUIComposer {
         let refreshController = BurgersRefreshViewController(presenter: presenter)
         let burgerController = BurgerListViewController(refreshController: refreshController)
         
-        presenter.loadingBurgerView = refreshController
+        presenter.loadingBurgerView = WeakRefVirtualProxy(refreshController)
         presenter.burgersView = BurgerViewAdapter(controller: burgerController, imageLoader: imageLoader)
         
         return burgerController
@@ -40,6 +40,20 @@ private final class BurgerViewAdapter: BurgerView {
                                                  imageTransformer: UIImage.init(data:))
             return BurgerCellController(viewModel: viewModel)
         })
+    }
+}
+
+private final class WeakRefVirtualProxy<T: AnyObject> {
+    private weak var object: T?
+    
+    init(_ object: T) {
+        self.object = object
+    }
+}
+
+extension WeakRefVirtualProxy: LoadingBurgerView where T: LoadingBurgerView {
+    func display(isLoading: Bool) {
+        object?.display(isLoading: isLoading)
     }
 }
 
