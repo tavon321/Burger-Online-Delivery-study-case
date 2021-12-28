@@ -33,8 +33,8 @@ private final class BurgerViewAdapter: BurgerView {
         self.imageLoader = imageLoader
     }
     
-    func display(burgers: [Burger]) {
-        controller?.cellControllers = burgers.map({ model in
+    func display(_ viewModel: BurgerViewModel) {
+        controller?.cellControllers = viewModel.burgers.map({ model in
             let viewModel = BurgerImageViewModel(model: model,
                                                  imageLoader: imageLoader,
                                                  imageTransformer: UIImage.init(data:))
@@ -52,8 +52,8 @@ private final class WeakRefVirtualProxy<T: AnyObject> {
 }
 
 extension WeakRefVirtualProxy: LoadingBurgerView where T: LoadingBurgerView {
-    func display(isLoading: Bool) {
-        object?.display(isLoading: isLoading)
+    func display(_ viewModel: BurgerLoadingViewModel) {
+        object?.display(viewModel)
     }
 }
 

@@ -21,8 +21,8 @@ final class BurgersRefreshViewController: NSObject, LoadingBurgerView {
         presenter.loadBurgers()
     }
     
-    func display(isLoading: Bool) {
-        if isLoading {
+    func display(_ viewModel: BurgerLoadingViewModel) {
+        if viewModel.isLoading {
             view.beginRefreshing()
         } else {
             view.endRefreshing()

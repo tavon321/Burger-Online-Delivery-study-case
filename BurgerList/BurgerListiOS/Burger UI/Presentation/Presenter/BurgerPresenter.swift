@@ -8,12 +8,20 @@
 
 import BurgerList
 
+struct BurgerLoadingViewModel {
+    var isLoading: Bool
+}
+
 protocol LoadingBurgerView: AnyObject {
-    func display(isLoading: Bool)
+    func display(_ viewModel: BurgerLoadingViewModel)
+}
+
+struct BurgerViewModel {
+    var burgers: [Burger]
 }
 
 protocol BurgerView {
-    func display(burgers: [Burger])
+    func display(_ viewModel: BurgerViewModel)
 }
 
 class BurgersPresenter {
@@ -28,12 +36,12 @@ class BurgersPresenter {
     }
     
     func loadBurgers() {
-        loadingBurgerView?.display(isLoading: true)
+        loadingBurgerView?.display(.init(isLoading: true))
         burgerLoader.load { [weak self] result in
             if let burgers = try? result.get() {
-                self?.burgersView?.display(burgers: burgers)
+                self?.burgersView?.display(.init(burgers: burgers))
             }
-            self?.loadingBurgerView?.display(isLoading: false)
+            self?.loadingBurgerView?.display(.init(isLoading: false))
         }
     }
 }
