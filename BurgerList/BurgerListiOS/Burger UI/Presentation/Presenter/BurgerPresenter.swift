@@ -26,22 +26,20 @@ protocol BurgerView {
 
 class BurgersPresenter {
     typealias Observer<T> = (T) -> Void
-    private let burgerLoader: BurgerLoader
     
     var burgersView: BurgerView?
     var loadingBurgerView: LoadingBurgerView?
     
-    init(burgerLoader: BurgerLoader) {
-        self.burgerLoader = burgerLoader
+    func didStartLoadingBurgers() {
+        loadingBurgerView?.display(.init(isLoading: true))
     }
     
-    func loadBurgers() {
-        loadingBurgerView?.display(.init(isLoading: true))
-        burgerLoader.load { [weak self] result in
-            if let burgers = try? result.get() {
-                self?.burgersView?.display(.init(burgers: burgers))
-            }
-            self?.loadingBurgerView?.display(.init(isLoading: false))
-        }
+    func didFinishLoadingBurgers(with burgers: [Burger]) {
+        loadingBurgerView?.display(.init(isLoading: false))
+        burgersView?.display(.init(burgers: burgers))
+    }
+    
+    func didFinishLoadingBurgers(with error: Error) {
+        loadingBurgerView?.display(.init(isLoading: false))
     }
 }
