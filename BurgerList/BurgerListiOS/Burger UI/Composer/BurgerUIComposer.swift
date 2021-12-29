@@ -15,7 +15,7 @@ public final class BurgerUIComposer {
                                imageLoader: BurgerImageLoader) -> BurgerListViewController {
         let presenter = BurgersPresenter()
         let presentationAdapter = BurgerLoaderPresentationAdapter(burgerLoader: burgerLoader, presenter: presenter)
-        let refreshController = BurgersRefreshViewController(loadBurgers: presentationAdapter.loadBurgers)
+        let refreshController = BurgersRefreshViewController(delegate: presentationAdapter)
         let burgerController = BurgerListViewController(refreshController: refreshController)
         
         presenter.loadingBurgerView = WeakRefVirtualProxy(refreshController)
@@ -58,7 +58,7 @@ extension WeakRefVirtualProxy: LoadingBurgerView where T: LoadingBurgerView {
     }
 }
 
-public final class BurgerLoaderPresentationAdapter {
+public final class BurgerLoaderPresentationAdapter: BurgerListViewControllerDelegate {
     private let burgerLoader: BurgerLoader
     private let presenter: BurgersPresenter
     

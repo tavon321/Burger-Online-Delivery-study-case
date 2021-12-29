@@ -8,18 +8,22 @@
 
 import UIKit
 
+protocol BurgerListViewControllerDelegate {
+    func loadBurgers()
+}
+
 final class BurgersRefreshViewController: NSObject, LoadingBurgerView {
     
     private(set) lazy var view: UIRefreshControl = loadView()
     
-    private var loadBurgers: () -> Void
+    private let delegate: BurgerListViewControllerDelegate
     
-    init(loadBurgers: @escaping () -> Void) {
-        self.loadBurgers = loadBurgers
+    init(delegate: BurgerListViewControllerDelegate) {
+        self.delegate = delegate
     }
     
     @objc func refresh() {
-        loadBurgers()
+        delegate.loadBurgers()
     }
     
     func display(_ viewModel: BurgerLoadingViewModel) {
