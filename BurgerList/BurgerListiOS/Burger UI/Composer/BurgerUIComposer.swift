@@ -13,14 +13,13 @@ import UIKit
 public final class BurgerUIComposer {
     public static func compose(burgerLoader: BurgerLoader,
                                imageLoader: BurgerImageLoader) -> BurgerListViewController {
-        let presenter = BurgersPresenter()
-        let presentationAdapter = BurgerLoaderPresentationAdapter(burgerLoader: burgerLoader, presenter: presenter)
+        let presentationAdapter = BurgerLoaderPresentationAdapter(burgerLoader: burgerLoader)
         let refreshController = BurgersRefreshViewController(delegate: presentationAdapter)
         let burgerController = BurgerListViewController(refreshController: refreshController)
-        
-        presenter.loadingBurgerView = WeakRefVirtualProxy(refreshController)
-        presenter.burgersView = BurgerViewAdapter(controller: burgerController, imageLoader: imageLoader)
-        
+        let presenter = BurgersPresenter(burgersView: BurgerViewAdapter(controller: burgerController, imageLoader: imageLoader),
+                                         loadingBurgerView: WeakRefVirtualProxy(refreshController))
+        presentationAdapter.presenter = presenter
+         
         return burgerController
     }
 }
@@ -60,15 +59,14 @@ extension WeakRefVirtualProxy: LoadingBurgerView where T: LoadingBurgerView {
 
 public final class BurgerLoaderPresentationAdapter: BurgerListViewControllerDelegate {
     private let burgerLoader: BurgerLoader
-    private let presenter: BurgersPresenter
+    var presenter: BurgersPresenter?
     
-    init(burgerLoader: BurgerLoader, presenter: BurgersPresenter) {
+    init(burgerLoader: BurgerLoader) {
         self.burgerLoader = burgerLoader
-        self.presenter = presenter
     }
     
     func loadBurgers() {
-        presenter.didStartLoadingBurgers()
+        presenter?.didStartLoadingBurgers()
         burgerLoader.load { [weak presenter] result in
             switch result {
             case .success(let burgers):
