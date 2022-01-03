@@ -9,49 +9,90 @@
 import UIKit
 import BurgerList
 
-final class BurgerCellController {
+protocol FeedImageCellControllerDelegate {
+    func didRequestImage()
+    func didCancelImageRequest()
+}
+
+final class BurgerCellController: BurgerImageView {
     
-    private var viewModel: BurgerImageViewModel<UIImage>
+    private let delegate: FeedImageCellControllerDelegate
+    private lazy var cell = BurgerCell()
     
-    init(viewModel: BurgerImageViewModel<UIImage>) {
-        self.viewModel = viewModel
+    init(delegate: FeedImageCellControllerDelegate) {
+        self.delegate = delegate
     }
     
     func view() -> UITableViewCell {
-        let cell = binded(BurgerCell())
-        viewModel.loadImageData()
+        delegate.didRequestImage()
         
         return cell
     }
     
-    func binded(_ cell: BurgerCell) -> UITableViewCell {
-        cell.nameLabel.text = viewModel.name
-        cell.descriptionLabel.text = viewModel.description
-        cell.descriptionLabel.isHidden = !viewModel.hasDescription
-        cell.burgerImageView.image = nil
-        cell.burgerImageRetryButton.isHidden = true
-        cell.onRetry = viewModel.loadImageData
+    func display(_ model: BurgerImageViewModel<UIImage>) {
+        cell.nameLabel.text = model.name
+        cell.descriptionLabel.text = model.description
+        cell.descriptionLabel.isHidden = !model.hasDescription
         
-        viewModel.onImageLoad = { [weak cell] image in
-            cell?.burgerImageView.image = image
-        }
+        cell.burgerImageView.image = model.image
+        model.isLoading ? cell.imageContainer.startShimmering() : cell.imageContainer.stopShimmering()
         
-        viewModel.onImageLoadingStateChange = { [weak cell] isLoading in
-            isLoading ? cell?.imageContainer.startShimmering() : cell?.imageContainer.stopShimmering()
-        }
-        
-        viewModel.onShouldRetryImageLoadStateChange = { [weak cell] shouldRetry in
-            cell?.burgerImageRetryButton.isHidden = !shouldRetry
-        }
-        
-        return cell
+        cell.onRetry = delegate.didRequestImage
+        cell.burgerImageRetryButton.isHidden = !model.shouldRetry
     }
     
     func preload() {
-        viewModel.loadImageData()
+        delegate.didRequestImage()
     }
     
     func cancelLoad() {
-        viewModel.cancelImageDataLoad()
+        delegate.didCancelImageRequest()
     }
 }
+
+//final class BurgerCellController {
+//
+//    private var viewModel: BurgerImageViewModel<UIImage>
+//
+//    init(viewModel: BurgerImageViewModel<UIImage>) {
+//        self.viewModel = viewModel
+//    }
+//
+//    func view() -> UITableViewCell {
+//        let cell = binded(BurgerCell())
+//        viewModel.loadImageData()
+//
+//        return cell
+//    }
+//
+//    func binded(_ cell: BurgerCell) -> UITableViewCell {
+//        cell.nameLabel.text = viewModel.name
+//        cell.descriptionLabel.text = viewModel.description
+//        cell.descriptionLabel.isHidden = !viewModel.hasDescription
+//        cell.burgerImageView.image = nil
+//        cell.burgerImageRetryButton.isHidden = true
+//        cell.onRetry = viewModel.loadImageData
+//
+//        viewModel.onImageLoad = { [weak cell] image in
+//            cell?.burgerImageView.image = image
+//        }
+//
+//        viewModel.onImageLoadingStateChange = { [weak cell] isLoading in
+//            isLoading ? cell?.imageContainer.startShimmering() : cell?.imageContainer.stopShimmering()
+//        }
+//
+//        viewModel.onShouldRetryImageLoadStateChange = { [weak cell] shouldRetry in
+//            cell?.burgerImageRetryButton.isHidden = !shouldRetry
+//        }
+//
+//        return cell
+//    }
+//
+//    func preload() {
+//        viewModel.loadImageData()
+//    }
+//
+//    func cancelLoad() {
+//        viewModel.cancelImageDataLoad()
+//    }
+//}
