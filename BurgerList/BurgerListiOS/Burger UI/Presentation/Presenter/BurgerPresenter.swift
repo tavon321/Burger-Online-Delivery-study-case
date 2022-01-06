@@ -25,8 +25,6 @@ protocol BurgerView {
 }
 
 class BurgersPresenter {
-    typealias Observer<T> = (T) -> Void
-    
     private let burgersView: BurgerView
     private let loadingBurgerView: LoadingBurgerView
     
