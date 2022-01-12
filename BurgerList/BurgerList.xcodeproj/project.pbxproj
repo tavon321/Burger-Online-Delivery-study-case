@@ -24,6 +24,7 @@
 		712FEACE26B327BE00770D2D /* SharedCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E0B29E2524DC5100661112 /* SharedCacheTestHelpers.swift */; };
 		712FEACF26B3284100770D2D /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */; };
 		71339C4E274D37390071D07E /* BurgersRefreshViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71339C4D274D37390071D07E /* BurgersRefreshViewModel.swift */; };
+		7139E7D6278F13BD00F1BBCD /* Burgers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7139E7D5278F13BD00F1BBCD /* Burgers.storyboard */; };
 		7146D6F126E7D17A00F3CAB5 /* UIView+Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146D6F026E7D17A00F3CAB5 /* UIView+Shimmering.swift */; };
 		7178D9EB276B83F00012950D /* BurgerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7178D9EA276B83F00012950D /* BurgerPresenter.swift */; };
 		7185138926DE72DA0026EB61 /* BurgerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7185138826DE72DA0026EB61 /* BurgerCell.swift */; };
@@ -140,6 +141,7 @@
 		7122BB7A274EA7C000871542 /* BurgerImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerImageViewModel.swift; sourceTree = "<group>"; };
 		712A88CF2732CCF700FE7484 /* BurgersRefreshViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgersRefreshViewController.swift; sourceTree = "<group>"; };
 		71339C4D274D37390071D07E /* BurgersRefreshViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgersRefreshViewModel.swift; sourceTree = "<group>"; };
+		7139E7D5278F13BD00F1BBCD /* Burgers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Burgers.storyboard; sourceTree = "<group>"; };
 		7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListControllerTests.swift; sourceTree = "<group>"; };
 		7146D6F026E7D17A00F3CAB5 /* UIView+Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmering.swift"; sourceTree = "<group>"; };
 		7178D9EA276B83F00012950D /* BurgerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerPresenter.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 			children = (
 				7146D6EF26E7D16600F3CAB5 /* Utils */,
 				7185138826DE72DA0026EB61 /* BurgerCell.swift */,
+				7139E7D5278F13BD00F1BBCD /* Burgers.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -772,6 +775,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7139E7D6278F13BD00F1BBCD /* Burgers.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
