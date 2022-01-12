@@ -14,7 +14,12 @@ public final class BurgerUIComposer {
                                imageLoader: BurgerImageLoader) -> BurgerListViewController {
         let presentationAdapter = BurgerLoaderPresentationAdapter(burgerLoader: burgerLoader)
         let refreshController = BurgersRefreshViewController(delegate: presentationAdapter)
-        let burgerController = BurgerListViewController(refreshController: refreshController)
+        
+        let bundle = Bundle(for: BurgerListViewController.self)
+        let storyboad = UIStoryboard(name: "Burgers", bundle: bundle)
+        let burgerController = storyboad.instantiateInitialViewController() as! BurgerListViewController
+        burgerController.refreshController = refreshController
+        
         let presenter = BurgersPresenter(burgersView: BurgerViewAdapter(controller: burgerController, imageLoader: imageLoader),
                                          loadingBurgerView: WeakRefVirtualProxy(refreshController))
         presentationAdapter.presenter = presenter

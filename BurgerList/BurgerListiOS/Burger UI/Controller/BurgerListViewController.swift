@@ -10,18 +10,12 @@ import UIKit
 import BurgerList
 
 public final class BurgerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
-    private var refreshController: BurgersRefreshViewController?
+    var refreshController: BurgersRefreshViewController?
     
     var cellControllers = [BurgerCellController]() {
         didSet {
             tableView.reloadData()
         }
-    }
-    
-    convenience init(refreshController: BurgersRefreshViewController) {
-        self.init()
-        
-        self.refreshController = refreshController
     }
     
     public override func viewDidLoad() {
