@@ -44,6 +44,7 @@
 		71C6AFD926B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */; };
 		71C6AFDB26B1BFFC0080DF0D /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
 		71C6AFE126B207090080DF0D /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
+		71C707D627908C9400C12B48 /* UITableView+dequeeReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C707D527908C9400C12B48 /* UITableView+dequeeReusableCell.swift */; };
 		71C7F556273B44A30096AE7A /* BurgerCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C7F555273B44A30096AE7A /* BurgerCellController.swift */; };
 		71C7F559273B49DE0096AE7A /* BurgerUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C7F558273B49DE0096AE7A /* BurgerUIComposer.swift */; };
 		71E00510278343A000FC755F /* BurgerImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E0050F278343A000FC755F /* BurgerImagePresenter.swift */; };
@@ -160,6 +161,7 @@
 		71C6AFD626B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListCacheIntegrationTests.swift; sourceTree = "<group>"; };
 		71C6AFDA26B1BFFC0080DF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71C707D527908C9400C12B48 /* UITableView+dequeeReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+dequeeReusableCell.swift"; sourceTree = "<group>"; };
 		71C7F555273B44A30096AE7A /* BurgerCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerCellController.swift; sourceTree = "<group>"; };
 		71C7F558273B49DE0096AE7A /* BurgerUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerUIComposer.swift; sourceTree = "<group>"; };
 		71E0050F278343A000FC755F /* BurgerImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerImagePresenter.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 		718D61EE2731B9A300D9A4EE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				71C707D427908C6C00C12B48 /* Helper */,
 				71C1894B26D43AAD00BAC99B /* BurgerListViewController.swift */,
 				712A88CF2732CCF700FE7484 /* BurgersRefreshViewController.swift */,
 				71C7F555273B44A30096AE7A /* BurgerCellController.swift */,
@@ -417,6 +420,14 @@
 				71C6AFDA26B1BFFC0080DF0D /* Info.plist */,
 			);
 			path = BurgerListCacheIntegrationTests;
+			sourceTree = "<group>";
+		};
+		71C707D427908C6C00C12B48 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				71C707D527908C9400C12B48 /* UITableView+dequeeReusableCell.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		71C7F557273B49D30096AE7A /* Composer */ = {
@@ -828,6 +839,7 @@
 				7122BB7B274EA7C000871542 /* BurgerImageViewModel.swift in Sources */,
 				71C1894C26D43AAD00BAC99B /* BurgerListViewController.swift in Sources */,
 				718D61EC2731B7B900D9A4EE /* BurgerImageLoader.swift in Sources */,
+				71C707D627908C9400C12B48 /* UITableView+dequeeReusableCell.swift in Sources */,
 				7178D9EB276B83F00012950D /* BurgerPresenter.swift in Sources */,
 				71C7F556273B44A30096AE7A /* BurgerCellController.swift in Sources */,
 				71339C4E274D37390071D07E /* BurgersRefreshViewModel.swift in Sources */,

@@ -58,13 +58,6 @@ final class BurgerCellController: BurgerImageView {
     }
 }
 
-private extension UITableView {
-    func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
-        let identifier = String(describing: T.self)
-        return dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! T
-    }
-}
-
 //final class BurgerCellController {
 //
 //    private var viewModel: BurgerImageViewModel<UIImage>
