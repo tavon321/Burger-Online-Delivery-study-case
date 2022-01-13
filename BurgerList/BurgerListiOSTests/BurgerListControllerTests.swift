@@ -254,6 +254,17 @@ class BurgerListControllerTests: XCTestCase {
         XCTAssertEqual(loader.cancelledImageURLs, [burger0.imageURL, burger1.imageURL], "Expected second cancelled image URL request once second image not visible anymore")
     }
     
+    func test_burgerImageView_doesNotRenderLoadeImageWhenIsNotVisibleAnymore() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        loader.completeBurgerLoading(with: [makeBurger(imageURL: URL(string: "http://url-0.com")!)], at: 0)
+        
+        let view = sut.simulateBurgerViewNotVisible(at: 0)
+        loader.completeImageLoading(with: UIImage.make(withColor: .red).pngData()!, at: 0)
+        
+        XCTAssertNil(view)
+    }
+    
     // MARK: - Helpers
     private func assertThat(_ sut: BurgerListViewController,
                             isRendering burgers: [Burger],
@@ -385,13 +396,16 @@ private extension BurgerListViewController {
         refreshControl?.simulatePullToRefresh()
     }
     
-    func simulateBurgerViewNotVisible(at row: Int) {
-        guard let view = simulateBurgerViewVisible(at: row) else { return }
+    @discardableResult
+    func simulateBurgerViewNotVisible(at row: Int) -> BurgerCell? {
+        guard let view = simulateBurgerViewVisible(at: row) else { return nil }
         
         let delegate = tableView.delegate
         let index = IndexPath(row: row, section: burgerImageSection)
         
         delegate?.tableView?(tableView, didEndDisplaying: view, forRowAt: index)
+        
+        return view
     }
     
     func simulateBurgerViewNearVisible(at row: Int) {

@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="411" id="pep-Hp-LFb" customClass="BurgerCell" customModule="BurgerListiOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BurgerCell" rowHeight="411" id="pep-Hp-LFb" customClass="BurgerCell" customModule="BurgerListiOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="411"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pep-Hp-LFb" id="l6V-uG-9pb">
@@ -51,10 +51,13 @@
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jO1-Iz-uGH">
                                                             <rect key="frame" x="0.0" y="0.0" width="374" height="374"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <buttonConfiguration key="configuration" style="plain" title="⟲">
-                                                                <fontDescription key="titleFontDescription" type="system" pointSize="60"/>
-                                                            </buttonConfiguration>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal" title="⟲"/>
+                                                            <connections>
+                                                                <action selector="retryButtonTapped" destination="pep-Hp-LFb" eventType="touchUpInside" id="TvA-5r-wSr"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -79,6 +82,13 @@
                                         <constraint firstItem="L8j-n2-CP7" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="l6V-uG-9pb" secondAttribute="bottomMargin" id="sKY-YI-97T"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="burgerImageRetryButton" destination="jO1-Iz-uGH" id="e7r-dB-6J9"/>
+                                    <outlet property="burgerImageView" destination="f0h-Bm-7Og" id="YT7-X5-c4B"/>
+                                    <outlet property="descriptionLabel" destination="mYn-s3-oli" id="zUK-Nq-cqh"/>
+                                    <outlet property="imageContainer" destination="p6W-am-baC" id="2Rh-Hy-fye"/>
+                                    <outlet property="nameLabel" destination="iyF-uo-Hct" id="DTw-Go-J2N"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -89,7 +99,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xcv-Ks-6yw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="26.086956521739133" y="73.660714285714278"/>
+            <point key="canvasLocation" x="30" y="73"/>
         </scene>
     </scenes>
     <resources>

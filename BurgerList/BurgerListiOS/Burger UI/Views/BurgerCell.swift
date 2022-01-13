@@ -9,20 +9,15 @@
 import UIKit
 
 public class BurgerCell: UITableViewCell {
-    public let nameLabel = UILabel()
-    public let descriptionLabel = UILabel()
-    public let imageContainer = UIView()
-    public let burgerImageView = UIImageView()
-    
-    private(set) public lazy var burgerImageRetryButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
-        return button
-    }()
+    @IBOutlet private(set) public var nameLabel: UILabel!
+    @IBOutlet private(set) public var descriptionLabel: UILabel!
+    @IBOutlet private(set) public var imageContainer: UIView!
+    @IBOutlet private(set) public var burgerImageView: UIImageView!
+    @IBOutlet private(set) public   var burgerImageRetryButton: UIButton!
     
     var onRetry: (() -> Void)?
     
-    @objc private func retryButtonTapped() {
+    @IBAction private func retryButtonTapped() {
         onRetry?()
     }
 }

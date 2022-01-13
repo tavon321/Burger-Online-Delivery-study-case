@@ -17,19 +17,22 @@ protocol FeedImageCellControllerDelegate {
 final class BurgerCellController: BurgerImageView {
     
     private let delegate: FeedImageCellControllerDelegate
-    private lazy var cell = BurgerCell()
+    private var cell: BurgerCell?
     
     init(delegate: FeedImageCellControllerDelegate) {
         self.delegate = delegate
     }
     
-    func view() -> UITableViewCell {
+    func view(tableView: UITableView) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BurgerCell") as! BurgerCell
+        self.cell = cell
         delegate.didRequestImage()
         
         return cell
     }
     
     func display(_ model: BurgerImageViewModel<UIImage>) {
+        guard let cell = self.cell else { return }
         cell.nameLabel.text = model.name
         cell.descriptionLabel.text = model.description
         cell.descriptionLabel.isHidden = !model.hasDescription
@@ -46,7 +49,12 @@ final class BurgerCellController: BurgerImageView {
     }
     
     func cancelLoad() {
+        releaseCellForReuse()
         delegate.didCancelImageRequest()
+    }
+    
+    private func releaseCellForReuse() {
+        cell = nil
     }
 }
 
