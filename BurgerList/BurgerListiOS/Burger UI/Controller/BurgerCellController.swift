@@ -23,8 +23,8 @@ final class BurgerCellController: BurgerImageView {
         self.delegate = delegate
     }
     
-    func view(tableView: UITableView) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BurgerCell") as! BurgerCell
+    func view(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
+        let cell: BurgerCell = tableView.dequeueReusableCell(for: indexPath)
         self.cell = cell
         delegate.didRequestImage()
         
@@ -55,6 +55,13 @@ final class BurgerCellController: BurgerImageView {
     
     private func releaseCellForReuse() {
         cell = nil
+    }
+}
+
+private extension UITableView {
+    func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
+        let identifier = String(describing: T.self)
+        return dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! T
     }
 }
 

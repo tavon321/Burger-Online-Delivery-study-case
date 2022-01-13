@@ -43,7 +43,8 @@ public final class BurgerListViewController: UITableViewController, UITableViewD
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return cellController(forRowAt: indexPath).view(tableView: tableView)
+        return cellController(forRowAt: indexPath).view(tableView: tableView,
+                                                        for: indexPath)
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
