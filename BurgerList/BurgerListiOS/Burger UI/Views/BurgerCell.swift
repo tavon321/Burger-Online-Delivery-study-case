@@ -13,7 +13,7 @@ public class BurgerCell: UITableViewCell {
     @IBOutlet private(set) public var descriptionLabel: UILabel!
     @IBOutlet private(set) public var imageContainer: UIView!
     @IBOutlet private(set) public var burgerImageView: UIImageView!
-    @IBOutlet private(set) public   var burgerImageRetryButton: UIButton!
+    @IBOutlet private(set) public var burgerImageRetryButton: UIButton!
     
     var onRetry: (() -> Void)?
     

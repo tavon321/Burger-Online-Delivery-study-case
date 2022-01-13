@@ -45,6 +45,7 @@
 		71C6AFDB26B1BFFC0080DF0D /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
 		71C6AFE126B207090080DF0D /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
 		71C707D627908C9400C12B48 /* UITableView+dequeeReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C707D527908C9400C12B48 /* UITableView+dequeeReusableCell.swift */; };
+		71C707D827908D4D00C12B48 /* UIImageView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C707D727908D4D00C12B48 /* UIImageView+Animations.swift */; };
 		71C7F556273B44A30096AE7A /* BurgerCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C7F555273B44A30096AE7A /* BurgerCellController.swift */; };
 		71C7F559273B49DE0096AE7A /* BurgerUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C7F558273B49DE0096AE7A /* BurgerUIComposer.swift */; };
 		71E00510278343A000FC755F /* BurgerImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E0050F278343A000FC755F /* BurgerImagePresenter.swift */; };
@@ -162,6 +163,7 @@
 		71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListCacheIntegrationTests.swift; sourceTree = "<group>"; };
 		71C6AFDA26B1BFFC0080DF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71C707D527908C9400C12B48 /* UITableView+dequeeReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+dequeeReusableCell.swift"; sourceTree = "<group>"; };
+		71C707D727908D4D00C12B48 /* UIImageView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Animations.swift"; sourceTree = "<group>"; };
 		71C7F555273B44A30096AE7A /* BurgerCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerCellController.swift; sourceTree = "<group>"; };
 		71C7F558273B49DE0096AE7A /* BurgerUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerUIComposer.swift; sourceTree = "<group>"; };
 		71E0050F278343A000FC755F /* BurgerImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerImagePresenter.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				71C707D527908C9400C12B48 /* UITableView+dequeeReusableCell.swift */,
+				71C707D727908D4D00C12B48 /* UIImageView+Animations.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -833,6 +836,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71E00510278343A000FC755F /* BurgerImagePresenter.swift in Sources */,
+				71C707D827908D4D00C12B48 /* UIImageView+Animations.swift in Sources */,
 				71E005182783474400FC755F /* BurgerViewAdapter.swift in Sources */,
 				7146D6F126E7D17A00F3CAB5 /* UIView+Shimmering.swift in Sources */,
 				7185138926DE72DA0026EB61 /* BurgerCell.swift in Sources */,

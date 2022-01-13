@@ -37,7 +37,7 @@ final class BurgerCellController: BurgerImageView {
         cell.descriptionLabel.text = model.description
         cell.descriptionLabel.isHidden = !model.hasDescription
         
-        cell.burgerImageView.image = model.image
+        cell.burgerImageView.setImageAnimated(model.image)
         model.isLoading ? cell.imageContainer.startShimmering() : cell.imageContainer.stopShimmering()
         
         cell.onRetry = delegate.didRequestImage
