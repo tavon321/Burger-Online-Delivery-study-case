@@ -262,7 +262,7 @@ class BurgerListControllerTests: XCTestCase {
         let view = sut.simulateBurgerViewNotVisible(at: 0)
         loader.completeImageLoading(with: UIImage.make(withColor: .red).pngData()!, at: 0)
         
-        XCTAssertNil(view)
+        XCTAssertNil(view?.renderedImage)
     }
     
     // MARK: - Helpers

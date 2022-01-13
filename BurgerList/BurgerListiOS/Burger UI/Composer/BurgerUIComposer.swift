@@ -17,8 +17,9 @@ public final class BurgerUIComposer {
         
         let bundle = Bundle(for: BurgerListViewController.self)
         let storyboad = UIStoryboard(name: "Burgers", bundle: bundle)
-        let burgerController = storyboad.instantiateInitialViewController() as! BurgerListViewController
-        burgerController.refreshController = refreshController
+        let burgerController = storyboad.instantiateInitialViewController { coder in
+            return BurgerListViewController(coder: coder, refreshController: refreshController)
+        }!
         
         let presenter = BurgersPresenter(burgersView: BurgerViewAdapter(controller: burgerController, imageLoader: imageLoader),
                                          loadingBurgerView: WeakRefVirtualProxy(refreshController))

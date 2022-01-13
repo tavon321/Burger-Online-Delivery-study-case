@@ -49,8 +49,8 @@ final class BurgerCellController: BurgerImageView {
     }
     
     func cancelLoad() {
-        releaseCellForReuse()
         delegate.didCancelImageRequest()
+        releaseCellForReuse()
     }
     
     private func releaseCellForReuse() {
