@@ -7,6 +7,7 @@
 //
 
 import BurgerList
+import Foundation
 
 struct BurgerLoadingViewModel {
     var isLoading: Bool
@@ -29,7 +30,10 @@ class BurgersPresenter {
     private let loadingBurgerView: LoadingBurgerView
     
     static var title: String {
-        "Burgers"
+        NSLocalizedString("BURGERLIST_VIEW_TITLE",
+                          tableName: "Burgers",
+                          bundle: Bundle(for: BurgersPresenter.self),
+                          comment: "Title for the burger lists")
     }
     
     init(burgersView: BurgerView, loadingBurgerView: LoadingBurgerView) {
