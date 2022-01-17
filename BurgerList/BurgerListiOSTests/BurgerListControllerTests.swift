@@ -19,11 +19,7 @@ class BurgerListControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         
         let bundle = Bundle(for: BurgerListController.self)
-        let localizedKey = "BURGERLIST_VIEW_TITLE"
-        let localizedTitle = bundle.localizedString(forKey: localizedKey, value: nil, table: "Burgers")
-        
-        XCTAssertNotEqual(sut.title, localizedKey, "Missing localized string for key: \(localizedKey)")
-        XCTAssertEqual(sut.title, localizedTitle)
+        XCTAssertEqual(sut.title, localized( "BURGERLIST_VIEW_TITLE"))
     }
     
     func test_loadBurgerActions_requestBurgerListFromLoader() {
