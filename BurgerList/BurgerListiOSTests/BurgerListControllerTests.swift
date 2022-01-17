@@ -13,6 +13,14 @@ import BurgerListiOS
 
 class BurgerListControllerTests: XCTestCase {
     
+    func test_burgerList_hasTitle() {
+        let (sut, _) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        
+        XCTAssertEqual(sut.title, "Burgers")
+    }
+    
     func test_loadBurgerActions_requestBurgerListFromLoader() {
         let (sut, loader) = makeSUT()
         
