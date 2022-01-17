@@ -1,5 +1,5 @@
 //
-//  BurgerPresenter.swift
+//  BurgersPresenter.swift
 //  BurgerListiOS
 //
 //  Created by Gustavo on 16/12/21.
@@ -27,6 +27,10 @@ protocol BurgerView {
 class BurgersPresenter {
     private let burgersView: BurgerView
     private let loadingBurgerView: LoadingBurgerView
+    
+    static var title: String {
+        "Burgers"
+    }
     
     init(burgersView: BurgerView, loadingBurgerView: LoadingBurgerView) {
         self.burgersView = burgersView
