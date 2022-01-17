@@ -15,6 +15,18 @@ public final class BurgerUIComposer {
         let presentationAdapter = BurgerLoaderPresentationAdapter(burgerLoader: burgerLoader)
         let refreshController = BurgersRefreshViewController(delegate: presentationAdapter)
         
+        let burgerController = BurgerListViewController.makeWith(refreshController: refreshController,
+                                                                 title: BurgersPresenter.title)
+        let presenter = BurgersPresenter(burgersView: BurgerViewAdapter(controller: burgerController, imageLoader: imageLoader),
+                                         loadingBurgerView: WeakRefVirtualProxy(refreshController))
+        presentationAdapter.presenter = presenter
+         
+        return burgerController
+    }
+}
+
+private extension BurgerListViewController {
+    static func makeWith(refreshController: BurgersRefreshViewController, title: String) -> BurgerListViewController {
         let bundle = Bundle(for: BurgerListViewController.self)
         let storyboad = UIStoryboard(name: "Burgers", bundle: bundle)
         
@@ -22,11 +34,6 @@ public final class BurgerUIComposer {
             return BurgerListViewController(coder: coder, refreshController: refreshController)
         }!
         burgerController.title = BurgersPresenter.title
-        
-        let presenter = BurgersPresenter(burgersView: BurgerViewAdapter(controller: burgerController, imageLoader: imageLoader),
-                                         loadingBurgerView: WeakRefVirtualProxy(refreshController))
-        presentationAdapter.presenter = presenter
-         
         return burgerController
     }
 }
