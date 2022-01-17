@@ -38,6 +38,7 @@
 		71B28B0D261DE8CB00DF448B /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */; };
 		71B9D6012795E19000D1D064 /* XCTestCase+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B9D6002795E19000D1D064 /* XCTestCase+Localized.swift */; };
 		71B9D6032795E2BD00D1D064 /* Burgers.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71B9D6052795E2BD00D1D064 /* Burgers.strings */; };
+		71B9D6092795E3A300D1D064 /* BurgersLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B9D6082795E3A300D1D064 /* BurgersLocalizationTests.swift */; };
 		71C1893E26D40BC000BAC99B /* BurgerListIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146322726C1B86E0005CF50 /* BurgerListIntegrationTests.swift */; };
 		71C1894226D42CB300BAC99B /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; platformFilter = ios; };
 		71C1894326D42CB300BAC99B /* BurgerList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -163,6 +164,7 @@
 		71B9D6002795E19000D1D064 /* XCTestCase+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Localized.swift"; sourceTree = "<group>"; };
 		71B9D6042795E2BD00D1D064 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Burgers.strings; sourceTree = "<group>"; };
 		71B9D6062795E2F600D1D064 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Burgers.strings; sourceTree = "<group>"; };
+		71B9D6082795E3A300D1D064 /* BurgersLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgersLocalizationTests.swift; sourceTree = "<group>"; };
 		71C1894B26D43AAD00BAC99B /* BurgerListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListController.swift; sourceTree = "<group>"; };
 		71C6AFD626B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListCacheIntegrationTests.swift; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				71B9D6022795E1B900D1D064 /* Helpers */,
+				71B9D6072795E38F00D1D064 /* Presentation */,
 				7146322726C1B86E0005CF50 /* BurgerListIntegrationTests.swift */,
 				7193084D26B46271001B5A26 /* Info.plist */,
 			);
@@ -421,6 +424,14 @@
 				71B9D6002795E19000D1D064 /* XCTestCase+Localized.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		71B9D6072795E38F00D1D064 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				71B9D6082795E3A300D1D064 /* BurgersLocalizationTests.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		71C1894126D42CB300BAC99B /* Frameworks */ = {
@@ -877,6 +888,7 @@
 			files = (
 				71C1894826D42D1B00BAC99B /* XCTestCase+TrackForMemoryLeaks.swift in Sources */,
 				71B9D6012795E19000D1D064 /* XCTestCase+Localized.swift in Sources */,
+				71B9D6092795E3A300D1D064 /* BurgersLocalizationTests.swift in Sources */,
 				71C1893E26D40BC000BAC99B /* BurgerListIntegrationTests.swift in Sources */,
 				7185138A26DEA7900026EB61 /* SharedTestHelpers.swift in Sources */,
 			);
