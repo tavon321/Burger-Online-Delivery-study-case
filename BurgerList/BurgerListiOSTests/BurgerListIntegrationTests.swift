@@ -1,5 +1,5 @@
 //
-//  BurgerListControllerTests.swift
+//  BurgerListIntegrationTests.swift
 //  BurgerListiOSTests
 //
 //  Created by Gustavo on 9/08/21.
@@ -11,14 +11,13 @@ import UIKit
 import BurgerList
 import BurgerListiOS
 
-class BurgerListControllerTests: XCTestCase {
+class BurgerListIntegrationTests: XCTestCase {
     
     func test_burgerList_hasTitle() {
         let (sut, _) = makeSUT()
         
         sut.loadViewIfNeeded()
         
-        let bundle = Bundle(for: BurgerListController.self)
         XCTAssertEqual(sut.title, localized( "BURGERLIST_VIEW_TITLE"))
     }
     

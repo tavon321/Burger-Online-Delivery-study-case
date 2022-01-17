@@ -38,7 +38,7 @@
 		71B28B0D261DE8CB00DF448B /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */; };
 		71B9D5FF2795DE3000D1D064 /* Burgers.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71B9D5FE2795DE3000D1D064 /* Burgers.strings */; };
 		71B9D6012795E19000D1D064 /* XCTestCase+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B9D6002795E19000D1D064 /* XCTestCase+Localized.swift */; };
-		71C1893E26D40BC000BAC99B /* BurgerListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */; };
+		71C1893E26D40BC000BAC99B /* BurgerListIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146322726C1B86E0005CF50 /* BurgerListIntegrationTests.swift */; };
 		71C1894226D42CB300BAC99B /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; platformFilter = ios; };
 		71C1894326D42CB300BAC99B /* BurgerList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		71C1894826D42D1B00BAC99B /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
@@ -146,7 +146,7 @@
 		712A88CF2732CCF700FE7484 /* BurgersRefreshViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgersRefreshViewController.swift; sourceTree = "<group>"; };
 		71339C4D274D37390071D07E /* BurgersRefreshViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgersRefreshViewModel.swift; sourceTree = "<group>"; };
 		7139E7D5278F13BD00F1BBCD /* Burgers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Burgers.storyboard; sourceTree = "<group>"; };
-		7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListControllerTests.swift; sourceTree = "<group>"; };
+		7146322726C1B86E0005CF50 /* BurgerListIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListIntegrationTests.swift; sourceTree = "<group>"; };
 		7146D6F026E7D17A00F3CAB5 /* UIView+Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmering.swift"; sourceTree = "<group>"; };
 		7178D9EA276B83F00012950D /* BurgerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerPresenter.swift; sourceTree = "<group>"; };
 		7185138826DE72DA0026EB61 /* BurgerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerCell.swift; sourceTree = "<group>"; };
@@ -380,7 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				71B9D6022795E1B900D1D064 /* Helpers */,
-				7146322726C1B86E0005CF50 /* BurgerListControllerTests.swift */,
+				7146322726C1B86E0005CF50 /* BurgerListIntegrationTests.swift */,
 				7193084D26B46271001B5A26 /* Info.plist */,
 			);
 			path = BurgerListiOSTests;
@@ -875,7 +875,7 @@
 			files = (
 				71C1894826D42D1B00BAC99B /* XCTestCase+TrackForMemoryLeaks.swift in Sources */,
 				71B9D6012795E19000D1D064 /* XCTestCase+Localized.swift in Sources */,
-				71C1893E26D40BC000BAC99B /* BurgerListControllerTests.swift in Sources */,
+				71C1893E26D40BC000BAC99B /* BurgerListIntegrationTests.swift in Sources */,
 				7185138A26DEA7900026EB61 /* SharedTestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
