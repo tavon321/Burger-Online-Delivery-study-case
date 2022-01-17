@@ -36,8 +36,8 @@
 		71B28B02261DE15900DF448B /* ManageBurger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B01261DE15900DF448B /* ManageBurger.swift */; };
 		71B28B07261DE2A600DF448B /* ManagedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B06261DE2A600DF448B /* ManagedCache.swift */; };
 		71B28B0D261DE8CB00DF448B /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */; };
-		71B9D5FF2795DE3000D1D064 /* Burgers.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71B9D5FE2795DE3000D1D064 /* Burgers.strings */; };
 		71B9D6012795E19000D1D064 /* XCTestCase+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B9D6002795E19000D1D064 /* XCTestCase+Localized.swift */; };
+		71B9D6032795E2BD00D1D064 /* Burgers.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71B9D6052795E2BD00D1D064 /* Burgers.strings */; };
 		71C1893E26D40BC000BAC99B /* BurgerListIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146322726C1B86E0005CF50 /* BurgerListIntegrationTests.swift */; };
 		71C1894226D42CB300BAC99B /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; platformFilter = ios; };
 		71C1894326D42CB300BAC99B /* BurgerList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -160,8 +160,8 @@
 		71B28B01261DE15900DF448B /* ManageBurger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBurger.swift; sourceTree = "<group>"; };
 		71B28B06261DE2A600DF448B /* ManagedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedCache.swift; sourceTree = "<group>"; };
 		71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
-		71B9D5FE2795DE3000D1D064 /* Burgers.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Burgers.strings; sourceTree = "<group>"; };
 		71B9D6002795E19000D1D064 /* XCTestCase+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Localized.swift"; sourceTree = "<group>"; };
+		71B9D6042795E2BD00D1D064 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Burgers.strings; sourceTree = "<group>"; };
 		71C1894B26D43AAD00BAC99B /* BurgerListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListController.swift; sourceTree = "<group>"; };
 		71C6AFD626B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListCacheIntegrationTests.swift; sourceTree = "<group>"; };
@@ -304,7 +304,7 @@
 			children = (
 				712B40A2277B51BE001E424E /* Presenter */,
 				712B40A1277B51B2001E424E /* ViewModel */,
-				71B9D5FE2795DE3000D1D064 /* Burgers.strings */,
+				71B9D6052795E2BD00D1D064 /* Burgers.strings */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -804,7 +804,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7139E7D6278F13BD00F1BBCD /* Burgers.storyboard in Resources */,
-				71B9D5FF2795DE3000D1D064 /* Burgers.strings in Resources */,
+				71B9D6032795E2BD00D1D064 /* Burgers.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -978,6 +978,17 @@
 			targetProxy = DCEBAA5C2487DFBD0024BFA9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		71B9D6052795E2BD00D1D064 /* Burgers.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				71B9D6042795E2BD00D1D064 /* en */,
+			);
+			name = Burgers.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7193085026B46271001B5A26 /* Debug */ = {
