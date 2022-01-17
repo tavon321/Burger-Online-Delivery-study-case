@@ -31,7 +31,6 @@ public final class BurgerListViewController: UITableViewController, UITableViewD
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = BurgersPresenter.title
         refreshControl = refreshController.view
         tableView.prefetchDataSource = self
         
