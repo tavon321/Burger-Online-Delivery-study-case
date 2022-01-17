@@ -40,7 +40,7 @@
 		71C1894226D42CB300BAC99B /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; platformFilter = ios; };
 		71C1894326D42CB300BAC99B /* BurgerList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		71C1894826D42D1B00BAC99B /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
-		71C1894C26D43AAD00BAC99B /* BurgerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C1894B26D43AAD00BAC99B /* BurgerListViewController.swift */; };
+		71C1894C26D43AAD00BAC99B /* BurgerListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C1894B26D43AAD00BAC99B /* BurgerListController.swift */; };
 		71C6AFD926B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */; };
 		71C6AFDB26B1BFFC0080DF0D /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
 		71C6AFE126B207090080DF0D /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
@@ -158,7 +158,7 @@
 		71B28B01261DE15900DF448B /* ManageBurger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageBurger.swift; sourceTree = "<group>"; };
 		71B28B06261DE2A600DF448B /* ManagedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedCache.swift; sourceTree = "<group>"; };
 		71B28B0C261DE8CB00DF448B /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
-		71C1894B26D43AAD00BAC99B /* BurgerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListViewController.swift; sourceTree = "<group>"; };
+		71C1894B26D43AAD00BAC99B /* BurgerListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListController.swift; sourceTree = "<group>"; };
 		71C6AFD626B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListCacheIntegrationTests.swift; sourceTree = "<group>"; };
 		71C6AFDA26B1BFFC0080DF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -344,7 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				71C707D427908C6C00C12B48 /* Helper */,
-				71C1894B26D43AAD00BAC99B /* BurgerListViewController.swift */,
+				71C1894B26D43AAD00BAC99B /* BurgerListController.swift */,
 				712A88CF2732CCF700FE7484 /* BurgersRefreshViewController.swift */,
 				71C7F555273B44A30096AE7A /* BurgerCellController.swift */,
 			);
@@ -841,7 +841,7 @@
 				7146D6F126E7D17A00F3CAB5 /* UIView+Shimmering.swift in Sources */,
 				7185138926DE72DA0026EB61 /* BurgerCell.swift in Sources */,
 				7122BB7B274EA7C000871542 /* BurgerImageViewModel.swift in Sources */,
-				71C1894C26D43AAD00BAC99B /* BurgerListViewController.swift in Sources */,
+				71C1894C26D43AAD00BAC99B /* BurgerListController.swift in Sources */,
 				718D61EC2731B7B900D9A4EE /* BurgerImageLoader.swift in Sources */,
 				71C707D627908C9400C12B48 /* UITableView+dequeeReusableCell.swift in Sources */,
 				7178D9EB276B83F00012950D /* BurgerPresenter.swift in Sources */,

@@ -10,10 +10,10 @@ import UIKit
 import BurgerList
 
 final class BurgerViewAdapter: BurgerView {
-    private weak var controller: BurgerListViewController?
+    private weak var controller: BurgerListController?
     private let imageLoader: BurgerImageLoader
     
-    init(controller: BurgerListViewController, imageLoader: BurgerImageLoader) {
+    init(controller: BurgerListController, imageLoader: BurgerImageLoader) {
         self.controller = controller
         self.imageLoader = imageLoader
     }

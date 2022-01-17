@@ -11,11 +11,11 @@ import UIKit
 
 public final class BurgerUIComposer {
     public static func compose(burgerLoader: BurgerLoader,
-                               imageLoader: BurgerImageLoader) -> BurgerListViewController {
+                               imageLoader: BurgerImageLoader) -> BurgerListController {
         let presentationAdapter = BurgerLoaderPresentationAdapter(burgerLoader: burgerLoader)
         let refreshController = BurgersRefreshViewController(delegate: presentationAdapter)
         
-        let burgerController = BurgerListViewController.makeWith(refreshController: refreshController,
+        let burgerController = BurgerListController.makeWith(refreshController: refreshController,
                                                                  title: BurgersPresenter.title)
         let presenter = BurgersPresenter(burgersView: BurgerViewAdapter(controller: burgerController, imageLoader: imageLoader),
                                          loadingBurgerView: WeakRefVirtualProxy(refreshController))
@@ -25,13 +25,13 @@ public final class BurgerUIComposer {
     }
 }
 
-private extension BurgerListViewController {
-    static func makeWith(refreshController: BurgersRefreshViewController, title: String) -> BurgerListViewController {
-        let bundle = Bundle(for: BurgerListViewController.self)
+private extension BurgerListController {
+    static func makeWith(refreshController: BurgersRefreshViewController, title: String) -> BurgerListController {
+        let bundle = Bundle(for: BurgerListController.self)
         let storyboad = UIStoryboard(name: "Burgers", bundle: bundle)
         
         let burgerController = storyboad.instantiateInitialViewController { coder in
-            return BurgerListViewController(coder: coder, refreshController: refreshController)
+            return BurgerListController(coder: coder, refreshController: refreshController)
         }!
         burgerController.title = BurgersPresenter.title
         return burgerController
@@ -46,17 +46,17 @@ extension WeakRefVirtualProxy: LoadingBurgerView where T: LoadingBurgerView {
 
 //public final class BurgerUIComposer {
 //    public static func compose(burgerLoader: BurgerLoader,
-//                               imageLoader: BurgerImageLoader) -> BurgerListViewController {
+//                               imageLoader: BurgerImageLoader) -> BurgerListController {
 //        let viewModel = BurgersRefreshViewModel(burgerLoader: burgerLoader)
 //        let refreshController = BurgersRefreshViewController(viewModel: viewModel)
-//        let burgerController = BurgerListViewController(refreshController: refreshController)
+//        let burgerController = BurgerListController(refreshController: refreshController)
 //        viewModel.onBurgerLoad = adaptToCellControllers(forwardingTo: burgerController,
 //                                                        loader: imageLoader)
 //
 //        return burgerController
 //    }
 //
-//    private static func adaptToCellControllers(forwardingTo controller: BurgerListViewController,
+//    private static func adaptToCellControllers(forwardingTo controller: BurgerListController,
 //                                               loader: BurgerImageLoader)
 //    -> ([Burger]) -> Void {
 //        return { [weak controller] burgers in
@@ -71,10 +71,10 @@ extension WeakRefVirtualProxy: LoadingBurgerView where T: LoadingBurgerView {
 //}
 
 //private final class BurgerViewAdapter: BurgerView {
-//    private weak var controller: BurgerListViewController?
+//    private weak var controller: BurgerListController?
 //    private let imageLoader: BurgerImageLoader
 //
-//    init(controller: BurgerListViewController, imageLoader: BurgerImageLoader) {
+//    init(controller: BurgerListController, imageLoader: BurgerImageLoader) {
 //        self.controller = controller
 //        self.imageLoader = imageLoader
 //    }

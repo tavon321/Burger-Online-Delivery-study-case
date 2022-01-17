@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BurgerListViewControllerDelegate {
+protocol BurgerListControllerDelegate {
     func loadBurgers()
 }
 
@@ -16,9 +16,9 @@ final class BurgersRefreshViewController: NSObject, LoadingBurgerView {
     
     private(set) lazy var view: UIRefreshControl = loadView()
     
-    private let delegate: BurgerListViewControllerDelegate
+    private let delegate: BurgerListControllerDelegate
     
-    init(delegate: BurgerListViewControllerDelegate) {
+    init(delegate: BurgerListControllerDelegate) {
         self.delegate = delegate
     }
     

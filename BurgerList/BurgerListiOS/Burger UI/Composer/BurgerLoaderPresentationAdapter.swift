@@ -9,7 +9,7 @@
 import UIKit
 import BurgerList
 
-public final class BurgerLoaderPresentationAdapter: BurgerListViewControllerDelegate {
+public final class BurgerLoaderPresentationAdapter: BurgerListControllerDelegate {
     private let burgerLoader: BurgerLoader
     var presenter: BurgersPresenter?
     

@@ -1,5 +1,5 @@
 //
-//  BurgerListViewController.swift
+//  BurgerListController.swift
 //  BurgerListiOS
 //
 //  Created by Gustavo on 23/08/21.
@@ -9,7 +9,7 @@
 import UIKit
 import BurgerList
 
-public final class BurgerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
+public final class BurgerListController: UITableViewController, UITableViewDataSourcePrefetching {
     private let refreshController: BurgersRefreshViewController
     
     var cellControllers = [BurgerCellController]() {
@@ -71,7 +71,7 @@ public final class BurgerListViewController: UITableViewController, UITableViewD
 }
 
 
-//public final class BurgerListViewController: UITableViewController, UITableViewDataSourcePrefetching {
+//public final class BurgerListController: UITableViewController, UITableViewDataSourcePrefetching {
 //    private var refreshController: BurgersRefreshViewController?
 //    var cellControllers = [BurgerCellController]() {
 //        didSet {

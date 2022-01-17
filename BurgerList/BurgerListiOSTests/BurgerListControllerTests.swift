@@ -274,7 +274,7 @@ class BurgerListControllerTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    private func assertThat(_ sut: BurgerListViewController,
+    private func assertThat(_ sut: BurgerListController,
                             isRendering burgers: [Burger],
                             file: StaticString = #file,
                             line: UInt = #line) {
@@ -292,7 +292,7 @@ class BurgerListControllerTests: XCTestCase {
                               line: line) })
     }
     
-    private func assert(_ sut: BurgerListViewController,
+    private func assert(_ sut: BurgerListController,
                         hasViewCofiguredFor burger: Burger,
                         at index: Int,
                         file: StaticString = #file,
@@ -323,7 +323,7 @@ class BurgerListControllerTests: XCTestCase {
     
     private func makeSUT(file: StaticString = #file,
                          line: UInt = #line)
-    -> (sut: BurgerListViewController, loader: LoaderSpy) {
+    -> (sut: BurgerListController, loader: LoaderSpy) {
         let loader = LoaderSpy()
         let sut = BurgerUIComposer.compose(burgerLoader: loader, imageLoader: loader)
         
@@ -393,7 +393,7 @@ class BurgerListControllerTests: XCTestCase {
     }
 }
 
-private extension BurgerListViewController {
+private extension BurgerListController {
     
     @discardableResult
     func simulateBurgerViewVisible(at index: Int) -> BurgerCell? {
