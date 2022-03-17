@@ -273,6 +273,19 @@ class BurgerListIntegrationTests: XCTestCase {
         XCTAssertNil(view?.renderedImage)
     }
     
+    func test_completeBurgerLoading_dispatchesFromBackgroundToMainThread() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        let exp = expectation(description: "Wait for backgroud queue")
+        DispatchQueue.global(qos: .background).async {
+            loader.completeBurgerLoading()
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1.0)
+    }
+    
     // MARK: - Helpers
     private func assertThat(_ sut: BurgerListController,
                             isRendering burgers: [Burger],
