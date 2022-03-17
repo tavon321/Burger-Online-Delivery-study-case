@@ -52,6 +52,7 @@
 		71C7F556273B44A30096AE7A /* BurgerCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C7F555273B44A30096AE7A /* BurgerCellController.swift */; };
 		71C7F559273B49DE0096AE7A /* BurgerUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C7F558273B49DE0096AE7A /* BurgerUIComposer.swift */; };
 		71D7BC3427E2BB3D0010CCAC /* BurgerImagePresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7BC3327E2BB3D0010CCAC /* BurgerImagePresentationAdapter.swift */; };
+		71D7BC3627E2BED70010CCAC /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7BC3527E2BED70010CCAC /* MainQueueDispatchDecorator.swift */; };
 		71E00510278343A000FC755F /* BurgerImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E0050F278343A000FC755F /* BurgerImagePresenter.swift */; };
 		71E005132783462300FC755F /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E005122783462300FC755F /* WeakRefVirtualProxy.swift */; };
 		71E005152783464C00FC755F /* BurgerLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E005142783464C00FC755F /* BurgerLoaderPresentationAdapter.swift */; };
@@ -175,6 +176,7 @@
 		71C7F555273B44A30096AE7A /* BurgerCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerCellController.swift; sourceTree = "<group>"; };
 		71C7F558273B49DE0096AE7A /* BurgerUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerUIComposer.swift; sourceTree = "<group>"; };
 		71D7BC3327E2BB3D0010CCAC /* BurgerImagePresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerImagePresentationAdapter.swift; sourceTree = "<group>"; };
+		71D7BC3527E2BED70010CCAC /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
 		71E0050F278343A000FC755F /* BurgerImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerImagePresenter.swift; sourceTree = "<group>"; };
 		71E005122783462300FC755F /* WeakRefVirtualProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRefVirtualProxy.swift; sourceTree = "<group>"; };
 		71E005142783464C00FC755F /* BurgerLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 			isa = PBXGroup;
 			children = (
 				71E005122783462300FC755F /* WeakRefVirtualProxy.swift */,
+				71D7BC3527E2BED70010CCAC /* MainQueueDispatchDecorator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 				71C1894C26D43AAD00BAC99B /* BurgerListController.swift in Sources */,
 				718D61EC2731B7B900D9A4EE /* BurgerImageLoader.swift in Sources */,
 				71C707D627908C9400C12B48 /* UITableView+dequeeReusableCell.swift in Sources */,
+				71D7BC3627E2BED70010CCAC /* MainQueueDispatchDecorator.swift in Sources */,
 				7178D9EB276B83F00012950D /* BurgerPresenter.swift in Sources */,
 				71C7F556273B44A30096AE7A /* BurgerCellController.swift in Sources */,
 				71339C4E274D37390071D07E /* BurgersRefreshViewModel.swift in Sources */,

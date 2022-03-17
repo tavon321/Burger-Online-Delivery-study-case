@@ -27,27 +27,6 @@ public final class BurgerUIComposer {
     }
 }
 
-private final class MainQueueDispatchDecorator: BurgerLoader {
-    private let decoratee: BurgerLoader
-    
-    init(decoratee: BurgerLoader) {
-        self.decoratee = decoratee
-    }
-    
-    func load(completion: @escaping (BurgerLoader.Result) -> Void) {
-        decoratee.load { result in
-            if Thread.isMainThread {
-                completion(result)
-            } else {
-                DispatchQueue.main.async {
-                    completion(result)
-                }
-            }
-        }
-    }
-    
-}
-
 private extension BurgerListController {
     static func makeWith(refreshController: BurgersRefreshViewController, title: String) -> BurgerListController {
         let bundle = Bundle(for: BurgerListController.self)
