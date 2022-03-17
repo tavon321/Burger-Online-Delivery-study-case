@@ -19,7 +19,8 @@ public final class BurgerUIComposer {
         
         let burgerController = BurgerListController.makeWith(refreshController: refreshController,
                                                                  title: BurgersPresenter.title)
-        let presenter = BurgersPresenter(burgersView: BurgerViewAdapter(controller: burgerController, imageLoader: imageLoader),
+        let presenter = BurgersPresenter(burgersView: BurgerViewAdapter(controller: burgerController,
+                                                                        imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader)),
                                          loadingBurgerView: WeakRefVirtualProxy(refreshController))
         presentationAdapter.presenter = presenter
          

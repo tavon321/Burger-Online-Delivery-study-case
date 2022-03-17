@@ -286,6 +286,23 @@ class BurgerListIntegrationTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
     
+    
+    func test_completeImageLoading_dispatchesFromBackgroundToMainThread() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeBurgerLoading(with: [makeBurger(imageURL: URL(string: "http://url-0.com")!)])
+        _ = sut.simulateBurgerViewVisible(at: 0)
+        
+        let exp = expectation(description: "Wait for backgroud queue")
+        DispatchQueue.global(qos: .background).async {
+            loader.completeImageLoading()
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1.0)
+    }
+    
     // MARK: - Helpers
     private func assertThat(_ sut: BurgerListController,
                             isRendering burgers: [Burger],
