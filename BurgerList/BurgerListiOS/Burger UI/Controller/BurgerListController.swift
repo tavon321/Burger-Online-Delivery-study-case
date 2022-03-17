@@ -14,13 +14,7 @@ public final class BurgerListController: UITableViewController, UITableViewDataS
     
     var cellControllers = [BurgerCellController]() {
         didSet {
-            if Thread.isMainThread {
-                tableView.reloadData()
-            } else {
-                DispatchQueue.main.async { [weak self] in
-                    self?.tableView?.reloadData()
-                }
-            }
+            tableView.reloadData()
         }
     }
     

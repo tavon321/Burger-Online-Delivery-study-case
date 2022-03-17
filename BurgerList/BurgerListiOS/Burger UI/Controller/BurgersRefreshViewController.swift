@@ -27,11 +27,6 @@ final class BurgersRefreshViewController: NSObject, LoadingBurgerView {
     }
     
     func display(_ viewModel: BurgerLoadingViewModel) {
-        guard Thread.isMainThread else {
-            return DispatchQueue.main.async { [weak self] in
-                self?.display(viewModel)
-            }
-        }
         if viewModel.isLoading {
             view.beginRefreshing()
         } else {
