@@ -61,7 +61,7 @@ class BurgerPresenterTests: XCTestCase {
     }
     
     private class ViewSpy: BurgerErrorView {
-        var messages = [Message]()
+        private(set) var messages = [Message]()
         
         enum Message: Equatable {
             case display(errorMessage: String?)
