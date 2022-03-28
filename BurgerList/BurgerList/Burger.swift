@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Burger: Equatable {
+public struct Burger: Hashable {
     public let id: UUID
     public let name: String
     public let description: String?
