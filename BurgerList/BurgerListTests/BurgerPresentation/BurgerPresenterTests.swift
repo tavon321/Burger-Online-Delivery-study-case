@@ -28,6 +28,17 @@ class BurgerPresenterTests: XCTestCase {
     
     // MARK: - Helpers
     
+    private func makeSUT(file: StaticString = #file,
+                         line: UInt = #line) -> (sut: BurgersPresenter, view: ViewSpy) {
+        let view = ViewSpy()
+        let sut = BurgersPresenter(view: view)
+        
+        trackForMemoryLeaks(view, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
+        
+        return (sut: sut, view: view)
+    }
+    
     private class ViewSpy{
         var messages = [Message]()
         
