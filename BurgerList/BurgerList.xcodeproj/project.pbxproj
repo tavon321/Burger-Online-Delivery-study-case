@@ -29,6 +29,9 @@
 		7169307327F25DDB00F198EF /* Burgers.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71B9D6052795E2BD00D1D064 /* Burgers.strings */; };
 		7169307527F25DEA00F198EF /* BurgerPresnter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169307427F25DEA00F198EF /* BurgerPresnter.swift */; };
 		7169307727F25EAF00F198EF /* Burgers.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71C1B2D527F2203A00D11DF9 /* Burgers.strings */; };
+		7169307927F25F1D00F198EF /* BurgerErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169307827F25F1D00F198EF /* BurgerErrorViewModel.swift */; };
+		7169307B27F25F2F00F198EF /* BurgerLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169307A27F25F2F00F198EF /* BurgerLoadingViewModel.swift */; };
+		7169307D27F25F4F00F198EF /* BurgerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169307C27F25F4F00F198EF /* BurgerViewModel.swift */; };
 		7178D9EB276B83F00012950D /* BurgerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7178D9EA276B83F00012950D /* BurgerPresenter.swift */; };
 		7185138926DE72DA0026EB61 /* BurgerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7185138826DE72DA0026EB61 /* BurgerCell.swift */; };
 		7185138A26DEA7900026EB61 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */; };
@@ -158,6 +161,9 @@
 		7146322726C1B86E0005CF50 /* BurgerListIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListIntegrationTests.swift; sourceTree = "<group>"; };
 		7146D6F026E7D17A00F3CAB5 /* UIView+Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmering.swift"; sourceTree = "<group>"; };
 		7169307427F25DEA00F198EF /* BurgerPresnter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerPresnter.swift; sourceTree = "<group>"; };
+		7169307827F25F1D00F198EF /* BurgerErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerErrorViewModel.swift; sourceTree = "<group>"; };
+		7169307A27F25F2F00F198EF /* BurgerLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerLoadingViewModel.swift; sourceTree = "<group>"; };
+		7169307C27F25F4F00F198EF /* BurgerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerViewModel.swift; sourceTree = "<group>"; };
 		7178D9EA276B83F00012950D /* BurgerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerPresenter.swift; sourceTree = "<group>"; };
 		7185138826DE72DA0026EB61 /* BurgerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerCell.swift; sourceTree = "<group>"; };
 		718D61EB2731B7B900D9A4EE /* BurgerImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerImageLoader.swift; sourceTree = "<group>"; };
@@ -349,6 +355,9 @@
 			children = (
 				71B9D6052795E2BD00D1D064 /* Burgers.strings */,
 				7169307427F25DEA00F198EF /* BurgerPresnter.swift */,
+				7169307827F25F1D00F198EF /* BurgerErrorViewModel.swift */,
+				7169307A27F25F2F00F198EF /* BurgerLoadingViewModel.swift */,
+				7169307C27F25F4F00F198EF /* BurgerViewModel.swift */,
 			);
 			path = "Burger Presentation";
 			sourceTree = "<group>";
@@ -981,11 +990,14 @@
 				40A943AF25F8129900BC786D /* CodableBurgerStore.swift in Sources */,
 				40FC239F254B662600290628 /* BurgerCachePolicy.swift in Sources */,
 				71B28B0D261DE8CB00DF448B /* CoreDataHelpers.swift in Sources */,
+				7169307D27F25F4F00F198EF /* BurgerViewModel.swift in Sources */,
 				711A664C2682AC31000B6EDF /* BurgerStore.xcdatamodeld in Sources */,
 				71B28AFA261DDFA800DF448B /* CoreDataBurgerStore.swift in Sources */,
+				7169307B27F25F2F00F198EF /* BurgerLoadingViewModel.swift in Sources */,
 				DC8671BD24911ED6007DA501 /* RemoteBurgerLoader.swift in Sources */,
 				DCD8F68624A4DC1C00064ED9 /* HTTPClient.swift in Sources */,
 				DCABB350250FD59700D002E9 /* RemoteBurger.swift in Sources */,
+				7169307927F25F1D00F198EF /* BurgerErrorViewModel.swift in Sources */,
 				DCEBAA6E2487E4D00024BFA9 /* BurgerLoader.swift in Sources */,
 				DC765CDE24C9CB2C007D7999 /* URLSessionHTTPClient.swift in Sources */,
 				DC0115C424CF1178002A7CB7 /* HTTPURLResponse+statusCode.swift in Sources */,

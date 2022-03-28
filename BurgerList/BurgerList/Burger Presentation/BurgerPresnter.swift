@@ -8,32 +8,12 @@
 
 import Foundation
 
-public struct BurgerErrorViewModel {
-    public var errorMessage: String?
-    
-    public static var noError: BurgerErrorViewModel {
-        BurgerErrorViewModel(errorMessage: nil)
-    }
-    
-    public static func error(message: String) -> BurgerErrorViewModel {
-        BurgerErrorViewModel(errorMessage: message)
-    }
-}
-
 public protocol BurgerErrorView {
     func display(_ viewModel: BurgerErrorViewModel)
 }
 
-public struct BurgerLoadingViewModel {
-    public var isLoading: Bool
-}
-
 public protocol LoadingBurgerView: AnyObject {
     func display(_ viewModel: BurgerLoadingViewModel)
-}
-
-public struct BurgerViewModel {
-    public var burgers: [Burger]
 }
 
 public protocol BurgerView {
