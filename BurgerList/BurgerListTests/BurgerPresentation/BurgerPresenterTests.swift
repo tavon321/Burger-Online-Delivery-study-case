@@ -46,6 +46,13 @@ final class BurgersPresenter {
     private let errorView: BurgerErrorView
     private let loadingBurgerView: LoadingBurgerView
     
+    static var title: String {
+        NSLocalizedString("BURGERLIST_VIEW_TITLE",
+                          tableName: "Burgers",
+                          bundle: Bundle(for: BurgersPresenter.self),
+                          comment: "Title for the burger lists")
+    }
+    
     private var burgerLoadErrorMessage: String {
         NSLocalizedString("BURGER_VIEW_CONNECTION_ERROR",
                           tableName: "Burgers",
@@ -77,6 +84,10 @@ final class BurgersPresenter {
 
 class BurgerPresenterTests: XCTestCase {
     
+    func test_title_isLocalized() {
+        XCTAssertEqual(BurgersPresenter.title, localized("BURGERLIST_VIEW_TITLE"))
+    }
+    
     func test_init_doesNotMessageView() {
         let (_, view) = makeSUT()
         XCTAssertTrue(view.messages.isEmpty, "Expected no messages on init, got \(view.messages) instead")
@@ -104,7 +115,7 @@ class BurgerPresenterTests: XCTestCase {
         
         sut.didFinishLoadingBurgers(with: anyError)
         
-        XCTAssertEqual(view.messages, [.display(errorMessage: localized( "BURGER_VIEW_CONNECTION_ERROR")), .display(isLoading: false)])
+        XCTAssertEqual(view.messages, [.display(errorMessage: localized("BURGER_VIEW_CONNECTION_ERROR")), .display(isLoading: false)])
     }
     
     // MARK: - Helpers
