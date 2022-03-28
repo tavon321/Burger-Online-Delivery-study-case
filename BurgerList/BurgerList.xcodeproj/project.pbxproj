@@ -27,12 +27,13 @@
 		7139E7D6278F13BD00F1BBCD /* Burgers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7139E7D5278F13BD00F1BBCD /* Burgers.storyboard */; };
 		7146D6F126E7D17A00F3CAB5 /* UIView+Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146D6F026E7D17A00F3CAB5 /* UIView+Shimmering.swift */; };
 		7169307327F25DDB00F198EF /* Burgers.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71B9D6052795E2BD00D1D064 /* Burgers.strings */; };
-		7169307527F25DEA00F198EF /* BurgerPresnter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169307427F25DEA00F198EF /* BurgerPresnter.swift */; };
-		7169307727F25EAF00F198EF /* Burgers.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71C1B2D527F2203A00D11DF9 /* Burgers.strings */; };
+		7169307527F25DEA00F198EF /* BurgersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169307427F25DEA00F198EF /* BurgersPresenter.swift */; };
 		7169307927F25F1D00F198EF /* BurgerErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169307827F25F1D00F198EF /* BurgerErrorViewModel.swift */; };
 		7169307B27F25F2F00F198EF /* BurgerLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169307A27F25F2F00F198EF /* BurgerLoadingViewModel.swift */; };
 		7169307D27F25F4F00F198EF /* BurgerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169307C27F25F4F00F198EF /* BurgerViewModel.swift */; };
-		7178D9EB276B83F00012950D /* BurgerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7178D9EA276B83F00012950D /* BurgerPresenter.swift */; };
+		7169308127F2625B00F198EF /* ViewModelExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169308027F2625B00F198EF /* ViewModelExample.swift */; };
+		7169308327F2632600F198EF /* ViewModelControllerExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169308227F2632600F198EF /* ViewModelControllerExample.swift */; };
+		7169308527F2646100F198EF /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169308427F2646100F198EF /* ErrorView.swift */; };
 		7185138926DE72DA0026EB61 /* BurgerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7185138826DE72DA0026EB61 /* BurgerCell.swift */; };
 		7185138A26DEA7900026EB61 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DAA06F2564827100B1AEC0 /* SharedTestHelpers.swift */; };
 		718D61EC2731B7B900D9A4EE /* BurgerImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D61EB2731B7B900D9A4EE /* BurgerImageLoader.swift */; };
@@ -50,9 +51,6 @@
 		71C1894826D42D1B00BAC99B /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
 		71C1894C26D43AAD00BAC99B /* BurgerListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C1894B26D43AAD00BAC99B /* BurgerListController.swift */; };
 		71C1B2C927F202B800D11DF9 /* BurgerPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C1B2C827F202B800D11DF9 /* BurgerPresenterTests.swift */; };
-		71C1B2CC27F2184500D11DF9 /* BurgerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C1B2CB27F2184500D11DF9 /* BurgerViewModel.swift */; };
-		71C1B2CE27F2185000D11DF9 /* BurgerLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C1B2CD27F2185000D11DF9 /* BurgerLoadingViewModel.swift */; };
-		71C1B2D027F2186000D11DF9 /* BurgerErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C1B2CF27F2186000D11DF9 /* BurgerErrorViewModel.swift */; };
 		71C6AFD926B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */; };
 		71C6AFDB26B1BFFC0080DF0D /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
 		71C6AFE126B207090080DF0D /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
@@ -160,11 +158,13 @@
 		7139E7D5278F13BD00F1BBCD /* Burgers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Burgers.storyboard; sourceTree = "<group>"; };
 		7146322726C1B86E0005CF50 /* BurgerListIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListIntegrationTests.swift; sourceTree = "<group>"; };
 		7146D6F026E7D17A00F3CAB5 /* UIView+Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmering.swift"; sourceTree = "<group>"; };
-		7169307427F25DEA00F198EF /* BurgerPresnter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerPresnter.swift; sourceTree = "<group>"; };
+		7169307427F25DEA00F198EF /* BurgersPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgersPresenter.swift; sourceTree = "<group>"; };
 		7169307827F25F1D00F198EF /* BurgerErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerErrorViewModel.swift; sourceTree = "<group>"; };
 		7169307A27F25F2F00F198EF /* BurgerLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerLoadingViewModel.swift; sourceTree = "<group>"; };
 		7169307C27F25F4F00F198EF /* BurgerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerViewModel.swift; sourceTree = "<group>"; };
-		7178D9EA276B83F00012950D /* BurgerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerPresenter.swift; sourceTree = "<group>"; };
+		7169308027F2625B00F198EF /* ViewModelExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelExample.swift; sourceTree = "<group>"; };
+		7169308227F2632600F198EF /* ViewModelControllerExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelControllerExample.swift; sourceTree = "<group>"; };
+		7169308427F2646100F198EF /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		7185138826DE72DA0026EB61 /* BurgerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerCell.swift; sourceTree = "<group>"; };
 		718D61EB2731B7B900D9A4EE /* BurgerImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerImageLoader.swift; sourceTree = "<group>"; };
 		7193083E26B46271001B5A26 /* BurgerListiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BurgerListiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,10 +182,6 @@
 		71B9D6082795E3A300D1D064 /* BurgersLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgersLocalizationTests.swift; sourceTree = "<group>"; };
 		71C1894B26D43AAD00BAC99B /* BurgerListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListController.swift; sourceTree = "<group>"; };
 		71C1B2C827F202B800D11DF9 /* BurgerPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerPresenterTests.swift; sourceTree = "<group>"; };
-		71C1B2CB27F2184500D11DF9 /* BurgerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerViewModel.swift; sourceTree = "<group>"; };
-		71C1B2CD27F2185000D11DF9 /* BurgerLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerLoadingViewModel.swift; sourceTree = "<group>"; };
-		71C1B2CF27F2186000D11DF9 /* BurgerErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerErrorViewModel.swift; sourceTree = "<group>"; };
-		71C1B2D427F2203A00D11DF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Burgers.strings; sourceTree = "<group>"; };
 		71C6AFD626B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListCacheIntegrationTests.swift; sourceTree = "<group>"; };
 		71C6AFDA26B1BFFC0080DF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -303,6 +299,7 @@
 			children = (
 				71339C4D274D37390071D07E /* BurgersRefreshViewModel.swift */,
 				7122BB7A274EA7C000871542 /* BurgerImageViewModel.swift */,
+				7169308027F2625B00F198EF /* ViewModelExample.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -310,8 +307,6 @@
 		712B40A2277B51BE001E424E /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				71C1B2CA27F2183B00D11DF9 /* ViewModels */,
-				7178D9EA276B83F00012950D /* BurgerPresenter.swift */,
 				71E0050F278343A000FC755F /* BurgerImagePresenter.swift */,
 			);
 			path = Presenter;
@@ -354,7 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				71B9D6052795E2BD00D1D064 /* Burgers.strings */,
-				7169307427F25DEA00F198EF /* BurgerPresnter.swift */,
+				7169307427F25DEA00F198EF /* BurgersPresenter.swift */,
 				7169307827F25F1D00F198EF /* BurgerErrorViewModel.swift */,
 				7169307A27F25F2F00F198EF /* BurgerLoadingViewModel.swift */,
 				7169307C27F25F4F00F198EF /* BurgerViewModel.swift */,
@@ -389,6 +384,7 @@
 				71C1894B26D43AAD00BAC99B /* BurgerListController.swift */,
 				712A88CF2732CCF700FE7484 /* BurgersRefreshViewController.swift */,
 				71C7F555273B44A30096AE7A /* BurgerCellController.swift */,
+				7169308227F2632600F198EF /* ViewModelControllerExample.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -396,9 +392,10 @@
 		718D61EF2731B9AB00D9A4EE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7146D6EF26E7D16600F3CAB5 /* Utils */,
-				7185138826DE72DA0026EB61 /* BurgerCell.swift */,
 				7139E7D5278F13BD00F1BBCD /* Burgers.storyboard */,
+				7185138826DE72DA0026EB61 /* BurgerCell.swift */,
+				7169308427F2646100F198EF /* ErrorView.swift */,
+				7146D6EF26E7D16600F3CAB5 /* Utils */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -479,19 +476,8 @@
 			isa = PBXGroup;
 			children = (
 				71C1B2C827F202B800D11DF9 /* BurgerPresenterTests.swift */,
-				71C1B2D527F2203A00D11DF9 /* Burgers.strings */,
 			);
 			path = BurgerPresentation;
-			sourceTree = "<group>";
-		};
-		71C1B2CA27F2183B00D11DF9 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				71C1B2CB27F2184500D11DF9 /* BurgerViewModel.swift */,
-				71C1B2CD27F2185000D11DF9 /* BurgerLoadingViewModel.swift */,
-				71C1B2CF27F2186000D11DF9 /* BurgerErrorViewModel.swift */,
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		71C6AFD726B1BFFC0080DF0D /* BurgerListCacheIntegrationTests */ = {
@@ -910,7 +896,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7169307727F25EAF00F198EF /* Burgers.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -929,19 +914,18 @@
 				7122BB7B274EA7C000871542 /* BurgerImageViewModel.swift in Sources */,
 				71D7BC3427E2BB3D0010CCAC /* BurgerImagePresentationAdapter.swift in Sources */,
 				71C1894C26D43AAD00BAC99B /* BurgerListController.swift in Sources */,
-				71C1B2CC27F2184500D11DF9 /* BurgerViewModel.swift in Sources */,
 				718D61EC2731B7B900D9A4EE /* BurgerImageLoader.swift in Sources */,
 				71C707D627908C9400C12B48 /* UITableView+dequeeReusableCell.swift in Sources */,
 				71D7BC3627E2BED70010CCAC /* MainQueueDispatchDecorator.swift in Sources */,
-				7178D9EB276B83F00012950D /* BurgerPresenter.swift in Sources */,
+				7169308127F2625B00F198EF /* ViewModelExample.swift in Sources */,
 				71C7F556273B44A30096AE7A /* BurgerCellController.swift in Sources */,
 				71339C4E274D37390071D07E /* BurgersRefreshViewModel.swift in Sources */,
-				71C1B2D027F2186000D11DF9 /* BurgerErrorViewModel.swift in Sources */,
 				71E005152783464C00FC755F /* BurgerLoaderPresentationAdapter.swift in Sources */,
-				71C1B2CE27F2185000D11DF9 /* BurgerLoadingViewModel.swift in Sources */,
+				7169308527F2646100F198EF /* ErrorView.swift in Sources */,
 				712A88D02732CCF700FE7484 /* BurgersRefreshViewController.swift in Sources */,
 				71E005132783462300FC755F /* WeakRefVirtualProxy.swift in Sources */,
 				71C7F559273B49DE0096AE7A /* BurgerUIComposer.swift in Sources */,
+				7169308327F2632600F198EF /* ViewModelControllerExample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -986,7 +970,7 @@
 				DCABB352250FD5E600D002E9 /* LocalBurger.swift in Sources */,
 				DCD8F68824A4DC7700064ED9 /* BurgerMapper.swift in Sources */,
 				DCEBAA6C2487DFDB0024BFA9 /* Burger.swift in Sources */,
-				7169307527F25DEA00F198EF /* BurgerPresnter.swift in Sources */,
+				7169307527F25DEA00F198EF /* BurgersPresenter.swift in Sources */,
 				40A943AF25F8129900BC786D /* CodableBurgerStore.swift in Sources */,
 				40FC239F254B662600290628 /* BurgerCachePolicy.swift in Sources */,
 				71B28B0D261DE8CB00DF448B /* CoreDataHelpers.swift in Sources */,
@@ -1067,14 +1051,6 @@
 			children = (
 				71B9D6042795E2BD00D1D064 /* en */,
 				71B9D6062795E2F600D1D064 /* es */,
-			);
-			name = Burgers.strings;
-			sourceTree = "<group>";
-		};
-		71C1B2D527F2203A00D11DF9 /* Burgers.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				71C1B2D427F2203A00D11DF9 /* en */,
 			);
 			name = Burgers.strings;
 			sourceTree = "<group>";

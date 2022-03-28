@@ -16,20 +16,18 @@ public final class BurgerUIComposer {
             MainQueueDispatchDecorator(decoratee: burgerLoader)
         )
         let refreshController = BurgersRefreshViewController(delegate: presentationAdapter)
-        
-        let burgerController = BurgerListController.makeWith(refreshController: refreshController,
+        let burgerController = makeBurgerListController(refreshController: refreshController,
                                                                  title: BurgersPresenter.title)
         let presenter = BurgersPresenter(burgersView: BurgerViewAdapter(controller: burgerController,
                                                                         imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader)),
+                                         errorView: WeakRefVirtualProxy(burgerController),
                                          loadingBurgerView: WeakRefVirtualProxy(refreshController))
         presentationAdapter.presenter = presenter
          
         return burgerController
     }
-}
-
-private extension BurgerListController {
-    static func makeWith(refreshController: BurgersRefreshViewController, title: String) -> BurgerListController {
+    
+    private static func makeBurgerListController(refreshController: BurgersRefreshViewController, title: String) -> BurgerListController {
         let bundle = Bundle(for: BurgerListController.self)
         let storyboad = UIStoryboard(name: "Burgers", bundle: bundle)
         
@@ -47,47 +45,8 @@ extension WeakRefVirtualProxy: LoadingBurgerView where T: LoadingBurgerView {
     }
 }
 
-//public final class BurgerUIComposer {
-//    public static func compose(burgerLoader: BurgerLoader,
-//                               imageLoader: BurgerImageLoader) -> BurgerListController {
-//        let viewModel = BurgersRefreshViewModel(burgerLoader: burgerLoader)
-//        let refreshController = BurgersRefreshViewController(viewModel: viewModel)
-//        let burgerController = BurgerListController(refreshController: refreshController)
-//        viewModel.onBurgerLoad = adaptToCellControllers(forwardingTo: burgerController,
-//                                                        loader: imageLoader)
-//
-//        return burgerController
-//    }
-//
-//    private static func adaptToCellControllers(forwardingTo controller: BurgerListController,
-//                                               loader: BurgerImageLoader)
-//    -> ([Burger]) -> Void {
-//        return { [weak controller] burgers in
-//            controller?.cellControllers = burgers.map({ model in
-//                let viewModel = BurgerImageViewModel(model: model,
-//                                                     imageLoader: loader,
-//                                                     imageTransformer: UIImage.init(data:))
-//                return BurgerCellController(viewModel: viewModel)
-//            })
-//        }
-//    }
-//}
-
-//private final class BurgerViewAdapter: BurgerView {
-//    private weak var controller: BurgerListController?
-//    private let imageLoader: BurgerImageLoader
-//
-//    init(controller: BurgerListController, imageLoader: BurgerImageLoader) {
-//        self.controller = controller
-//        self.imageLoader = imageLoader
-//    }
-//
-//    func display(_ viewModel: BurgerViewModel) {
-//        controller?.cellControllers = viewModel.burgers.map({ model in
-//            let viewModel = BurgerImageViewModel(model: model,
-//                                                 imageLoader: imageLoader,
-//                                                 imageTransformer: UIImage.init(data:))
-//            return BurgerCellController(viewModel: viewModel)
-//        })
-//    }
-//}
+extension WeakRefVirtualProxy: BurgerErrorView where T: BurgerErrorView {
+    func display(_ viewModel: BurgerErrorViewModel) {
+        object?.display(viewModel)
+    }
+}

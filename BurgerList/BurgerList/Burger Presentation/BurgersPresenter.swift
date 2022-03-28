@@ -1,5 +1,5 @@
 //
-//  BurgerPresnter.swift
+//  BurgersPresenter.swift
 //  BurgerList
 //
 //  Created by Gustavo on 28/03/22.

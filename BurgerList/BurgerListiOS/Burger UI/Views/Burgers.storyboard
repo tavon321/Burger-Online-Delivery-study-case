@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,9 +17,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="iBP-zp-ZEX" customClass="ErrorView" customModule="BurgerListiOS" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SX9-0v-xlI">
+                                    <rect key="frame" x="8" y="8" width="398" height="18"/>
+                                    <viewLayoutGuide key="safeArea" id="3bD-zG-0qO"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.99951404330000004" green="0.41759261489999999" blue="0.4154433012" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstAttribute="trailingMargin" secondItem="SX9-0v-xlI" secondAttribute="trailing" id="Fd4-hG-AT5"/>
+                                <constraint firstItem="SX9-0v-xlI" firstAttribute="top" secondItem="iBP-zp-ZEX" secondAttribute="top" constant="8" id="fgQ-3L-SRD"/>
+                                <constraint firstAttribute="bottom" secondItem="SX9-0v-xlI" secondAttribute="bottom" constant="8" id="h82-rX-v7U"/>
+                                <constraint firstItem="SX9-0v-xlI" firstAttribute="leading" secondItem="iBP-zp-ZEX" secondAttribute="leadingMargin" id="miT-0e-tEq"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="label" destination="SX9-0v-xlI" id="zip-NT-wMF"/>
+                            </connections>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BurgerCell" rowHeight="411" id="pep-Hp-LFb" customClass="BurgerCell" customModule="BurgerListiOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="411"/>
+                                <rect key="frame" x="0.0" y="78.5" width="414" height="411"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pep-Hp-LFb" id="l6V-uG-9pb">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="411"/>
@@ -96,6 +121,9 @@
                             <outlet property="delegate" destination="s20-ya-7kC" id="BP0-J3-xFk"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="errorView" destination="iBP-zp-ZEX" id="ma2-g5-pCf"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xcv-Ks-6yw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import UIKit
 import BurgerList
 import BurgerListiOS
 
@@ -18,7 +17,7 @@ class BurgerListIntegrationTests: XCTestCase {
         
         sut.loadViewIfNeeded()
         
-        XCTAssertEqual(sut.title, localized( "BURGERLIST_VIEW_TITLE"))
+        XCTAssertEqual(sut.title, localized("BURGERLIST_VIEW_TITLE"))
     }
     
     func test_loadBurgerActions_requestBurgerListFromLoader() {
@@ -84,6 +83,19 @@ class BurgerListIntegrationTests: XCTestCase {
         sut.simulateUserInitiatedReload()
         loader.completeBurgerLoading(with: anyError)
         assertThat(sut, isRendering: [burger0])
+    }
+    
+    func test_loadBurgerCompletion_rendersErrorMessageOnErrorUntilNextReload() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        XCTAssertEqual(sut.errorMessage, nil)
+        
+        loader.completeBurgerLoading(with: anyError)
+        XCTAssertEqual(sut.errorMessage, localized("BURGER_VIEW_CONNECTION_ERROR"))
+        
+        sut.simulateUserInitiatedReload()
+        XCTAssertEqual(sut.errorMessage, nil)
     }
     
     func test_burgerView_loadsImageURLWhenVisible() {
@@ -286,7 +298,6 @@ class BurgerListIntegrationTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
     
-    
     func test_completeImageLoading_dispatchesFromBackgroundToMainThread() {
         let (sut, loader) = makeSUT()
         
@@ -477,6 +488,10 @@ private extension BurgerListController {
     }
     
     private var burgerImageSection: Int { 0 }
+    
+    var errorMessage: String? {
+        return errorView?.message
+    }
 }
 
 private extension BurgerCell {

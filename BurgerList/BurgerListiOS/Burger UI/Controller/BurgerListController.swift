@@ -9,8 +9,10 @@
 import UIKit
 import BurgerList
 
-public final class BurgerListController: UITableViewController, UITableViewDataSourcePrefetching {
+public final class BurgerListController: UITableViewController, UITableViewDataSourcePrefetching, BurgerErrorView {
+    
     private let refreshController: BurgersRefreshViewController
+    @IBOutlet private(set) public var errorView: ErrorView?
     
     var cellControllers = [BurgerCellController]() {
         didSet {
@@ -35,6 +37,10 @@ public final class BurgerListController: UITableViewController, UITableViewDataS
         tableView.prefetchDataSource = self
         
         refreshController.refresh()
+    }
+    
+    public func display(_ viewModel: BurgerErrorViewModel) {
+        errorView?.message = viewModel.errorMessage
     }
     
     public override func tableView(_ tableView: UITableView,
@@ -69,59 +75,3 @@ public final class BurgerListController: UITableViewController, UITableViewDataS
         return cellControllers[indexPath.row]
     }
 }
-
-
-//public final class BurgerListController: UITableViewController, UITableViewDataSourcePrefetching {
-//    private var refreshController: BurgersRefreshViewController?
-//    var cellControllers = [BurgerCellController]() {
-//        didSet {
-//            tableView.reloadData()
-//        }
-//    }
-//
-//    convenience init(refreshController: BurgersRefreshViewController) {
-//        self.init()
-//
-//        self.refreshController = refreshController
-//    }
-//
-//    public override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        refreshControl = refreshController?.view
-//        tableView.prefetchDataSource = self
-//
-//        refreshController?.refresh()
-//    }
-//
-//    public override func tableView(_ tableView: UITableView,
-//                                   numberOfRowsInSection section: Int) -> Int {
-//        return cellControllers.count
-//    }
-//
-//    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        return cellController(forRowAt: indexPath).view()
-//    }
-//
-//    public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        cancelCellControllerLoad(forRowAt: indexPath)
-//    }
-//
-//    public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        indexPaths.forEach { indexPath in
-//            cellController(forRowAt: indexPath).preload()
-//        }
-//    }
-//
-//    public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-//        indexPaths.forEach(cancelCellControllerLoad)
-//    }
-//
-//    private func cancelCellControllerLoad(forRowAt indexPath: IndexPath) {
-//        cellController(forRowAt: indexPath).cancelLoad()
-//    }
-//
-//    private func cellController(forRowAt indexPath: IndexPath) -> BurgerCellController {
-//        return cellControllers[indexPath.row]
-//    }
-//}

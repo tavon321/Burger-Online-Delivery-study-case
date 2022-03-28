@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import BurgerListiOS
+import BurgerList
 
 final class BurgersLocalizationTests: XCTestCase {
 

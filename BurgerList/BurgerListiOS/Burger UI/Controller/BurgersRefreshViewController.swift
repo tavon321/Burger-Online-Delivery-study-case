@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BurgerList
 
 protocol BurgerListControllerDelegate {
     func loadBurgers()
@@ -40,32 +41,3 @@ final class BurgersRefreshViewController: NSObject, LoadingBurgerView {
         return view
     }
 }
-
-// MVVM
-//final class BurgersRefreshViewController: NSObject {
-//    private(set) lazy var view: UIRefreshControl = {
-//        return binded(UIRefreshControl())
-//    }()
-//
-//    private let viewModel: BurgersRefreshViewModel
-//
-//    init(viewModel: BurgersRefreshViewModel) {
-//        self.viewModel = viewModel
-//    }
-//
-//    @objc func refresh() {
-//        viewModel.loadBurgers()
-//    }
-//
-//    private func binded(_ view: UIRefreshControl) -> UIRefreshControl {
-//        viewModel.onLoadingStateChange = { [weak view] isLoading in
-//            if isLoading {
-//                view?.beginRefreshing()
-//            } else {
-//                view?.endRefreshing()
-//            }
-//        }
-//        view.addTarget(self, action: #selector(refresh), for: .valueChanged)
-//        return view
-//    }
-//}
