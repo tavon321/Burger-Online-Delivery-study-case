@@ -9,16 +9,8 @@
 import BurgerList
 import Foundation
 
-struct BurgerLoadingViewModel {
-    var isLoading: Bool
-}
-
 protocol LoadingBurgerView: AnyObject {
     func display(_ viewModel: BurgerLoadingViewModel)
-}
-
-struct BurgerViewModel {
-    var burgers: [Burger]
 }
 
 protocol BurgerView {

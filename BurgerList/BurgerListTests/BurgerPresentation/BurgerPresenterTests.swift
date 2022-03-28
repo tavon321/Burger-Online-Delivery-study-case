@@ -8,22 +8,43 @@
 
 import XCTest
 
-final class BurgersPresenter {
-    private let view: Any
+struct BurgerErrorViewModel {
+    var errorMessage: String?
     
-    init(view: Any) {
-        self.view = view
+    static var noError: BurgerErrorViewModel {
+        BurgerErrorViewModel(errorMessage: nil)
+    }
+}
+
+protocol BurgerErrorView {
+    func display(_ viewModel: BurgerErrorViewModel)
+}
+
+final class BurgersPresenter {
+    private let errorView: BurgerErrorView
+    
+    init(errorView: BurgerErrorView) {
+        self.errorView = errorView
+    }
+    
+    func didStartLoadingBurgers() {
+        errorView.display(.noError)
     }
 }
 
 class BurgerPresenterTests: XCTestCase {
     
     func test_init_doesNotMessageView() {
-        let view = ViewSpy()
-        
-        _ = BurgersPresenter(view: view)
-        
+        let (_, view) = makeSUT()
         XCTAssertTrue(view.messages.isEmpty, "Expected no messages on init, got \(view.messages) instead")
+    }
+    
+    func test_didStatLoadingBurger_displauNoErrorMessage() {
+        let (sut, view) = makeSUT()
+        
+        sut.didStartLoadingBurgers()
+        
+        XCTAssertEqual(view.messages, [.display(errorMessage: .none)])
     }
     
     // MARK: - Helpers
@@ -31,7 +52,7 @@ class BurgerPresenterTests: XCTestCase {
     private func makeSUT(file: StaticString = #file,
                          line: UInt = #line) -> (sut: BurgersPresenter, view: ViewSpy) {
         let view = ViewSpy()
-        let sut = BurgersPresenter(view: view)
+        let sut = BurgersPresenter(errorView: view)
         
         trackForMemoryLeaks(view, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
@@ -39,10 +60,15 @@ class BurgerPresenterTests: XCTestCase {
         return (sut: sut, view: view)
     }
     
-    private class ViewSpy{
+    private class ViewSpy: BurgerErrorView {
         var messages = [Message]()
         
         enum Message: Equatable {
+            case display(errorMessage: String?)
+        }
+        
+        func display(_ viewModel: BurgerErrorViewModel) {
+            messages.append(.display(errorMessage: viewModel.errorMessage))
         }
     }
 }
