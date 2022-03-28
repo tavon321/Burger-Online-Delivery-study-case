@@ -44,6 +44,7 @@
 		71C1894326D42CB300BAC99B /* BurgerList.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		71C1894826D42D1B00BAC99B /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
 		71C1894C26D43AAD00BAC99B /* BurgerListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C1894B26D43AAD00BAC99B /* BurgerListController.swift */; };
+		71C1B2C927F202B800D11DF9 /* BurgerPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C1B2C827F202B800D11DF9 /* BurgerPresenterTests.swift */; };
 		71C6AFD926B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */; };
 		71C6AFDB26B1BFFC0080DF0D /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
 		71C6AFE126B207090080DF0D /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
@@ -168,6 +169,7 @@
 		71B9D6062795E2F600D1D064 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Burgers.strings; sourceTree = "<group>"; };
 		71B9D6082795E3A300D1D064 /* BurgersLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgersLocalizationTests.swift; sourceTree = "<group>"; };
 		71C1894B26D43AAD00BAC99B /* BurgerListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListController.swift; sourceTree = "<group>"; };
+		71C1B2C827F202B800D11DF9 /* BurgerPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerPresenterTests.swift; sourceTree = "<group>"; };
 		71C6AFD626B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListCacheIntegrationTests.swift; sourceTree = "<group>"; };
 		71C6AFDA26B1BFFC0080DF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -445,6 +447,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		71C1B2C727F2015200D11DF9 /* BurgerPresentation */ = {
+			isa = PBXGroup;
+			children = (
+				71C1B2C827F202B800D11DF9 /* BurgerPresenterTests.swift */,
+			);
+			path = BurgerPresentation;
+			sourceTree = "<group>";
+		};
 		71C6AFD726B1BFFC0080DF0D /* BurgerListCacheIntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -578,11 +588,11 @@
 			children = (
 				DCEBAA532487DFBD0024BFA9 /* BurgerList */,
 				DCEBAA5E2487DFBD0024BFA9 /* BurgerListTests */,
+				DCEBAA522487DFBD0024BFA9 /* Products */,
 				DC765CD324C9CA82007D7999 /* BurgerListAPIEndToEndTests */,
 				71C6AFD726B1BFFC0080DF0D /* BurgerListCacheIntegrationTests */,
 				7193083F26B46271001B5A26 /* BurgerListiOS */,
 				7193084A26B46271001B5A26 /* BurgerListiOSTests */,
-				DCEBAA522487DFBD0024BFA9 /* Products */,
 				71C1894126D42CB300BAC99B /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -615,9 +625,10 @@
 			isa = PBXGroup;
 			children = (
 				DCEBAA612487DFBD0024BFA9 /* Info.plist */,
-				DCB38B9C24CBC7290009C6B7 /* Helpers */,
-				DC6C67F224E6C6540071525B /* BurgerCache */,
 				DCE1E05724A6359A000325B1 /* BurgerAPI */,
+				DC6C67F224E6C6540071525B /* BurgerCache */,
+				71C1B2C727F2015200D11DF9 /* BurgerPresentation */,
+				DCB38B9C24CBC7290009C6B7 /* Helpers */,
 			);
 			path = BurgerListTests;
 			sourceTree = "<group>";
@@ -956,6 +967,7 @@
 				40DAA0702564827100B1AEC0 /* SharedTestHelpers.swift in Sources */,
 				71B28AF3261DDDA100DF448B /* CoreDataBurgerStoreTests.swift in Sources */,
 				401E0BC52602833D00F83952 /* XCTestCase+FailableInsertBurgerSpecs.swift in Sources */,
+				71C1B2C927F202B800D11DF9 /* BurgerPresenterTests.swift in Sources */,
 				401E0BCD260284AF00F83952 /* XCTestCase+FailableDeleteBurgerSpecs.swift in Sources */,
 				DCE9FBB724B36613004D526E /* URLSessionHttpClientTest.swift in Sources */,
 				401E0BA92602792E00F83952 /* XCTestCase+BurgerStoreSpecs.swift in Sources */,

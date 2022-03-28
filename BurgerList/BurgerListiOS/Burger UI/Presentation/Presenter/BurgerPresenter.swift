@@ -25,7 +25,7 @@ protocol BurgerView {
     func display(_ viewModel: BurgerViewModel)
 }
 
-class BurgersPresenter {
+public final class BurgersPresenter {
     private let burgersView: BurgerView
     private let loadingBurgerView: LoadingBurgerView
     
