@@ -48,6 +48,7 @@
 		71C1B2CC27F2184500D11DF9 /* BurgerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C1B2CB27F2184500D11DF9 /* BurgerViewModel.swift */; };
 		71C1B2CE27F2185000D11DF9 /* BurgerLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C1B2CD27F2185000D11DF9 /* BurgerLoadingViewModel.swift */; };
 		71C1B2D027F2186000D11DF9 /* BurgerErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C1B2CF27F2186000D11DF9 /* BurgerErrorViewModel.swift */; };
+		71C1B2D327F2203A00D11DF9 /* Burgers.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71C1B2D527F2203A00D11DF9 /* Burgers.strings */; };
 		71C6AFD926B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */; };
 		71C6AFDB26B1BFFC0080DF0D /* BurgerList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCEBAA512487DFBD0024BFA9 /* BurgerList.framework */; };
 		71C6AFE126B207090080DF0D /* XCTestCase+TrackForMemoryLeaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB38B9D24CBC7430009C6B7 /* XCTestCase+TrackForMemoryLeaks.swift */; };
@@ -176,6 +177,7 @@
 		71C1B2CB27F2184500D11DF9 /* BurgerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerViewModel.swift; sourceTree = "<group>"; };
 		71C1B2CD27F2185000D11DF9 /* BurgerLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerLoadingViewModel.swift; sourceTree = "<group>"; };
 		71C1B2CF27F2186000D11DF9 /* BurgerErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerErrorViewModel.swift; sourceTree = "<group>"; };
+		71C1B2D427F2203A00D11DF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Burgers.strings; sourceTree = "<group>"; };
 		71C6AFD626B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurgerListCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C6AFD826B1BFFC0080DF0D /* BurgerListCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerListCacheIntegrationTests.swift; sourceTree = "<group>"; };
 		71C6AFDA26B1BFFC0080DF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				71C1B2C827F202B800D11DF9 /* BurgerPresenterTests.swift */,
+				71C1B2D527F2203A00D11DF9 /* Burgers.strings */,
 			);
 			path = BurgerPresentation;
 			sourceTree = "<group>";
@@ -887,6 +890,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71C1B2D327F2203A00D11DF9 /* Burgers.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1039,6 +1043,14 @@
 			children = (
 				71B9D6042795E2BD00D1D064 /* en */,
 				71B9D6062795E2F600D1D064 /* es */,
+			);
+			name = Burgers.strings;
+			sourceTree = "<group>";
+		};
+		71C1B2D527F2203A00D11DF9 /* Burgers.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				71C1B2D427F2203A00D11DF9 /* en */,
 			);
 			name = Burgers.strings;
 			sourceTree = "<group>";
