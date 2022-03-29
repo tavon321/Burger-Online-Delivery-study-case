@@ -20,6 +20,8 @@ final class BurgerImagePresenter<View: BurgerImageView, Image> where View.Image 
     private let view: View
     private let imageTransformer: (Data) -> Image?
     
+    private struct InvalidImageDataError: Error {}
+    
     internal init(view: View, imageTransformer: @escaping (Data) -> Image?) {
         self.view = view
         self.imageTransformer = imageTransformer
@@ -40,8 +42,6 @@ final class BurgerImagePresenter<View: BurgerImageView, Image> where View.Image 
                                           isLoading: true,
                                           shouldRetry: false))
     }
-    
-    private struct InvalidImageDataError: Error {}
     
     func didFinishLoadingImageData(with data: Data, for model: Burger) {
         guard let image = imageTransformer(data) else {
