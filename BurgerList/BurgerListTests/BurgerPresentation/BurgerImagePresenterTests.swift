@@ -28,10 +28,15 @@ protocol BurgerImageView {
 }
 
 final class BurgerImagePresenter<View: BurgerImageView, Image> where View.Image == Image {
-    private let view: View
     
-    init(view: View) {
+    private let view: View
+    private let imageTransformer: (Data) -> Image?
+    
+    private struct InvalidImageDataError: Error {}
+    
+    init(view: View, imageTransformer: @escaping (Data) -> Image?) {
         self.view =  view
+        self.imageTransformer = imageTransformer
     }
     
     func cellDidLoad(for model: Burger) {
@@ -47,6 +52,19 @@ final class BurgerImagePresenter<View: BurgerImageView, Image> where View.Image 
                                           description: model.description,
                                           image: nil,
                                           isLoading: true,
+                                          shouldRetry: false))
+    }
+    
+    func didFinishLoadingImageData(with data: Data, for model: Burger) {
+        guard let image = imageTransformer(data) else {
+            return
+            //return didFinishLoadingImageData(with: InvalidImageDataError(), for: model)
+        }
+        
+        view.display(BurgerImageViewModel(name: model.name,
+                                          description: model.description,
+                                          image: image,
+                                          isLoading: false,
                                           shouldRetry: false))
     }
 }
@@ -89,12 +107,29 @@ class BurgerImagePresenterTests: XCTestCase {
         XCTAssertEqual(message?.shouldRetry, false)
     }
     
+    func test_didFinishLoadingImageDataWithImageData_displayLoadingDataWithImage() {
+        let uniqueBurger = uniqueBurger
+        let expectedImage = AnyImage()
+        let (sut, view) = makeSUT(imageTransformer: { _ in expectedImage })
+        
+        sut.didFinishLoadingImageData(with: anyData, for: uniqueBurger)
+        
+        let message = view.models.first
+        XCTAssertEqual(view.models.count, 1)
+        XCTAssertEqual(message?.name, uniqueBurger.name)
+        XCTAssertEqual(message?.description, uniqueBurger.description)
+        XCTAssertEqual(message?.image, expectedImage)
+        XCTAssertEqual(message?.isLoading, false)
+        XCTAssertEqual(message?.shouldRetry, false)
+    }
+    
     // MARK: - Helpers
-    private func makeSUT(file: StaticString = #file,
+    private func makeSUT(imageTransformer: @escaping (Data) -> AnyImage? = { _ in nil },
+                         file: StaticString = #file,
                          line: UInt = #line)
     -> (sut: BurgerImagePresenter<ViewSpy, AnyImage>, view: ViewSpy) {
         let view = ViewSpy()
-        let sut = BurgerImagePresenter(view: view)
+        let sut = BurgerImagePresenter(view: view, imageTransformer: imageTransformer)
         
         trackForMemoryLeaks(view, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
