@@ -67,6 +67,14 @@ final class BurgerImagePresenter<View: BurgerImageView, Image> where View.Image 
                                           isLoading: false,
                                           shouldRetry: false))
     }
+    
+    func didFinishLoadingImageData(with error: Error, for model: Burger) {
+        view.display(BurgerImageViewModel(name: model.name,
+                                          description: model.description,
+                                          image: nil,
+                                          isLoading: false,
+                                          shouldRetry: true))
+    }
 }
 
 class BurgerImagePresenterTests: XCTestCase {
@@ -123,6 +131,21 @@ class BurgerImagePresenterTests: XCTestCase {
         XCTAssertEqual(message?.shouldRetry, false)
     }
     
+    func test_didFinishLoadingImageDataWithError_displayLoadingDataWithRetry() {
+        let uniqueBurger = uniqueBurger
+        let (sut, view) = makeSUT()
+        
+        sut.didFinishLoadingImageData(with: anyError, for: uniqueBurger)
+        
+        let message = view.models.first
+        XCTAssertEqual(view.models.count, 1)
+        XCTAssertEqual(message?.name, uniqueBurger.name)
+        XCTAssertEqual(message?.description, uniqueBurger.description)
+        XCTAssertEqual(message?.image, nil)
+        XCTAssertEqual(message?.isLoading, false)
+        XCTAssertEqual(message?.shouldRetry, true)
+    }
+    
     // MARK: - Helpers
     private func makeSUT(imageTransformer: @escaping (Data) -> AnyImage? = { _ in nil },
                          file: StaticString = #file,
@@ -138,6 +161,10 @@ class BurgerImagePresenterTests: XCTestCase {
     }
     
     private struct AnyImage: Equatable {}
+    
+    private var fail: (Data) -> AnyImage? {
+        return { _ in nil }
+    }
     
     private class ViewSpy: BurgerImageView {
         private(set) var models = [BurgerImageViewModel<AnyImage>]()
