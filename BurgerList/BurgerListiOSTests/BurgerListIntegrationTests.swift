@@ -52,10 +52,10 @@ class BurgerListIntegrationTests: XCTestCase {
     }
     
     func test_loadBurgerListCompletion_renderCellView() {
-        let burger0 = makeBurger(name: "a name", description: "a desccription")
+        let burger0 = makeBurger(name: "a name", description: "a description")
         let burger1 = makeBurger(name: "a name")
         let burger2 = makeBurger(name: "a name", imageURL: anyURL)
-        let burger3 = makeBurger(name: "a name", description: "a desccription", imageURL: anyURL)
+        let burger3 = makeBurger(name: "a name", description: "a description", imageURL: anyURL)
         
         let (sut, loader) = makeSUT()
         
@@ -72,7 +72,7 @@ class BurgerListIntegrationTests: XCTestCase {
     }
     
     func test_loadBurgerCompletion_doesNotAlterCurrentRenderingState() {
-        let burger0 = makeBurger(name: "a name", description: "a desccription")
+        let burger0 = makeBurger(name: "a name", description: "a description")
         
         let (sut, loader) = makeSUT()
         

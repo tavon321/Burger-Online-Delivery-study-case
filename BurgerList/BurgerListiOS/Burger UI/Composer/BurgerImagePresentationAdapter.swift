@@ -20,10 +20,11 @@ final class BurgerImagePresentationAdapter<View: BurgerImageView, Image>: FeedIm
     internal init(model: Burger, imageLoader: BurgerImageLoader) {
         self.model = model
         self.imageLoader = imageLoader
-        self.presenter?.didInit(for: model)
     }
     
     func didRequestImage() {
+        self.presenter?.cellDidLoad(for: model)
+        
         guard let url = model.imageURL else { return }
         
         presenter?.didStartLoadingImageData(for: model)
