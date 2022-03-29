@@ -41,6 +41,14 @@ final class BurgerImagePresenter<View: BurgerImageView, Image> where View.Image 
                                           isLoading: false,
                                           shouldRetry: false))
     }
+    
+    func didStartLoadingImageData(for model: Burger) {
+        view.display(BurgerImageViewModel(name: model.name,
+                                          description: model.description,
+                                          image: nil,
+                                          isLoading: true,
+                                          shouldRetry: false))
+    }
 }
 
 class BurgerImagePresenterTests: XCTestCase {
@@ -61,7 +69,23 @@ class BurgerImagePresenterTests: XCTestCase {
         XCTAssertEqual(view.models.count, 1)
         XCTAssertEqual(message?.name, uniqueBurger.name)
         XCTAssertEqual(message?.description, uniqueBurger.description)
+        XCTAssertEqual(message?.image, nil)
         XCTAssertEqual(message?.isLoading, false)
+        XCTAssertEqual(message?.shouldRetry, false)
+    }
+    
+    func test_didStartLoadingImageData_displayIsLoadingData() {
+        let (sut, view) = makeSUT()
+        let uniqueBurger = uniqueBurger
+        
+        sut.didStartLoadingImageData(for: uniqueBurger)
+        
+        let message = view.models.first
+        XCTAssertEqual(view.models.count, 1)
+        XCTAssertEqual(message?.name, uniqueBurger.name)
+        XCTAssertEqual(message?.description, uniqueBurger.description)
+        XCTAssertEqual(message?.image, nil)
+        XCTAssertEqual(message?.isLoading, true)
         XCTAssertEqual(message?.shouldRetry, false)
     }
     
