@@ -57,8 +57,7 @@ final class BurgerImagePresenter<View: BurgerImageView, Image> where View.Image 
     
     func didFinishLoadingImageData(with data: Data, for model: Burger) {
         guard let image = imageTransformer(data) else {
-            return
-            //return didFinishLoadingImageData(with: InvalidImageDataError(), for: model)
+            return didFinishLoadingImageData(with: InvalidImageDataError(), for: model)
         }
         
         view.display(BurgerImageViewModel(name: model.name,
@@ -115,7 +114,7 @@ class BurgerImagePresenterTests: XCTestCase {
         XCTAssertEqual(message?.shouldRetry, false)
     }
     
-    func test_didFinishLoadingImageDataWithImageData_displayLoadingDataWithImage() {
+    func test_didFinishLoadingImageDataWithImageData_displayDataWithImage() {
         let uniqueBurger = uniqueBurger
         let expectedImage = AnyImage()
         let (sut, view) = makeSUT(imageTransformer: { _ in expectedImage })
@@ -131,11 +130,26 @@ class BurgerImagePresenterTests: XCTestCase {
         XCTAssertEqual(message?.shouldRetry, false)
     }
     
-    func test_didFinishLoadingImageDataWithError_displayLoadingDataWithRetry() {
+    func test_didFinishLoadingImageDataWithError_displayDataWithRetry() {
         let uniqueBurger = uniqueBurger
         let (sut, view) = makeSUT()
         
         sut.didFinishLoadingImageData(with: anyError, for: uniqueBurger)
+        
+        let message = view.models.first
+        XCTAssertEqual(view.models.count, 1)
+        XCTAssertEqual(message?.name, uniqueBurger.name)
+        XCTAssertEqual(message?.description, uniqueBurger.description)
+        XCTAssertEqual(message?.image, nil)
+        XCTAssertEqual(message?.isLoading, false)
+        XCTAssertEqual(message?.shouldRetry, true)
+    }
+    
+    func test_didFinishLoadingImageDataWithInvalidImage_displayDataWithRetry() {
+        let uniqueBurger = uniqueBurger
+        let (sut, view) = makeSUT(imageTransformer: fail)
+        
+        sut.didFinishLoadingImageData(with: anyData, for: uniqueBurger)
         
         let message = view.models.first
         XCTAssertEqual(view.models.count, 1)
