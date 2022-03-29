@@ -59,6 +59,8 @@
 		71C7F556273B44A30096AE7A /* BurgerCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C7F555273B44A30096AE7A /* BurgerCellController.swift */; };
 		71C7F559273B49DE0096AE7A /* BurgerUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C7F558273B49DE0096AE7A /* BurgerUIComposer.swift */; };
 		71D5847B27F34560008F4B1C /* BurgerImagePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D5847A27F34560008F4B1C /* BurgerImagePresenterTests.swift */; };
+		71D5847D27F35B5F008F4B1C /* BurgerImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D5847C27F35B5F008F4B1C /* BurgerImagePresenter.swift */; };
+		71D5847F27F35BB6008F4B1C /* BurgerImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D5847E27F35BB6008F4B1C /* BurgerImageViewModel.swift */; };
 		71D7BC3427E2BB3D0010CCAC /* BurgerImagePresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7BC3327E2BB3D0010CCAC /* BurgerImagePresentationAdapter.swift */; };
 		71D7BC3627E2BED70010CCAC /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7BC3527E2BED70010CCAC /* MainQueueDispatchDecorator.swift */; };
 		71E00510278343A000FC755F /* BurgerImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E0050F278343A000FC755F /* BurgerImagePresenter.swift */; };
@@ -191,6 +193,8 @@
 		71C7F555273B44A30096AE7A /* BurgerCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerCellController.swift; sourceTree = "<group>"; };
 		71C7F558273B49DE0096AE7A /* BurgerUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerUIComposer.swift; sourceTree = "<group>"; };
 		71D5847A27F34560008F4B1C /* BurgerImagePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BurgerImagePresenterTests.swift; path = BurgerPresentation/BurgerImagePresenterTests.swift; sourceTree = "<group>"; };
+		71D5847C27F35B5F008F4B1C /* BurgerImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerImagePresenter.swift; sourceTree = "<group>"; };
+		71D5847E27F35BB6008F4B1C /* BurgerImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerImageViewModel.swift; sourceTree = "<group>"; };
 		71D7BC3327E2BB3D0010CCAC /* BurgerImagePresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerImagePresentationAdapter.swift; sourceTree = "<group>"; };
 		71D7BC3527E2BED70010CCAC /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
 		71E0050F278343A000FC755F /* BurgerImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerImagePresenter.swift; sourceTree = "<group>"; };
@@ -355,6 +359,8 @@
 				7169307827F25F1D00F198EF /* BurgerErrorViewModel.swift */,
 				7169307A27F25F2F00F198EF /* BurgerLoadingViewModel.swift */,
 				7169307C27F25F4F00F198EF /* BurgerViewModel.swift */,
+				71D5847C27F35B5F008F4B1C /* BurgerImagePresenter.swift */,
+				71D5847E27F35BB6008F4B1C /* BurgerImageViewModel.swift */,
 			);
 			path = "Burger Presentation";
 			sourceTree = "<group>";
@@ -968,6 +974,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC68462B24FD6F46009FF676 /* BurgerStore.swift in Sources */,
+				71D5847D27F35B5F008F4B1C /* BurgerImagePresenter.swift in Sources */,
 				DC03E02A24FFDE8800BDB35E /* LocalBurgerLoader.swift in Sources */,
 				DCABB352250FD5E600D002E9 /* LocalBurger.swift in Sources */,
 				DCD8F68824A4DC7700064ED9 /* BurgerMapper.swift in Sources */,
@@ -977,6 +984,7 @@
 				40FC239F254B662600290628 /* BurgerCachePolicy.swift in Sources */,
 				71B28B0D261DE8CB00DF448B /* CoreDataHelpers.swift in Sources */,
 				7169307D27F25F4F00F198EF /* BurgerViewModel.swift in Sources */,
+				71D5847F27F35BB6008F4B1C /* BurgerImageViewModel.swift in Sources */,
 				711A664C2682AC31000B6EDF /* BurgerStore.xcdatamodeld in Sources */,
 				71B28AFA261DDFA800DF448B /* CoreDataBurgerStore.swift in Sources */,
 				7169307B27F25F2F00F198EF /* BurgerLoadingViewModel.swift in Sources */,
