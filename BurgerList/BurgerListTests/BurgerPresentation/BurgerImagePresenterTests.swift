@@ -7,12 +7,39 @@
 //
 
 import XCTest
+import BurgerList
 
-final class BurgerImagePresenter {
-    private let view: Any
+struct BurgerImageViewModel<Image> {
+    var name: String
+    var description: String?
+    var image: Image?
+    var isLoading: Bool
+    var shouldRetry: Bool
     
-    init(view: Any) {
+    var hasDescription: Bool {
+        return description != nil
+    }
+}
+
+protocol BurgerImageView {
+    associatedtype Image
+    
+    func display(_ model: BurgerImageViewModel<Image>)
+}
+
+final class BurgerImagePresenter<View: BurgerImageView, Image> where View.Image == Image {
+    private let view: View
+    
+    init(view: View) {
         self.view =  view
+    }
+    
+    func cellDidLoad(for model: Burger) {
+        view.display(BurgerImageViewModel(name: model.name,
+                                          description: model.description,
+                                          image: nil,
+                                          isLoading: false,
+                                          shouldRetry: false))
     }
 }
 
@@ -21,13 +48,27 @@ class BurgerImagePresenterTests: XCTestCase {
     func test_init_doesNoteMessageView() {
         let (_, view) = makeSUT()
         
-        XCTAssertTrue(view.messages.isEmpty, "Expected No messages, got \(view.messages) instead")
+        XCTAssertTrue(view.models.isEmpty, "Expected No messages, got \(view.models) instead")
+    }
+    
+    func test_cellDidLoad_displayLoadedData() {
+        let (sut, view) = makeSUT()
+        let uniqueBurger = uniqueBurger
+        
+        sut.cellDidLoad(for: uniqueBurger)
+        
+        let message = view.models.first
+        XCTAssertEqual(view.models.count, 1)
+        XCTAssertEqual(message?.name, uniqueBurger.name)
+        XCTAssertEqual(message?.description, uniqueBurger.description)
+        XCTAssertEqual(message?.isLoading, false)
+        XCTAssertEqual(message?.shouldRetry, false)
     }
     
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file,
                          line: UInt = #line)
-    -> (sut: BurgerImagePresenter, view: ViewSpy) {
+    -> (sut: BurgerImagePresenter<ViewSpy, AnyImage>, view: ViewSpy) {
         let view = ViewSpy()
         let sut = BurgerImagePresenter(view: view)
         
@@ -37,11 +78,13 @@ class BurgerImagePresenterTests: XCTestCase {
         return (sut: sut, view: view)
     }
     
-    private class ViewSpy {
-        private(set) var messages = [Message]()
+    private struct AnyImage: Equatable {}
+    
+    private class ViewSpy: BurgerImageView {
+        private(set) var models = [BurgerImageViewModel<AnyImage>]()
         
-        enum Message: Equatable {
-            
+        func display(_ model: BurgerImageViewModel<AnyImage>) {
+            models.append(model)
         }
     }
 }
