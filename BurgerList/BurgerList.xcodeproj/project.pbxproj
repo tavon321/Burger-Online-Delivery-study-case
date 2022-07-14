@@ -459,8 +459,8 @@
 		71C1B2C727F2015200D11DF9 /* BurgerPresentation */ = {
 			isa = PBXGroup;
 			children = (
-				71B9D6082795E3A300D1D064 /* BurgersLocalizationTests.swift */,
 				71C1B2C827F202B800D11DF9 /* BurgerPresenterTests.swift */,
+				71B9D6082795E3A300D1D064 /* BurgersLocalizationTests.swift */,
 			);
 			path = BurgerPresentation;
 			sourceTree = "<group>";

@@ -36,7 +36,7 @@ public final class BurgersPresenter {
         NSLocalizedString("BURGER_VIEW_CONNECTION_ERROR",
                           tableName: "Burgers",
                           bundle: Bundle(for: BurgersPresenter.self),
-                          comment: "Error message displayer when we can't load the burgers from the server ")
+                          comment: "Error message displayed when we can't load the burgers from the server")
     }
     
     public init(burgersView: BurgerView, errorView: BurgerErrorView, loadingBurgerView: LoadingBurgerView) {
