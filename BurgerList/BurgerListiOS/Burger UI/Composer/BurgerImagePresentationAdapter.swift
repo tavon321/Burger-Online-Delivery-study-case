@@ -15,7 +15,7 @@ final class BurgerImagePresentationAdapter<View: BurgerImageView, Image>: FeedIm
     
     var presenter: BurgerImagePresenter<View, Image>?
     
-    private var task: BurgerImageDataLoadTask?
+    private var task: HTTPClientTask?
     
     internal init(model: Burger, imageLoader: BurgerImageLoader) {
         self.model = model

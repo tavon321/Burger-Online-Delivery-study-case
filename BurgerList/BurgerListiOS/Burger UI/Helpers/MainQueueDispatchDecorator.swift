@@ -35,7 +35,7 @@ extension MainQueueDispatchDecorator: BurgerLoader where T == BurgerLoader {
 }
 
 extension MainQueueDispatchDecorator: BurgerImageLoader where T == BurgerImageLoader {
-    func loadImageData(from url: URL, completion: @escaping (BurgerImageLoader.Result) -> Void) -> BurgerImageDataLoadTask {
+    func loadImageData(from url: URL, completion: @escaping (BurgerImageLoader.Result) -> Void) -> HTTPClientTask {
         decoratee.loadImageData(from: url) { [weak self] result in
             self?.dispatch { completion(result) }
         }
