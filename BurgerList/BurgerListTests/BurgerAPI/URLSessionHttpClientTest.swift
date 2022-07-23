@@ -35,7 +35,7 @@ class URLSessionHttpClientTest: XCTestCase {
     }
     
     func test_cancelGetFromURLTask_cancelTask() {
-        let cancelledResult = resultErrorFor(data: nil, response: nil, error: nil) { task in
+        let receivedError = resultErrorFor(data: nil, response: nil, error: nil) { task in
             task.cancel()
         } as? NSError
         
